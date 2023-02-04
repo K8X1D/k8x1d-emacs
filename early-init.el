@@ -23,20 +23,6 @@
 (push '(mouse-color . "#ebdbb2") default-frame-alist)
 
 ;; Initial frame parameters
-;;(set-frame-parameter (selected-frame) 'alpha 90)
-;;(add-to-list 'default-frame-alist '(alpha .  90))
-;;(set-frame-parameter nil 'alpha-background 80)
-;;(add-to-list 'default-frame-alist '(alpha-background . 80))
-
-(if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
-    (progn
-      (set-frame-parameter nil 'alpha-background 80)
-      (add-to-list 'default-frame-alist '(alpha-background . 80)))
-  (progn
-    (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-    (add-to-list 'default-frame-alist '(alpha . (90 . 90)))))
-
-
 (setq frame-inhibit-implied-resize t)
 
 ;; Initial frame

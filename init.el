@@ -23,6 +23,19 @@
 (setq user-full-name "Kevin Kaiser"
       user-mail-address "k8x1d@proton.me")
 
+
+;; Set initial transparency
+(if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
+    (progn
+    (set-frame-parameter nil 'alpha-background 80)
+    (add-to-list 'default-frame-alist '(alpha-background . 80))
+      )
+  (progn
+   (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+   (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+    ))
+
+
 ;; Add modules to path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
