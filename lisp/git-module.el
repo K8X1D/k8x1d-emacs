@@ -17,7 +17,8 @@
   )
 
 ;; Show todos of the project in magit buffer
-(use-package magit-todos)
+(use-package magit-todos
+  :after magit)
 
 ;; Interaction with github/gitlab
 (use-package forge
