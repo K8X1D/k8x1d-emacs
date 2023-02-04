@@ -1,0 +1,15 @@
+* Emacs 29 on Guix
+New features of Emacs 29 looked quite interesting. Sadly, on Guix, only 29.0.50 is available through ~emacs-next~ and ~emacs-next-pgtk~.
+The following configuration contains both my testing set-up of emacs and the (awfully written) definition to try emacs 29.0.60.
+
+To set-up non-pgtk version, launch 
+#+begin_src 
+$ ./set-up_emacs-29
+#+end_src
+
+To set-up pgtk version, launch 
+#+begin_src 
+$ ./set-up_emacs-29-pgtk
+#+end_src
+
+Both version can be installed simultaneously.
