@@ -1,0 +1,23 @@
+PROJECT_NAME=emacs-29-pgtk
+GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
+GUIX_EXTRA=$HOME/.guix-extra
+EMACS_CONFIG_DIR="$HOME/.$PROJECT_NAME.d"
+
+mkdir -p "$GUIX_EXTRA/$PROJECT_NAME"
+guix pull --profile="$GUIX_EXTRA/$PROJECT_NAME/guix"
+
+mkdir -p "$GUIX_EXTRA_PROFILES/$PROJECT_NAME"
+"$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest=emacs-29-pgtk.scm --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
+
+mkdir -p $EMACS_CONFIG_DIR
+ln -s $PWD/bookmarks $EMACS_CONFIG_DIR/
+ln -s $PWD/init.el $EMACS_CONFIG_DIR/
+ln -s $PWD/recentf $EMACS_CONFIG_DIR/
+ln -s $PWD/custom.el $EMACS_CONFIG_DIR/
+ln -s $PWD/emacs-29.scm $EMACS_CONFIG_DIR/
+ln -s $PWD/lisp $EMACS_CONFIG_DIR/
+ln -s $PWD/early-init.el $EMACS_CONFIG_DIR/
+ln -s $PWD/history $EMACS_CONFIG_DIR/
+ln -s $PWD/package-quickstart.el $EMACS_CONFIG_DIR/
+
+ln -s $PWD/emacs-29-pgtk.desktop $HOME/.local/share/applications/

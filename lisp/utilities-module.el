@@ -1,0 +1,40 @@
+;;;;
+;;;; Pdf support
+;;;;
+(use-package pdf-tools
+  :hook
+  (pdf-view-mode . pdf-view-midnight-minor-mode) ;; dark mode by default
+  :config
+  (pdf-loader-install) ;; On demand loading
+  )
+
+;;
+;; Terminal
+;;
+
+(use-package vterm
+  :hook
+  (vterm-mode . (lambda ()
+		  (setq-local evil-insert-state-cursor 'box)
+		  (evil-insert-state))))
+(use-package multi-vterm
+ :bind
+  (("C-c o t" . multi-vterm-dedicated-toggle)
+  ("C-c o T" . multi-vterm))
+  :config
+  (setq multi-vterm-dedicated-window-height-percent 35)
+  )
+
+(use-package hide-mode-line
+  :hook
+  (vterm-mode . hide-mode-line-mode))
+
+
+;;
+;; Guix interaction
+;;
+;;(use-package guix)
+
+
+
+(provide 'utilities-module)
