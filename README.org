@@ -1,15 +1,24 @@
-* Emacs 29 on Guix
-New features of Emacs 29 looked quite interesting. Sadly, on Guix, only 29.0.50 is available through ~emacs-next~ and ~emacs-next-pgtk~.
-The following configuration contains both my testing set-up of emacs and the (awfully written) definition to try emacs 29.0.60.
+#+title:  K8X1D Emacs configuration
+#+author: Kevin Kaiser
+#+author: k8x1d@proton.me
+#+startup: inlineimages
 
-To set-up non-pgtk version, launch 
-#+begin_src 
-$ ./set-up_emacs-29
+#+attr_html: :width 30%;
+[[file:k8x1d-avatar.png]]
+
+
+** Context of the project
+#TODO
+
+Dependencies:
+- guix package manager
+
+
+** Content of the project
+#TODO
+
+** Deployment of the project
+
+#+begin_src shell 
+$ ./set-up_k8x1d-emacs
 #+end_src
-
-To set-up pgtk version, launch 
-#+begin_src 
-$ ./set-up_emacs-29-pgtk
-#+end_src
-
-Both version can be installed simultaneously.
