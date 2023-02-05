@@ -35,6 +35,22 @@
 ;;
 ;;(use-package guix)
 
+;;
+;; Password-store interaction
+;;
+(use-package pass
+  :defer t)
+(use-package password-store
+  :defer t)
+(use-package password-store-otp
+  :defer t)
+
+
+
+
+
+
+
 
 
 (provide 'utilities-module)
