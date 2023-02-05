@@ -50,7 +50,7 @@
 (setq tab-bar-separator " | ")
 
 (custom-set-faces
- '(tab-bar ((t (:inherit nil :background "#282828" :foreground "#928374" :height 1.1))))
+ '(tab-bar ((t (:inherit nil :background "#282828" :foreground "#928374" :height 1.0))))
  '(tab-bar-tab ((t (:background "#282828" :foreground "#ebdbb2":weight bold :underline t))))
  )
 
