@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Set commons variables names
+GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
+GUIX_EXTRA=$HOME/.guix-extra
+
+# For each project
+for PROJECT_NAME in k8x1d-emacs k8x1d-emacs-pgtk
+do
+    # Set local variables
+    EMACS_CONFIG_DIR="$HOME/.$PROJECT_NAME.d"
+
+    # Create local directories
+    mkdir -p "$GUIX_EXTRA/$PROJECT_NAME"
+    mkdir -p "$GUIX_EXTRA_PROFILES/$PROJECT_NAME"
+    mkdir -p $EMACS_CONFIG_DIR
+
+    # Create channel
+    guix pull --profile="$GUIX_EXTRA/$PROJECT_NAME/guix"
+
+    # Install packages
+    "$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest=$PROJECT_NAME.scm --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
+
+    # Deploy project
+    ln -s -f $PWD/bookmarks $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/init.el $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/recentf $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/custom.el $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/emacs-29.scm $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/lisp $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/early-init.el $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/history $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/package-quickstart.el $EMACS_CONFIG_DIR/
+    ln -s -f $PWD/$PROJECT_NAME.desktop $HOME/.local/share/applications/
+
+done

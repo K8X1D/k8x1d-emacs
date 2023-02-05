@@ -26,6 +26,8 @@
   :hook
   (after-init . doom-modeline-mode)
   :config
+  (setq doom-modeline-enable-word-count t)
+(setq doom-modeline-workspace-name nil) ;; use tab instead
   (setq doom-modeline-minor-modes t)
   (setq doom-modeline-buffer-encoding nil))
 
@@ -40,10 +42,19 @@
 
 
 ;; Tabs
-(setq tab-bar-show nil)
+;;(setq tab-bar-show nil)
 (setq tab-bar-new-tab-choice "*scratch*")
 (setq tab-bar-close-button-show nil
     tab-bar-new-button-show nil)
+
+(setq tab-bar-separator " | ")
+
+(custom-set-faces
+ '(tab-bar ((t (:inherit nil :background "#282828" :foreground "#928374" :height 1.1))))
+ '(tab-bar-tab ((t (:background "#282828" :foreground "#ebdbb2":weight bold :underline t))))
+ )
+
+
 
 ;; Smoother scrolling (>= 29)
 (add-hook 'after-init-hook 'pixel-scroll-precision-mode)
