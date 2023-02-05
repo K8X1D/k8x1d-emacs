@@ -20,15 +20,15 @@
 (use-package magit-todos
   :after magit)
 
-;; Interaction with github/gitlab
-(use-package forge
-  :after magit
-  :config
-  ;; evil-collection compat, see https://github.com/emacs-evil/evil-collection/issues/543
-  (setq forge-add-default-sections nil)
-  (setq forge-add-default-bindings nil)
-  (setq auth-sources '("~/.authinfo.gpg"))
-  )
+;;;; Interaction with github/gitlab
+;;(use-package forge
+;;  :after magit
+;;  :config
+;;  ;; evil-collection compat, see https://github.com/emacs-evil/evil-collection/issues/543
+;;  (setq forge-add-default-sections nil)
+;;  (setq forge-add-default-bindings nil)
+;;  (setq auth-sources '("~/.authinfo.gpg"))
+;;  )
 
 
 (provide 'git-module)
