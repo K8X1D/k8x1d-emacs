@@ -48,7 +48,8 @@
 (timed-require 'file-explorer-module)
 (timed-require 'utilities-module)
 (timed-require 'git-module)
-(timed-require 'programmation-module)
+(timed-require 'prog-module)
+(timed-require 'text-module)
 
 
 
