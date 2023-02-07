@@ -18,7 +18,8 @@
   ((after-init . evil-mode)
    (org-capture-mode . evil-insert-state))
   :config
-(setq evil-undo-system 'undo-fu)
+;;(setq evil-undo-system 'undo-fu)
+(setq evil-undo-system 'undo-redo) ;; test native option
 )
 
 ;; Extended evil
