@@ -26,6 +26,9 @@
 	   "*** TODO %?\n  %i\n  %a")))
   (setq org-todo-keywords
 	'((sequence "TODO(t)" "IN PROGRESS(i)" "WAITING(w)" "NEXT(n)" "REPORTED(r)"  "|" "DONE(d)" "CANCELLED(c)")))
+(setq org-todo-keyword-faces
+      '(("WAITING" . (:foreground ,(doom-color 'yellow)))
+        ("CANCELLED" . (:foreground ,(doom-color 'red)))))
   ;; Increase size of LaTeX fragment previews
   (plist-put org-format-latex-options :scale 1.0)
   ;; better quality latex preview
@@ -69,13 +72,7 @@
 
 ;; Emphasis marker appering 
 (use-package org-appear
-  :hook
-  (org-mode . org-appear-mode)
-  :config
-  (setq org-hide-emphasis-markers t
-	org-appear-trigger 'manual
-	org-appear-autoemphasis t
-	org-appear-autolinks t)
+  :init
   ;; show only in insert mode
   (add-hook 'org-mode-hook (lambda ()
 			     (add-hook 'evil-insert-state-entry-hook
@@ -86,6 +83,13 @@
 				       #'org-appear-manual-stop
 				       nil
 				       t)))
+  :hook
+  (org-mode . org-appear-mode)
+  :config
+  (setq org-hide-emphasis-markers t
+	org-appear-trigger 'manual
+	org-appear-autoemphasis t
+	org-appear-autolinks t)
   )
 
 
