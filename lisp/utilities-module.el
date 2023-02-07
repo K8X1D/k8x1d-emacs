@@ -2,6 +2,7 @@
 ;;;; Pdf support
 ;;;;
 (use-package pdf-tools
+  :defer t
   :hook
   (pdf-view-mode . pdf-view-midnight-minor-mode) ;; dark mode by default
   :config
@@ -13,11 +14,13 @@
 ;;
 
 (use-package vterm
+  :defer t
   :hook
   (vterm-mode . (lambda ()
 		  (setq-local evil-insert-state-cursor 'box)
 		  (evil-insert-state))))
 (use-package multi-vterm
+  :defer t
  :bind
   (("C-c o t" . multi-vterm-dedicated-toggle)
   ("C-c o T" . multi-vterm))
@@ -26,6 +29,7 @@
   )
 
 (use-package hide-mode-line
+  :defer t
   :hook
   (vterm-mode . hide-mode-line-mode))
 
