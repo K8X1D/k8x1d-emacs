@@ -56,6 +56,7 @@
   (specifications->manifest
    '(
      "emacs-next-pgtk"
+     "plantuml" ;; Draw UML diagrams from simple textual description
      ))
   (packages->manifest (list
 		       ;;emacs-29-pgtk

@@ -49,6 +49,7 @@
   (specifications->manifest
    '(
      "emacs-next"
+     "plantuml" ;; Draw UML diagrams from simple textual description
      ))
   (packages->manifest (list
 		       ;;emacs-29
