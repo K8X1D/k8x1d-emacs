@@ -52,6 +52,8 @@
   (add-to-list 'org-latex-packages-alist '("AUTO" "babel" t ("pdflatex")))
   ;; taskjuggler
   ;;(require 'ox-taskjuggler)
+  ;; Bibliography
+  (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
   )
 
 ;; Priorities symbols
