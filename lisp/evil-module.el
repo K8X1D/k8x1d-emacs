@@ -9,17 +9,23 @@
 ;;  (unless (package-installed-p package)
 ;;    (package-install package)))
 
+
+;; Redo system
+(use-package undo-fu
+  :defer t)
+
+
+
 ;; Base evil
 (use-package evil
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-fu)
   :hook
   ((after-init . evil-mode)
    (org-capture-mode . evil-insert-state))
-  :config
-;;(setq evil-undo-system 'undo-fu)
-(setq evil-undo-system 'undo-redo) ;; test native option
+;;(setq evil-undo-system 'undo-redo) ;; test native option, create problems...
 )
 
 ;; Extended evil
