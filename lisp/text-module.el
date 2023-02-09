@@ -54,6 +54,7 @@
   :config
   (setq reftex-toc-split-windows-horizontally t)
   (setq reftex-toc-max-level 3)
+  (setq reftex-toc-split-windows-fraction 0.2)
   )
 
 
