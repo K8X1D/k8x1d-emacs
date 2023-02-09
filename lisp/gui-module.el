@@ -64,9 +64,10 @@
 (use-package mixed-pitch
   :defer t
   :init
-  (set-face-attribute 'default nil :font "DejaVu Sans Mono" :weight 'normal :height 150)
-  (set-face-attribute 'fixed-pitch nil :font "DejaVu Sans Mono" :weight 'normal :height 180)
-  (set-face-attribute 'variable-pitch nil :font "DejaVu Sans" :weight 'normal :height 1.5)
+  (set-face-attribute 'default nil :font "Iosevka Term" :weight 'normal :height 150)
+  (set-face-attribute 'fixed-pitch nil :font "Iosevka Term" :weight 'normal :height 180)
+  ;;(set-face-attribute 'variable-pitch nil :font "DejaVu Sans" :weight 'normal :height 1.5)
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :weight 'normal :height 1.5)
   :hook
   (text-mode . mixed-pitch-mode)
   )
@@ -113,5 +114,32 @@
   )
 
 
+;;
+;; Dashboard
+;;
+
+
+
+(use-package dashboard
+  :bind
+  ("C-c d" .'dashboard-refresh-buffer)
+  :config
+  (setq dashboard-startup-banner 'logo) 
+  (setq dashboard-match-agenda-entry "-main-mont-bud")
+  (setq dashboard-page-separator "\n\f\n")
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-set-navigator t)
+  (dashboard-setup-startup-hook))
+
+(use-package page-break-lines
+  :hook
+  (after-init . global-page-break-lines-mode))
+
+
+;; Alt
+;;(use-package narumi
+;;  :config
+;;  (setq narumi-image-directory "~/Pictures/wallpapers/paintings/Cathy_Bible"))
 
 (provide 'gui-module)
