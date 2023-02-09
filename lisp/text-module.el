@@ -48,6 +48,15 @@
 ;; Latex better support
 ;;
 
+(use-package reftex
+  :hook
+  (reftex-mode . visual-line-mode)
+  :config
+  (setq reftex-toc-split-windows-horizontally t)
+  (setq reftex-toc-max-level 3)
+  )
+
+
 (use-package auctex
   :defer t
   :hook
@@ -78,6 +87,7 @@
   ;;(add-hook 'LaTeX-mode-hook 'eglot-ensure)
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+
   )
 
 (use-package auctex-latexmk
