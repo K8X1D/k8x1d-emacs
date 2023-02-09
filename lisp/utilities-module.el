@@ -2,10 +2,9 @@
 ;;;; Pdf support
 ;;;;
 (use-package pdf-tools
-  :defer t
   :hook
   (pdf-view-mode . pdf-view-midnight-minor-mode) ;; dark mode by default
-  :config
+  :init
   (pdf-loader-install) ;; On demand loading
   )
 

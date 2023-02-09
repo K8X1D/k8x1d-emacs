@@ -59,12 +59,7 @@
 
 
 (use-package auctex
-  :defer t
-  :hook
-  ((LaTeX-mode . eglot-ensure)
-   (LaTeX-mode . LaTeX-math-mode)
-   (LaTeX-mode . turn-on-reftex))
-  :config
+  :init
   (setq TeX-parse-self t ; parse on load
 	TeX-auto-save t  ; parse on save
 	;; Use hidden directories for AUCTeX files.
@@ -79,12 +74,18 @@
 	;; Just save, don't ask before each compilation.
 	TeX-save-query nil
 
-	TeX-view-program-selection '((output-pdf "PDF Tools"))
 	TeX-source-correlate-start-server t
 	TeX-PDF-mode t
+	;; Set pdf viewer
+	TeX-view-program-selection '((output-pdf "PDF Tools"))
 	reftex-plug-into-AUCTeX t)
   (add-hook 'TeX-after-compilation-finished-functions
 	    #'TeX-revert-document-buffer)
+  (setq )
+  :hook
+  ((LaTeX-mode . eglot-ensure)
+   (LaTeX-mode . LaTeX-math-mode)
+   (LaTeX-mode . turn-on-reftex))
   ;;(add-hook 'LaTeX-mode-hook 'eglot-ensure)
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
