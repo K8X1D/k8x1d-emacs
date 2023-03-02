@@ -57,6 +57,8 @@
    '(
      "emacs-next-pgtk"
      "plantuml" ;; Draw UML diagrams from simple textual description
+     "git"
+     "cmake"
      ))
   (packages->manifest (list
 		       ;;emacs-29-pgtk

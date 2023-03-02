@@ -3,7 +3,7 @@ Name=k8x1d-emacs-pgtk
 GenericName=Text Editor
 Comment=Edit text
 MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
-Exec=sh -c "\$HOME/.guix-extra-profiles/k8x1d-emacs-pgtk/k8x1d-emacs-pgtk/bin/emacs-30.0.50 --init-directory=\$HOME/.k8x1d-emacs-pgtk.d"
+Exec=sh -c "\$HOME/.guix-extra-profiles/k8x1d-emacs-pgtk/k8x1d-emacs-pgtk/bin/emacs-29.0.60 --init-directory=\$HOME/.k8x1d-emacs-pgtk.d"
 Icon=k8x1d-avatar_small
 Type=Application
 Terminal=false

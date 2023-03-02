@@ -36,7 +36,8 @@
 ;;
 ;; Guix interaction
 ;;
-;;(use-package guix)
+(use-package guix
+  :defer t)
 
 ;;
 ;; Password-store interaction

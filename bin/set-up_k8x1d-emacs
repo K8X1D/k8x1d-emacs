@@ -4,6 +4,11 @@
 GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
 GUIX_EXTRA=$HOME/.guix-extra
 
+# Create global directories
+mkdir -p $HOME/.local/share/applications
+mkdir -p $HOME/.local/share/icons
+mkdir -p $HOME/.local/bin
+
 # For each project
 for PROJECT_NAME in k8x1d-emacs k8x1d-emacs-pgtk
 do
@@ -30,10 +35,11 @@ do
     ln -s -f $PWD/early-init.el $EMACS_CONFIG_DIR/early-init.el
     ln -s -f $PWD/history $EMACS_CONFIG_DIR/history
     ln -s -f $PWD/package-quickstart.el $EMACS_CONFIG_DIR/package-quickstart.el
+    
+    ln -s -f $PWD/$PROJECT_NAME $HOME/.local/bin/$ROJECT_NAME
     ln -s -f $PWD/$PROJECT_NAME.desktop $HOME/.local/share/applications/$PROJECT_NAME.desktop
 
 done
 
-# Set-up icon
-mkdir -p $HOME/.local/share/icons
+# Deploy general element of project
 ln -s -f $PWD/k8x1d-avatar_small.png $HOME/.local/share/icons/k8x1d-avatar_small.png
