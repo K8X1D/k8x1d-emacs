@@ -39,7 +39,7 @@
   (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-enable-word-count t)
-  (setq doom-modeline-workspace-name nil) ;; use tab instead
+  ;;(setq doom-modeline-workspace-name nil) ;; use tab instead
   (setq doom-modeline-minor-modes t)
   (setq doom-modeline-buffer-encoding nil))
 
@@ -87,6 +87,22 @@
   )
 
 
+;; Highlight todos
+(use-package hl-todo
+  :hook
+  (after-init . global-hl-todo-mode)
+  :config
+  (define-key hl-todo-mode-map (kbd "C-c p") 'hl-todo-previous)
+  (define-key hl-todo-mode-map (kbd "C-c n") 'hl-todo-next)
+  (define-key hl-todo-mode-map (kbd "C-c o") 'hl-todo-occur)
+  (define-key hl-todo-mode-map (kbd "C-c i") 'hl-todo-insert)
+  (setq hl-todo-keyword-faces
+	'(("TODO"   . "#FF0000")
+	  ("FIXME"  . "#FF0000")
+	  ("DEBUG"  . "#A020F0")
+	  ("GOTCHA" . "#FF4500")
+	  ("STUB"   . "#1E90FF"))))
+
 
 ;; General mode caracteristics
 (use-package emacs
@@ -100,17 +116,17 @@
   ;; ibuffer instead of buffer-menu
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   ;; Tabs
-  ;;(setq tab-bar-show nil)
-  (setq tab-bar-new-tab-choice "*scratch*")
-  (setq tab-bar-close-button-show nil
-	tab-bar-new-button-show nil
-	tab-bar-auto-width nil)
+  (setq tab-bar-show nil)
+ ;; (setq tab-bar-new-tab-choice "*scratch*")
+ ;; (setq tab-bar-close-button-show nil
+ ;;	tab-bar-new-button-show nil
+ ;;	tab-bar-auto-width nil)
 
-  (setq tab-bar-separator " | ")
-  (custom-set-faces
-   '(tab-bar ((t (:inherit nil :background "#282828" :foreground "#928374" :height 1.0))))
-   '(tab-bar-tab ((t (:background "#282828" :foreground "#ebdbb2":weight bold :underline t))))
-   )
+ ;; (setq tab-bar-separator " | ")
+ ;; (custom-set-faces
+ ;;  '(tab-bar ((t (:inherit nil :background "#282828" :foreground "#928374" :height 1.0))))
+ ;;  '(tab-bar-tab ((t (:background "#282828" :foreground "#ebdbb2":weight bold :underline t))))
+ ;;  )
   )
 
 
@@ -118,18 +134,30 @@
 ;; Dashboard
 ;;
 
-
-
 (use-package dashboard
   :bind
   ("C-c d" .'dashboard-refresh-buffer)
   :config
-  (setq dashboard-startup-banner 'logo) 
+  ;; Faces
+  (custom-set-faces
+   `(dashboard-items-face ((t (:inherit widget-button :height 0.85))))
+   `(dashboard-heading ((t (:inherit font-lock-keyword-face :height 0.9))))
+   )
+  (setq dashboard-startup-banner "~/Pictures/Personnel/k8x1d-avatar/k8x1d-avatar_200x145.png")
+  ;;(setq dashboard-startup-banner 'logo) 
+  (setq dashboard-banner-logo-title "Welcome to K8X1d Emacs Dashboard!")
+  (setq dashboard-banner-logo-title "")
   (setq dashboard-match-agenda-entry "-main-mont-bud")
   (setq dashboard-page-separator "\n\f\n")
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-set-navigator t)
+  ;;(setq dashboard-set-navigator t)
+  (setq dashboard-projects-backend 'project-el)
+  (setq dashboard-items '((recents  . 4)
+			  (bookmarks . 4)
+			  (projects . 4)
+			  (agenda . 4)))
+  (setq dashboard-center-content t)
   (dashboard-setup-startup-hook))
 
 (use-package page-break-lines
