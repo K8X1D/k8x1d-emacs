@@ -117,7 +117,7 @@
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   ;; Tabs
   (setq tab-bar-show nil)
- ;; (setq tab-bar-new-tab-choice "*scratch*")
+  (setq tab-bar-new-tab-choice "*scratch*")
  ;; (setq tab-bar-close-button-show nil
  ;;	tab-bar-new-button-show nil
  ;;	tab-bar-auto-width nil)
