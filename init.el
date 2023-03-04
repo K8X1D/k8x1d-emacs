@@ -41,6 +41,7 @@
 
 ;; Load modules of interest
 (timed-require 'packages-module)
+(timed-require 'keybindings-module)
 (timed-require 'org-module)
 (timed-require 'evil-module)
 (timed-require 'gui-module)
