@@ -3,6 +3,7 @@
 ;;
 
 (use-package org
+  :defer t
   :bind
   ;; From https://orgmode.org/manual/Activation.html
   (("C-c l" . org-store-link)
@@ -16,7 +17,9 @@
   (setq org-refile-use-outline-path t)
   (setq org-default-notes-file "~/org/notes.org")
   (setq org-agenda-files
-	(file-expand-wildcards "~/org/*.org"))
+	(append
+	 (file-expand-wildcards "~/org/*.org")
+	 (file-expand-wildcards "~/Dropbox/org/*.org")))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-confirm-babel-evaluate 'nil)
   (setq org-capture-templates

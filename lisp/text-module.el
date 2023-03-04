@@ -13,11 +13,12 @@
 (use-package eglot-ltex
   :defer t
   :ensure nil
-  :hook (LaTeX-mode . (lambda ()
-			(require 'eglot-ltex)
-			(call-interactively #'eglot)))
+  ;; TODO: find problem, don't find java
+;;  :hook (LaTeX-mode . (lambda ()
+;;			(require 'eglot-ltex)
+;;			(call-interactively #'eglot)))
   :init
-  (setq eglot-languagetool-server-path "~/Documents/Developpement/Logiciels/Editeurs/2022/A/ltex-ls-15.2.0/")
+  (setq eglot-languagetool-server-path "/home/k8x1d/Documents/Developpement/Logiciels/Editeurs/2023/k8x1d-emacs/ltex-ls-15.2.0/")
   ;;(setq eglot-languagetool-server-path "~/Documents/Developpement/Logiciels/Editeurs/2022/A/k8x1d-emacs/ltex-ls/"))
   :config
   (defun k8x1d/start-ltex ()
@@ -100,6 +101,9 @@
 	reftex-plug-into-AUCTeX t)
   (add-hook 'TeX-after-compilation-finished-functions
 	    #'TeX-revert-document-buffer)
+  (custom-set-faces
+   `(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold :height 0.8))))
+   )
   :hook
   ((LaTeX-mode . eglot-ensure)
    (LaTeX-mode . LaTeX-math-mode)
@@ -107,7 +111,6 @@
   ;;(add-hook 'LaTeX-mode-hook 'eglot-ensure)
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-
   )
 
 (use-package auctex-latexmk
