@@ -76,7 +76,9 @@
 ;; add icons to ibuffer 
 (add-hook 'ibuffer-mode-hook #'all-the-icons-ibuffer-mode)
 ;; add icons to dired
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
+;; Highlights "TODOs"  
+(add-hook 'after-init-hook #'global-hl-todo-mode)
 
 ;; Modeline
 ;; Don't work..
@@ -192,5 +194,16 @@
    'org-babel-load-languages
    '((sql . t))))
 
-
-
+;;
+;; Git support
+;;
+(defun k8x1d/magit-status-w-forge-upd ()
+  (interactive)
+  (magit-todos-mode)
+  (magit-status)
+  (forge-pull))
+(global-set-key (kbd "C-c g s") 'k8x1d/magit-status-w-forge-upd)
+(global-set-key (kbd "C-c g t") 'magit-todos-list)
+(setq auth-sources '("~/.authinfo.gpg")
+;;(with-eval-after-load 'magit
+;;  (require 'forge))
