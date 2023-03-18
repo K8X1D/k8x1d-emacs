@@ -54,14 +54,8 @@
 		    :weight 'light)
 
 
-
-;; Reduce UI
-(setq use-file-dialog nil)
-(setq use-dialog-box nil)
-(setq inhibit-startup-message t)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(menu-bar-mode -1)
+(add-hook 'after-init-hook (lambda ()
+			     (defalias 'yes-or-no-p 'y-or-n-p)))
 
 
 ;; Tab configuration
@@ -73,17 +67,23 @@
 (add-hook 'after-init-hook #'hl-line-mode)
 ;; Better scrolling effects
 (add-hook 'after-init-hook #'pixel-scroll-precision-mode)
-;; Theme
-(load-theme 'modus-vivendi)
 ;; Show line number for programming mode 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 ;; Show which key
 (add-hook 'after-init-hook #'which-key-mode)
+;; Per buffer exposition
+(add-hook 'after-init-hook #'solaire-global-mode)
+;; add icons to ibuffer 
+(add-hook 'ibuffer-mode-hook #'all-the-icons-ibuffer-mode)
+;; add icons to dired
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
 ;; Modeline
 ;; Don't work..
 ;;(setq mood-line-glyph-alist mood-line-glyphs-fira-code)
 ;;(setq mood-line-glyph-alist mood-line-glyphs-unicode)
 (add-hook 'after-init-hook #'mood-line-mode)
+
 
 ;;
 ;; Native compilation
@@ -139,8 +139,17 @@
 (pdf-loader-install)
 
 ;; Terminal
-(global-set-key (kbd "C-x o t") 'vterm-toggle)
+(global-set-key (kbd "C-c o t") 'vterm-toggle)
+(add-hook 'vterm-mode-hook #'visual-line-mode)
 
+;; File explorer
+
+;;
+;; Project management
+;;
+(setq multi-vterm-dedicated-window-height 18)
+(global-set-key (kbd "C-c p t") 'multi-vterm-dedicated-toggle)
+(global-set-key (kbd "C-c p e") 'dired-sidebar-toggle-sidebar)
 
 ;;
 ;; Org Mode 
@@ -149,10 +158,18 @@
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
 
+;; Org directory
+(setq org-directory "~/Dropbox/org")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+
 ;; Indent bullets
 (add-hook 'org-mode-hook #'org-indent-mode)
+;; Better look
 (add-hook 'org-mode-hook #'org-modern-mode)
+;; Evil compatibility
 (add-hook 'org-mode-hook #'evil-org-mode)
+;; Add "#+auto_tangle: t" option for header
+(add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
 
 
@@ -166,6 +183,14 @@
 			     ))
 
 
+;;
+;; Org babel
+;;
+(with-eval-after-load "org"
+  (setq org-confirm-babel-evaluate nil)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((sql . t))))
 
 
 
