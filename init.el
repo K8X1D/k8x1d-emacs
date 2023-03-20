@@ -53,10 +53,21 @@
 		    :height 150
 		    :weight 'light)
 
+;;
+;; Set Theme
+;; 
+(load-theme 'modus-vivendi)
 
+
+;;
+;; Emacs characteristics
+;;
 (add-hook 'after-init-hook (lambda ()
-			     (defalias 'yes-or-no-p 'y-or-n-p)))
-
+			     (defalias 'yes-or-no-p 'y-or-n-p)
+			     (setq vc-follow-symlinks t)
+			     ))
+;; Update buffer when file change
+(add-hook 'after-init-hook 'global-auto-revert-mode)
 
 ;; Tab configuration
 ;;(setq tab-bar-show nil)
@@ -84,7 +95,22 @@
 ;; Don't work..
 ;;(setq mood-line-glyph-alist mood-line-glyphs-fira-code)
 ;;(setq mood-line-glyph-alist mood-line-glyphs-unicode)
-(add-hook 'after-init-hook #'mood-line-mode)
+;;(setq mood-line-glyph-alist mood-line-glyphs-fira-code)
+;;(add-hook 'after-init-hook #'mood-line-mode)
+
+;; Add wanted information
+(setq doom-modeline-enable-word-count t)
+(setq doom-modeline-minor-modes t) ;; for minions
+
+;; Clean-up modeline
+(setq doom-modeline-buffer-state-icon nil)
+(setq doom-modeline-major-mode-icon nil)
+(setq doom-modeline-workspace-name nil) ;; use tab instead
+(setq doom-modeline-buffer-encoding nil)
+
+(add-hook 'after-init-hook #'doom-modeline-mode)
+(add-hook 'doom-modeline-mode-hook #'minions-mode)
+
 
 
 ;;
@@ -98,9 +124,11 @@
 ;;
 (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
 (setq evil-want-keybinding nil)
+(setq evil-undo-system 'undo-fu)
 (add-hook 'after-init-hook (lambda ()
 				  (evil-mode 1)
 				  (evil-collection-init)))
+
 
 ;;
 ;; Teach emacs to be clean!
@@ -146,6 +174,12 @@
 
 ;; File explorer
 
+;; Pass interation
+(global-set-key (kbd "C-c o p") 'pass)
+
+;; Guix packages management
+(global-set-key (kbd "C-c o g") 'guix)
+
 ;;
 ;; Project management
 ;;
@@ -157,8 +191,8 @@
 ;; Org Mode 
 ;;
 (global-set-key (kbd "C-c l") #'org-store-link)
-(global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c c") #'org-capture)
+
+(setq org-image-actual-width nil)
 
 ;; Org directory
 (setq org-directory "~/Dropbox/org")
@@ -168,21 +202,51 @@
 (add-hook 'org-mode-hook #'org-indent-mode)
 ;; Better look
 (add-hook 'org-mode-hook #'org-modern-mode)
-;; Evil compatibility
-(add-hook 'org-mode-hook #'evil-org-mode)
 ;; Add "#+auto_tangle: t" option for header
-(add-hook 'org-mode-hook 'org-auto-tangle-mode)
+(add-hook 'org-mode-hook #'org-auto-tangle-mode)
+;; Wrap text by default
+(add-hook 'org-mode-hook #'visual-line-mode)
+
+;; Evil compatibility
+(with-eval-after-load 'org
+  (require 'evil-org)
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 
+;; Pomodoro
+(setq org-pomodoro-length 50)
+(setq org-pomodoro-short-break-length 10)
+(setq org-pomodoro-long-break-length 30)
+
+
+;; GTD
+;; From https://lucidmanager.org/productivity/getting-things-done-with-emacs/
+;; From https://members.optusnet.com.au/~charles57/GTD/orgmode.html
+;; https://hamberg.no/gtd
+(global-set-key (kbd "C-c c") #'org-capture)
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+
+
+(global-set-key (kbd "C-c a") #'org-agenda)
+(setq org-agenda-files '("~/Dropbox/org/todo.org"))
+;;(setq org-agenda-files 
+;;      '((concat org-directory "/todo.org") 
+;;	(concat org-directory "/notes.org")
+;;	(concat org-directory "/projects.org")))
 
 ;;
 ;; Julia support
 ;; 
 (setq vterm-kill-buffer-on-exit nil)
-(add-hook 'julia-mode-hook (lambda ()
-			     (julia-repl-mode 1)
-			     (julia-repl-set-terminal-backend 'vterm)
-			     ))
+;;(add-hook 'julia-mode-hook (lambda ()
+;;			     (julia-repl-mode 1)
+;;			     (julia-repl-set-terminal-backend 'vterm)
+;;			     ))
+(add-hook 'julia-mode-hook #'julia-vterm-mode)
 
 
 ;;
@@ -190,9 +254,17 @@
 ;;
 (with-eval-after-load "org"
   (setq org-confirm-babel-evaluate nil)
+  (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
+  (defalias 'org-babel-variable-assignments:julia 'org-babel-variable-assignments:julia-vterm)
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((sql . t))))
+   '((sql . t)
+     (julia-vterm . t))))
+
+
+
+
+
 
 ;;
 ;; Git support
@@ -204,6 +276,6 @@
   (forge-pull))
 (global-set-key (kbd "C-c g s") 'k8x1d/magit-status-w-forge-upd)
 (global-set-key (kbd "C-c g t") 'magit-todos-list)
-(setq auth-sources '("~/.authinfo.gpg")
+(setq auth-sources '("~/.authinfo.gpg"))
 ;;(with-eval-after-load 'magit
 ;;  (require 'forge))
