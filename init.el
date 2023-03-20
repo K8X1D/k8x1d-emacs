@@ -56,7 +56,9 @@
 ;;
 ;; Set Theme
 ;; 
-(load-theme 'modus-vivendi)
+(add-hook 'after-init-hook (lambda ()
+			     (load-theme 'modus-vivendi)))
+;;(load-theme 'modus-operandi)
 
 
 ;;
@@ -190,6 +192,13 @@
 ;;
 ;; Org Mode 
 ;;
+
+;; Modern look to org
+;; TODO: explore doc for org-modern
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+;;(global-org-modern-mode)
+
 (global-set-key (kbd "C-c l") #'org-store-link)
 
 (setq org-image-actual-width nil)
@@ -200,8 +209,6 @@
 
 ;; Indent bullets
 (add-hook 'org-mode-hook #'org-indent-mode)
-;; Better look
-(add-hook 'org-mode-hook #'org-modern-mode)
 ;; Add "#+auto_tangle: t" option for header
 (add-hook 'org-mode-hook #'org-auto-tangle-mode)
 ;; Wrap text by default
