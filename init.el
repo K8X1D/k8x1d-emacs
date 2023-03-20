@@ -193,13 +193,19 @@
 ;; Org Mode 
 ;;
 
+(global-set-key (kbd "C-c l") #'org-store-link)
+
+;; Indent bullets
+(add-hook 'org-mode-hook #'org-indent-mode)
+
 ;; Modern look to org
 ;; TODO: explore doc for org-modern
-(add-hook 'org-mode-hook #'org-modern-mode)
+;; Must be set after org-indent-mode, if not, coloring problem occurs (invisible level-2 bullets)
+;;(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-indent-mode-hook #'org-modern-mode)
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 ;;(global-org-modern-mode)
 
-(global-set-key (kbd "C-c l") #'org-store-link)
 
 (setq org-image-actual-width nil)
 
@@ -207,8 +213,6 @@
 (setq org-directory "~/Dropbox/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
-;; Indent bullets
-(add-hook 'org-mode-hook #'org-indent-mode)
 ;; Add "#+auto_tangle: t" option for header
 (add-hook 'org-mode-hook #'org-auto-tangle-mode)
 ;; Wrap text by default
