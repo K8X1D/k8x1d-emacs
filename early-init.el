@@ -17,7 +17,3 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 (push '(mouse-color . "white") default-frame-alist)
 
-;;
-;; Set Theme
-;; 
-(load-theme 'modus-vivendi)
