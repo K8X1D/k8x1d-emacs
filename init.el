@@ -57,7 +57,9 @@
 ;; Set Theme
 ;; 
 (add-hook 'after-init-hook (lambda ()
-			     (load-theme 'modus-vivendi)))
+			     ;;(load-theme 'modus-vivendi)
+			     (load-theme 'doom-gruvbox t)
+			     ))
 ;;(load-theme 'modus-operandi)
 
 
@@ -73,11 +75,20 @@
 
 ;; Tab configuration
 ;;(setq tab-bar-show nil)
-(setq tab-bar-new-tab-choice "*scratch*")
+(setq tab-bar-new-tab-choice "*scratch*"
+      tab-bar-close-button-show nil
+      tab-bar-new-button-show nil
+      tab-bar-auto-width nil
+      tab-bar-separator "  "
+      )
 
+(custom-set-faces
+ '(tab-bar ((t (:inherit nil :background "#282828" :foreground "#928374" :height 1.0))))
+ '(tab-bar-tab ((t (:background "#282828" :foreground "#ebdbb2":weight bold :underline nil))))
+ )
 
 ;; Highlight whole line
-(add-hook 'after-init-hook #'hl-line-mode)
+(add-hook 'after-init-hook #'global-hl-line-mode)
 ;; Better scrolling effects
 (add-hook 'after-init-hook #'pixel-scroll-precision-mode)
 ;; Show line number for programming mode 
@@ -148,6 +159,9 @@
 
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
 
+;; Custom file location
+(setq custom-file (concat user-emacs-directory "/custom.el"))
+
 ;;
 ;; Completion
 ;;
@@ -182,6 +196,11 @@
 ;; Guix packages management
 (global-set-key (kbd "C-c o g") 'guix)
 
+;; Multimedia player
+(emms-minimalistic)
+(setq emms-player-list '(emms-player-mpv)
+      emms-info-functions '(emms-info-native))
+
 ;;
 ;; Project management
 ;;
@@ -211,7 +230,8 @@
 
 ;; Org directory
 (setq org-directory "~/Dropbox/org")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-default-notes-file (concat org-directory "/gtd/inbox.org"))
+
 
 ;; Add "#+auto_tangle: t" option for header
 (add-hook 'org-mode-hook #'org-auto-tangle-mode)
@@ -237,6 +257,25 @@
 (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
 
 
+;; Esthetics
+(setq org-insert-heading-respect-content t)
+
+;; Visibility of hidden elements only when in insert mode
+;; from https://github.com/awth13/org-appear
+(setq org-appear-trigger 'manual)
+(add-hook 'org-mode-hook (lambda ()
+                           (add-hook 'evil-insert-state-entry-hook
+                                     #'org-appear-manual-start
+                                     nil
+                                     t)
+                           (add-hook 'evil-insert-state-exit-hook
+                                     #'org-appear-manual-stop
+                                     nil
+                                     t)))
+
+
+
+
 ;; GTD
 ;; From https://lucidmanager.org/productivity/getting-things-done-with-emacs/
 ;; From https://members.optusnet.com.au/~charles57/GTD/orgmode.html
@@ -247,7 +286,7 @@
 
 
 (global-set-key (kbd "C-c a") #'org-agenda)
-(setq org-agenda-files '("~/Dropbox/org/todo.org"))
+(setq org-agenda-files (file-expand-wildcards (concat org-directory "/gtd/*.org")))
 ;;(setq org-agenda-files 
 ;;      '((concat org-directory "/todo.org") 
 ;;	(concat org-directory "/notes.org")
@@ -263,6 +302,14 @@
 ;;			     ))
 (add-hook 'julia-mode-hook #'julia-vterm-mode)
 
+;;(setq eglot-jl-language-server-project "~/.julia/environments/v1.8")
+(add-hook 'julia-mode-hook (lambda()
+			     (eglot-jl-init)
+			     (setq eglot-connect-timeout 60) ;; prevent eglot timeout
+			     (call-interactively 'eglot)
+			     ))  
+
+
 
 ;;
 ;; Org babel
@@ -275,11 +322,6 @@
    'org-babel-load-languages
    '((sql . t)
      (julia-vterm . t))))
-
-
-
-
-
 
 ;;
 ;; Git support
@@ -410,3 +452,6 @@
 ;;  ;; Notes
 ;;  (setq citar-notes-paths '("~/Zotero/notes"))
 ;;  )
+
+
+
