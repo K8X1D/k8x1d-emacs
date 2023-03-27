@@ -56,12 +56,32 @@
 ;;
 ;; Set Theme
 ;; 
+
+
+(setq dark-theme 'doom-gruvbox)
+(setq light-theme 'doom-gruvbox-light)
+(setq actual-theme dark-theme) 
+
+(defun switch-theme (theme)
+  (disable-theme actual-theme)
+  (setq actual-theme theme)
+  (load-theme actual-theme t)
+  )
+
+(defun k8x1d/dark-light-theme-switch ()
+  (interactive)
+  (if (equal actual-theme dark-theme)
+      (switch-theme light-theme)
+    (switch-theme dark-theme)
+    ))
+
+(global-set-key (kbd "<f5>") 'k8x1d/dark-light-theme-switch)
+
 (add-hook 'after-init-hook (lambda ()
 			     ;;(load-theme 'modus-vivendi)
-			     (load-theme 'doom-gruvbox t)
+			     (load-theme dark-theme t)
 			     ))
 ;;(load-theme 'modus-operandi)
-
 
 ;;
 ;; Emacs characteristics
@@ -76,16 +96,18 @@
 ;; Tab configuration
 ;;(setq tab-bar-show nil)
 (setq tab-bar-new-tab-choice "*scratch*"
-      tab-bar-close-button-show nil
+      tab-bar-close-button-show t
       tab-bar-new-button-show nil
-      tab-bar-auto-width nil
-      tab-bar-separator "  "
+      tab-bar-auto-width t
+      tab-bar-separator " | "
       )
 
+tab-bar-close-button
+
 (custom-set-faces
- '(tab-bar ((t (:inherit nil :background "#282828" :foreground "#928374" :height 1.0))))
- '(tab-bar-tab ((t (:background "#282828" :foreground "#ebdbb2":weight bold :underline nil))))
- )
+ '(tab-bar ((t (:inherit nil :foreground "#928374" :height 1.0))))
+ '(tab-bar-tab ((t (:foreground "#ebdbb2":weight bold :underline nil))))
+)
 
 ;; Highlight whole line
 (add-hook 'after-init-hook #'global-hl-line-mode)
@@ -142,6 +164,7 @@
 				  (evil-mode 1)
 				  (evil-collection-init)))
 
+(evil-set-initial-state 'inferior-ess-mode 'emacs)
 
 ;;
 ;; Teach emacs to be clean!
@@ -183,6 +206,7 @@
 
 ;; Pdf support
 (pdf-loader-install)
+(add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode) ;; dark mode by default
 
 ;; Terminal
 (global-set-key (kbd "C-c o t") 'vterm-toggle)
@@ -262,7 +286,12 @@
 
 ;; Visibility of hidden elements only when in insert mode
 ;; from https://github.com/awth13/org-appear
-(setq org-appear-trigger 'manual)
+(add-hook 'org-mode-hook #'org-appear-mode)
+(setq org-hide-emphasis-markers t
+      org-appear-trigger 'manual
+      org-appear-autoemphasis t
+      org-appear-autolinks t)
+
 (add-hook 'org-mode-hook (lambda ()
                            (add-hook 'evil-insert-state-entry-hook
                                      #'org-appear-manual-start
@@ -308,6 +337,12 @@
 			     (setq eglot-connect-timeout 60) ;; prevent eglot timeout
 			     (call-interactively 'eglot)
 			     ))  
+
+;;
+;; Python support
+;;
+(add-hook 'python-mode-hook #'eglot-ensure)
+
 
 
 
@@ -420,6 +455,13 @@
 (setq citar-bibliography org-cite-global-bibliography)
 (setq citar-notes-paths '("~/Zotero/notes"))
 
+(global-set-key (kbd "C-c b i c") 'citar-insert-citation)
+(global-set-key (kbd "C-c b i r") 'citar-insert-reference)
+(global-set-key (kbd "C-c b o f") 'citar-open)
+(global-set-key (kbd "C-c b o n") 'citar-open-note)
+
+
+
 ;; Org interaction 
  (with-eval-after-load 'org
    (setq org-cite-insert-processor 'citar)
@@ -453,5 +495,64 @@
 ;;  (setq citar-notes-paths '("~/Zotero/notes"))
 ;;  )
 
+;;
+;; Org-roam
+;;
+(setq org-roam-directory (concat org-directory "/roam"))
+(setq find-file-visit-truename t)
+(setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+
+;; Ui
+(setq org-roam-ui-sync-theme t
+      org-roam-ui-follow t
+      org-roam-ui-update-on-save t
+      org-roam-ui-open-on-start t)
+
+(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
+(global-set-key (kbd "C-c n f") 'org-roam-node-find)
+;;(global-set-key (kbd "C-c n g") 'org-roam-graph)
+(global-set-key (kbd "C-c n g") 'org-roam-ui-open)
+(global-set-key (kbd "C-c n i") 'org-roam-node-insert)
+(global-set-key (kbd "C-c n c") 'org-roam-capture)
+(global-set-key (kbd "C-c n j") 'org-roam-dailies-capture-today)
 
 
+;; Upd database
+(add-hook 'org-mode-hook #'org-roam-db-autosync-mode)
+;;;; Web visualization network
+;;(add-hook 'org-roam-db-autosync-mode-hook #'org-roam-ui-mode)
+;; Integration with citar
+
+(with-eval-after-load 'citar
+  (citar-org-roam-mode 1))
+
+(with-eval-after-load 'org-roam
+  (citar-org-roam-mode 1))
+
+
+;;(use-package consult-org-roam
+;;   :ensure t
+;;   :after org-roam
+;;   :init
+;;   (require 'consult-org-roam)
+;;   ;; Activate the minor mode
+;;   (consult-org-roam-mode 1)
+;;   :custom
+;;   ;; Use `ripgrep' for searching with `consult-org-roam-search'
+;;   (consult-org-roam-grep-func #'consult-ripgrep)
+;;   ;; Configure a custom narrow key for `consult-buffer'
+;;   (consult-org-roam-buffer-narrow-key ?r)
+;;   ;; Display org-roam buffers right after non-org-roam buffers
+;;   ;; in consult-buffer (and not down at the bottom)
+;;   (consult-org-roam-buffer-after-buffers t)
+;;   :config
+;;   ;; Eventually suppress previewing for certain functions
+;;   (consult-customize
+;;    consult-org-roam-forward-links
+;;    :preview-key (kbd "M-."))
+;;   :bind
+;;   ;; Define some convenient keybindings as an addition
+;;   ("C-c n e" . consult-org-roam-file-find)
+;;   ("C-c n b" . consult-org-roam-backlinks)
+;;   ("C-c n l" . consult-org-roam-forward-links)
+;;   ("C-c n r" . consult-org-roam-search))
