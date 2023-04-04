@@ -10,21 +10,55 @@
           (lambda ()
             (setq gc-cons-threshold (expt 2 23))))
 
-;; Use a hook so the message doesn't get clobbered by other messages.
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "Emacs ready in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
+;;;; Use a hook so the message doesn't get clobbered by other messages.
+;;(add-hook 'emacs-startup-hook
+;;          (lambda ()
+;;            (message "Emacs ready in %s with %d garbage collections."
+;;                     (format "%.2f seconds"
+;;                             (float-time
+;;                              (time-subtract after-init-time before-init-time)))
+;;                     gcs-done)))
+
+
+
+;; Define time-mesurement require function 
+(require 'benchmark)
+(defun timed-require (feat)
+  (if (featurep feat)
+      (progn (message "erraneous usage: '%s'" feat) nil)
+    (message "'%s' loaded in %.2fs" feat
+        (benchmark-elapse (load-library (symbol-name feat))))))
+
+;; Add modules to path
+(add-to-list 'load-path (concat user-emacs-directory "/lisp"))
+
+(timed-require 'k8x1d-dashboard)
+(timed-require 'k8x1d-evil)
+(timed-require 'k8x1d-modeline)
+(timed-require 'k8x1d-julia)
+(timed-require 'k8x1d-python)
+(timed-require 'k8x1d-workspaces)
+(timed-require 'k8x1d-biblio)
+(timed-require 'k8x1d-corrector)
+
+
+
+
 
 ;;
 ;; Frames characteristics
 ;;
 
-(set-frame-parameter nil 'alpha-background 80) ; For current frame
-(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
+;; Set initial transparency
+(if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
+    (progn
+    (set-frame-parameter nil 'alpha-background 80) ; For current frame
+    (add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
+      )
+  (progn
+   (set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
+   (add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
+    ))
 
 ;; Set transparency of emacs
 (defun transparency (value)
@@ -37,12 +71,13 @@
 ;;
 
 ;; Fonts
+;;(set-face-attribute 'default nil :font "Fira Code" :height 150)
 (set-face-attribute 'default nil :font "Fira Code" :height 150)
 
 ;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil
-		    ;;:font "JetBrains Mono"
-		    :font "Fira Code"
+		    :font "JetBrains Mono"
+		    ;;:font "Fira Code"
 		    :weight 'light
 		    :height 150)
 
@@ -50,8 +85,14 @@
 (set-face-attribute 'variable-pitch nil
 		    ;; :font "Cantarell"
 		    :font "Iosevka Aile"
+		    ;;:font "DejaVu Sans"
 		    :height 150
 		    :weight 'light)
+
+(use-package mixed-pitch
+  :hook
+  ;; If you want it in all text modes:
+  (text-mode . mixed-pitch-mode))
 
 ;;
 ;; Set Theme
@@ -99,7 +140,7 @@
       tab-bar-close-button-show t
       tab-bar-new-button-show nil
       tab-bar-auto-width t
-      tab-bar-separator " | "
+      tab-bar-separator " "
       )
 
 tab-bar-close-button
@@ -125,26 +166,8 @@ tab-bar-close-button
 (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
 ;; Highlights "TODOs"  
 (add-hook 'after-init-hook #'global-hl-todo-mode)
-
-;; Modeline
-;; Don't work..
-;;(setq mood-line-glyph-alist mood-line-glyphs-fira-code)
-;;(setq mood-line-glyph-alist mood-line-glyphs-unicode)
-;;(setq mood-line-glyph-alist mood-line-glyphs-fira-code)
-;;(add-hook 'after-init-hook #'mood-line-mode)
-
-;; Add wanted information
-(setq doom-modeline-enable-word-count t)
-(setq doom-modeline-minor-modes t) ;; for minions
-
-;; Clean-up modeline
-(setq doom-modeline-buffer-state-icon nil)
-(setq doom-modeline-major-mode-icon nil)
-(setq doom-modeline-workspace-name nil) ;; use tab instead
-(setq doom-modeline-buffer-encoding nil)
-
-(add-hook 'after-init-hook #'doom-modeline-mode)
-(add-hook 'doom-modeline-mode-hook #'minions-mode)
+;; Show git info in dired
+(add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
 
 
 
@@ -154,36 +177,35 @@ tab-bar-close-button
 (setq warning-minimum-level :error)
 
 
-;;
-;; Evil keybindings
-;;
-(setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-(setq evil-want-keybinding nil)
-(setq evil-undo-system 'undo-fu)
 (add-hook 'after-init-hook (lambda ()
 				  (evil-mode 1)
 				  (evil-collection-init)))
 
-(evil-set-initial-state 'inferior-ess-mode 'emacs)
+;; TODO: adjust, set evil-mode when doc ess
+;;(evil-set-initial-state 'inferior-ess-mode 'emacs)
 
 ;;
 ;; Teach emacs to be clean!
 ;; From: https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Cleaning.org 
 ;;
 
+
+(setq user-emacs-directory (expand-file-name "~/.k8x1d-emacs.d"))
+
+(setq user-emacs-cache-directory (expand-file-name "~/.cache/emacs"))
+
 ;; Backup files
-(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-cache-directory))))
 
 ;; auto-save-mode doesn't create the path automatically!
-(make-directory (expand-file-name "tmp/auto-saves/" user-emacs-directory) t)
+(make-directory (expand-file-name "tmp/auto-saves/" user-emacs-cache-directory) t)
 
-(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-cache-directory)
+      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-cache-directory) t)))
 
-(setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
 
 ;; Custom file location
-(setq custom-file (concat user-emacs-directory "/custom.el"))
+(setq custom-file (concat user-emacs-cache-directory "/custom.el"))
 
 ;;
 ;; Completion
@@ -229,8 +251,18 @@ tab-bar-close-button
 ;; Project management
 ;;
 (setq multi-vterm-dedicated-window-height 18)
-(global-set-key (kbd "C-c p t") 'multi-vterm-dedicated-toggle)
-(global-set-key (kbd "C-c p e") 'dired-sidebar-toggle-sidebar)
+(defun sidebar-toggle ()
+  "Toggle both `dired-sidebar' and `ibuffer-sidebar'."
+  (interactive)
+  (dired-sidebar-toggle-sidebar)
+  (ibuffer-sidebar-toggle-sidebar))
+
+
+(global-set-key (kbd "C-x p o t") 'multi-vterm-dedicated-toggle)
+;;(global-set-key (kbd "C-x p o e") 'dired-sidebar-toggle-sidebar)
+(global-set-key (kbd "C-x p o e") 'sidebar-toggle)
+
+
 
 ;;
 ;; Org Mode 
@@ -261,14 +293,6 @@ tab-bar-close-button
 (add-hook 'org-mode-hook #'org-auto-tangle-mode)
 ;; Wrap text by default
 (add-hook 'org-mode-hook #'visual-line-mode)
-
-;; Evil compatibility
-(with-eval-after-load 'org
-  (require 'evil-org)
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
 
 
 ;; Pomodoro
@@ -321,30 +345,6 @@ tab-bar-close-button
 ;;	(concat org-directory "/notes.org")
 ;;	(concat org-directory "/projects.org")))
 
-;;
-;; Julia support
-;; 
-(setq vterm-kill-buffer-on-exit nil)
-;;(add-hook 'julia-mode-hook (lambda ()
-;;			     (julia-repl-mode 1)
-;;			     (julia-repl-set-terminal-backend 'vterm)
-;;			     ))
-(add-hook 'julia-mode-hook #'julia-vterm-mode)
-
-;;(setq eglot-jl-language-server-project "~/.julia/environments/v1.8")
-(add-hook 'julia-mode-hook (lambda()
-			     (eglot-jl-init)
-			     (setq eglot-connect-timeout 60) ;; prevent eglot timeout
-			     (call-interactively 'eglot)
-			     ))  
-
-;;
-;; Python support
-;;
-(add-hook 'python-mode-hook #'eglot-ensure)
-
-
-
 
 ;;
 ;; Org babel
@@ -381,6 +381,9 @@ tab-bar-close-button
 (setq reftex-toc-split-windows-horizontally t)
 (setq reftex-toc-max-level 3)
 (setq reftex-toc-split-windows-fraction 0.2)
+
+(add-hook 'LaTeX-mode-hook  #'turn-on-reftex)
+(add-hook 'LaTeX-mode-hook  #'eglot-ensure)
 
 ;; Default pdf viewer
 (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
@@ -448,53 +451,6 @@ tab-bar-close-button
 ;;  (auctex-latexmk-setup))
 
 
-
-;;
-;; Zotero support
-;; 
-(setq citar-bibliography org-cite-global-bibliography)
-(setq citar-notes-paths '("~/Zotero/notes"))
-
-(global-set-key (kbd "C-c b i c") 'citar-insert-citation)
-(global-set-key (kbd "C-c b i r") 'citar-insert-reference)
-(global-set-key (kbd "C-c b o f") 'citar-open)
-(global-set-key (kbd "C-c b o n") 'citar-open-note)
-
-
-
-;; Org interaction 
- (with-eval-after-load 'org
-   (setq org-cite-insert-processor 'citar)
-   (setq org-cite-follow-processor 'citar)
-   (setq org-cite-activate-processor 'citar)
-   )
-
-
-;; OLD
-;;(use-package citar
-;;  :bind (("C-c b" . citar-insert-citation)
-;;	 (:map minibuffer-local-map
-;;	 ("M-b" . citar-insert-preset))
-;;	 (:map org-mode-map
-;;	 ("C-c b" . org-cite-insert))
-;;	 )
-;;  :config
-;;  ;; Org cite configuration to use citar
-;;  (setq org-cite-insert-processor 'citar)
-;;  (setq org-cite-follow-processor 'citar)
-;;  (setq org-cite-activate-processor 'citar)
-;;  (setq citar-bibliography org-cite-global-bibliography)
-;;  (setq citar-at-point-function 'embark-act)
-;;  ;; Icons support
-;;  (setq citar-symbols
-;; 	`((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
-;; 	  (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
-;; 	  (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
-;;  (setq citar-symbol-separator "  ")
-;;  ;; Notes
-;;  (setq citar-notes-paths '("~/Zotero/notes"))
-;;  )
-
 ;;
 ;; Org-roam
 ;;
@@ -556,3 +512,96 @@ tab-bar-close-button
 ;;   ("C-c n b" . consult-org-roam-backlinks)
 ;;   ("C-c n l" . consult-org-roam-forward-links)
 ;;   ("C-c n r" . consult-org-roam-search))
+
+
+;;;;
+;;;; File explorer
+;;;; 
+
+
+
+
+;;(use-package treemacs
+;;  :config
+;;  (treemacs-follow-mode 1)
+;;  (treemacs-filewatch-mode 1)
+;;  (treemacs-project-follow-mode 1)
+;;  :bind
+;;  ("C-x p o e"   . treemacs)
+;;  )
+;;
+;;(use-package treemacs-evil
+;;  :after (treemacs evil)
+;;  )
+;;
+;;(use-package treemacs-magit
+;;  :after (treemacs magit)
+;;  )
+
+;;
+;; Geiser support
+;;
+
+
+;;
+;; Keybinding
+;;
+
+;; ESC Cancels All
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;;
+;; Create leader keybinding
+;;
+					
+(use-package general
+  :config
+  (general-evil-setup t)
+
+  (general-create-definer k8x1d/leader-key-def
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC"))
+
+
+(k8x1d/leader-key-def
+  "f"  '(:ignore t :which-key "Find")
+  "ff" '(find-file :which-key "File")
+  "fs" '(save-some-buffers :which-key "Save")
+  "o"  '(:ignore t :which-key "Open")
+  "oa" '(org-agenda :which-key "Agenda")
+  "ot" '(multi-vterm-project :which-key "Terminal")
+  "os" '(dired-sidebar-toggle-sidebar :which-key "Sidebar")
+  "w" '(:ignore t :which-key "Window")
+  "wc" '(evil-window-delete :which-key "Delete")
+  "ws" '(evil-window-split :which-key "Split")
+  "wv" '(evil-window-vsplit :which-key "Vsplit")
+  "wh" '(evil-window-left :which-key "Left")
+  "wj" '(evil-window-down :which-key "Down")
+  "wk" '(evil-window-up :which-key "Up")
+  "wl" '(evil-window-right :which-key "Right")
+  "wH" '(evil-window-move-far-left :which-key "Move Left")
+  "wJ" '(evil-window-move-very-bottom :which-key "Move Down")
+  "wK" '(evil-window-move-very-top :which-key "Move Up")
+  "wL" '(evil-window-move-far-right :which-key "Move Right")
+ ;; ;; TODO: add workspaces keys
+  "<tab>" '(:ignore t :which-key "Tabspaces")
+  "<tab> C" '(tabspaces-clear-buffers :which-key "clear-buffers")
+  "<tab> b" '(tabspaces-switch-to-buffer :which-key "switch-to-buffer")
+  "<tab> d" '(tabspaces-close-workspace :which-key "close-workspace")
+  "<tab> k" '(tabspaces-kill-buffers-close-workspace :which-key "kill-buffers-close-workspace")
+  "<tab> o" '(tabspaces-open-or-create-project-and-workspace :which-key "open-or-create-project-and-workspace")
+  "<tab> r" '(tabspaces-remove-current-buffer :which-key "remove-current-buffer")
+  "<tab> R" '(tabspaces-remove-selected-buffer :which-key "remove-selected-buffer")
+  "<tab> s" '(tabspaces-switch-or-create-workspace :which-key "switch-or-create-workspace")
+  "<tab> t" '(tabspaces-switch-buffer-and-tab :which-key "switch-buffer-and-tab")
+
+  ;; TODO: add project keys
+  ;; TODO: add bookmark keys
+
+  "RET" '(bookmark-jump :which-key "Bookmarks")
+  ;;
+  "q" '(:ignore t :which-key "Quit")
+  "qq" '(save-buffers-kill-terminal :which-key "Emacs")
+  )
+
