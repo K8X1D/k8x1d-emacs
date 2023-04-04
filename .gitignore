@@ -4,3 +4,8 @@ elpa
 tmp
 todo.org
 transient
+bookmarks
+forge-database.sqlite
+org-roam.db
+projects
+recentf
