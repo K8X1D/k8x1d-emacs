@@ -17,3 +17,9 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 (push '(mouse-color . "white") default-frame-alist)
 
+
+;; Initial colors
+;; Prevent white flash
+(add-to-list 'default-frame-alist '(background-color . "#282828"))
+(add-to-list 'default-frame-alist '(foreground-color . "#ebdbb2"))
+(push '(mouse-color . "#ebdbb2") default-frame-alist)
