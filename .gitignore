@@ -9,3 +9,4 @@ forge-database.sqlite
 org-roam.db
 projects
 recentf
+.cache
