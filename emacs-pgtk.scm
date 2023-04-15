@@ -541,8 +541,8 @@ files")
  (list
   (specifications->manifest
    (list
-    ;;"emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
-    "emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
+    "emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
+    ;;"emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
     "emacs-guix" ;; Emacs interface for GNU Guix
 
     "emacs-evil" ;; Extensible Vi layer for Emacs
@@ -575,6 +575,9 @@ files")
     ;;"emacs-nano-modeline" ;; Emacs minor mode controlling mode line
     ;;"emacs-simple-modeline" ;; Simple mode-line configuration for Emacs
 
+    "emacs-f" ;; Emacs API for working with files and directories 
+    "emacs-s" ;; Emacs string manipulation library
+    "emacs-dash"
 
     "emacs-mixed-pitch" ;; Mix variable- and fixed-pitch fonts in the same Emacs buffer
 
