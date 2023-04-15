@@ -32,15 +32,34 @@
 ;; Add modules to path
 (add-to-list 'load-path (concat user-emacs-directory "/lisp"))
 
+(use-package all-the-icons
+  :if (display-graphic-p))
+
 (timed-require 'k8x1d-dashboard)
+;;(timed-require 'k8x1d-dashboard-alt)
+;;(timed-require 'lem-setup-splash.el)
 (timed-require 'k8x1d-evil)
 (timed-require 'k8x1d-modeline)
-(timed-require 'k8x1d-julia)
-(timed-require 'k8x1d-python)
+(timed-require 'k8x1d-completion)
+
+;; Project management
 (timed-require 'k8x1d-workspaces)
+(timed-require 'k8x1d-gtd)
+(timed-require 'k8x1d-vc)
+
+;; Writing support
+(timed-require 'k8x1d-org)
 (timed-require 'k8x1d-biblio)
 (timed-require 'k8x1d-corrector)
 
+;; Programation support
+(timed-require 'k8x1d-julia)
+(timed-require 'k8x1d-python)
+(timed-require 'k8x1d-R)
+(timed-require 'k8x1d-lisp)
+
+
+(timed-require 'k8x1d-multimedia)
 
 
 
@@ -48,6 +67,7 @@
 ;;
 ;; Frames characteristics
 ;;
+
 
 ;; Set initial transparency
 (if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
@@ -72,21 +92,21 @@
 
 ;; Fonts
 ;;(set-face-attribute 'default nil :font "Fira Code" :height 150)
-(set-face-attribute 'default nil :font "Fira Code" :height 150)
+(set-face-attribute 'default nil :font "JuliaMono" :height 100)
 
 ;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil
-		    :font "JetBrains Mono"
+		    :font "JuliaMono"
 		    ;;:font "Fira Code"
 		    :weight 'light
-		    :height 150)
+		    :height 100)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil
 		    ;; :font "Cantarell"
 		    :font "Iosevka Aile"
 		    ;;:font "DejaVu Sans"
-		    :height 150
+		    :height 130
 		    :weight 'light)
 
 (use-package mixed-pitch
@@ -107,6 +127,9 @@
   (disable-theme actual-theme)
   (setq actual-theme theme)
   (load-theme actual-theme t)
+  (custom-set-faces
+   `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :weight bold :underline nil :height 1.5))))
+   `(tab-bar-tab-inactive ((t (:inherit nil :foreground ,(doom-color 'base6) :height 1.5)))))
   )
 
 (defun k8x1d/dark-light-theme-switch ()
@@ -121,8 +144,14 @@
 (add-hook 'after-init-hook (lambda ()
 			     ;;(load-theme 'modus-vivendi)
 			     (load-theme dark-theme t)
+			     (custom-set-faces
+			      `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :weight bold :underline nil :height 1.5))))
+			      `(tab-bar-tab-inactive ((t (:inherit nil :foreground ,(doom-color 'base6) :height 1.5)))))
 			     ))
 ;;(load-theme 'modus-operandi)
+
+
+
 
 ;;
 ;; Emacs characteristics
@@ -134,21 +163,6 @@
 ;; Update buffer when file change
 (add-hook 'after-init-hook 'global-auto-revert-mode)
 
-;; Tab configuration
-;;(setq tab-bar-show nil)
-(setq tab-bar-new-tab-choice "*scratch*"
-      tab-bar-close-button-show t
-      tab-bar-new-button-show nil
-      tab-bar-auto-width t
-      tab-bar-separator " "
-      )
-
-tab-bar-close-button
-
-(custom-set-faces
- '(tab-bar ((t (:inherit nil :foreground "#928374" :height 1.0))))
- '(tab-bar-tab ((t (:foreground "#ebdbb2":weight bold :underline nil))))
-)
 
 ;; Highlight whole line
 (add-hook 'after-init-hook #'global-hl-line-mode)
@@ -210,13 +224,7 @@ tab-bar-close-button
 ;;
 ;; Completion
 ;;
-(setq completion-styles '(substring orderless basic)) ;; allow partial completion
-(setq tab-always-indent 'complete) ;; tab to start completion
 
-;; Show completion box under cursor
-(add-hook 'after-init-hook #'global-corfu-mode)
-;; Vertical display of buffer choice
-(add-hook 'after-init-hook #'vertico-mode)
 
 
 ;;
@@ -242,10 +250,7 @@ tab-bar-close-button
 ;; Guix packages management
 (global-set-key (kbd "C-c o g") 'guix)
 
-;; Multimedia player
-(emms-minimalistic)
-(setq emms-player-list '(emms-player-mpv)
-      emms-info-functions '(emms-info-native))
+
 
 ;;
 ;; Project management
@@ -259,40 +264,9 @@ tab-bar-close-button
 
 
 (global-set-key (kbd "C-x p o t") 'multi-vterm-dedicated-toggle)
-;;(global-set-key (kbd "C-x p o e") 'dired-sidebar-toggle-sidebar)
-(global-set-key (kbd "C-x p o e") 'sidebar-toggle)
+(global-set-key (kbd "C-x p o e") 'dired-sidebar-toggle-sidebar)
+;;(global-set-key (kbd "C-x p o e") 'sidebar-toggle) ;; bug with ibuffer-sidebar upd
 
-
-
-;;
-;; Org Mode 
-;;
-
-(global-set-key (kbd "C-c l") #'org-store-link)
-
-;; Indent bullets
-(add-hook 'org-mode-hook #'org-indent-mode)
-
-;; Modern look to org
-;; TODO: explore doc for org-modern
-;; Must be set after org-indent-mode, if not, coloring problem occurs (invisible level-2 bullets)
-;;(add-hook 'org-mode-hook #'org-modern-mode)
-(add-hook 'org-indent-mode-hook #'org-modern-mode)
-(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-;;(global-org-modern-mode)
-
-
-(setq org-image-actual-width nil)
-
-;; Org directory
-(setq org-directory "~/Dropbox/org")
-(setq org-default-notes-file (concat org-directory "/gtd/inbox.org"))
-
-
-;; Add "#+auto_tangle: t" option for header
-(add-hook 'org-mode-hook #'org-auto-tangle-mode)
-;; Wrap text by default
-(add-hook 'org-mode-hook #'visual-line-mode)
 
 
 ;; Pomodoro
@@ -301,76 +275,13 @@ tab-bar-close-button
 (setq org-pomodoro-long-break-length 30)
 
 
-;; Bibliography
-(setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
-
-
-;; Esthetics
-(setq org-insert-heading-respect-content t)
-
-;; Visibility of hidden elements only when in insert mode
-;; from https://github.com/awth13/org-appear
-(add-hook 'org-mode-hook #'org-appear-mode)
-(setq org-hide-emphasis-markers t
-      org-appear-trigger 'manual
-      org-appear-autoemphasis t
-      org-appear-autolinks t)
-
-(add-hook 'org-mode-hook (lambda ()
-                           (add-hook 'evil-insert-state-entry-hook
-                                     #'org-appear-manual-start
-                                     nil
-                                     t)
-                           (add-hook 'evil-insert-state-exit-hook
-                                     #'org-appear-manual-stop
-                                     nil
-                                     t)))
 
 
 
 
-;; GTD
-;; From https://lucidmanager.org/productivity/getting-things-done-with-emacs/
-;; From https://members.optusnet.com.au/~charles57/GTD/orgmode.html
-;; https://hamberg.no/gtd
-(global-set-key (kbd "C-c c") #'org-capture)
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
 
 
-(global-set-key (kbd "C-c a") #'org-agenda)
-(setq org-agenda-files (file-expand-wildcards (concat org-directory "/gtd/*.org")))
-;;(setq org-agenda-files 
-;;      '((concat org-directory "/todo.org") 
-;;	(concat org-directory "/notes.org")
-;;	(concat org-directory "/projects.org")))
 
-
-;;
-;; Org babel
-;;
-(with-eval-after-load "org"
-  (setq org-confirm-babel-evaluate nil)
-  (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
-  (defalias 'org-babel-variable-assignments:julia 'org-babel-variable-assignments:julia-vterm)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((sql . t)
-     (julia-vterm . t))))
-
-;;
-;; Git support
-;;
-(defun k8x1d/magit-status-w-forge-upd ()
-  (interactive)
-  (magit-todos-mode)
-  (magit-status)
-  (forge-pull))
-(global-set-key (kbd "C-c g s") 'k8x1d/magit-status-w-forge-upd)
-(global-set-key (kbd "C-c g t") 'magit-todos-list)
-(setq auth-sources '("~/.authinfo.gpg"))
-;;(with-eval-after-load 'magit
-;;  (require 'forge))
 
 
 ;;
