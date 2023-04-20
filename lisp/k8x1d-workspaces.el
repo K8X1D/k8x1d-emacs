@@ -32,8 +32,6 @@
 ;;  )
 
 
-
-
 ;;;; Tab Bar
 ;; Use tab-bar for window grouping and configuration within a project (replaces eyebrowse)
 (use-package tab-bar
@@ -47,7 +45,7 @@
   (tab-bar-tab-hints t) ;; show numbers in tabs
   ;; Unless another file/buffer is designated, start from workspace scratch buffer
   (tab-bar-new-tab-choice "*scratch*")
-  (tab-bar-select-tab-modifiers '(alt))
+  (tab-bar-select-tab-modifiers '(control))
   (tab-bar-close-tab-select 'recent)
   (tab-bar-new-tab-to 'rightmost)
   (tab-bar-close-last-tab-choice 'tab-bar-mode-disable)
@@ -62,22 +60,22 @@
   ;; Tab bar numbers
   ;; https://christiantietze.de/posts/2022/02/emacs-tab-bar-numbered-tabs/
   (defvar lem-tab-bar--circle-numbers-alist
-    '((0 . "⓪")
-      (1 . "①")
-      (2 . "②")
-      (3 . "③")
-      (4 . "④")
-      (5 . "⑤")
-      (6 . "⑥")
-      (7 . "⑦")
-      (8 . "⑧")
-      (9 . "⑨")
-      (10 . "⑩")
-      (11 . "⑪")
-      (12 . "⑫")
-      (13 . "⑬")
-      (14 . "⑭")
-      (15 . "⑮"))
+    '((0 . "0.")
+      (1 . "1.")
+      (2 . "2.")
+      (3 . "3.")
+      (4 . "4.")
+      (5 . "5.")
+      (6 . "6.")
+      (7 . "7.")
+      (8 . "8.")
+      (9 . "9.")
+      (10 . "10.")
+      (11 . "11.")
+      (12 . "12.")
+      (13 . "13.")
+      (14 . "14.")
+      (15 . "15."))
 
     "Alist of integers to strings of circled unicode numbers.")
 
@@ -161,7 +159,7 @@ questions.  Otherwise use completion to select the tab."
           :category 'buffer
           :state    #'consult--buffer-state
           :default  t
-          :items    (lambda () (consult--buffer-query
+          :items    (lambda () (co
                            :predicate #'tabspaces--local-buffer-p
                            :sort 'visibility
                            :as #'buffer-name)))
