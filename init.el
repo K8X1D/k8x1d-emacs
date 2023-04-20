@@ -35,6 +35,8 @@
 (use-package all-the-icons
   :if (display-graphic-p))
 
+
+(timed-require 'k8x1d-packages)
 (timed-require 'k8x1d-dashboard)
 ;;(timed-require 'k8x1d-dashboard-alt)
 ;;(timed-require 'lem-setup-splash.el)
@@ -92,11 +94,11 @@
 
 ;; Fonts
 ;;(set-face-attribute 'default nil :font "Fira Code" :height 150)
-(set-face-attribute 'default nil :font "JuliaMono" :height 100)
+(set-face-attribute 'default nil :font "Hack" :height 100)
 
 ;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil
-		    :font "JuliaMono"
+		    :font "Hack"
 		    ;;:font "Fira Code"
 		    :weight 'light
 		    :height 100)
@@ -130,6 +132,7 @@
   (custom-set-faces
    `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :weight bold :underline nil :height 1.5))))
    `(tab-bar-tab-inactive ((t (:inherit nil :foreground ,(doom-color 'base6) :height 1.5)))))
+   ;;`(org-inline-src-block ((t (:background ,(doom-color 'base3)))))
   )
 
 (defun k8x1d/dark-light-theme-switch ()
@@ -145,12 +148,13 @@
 			     ;;(load-theme 'modus-vivendi)
 			     (load-theme dark-theme t)
 			     (custom-set-faces
-			      `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :weight bold :underline nil :height 1.5))))
-			      `(tab-bar-tab-inactive ((t (:inherit nil :foreground ,(doom-color 'base6) :height 1.5)))))
+			      `(tab-bar ((t (:inherit nil :background "#000000"))))
+			      `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :underline nil :height 1.5))))
+			      ;;`(tab-bar-tab-inactive ((t (:inherit nil :background ,(doom-color 'base1) :foreground ,(doom-color 'base6) :height 1.5))))
+			      `(tab-bar-tab-inactive ((t (:inherit nil :background "#000000" :foreground ,(doom-color 'base6) :height 1.5))))
+			      )
 			     ))
 ;;(load-theme 'modus-operandi)
-
-
 
 
 ;;
@@ -180,8 +184,10 @@
 (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
 ;; Highlights "TODOs"  
 (add-hook 'after-init-hook #'global-hl-todo-mode)
-;; Show git info in dired
-(add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
+
+;;;; Show git info in dired
+;;;; Prone to error
+;;(add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
 
 
 
@@ -262,6 +268,7 @@
   (dired-sidebar-toggle-sidebar)
   (ibuffer-sidebar-toggle-sidebar))
 
+;;(add-hook 'dired-sidebar-mode #'dired-git-info-mode)
 
 (global-set-key (kbd "C-x p o t") 'multi-vterm-dedicated-toggle)
 (global-set-key (kbd "C-x p o e") 'dired-sidebar-toggle-sidebar)
@@ -515,4 +522,3 @@
   "q" '(:ignore t :which-key "Quit")
   "qq" '(save-buffers-kill-terminal :which-key "Emacs")
   )
-
