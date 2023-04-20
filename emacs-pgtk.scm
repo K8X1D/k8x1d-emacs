@@ -1,3 +1,4 @@
+;; TODO: fuse with emacs-pgtk
 ;;
 ;; Modules
 ;;
@@ -256,6 +257,30 @@ are lexically scoped.  The cl-defmethod here handles the common subset between
 the two.")
    (license gpl3+))
   )
+
+(define-public emacs-julia-ts-mode 
+(package
+  (name "emacs-julia-ts-mode")
+  (version "20230318.2210")
+  (source (origin
+            (method git-fetch)
+            (uri (git-reference
+                  (url "https://github.com/ronisbr/julia-ts-mode.git")
+                  (commit "33ea957ef696155ad45a952d653a9ff18d45c866")))
+            (sha256
+             (base32
+              "1pqsxdajrm5amvy51a9va2ycx8n4jhmv1a6frmdkjvdn127w2rg0"))))
+  (build-system emacs-build-system)
+  (propagated-inputs (list emacs-julia-mode))
+  (home-page "https://github.com/ronisbr/julia-ts-mode")
+  (synopsis "Major mode for Julia source code using tree-sitter")
+  (description
+   "This major modes uses tree-sitter for font-lock, indentation, imenu, and
+navigation.  It is derived from `julia-mode'.")
+  (license #f))
+)
+
+
 
 ;; Don't work
 ;;(define-public emacs-eglot-jl 
@@ -534,6 +559,58 @@ files")
 )
 
 
+;; guix version don't have access to spinner symbol for lsp 
+;; error in process filter: Symbol’s function definition is void: eglot--spinner
+
+(define-public emacs-doom-modeline 
+(package
+  (name "emacs-doom-modeline")
+  (version "20230415.1710")
+  (source (origin
+            (method git-fetch)
+            (uri (git-reference
+                  (url "https://github.com/seagle0128/doom-modeline.git")
+                  (commit "ed72a56f4b1ae7c13cfb14aa17c77b9400fd222f")))
+            (sha256
+             (base32
+              "007c666c49g4h8nn4wizmnwfgvsgmql48n17499nm3ambk2jcysk"))))
+  (build-system emacs-build-system)
+  (propagated-inputs (list emacs-compat emacs-shrink-path))
+  (home-page "https://github.com/seagle0128/doom-modeline")
+  (synopsis "A minimal and modern mode-line")
+  (description
+   "This package offers a fancy and fast mode-line inspired by minimalism design.
+It's integrated into Doom Emacs (https://github.com/hlissner/doom-emacs) and
+Centaur Emacs (https://github.com/seagle0128/.emacs.d).  The doom-modeline
+offers: - A match count panel (for anzu, iedit, multiple-cursors,
+symbol-overlay, evil-search and evil-substitute) - An indicator for recording a
+macro - Current environment version (e.g. python, ruby, go, etc.) in the
+major-mode - A customizable mode-line height (see doom-modeline-height) - A
+minor modes segment which is compatible with minions - An error/warning count
+segment for flymake/flycheck - A workspace number segment for eyebrowse - A
+perspective name segment for persp-mode - A window number segment for winum and
+window-numbering - An indicator for modal editing state, including evil,
+overwrite, god, ryo and xah-fly-keys, etc. - An indicator for battery status -
+An indicator for current input method - An indicator for debug state - An
+indicator for remote host - An indicator for LSP state with lsp-mode or eglot -
+An indicator for github notifications - An indicator for unread emails with
+mu4e-alert - An indicator for unread emails with gnus (basically builtin) - An
+indicator for irc notifications with circe, rcirc or erc. - An indicator for
+buffer position which is compatible with nyan-mode or poke-line - An indicator
+for party parrot - An indicator for PDF page number with pdf-tools - An
+indicator for markdown/org previews with grip - Truncated file name, file icon,
+buffer state and project name in buffer information segment, which is compatible
+with project, find-file-in-project and projectile - New mode-line for Info-mode
+buffers - New package mode-line for paradox - New mode-line for helm buffers -
+New mode-line for git-timemachine buffers Installation: From melpa, `M-x
+package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
+(doom-modeline-mode 1) or (use-package doom-modeline :ensure t :hook (after-init
+.  doom-modeline-mode))")
+  (license #f))
+)
+
+
+
 ;;
 ;; Manifest
 ;;
@@ -589,7 +666,7 @@ files")
     "font-fira-mono"
     "font-fira-sans"
 
-    "emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
+    ;;"emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
     "emacs-minions" ;; Minor-mode menu for the mode line
 
     "emacs-magit" ;; Emacs interface for the Git version control system
@@ -639,17 +716,23 @@ files")
     "emacs-page-break-lines" ;; Display page breaks as tidy horizontal lines
 
     "emacs-langtool" ;; Emacs interface to LanguageTool
+    "tree-sitter"
+
+    "emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
+
     ))
   (packages->manifest (list
 		       emacs-julia-vterm
 		       emacs-ob-julia-vterm
 		       ;;emacs-cl-generic
-		       emacs-eglot-jl
+		       ;;emacs-julia-ts-mode ;; wrong emacs version when building
+		       ;;emacs-eglot-jl
 		       emacs-dired-sidebar
 		       emacs-ibuffer-sidebar
 		       emacs-tabspaces
 		       emacs-use-package
 		       emacs-emms
 		       ;;python-tinytag ;; don't work
+		       emacs-doom-modeline
 		       ))
   ))
