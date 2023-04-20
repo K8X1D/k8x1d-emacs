@@ -1,75 +1,67 @@
-
-
-(global-set-key (kbd "C-c l") #'org-store-link)
-
-;; Indent bullets
-(add-hook 'org-mode-hook #'org-indent-mode)
-
-
-;; Bibliography
-(setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
-
-
-;; Esthetics
-(setq org-insert-heading-respect-content t)
-
-
-;; Modern look to org
-;; TODO: explore doc for org-modern
-;; Must be set after org-indent-mode, if not, coloring problem occurs (invisible level-2 bullets)
-;;(add-hook 'org-mode-hook #'org-modern-mode)
-(add-hook 'org-indent-mode-hook #'org-modern-mode)
-(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-;;(global-org-modern-mode)
-
-
-(setq org-image-actual-width nil)
-
-
-
-;; Add "#+auto_tangle: t" option for header
-(add-hook 'org-mode-hook #'org-auto-tangle-mode)
-;; Wrap text by default
-(add-hook 'org-mode-hook #'visual-line-mode)
-
-
-;;
-;; Org babel
-;;
-(with-eval-after-load "org"
+(use-package org
+  :bind
+  ("C-c l" . org-store-link)
+  :hook
+  ((org-mode . org-indent-mode)
+   (org-mode . visual-line-mode))
+  :config
+  (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
+  (setq org-image-actual-width nil)
+  ;; Babel
   (setq org-confirm-babel-evaluate nil)
   (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
   (defalias 'org-babel-variable-assignments:julia 'org-babel-variable-assignments:julia-vterm)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((sql . t)
-     (julia-vterm . t))))
+     (julia-vterm . t)))
+  )
 
+(use-package org-modern
+  :hook (after-init . global-org-modern-mode)
+  :config
+  (setq
+   ;; Edit settings
+   org-auto-align-tags nil
+   org-tags-column 0
+   org-catch-invisible-edits 'show-and-error
+   org-special-ctrl-a/e t
+   org-insert-heading-respect-content t
 
+   ;; Org styling, hide markup etc.
+   org-pretty-entities t
+   org-ellipsis "…"
 
+   ;; Agenda styling
+   org-agenda-tags-column 0
+   org-agenda-block-separator ?─
+   org-agenda-time-grid
+   '((daily today require-timed)
+     (800 1000 1200 1400 1600 1800 2000)
+     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-current-time-string
+   "⭠ now ─────────────────────────────────────────────────")
+  )
 
-;; Visibility of hidden elements only when in insert mode
-;; from https://github.com/awth13/org-appear
-(add-hook 'org-mode-hook #'org-appear-mode)
-(setq org-hide-emphasis-markers t
-      org-appear-trigger 'manual
-      org-appear-autoemphasis t
-      org-appear-autolinks t)
+(use-package org-auto-tangle
+  :hook (org-mode . org-auto-tangle-mode))
 
-(add-hook 'org-mode-hook (lambda ()
-                           (add-hook 'evil-insert-state-entry-hook
-                                     #'org-appear-manual-start
-                                     nil
-                                     t)
-                           (add-hook 'evil-insert-state-exit-hook
-                                     #'org-appear-manual-stop
-                                     nil
-                                     t)))
-
-
-
-
-
-
+(use-package org-appear
+  :hook
+  (org-mode . (lambda ()
+		(add-hook 'evil-insert-state-entry-hook
+			  #'org-appear-manual-start
+			  nil
+			  t)
+		(add-hook 'evil-insert-state-exit-hook
+			  #'org-appear-manual-stop
+			  nil
+			  t)))
+  :config
+  (setq org-hide-emphasis-markers t
+	org-appear-trigger 'manual
+	org-appear-autoemphasis t
+	org-appear-autolinks t)
+  )
 
 (provide 'k8x1d-org)
