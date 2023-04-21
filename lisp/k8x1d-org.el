@@ -19,7 +19,11 @@
 
 (use-package org-modern
   :hook (after-init . global-org-modern-mode)
+ ;; :custom
+;;  (org-modern-table nil)
   :config
+  ;; Tmp fix, see https://github.com/minad/org-modern/issues/5
+  (custom-set-variables '(org-modern-table nil))
   (setq
    ;; Edit settings
    org-auto-align-tags nil

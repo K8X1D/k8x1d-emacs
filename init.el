@@ -45,6 +45,7 @@
 (timed-require 'k8x1d-completion)
 
 ;; Project management
+(timed-require 'k8x1d-project)
 (timed-require 'k8x1d-workspaces)
 (timed-require 'k8x1d-gtd)
 (timed-require 'k8x1d-vc)
@@ -125,13 +126,19 @@
 (setq light-theme 'doom-gruvbox-light)
 (setq actual-theme dark-theme) 
 
+(defun k8x1d/set-theme ()
+  (load-theme actual-theme t)
+  (custom-set-faces
+   `(tab-bar ((t (:inherit nil :background ,(doom-color 'bg-alt)))))
+   `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :height 1.5))))
+   `(tab-bar-tab-inactive ((t (:inherit nil :background ,(doom-color 'base3) :foreground ,(doom-color 'fg-alt) :height 1.5))))
+   )
+  )
+
 (defun switch-theme (theme)
   (disable-theme actual-theme)
   (setq actual-theme theme)
-  (load-theme actual-theme t)
-  (custom-set-faces
-   `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :weight bold :underline nil :height 1.5))))
-   `(tab-bar-tab-inactive ((t (:inherit nil :foreground ,(doom-color 'base6) :height 1.5)))))
+  (k8x1d/set-theme)
    ;;`(org-inline-src-block ((t (:background ,(doom-color 'base3)))))
   )
 
@@ -146,13 +153,7 @@
 
 (add-hook 'after-init-hook (lambda ()
 			     ;;(load-theme 'modus-vivendi)
-			     (load-theme dark-theme t)
-			     (custom-set-faces
-			      `(tab-bar ((t (:inherit nil :background "#000000"))))
-			      `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :underline nil :height 1.5))))
-			      ;;`(tab-bar-tab-inactive ((t (:inherit nil :background ,(doom-color 'base1) :foreground ,(doom-color 'base6) :height 1.5))))
-			      `(tab-bar-tab-inactive ((t (:inherit nil :background "#000000" :foreground ,(doom-color 'base6) :height 1.5))))
-			      )
+			     (k8x1d/set-theme)
 			     ))
 ;;(load-theme 'modus-operandi)
 
@@ -244,11 +245,6 @@
 (pdf-loader-install)
 (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode) ;; dark mode by default
 
-;; Terminal
-(global-set-key (kbd "C-c o t") 'vterm-toggle)
-(add-hook 'vterm-mode-hook #'visual-line-mode)
-
-;; File explorer
 
 ;; Pass interation
 (global-set-key (kbd "C-c o p") 'pass)
@@ -257,22 +253,6 @@
 (global-set-key (kbd "C-c o g") 'guix)
 
 
-
-;;
-;; Project management
-;;
-(setq multi-vterm-dedicated-window-height 18)
-(defun sidebar-toggle ()
-  "Toggle both `dired-sidebar' and `ibuffer-sidebar'."
-  (interactive)
-  (dired-sidebar-toggle-sidebar)
-  (ibuffer-sidebar-toggle-sidebar))
-
-;;(add-hook 'dired-sidebar-mode #'dired-git-info-mode)
-
-(global-set-key (kbd "C-x p o t") 'multi-vterm-dedicated-toggle)
-(global-set-key (kbd "C-x p o e") 'dired-sidebar-toggle-sidebar)
-;;(global-set-key (kbd "C-x p o e") 'sidebar-toggle) ;; bug with ibuffer-sidebar upd
 
 
 
