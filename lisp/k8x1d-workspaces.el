@@ -35,16 +35,17 @@
 ;;;; Tab Bar
 ;; Use tab-bar for window grouping and configuration within a project (replaces eyebrowse)
 (use-package tab-bar
+  :hook (after-init . k8x1d/set-initial-workspaces)
   :after (project)
   :commands (tab-bar-new-tab
              tab-bar-switch-to-tab
              tab-bar-switch-to-next-tab
              tab-bar-switch-to-prev-tab)
   :custom
-  (tab-bar-show 1)
+  (tab-bar-show t)
   (tab-bar-tab-hints t) ;; show numbers in tabs
   ;; Unless another file/buffer is designated, start from workspace scratch buffer
-  (tab-bar-new-tab-choice "*scratch*")
+  ;;(tab-bar-new-tab-choice "*scratch*")
   (tab-bar-select-tab-modifiers '(control))
   (tab-bar-close-tab-select 'recent)
   (tab-bar-new-tab-to 'rightmost)
@@ -121,7 +122,24 @@ questions.  Otherwise use completion to select the tab."
              (tab-next))
             (t
              (tab-bar-switch-to-tab
-              (completing-read "Select tab: " tabs nil t)))))))
+              (completing-read "Select tab: " tabs nil t))))))
+
+  ;; Initial workspaces set-up
+  (defun k8x1d/set-initial-workspaces ()
+    "Hook to set-up inital workspaces."
+    ;; AIT
+    (tab-bar-switch-to-tab "AIT_udes")
+    (find-file "/extension/Work/Documents/Emplois/2023/H/BIN/AIT_udes/todo.org")
+    ;; GTD
+    (tab-bar-switch-to-tab "GTD")
+    (find-file "~/Dropbox/org/gtd/inbox.org")
+    ;; K8X1D config
+    (tab-bar-switch-to-tab "k8x1d-emacs")
+    (find-file "/extension/Work/Documents/Developpement/Logiciels/Editeurs/k8x1d-emacs/todo.org")
+    ;; Dashboard
+    (tab-bar-switch-to-tab "*scratch*")
+    )
+  )
 
 ;;;; Tab Workspaces
 (use-package tabspaces

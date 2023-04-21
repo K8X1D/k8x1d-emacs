@@ -719,6 +719,8 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
     "tree-sitter"
 
     "emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
+    "emacs-poly-r" ;; Polymodes for the R language
+    "emacs-polymode-markdown" ;; Polymode for Markdown mode
 
     ))
   (packages->manifest (list
