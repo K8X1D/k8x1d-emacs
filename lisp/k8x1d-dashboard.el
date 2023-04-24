@@ -7,7 +7,7 @@
    `(dashboard-items-face ((t (:inherit widget-button :height 0.85))))
    `(dashboard-heading ((t (:inherit font-lock-keyword-face :height 0.9))))
    )
-  (setq dashboard-startup-banner (concat user-emacs-directory "/banner.txt"))
+  (setq dashboard-startup-banner (concat user-emacs-directory "/banners/banner.txt"))
   ;;(setq dashboard-startup-banner 'logo) 
   (setq dashboard-banner-logo-title "Welcome to K8X1d Emacs Dashboard!")
   (setq dashboard-match-agenda-entry "-main-mont-bud")

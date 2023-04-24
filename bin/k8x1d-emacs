@@ -1,1 +1,1 @@
-guix shell --check -m ~/.k8x1d-emacs.d/emacs.scm -- emacs-30.0.50 --init-directory=~/.k8x1d-emacs.d
+guix shell --check -m ~/.k8x1d-emacs.d/manifests/emacs.scm -- emacs-30.0.50 --init-directory=~/.k8x1d-emacs.d
