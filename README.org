@@ -1,0 +1,24 @@
+#+title:  K8X1D Emacs configuration
+#+author: Kevin Kaiser
+#+author: k8x1d@proton.me
+#+startup: inlineimages
+
+#+attr_html: :width 30%;
+[[file:k8x1d-avatar.png]]
+
+
+** Context of the project
+#TODO
+
+Dependencies:
+- guix package manager
+
+
+** Content of the project
+#TODO
+
+** Deployment of the project
+
+#+begin_src shell 
+$ ./set-up_k8x1d-emacs
+#+end_src
