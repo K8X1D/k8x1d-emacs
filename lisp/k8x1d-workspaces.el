@@ -45,7 +45,7 @@
   (tab-bar-show t)
   (tab-bar-tab-hints t) ;; show numbers in tabs
   ;; Unless another file/buffer is designated, start from workspace scratch buffer
-  ;;(tab-bar-new-tab-choice "*scratch*")
+  (tab-bar-new-tab-choice "*scratch*")
   (tab-bar-select-tab-modifiers '(control))
   (tab-bar-close-tab-select 'recent)
   (tab-bar-new-tab-to 'rightmost)

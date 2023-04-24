@@ -704,6 +704,7 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
 
     "emacs-org-roam" ;; Non-hierarchical note-taking with Org mode
     "emacs-org-roam-ui" ;; Web User Interface for Org Roam
+    "emacs-websocket" ;;  Emacs WebSocket client and server 
     "emacs-citar-org-roam" ;; Emacs package to provide tighter Citar and Org-Roam integration
     "emacs-consult-org-roam" ;; Consult integration for Org Roam
 
@@ -721,6 +722,13 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
     "emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
     "emacs-poly-r" ;; Polymodes for the R language
     "emacs-polymode-markdown" ;; Polymode for Markdown mode
+
+    "emacs-org-superstar" ;; Prettify headings and plain lists in Org mode
+    "emacs-org-fancy-priorities" ;; Display org priorities as custom strings 
+
+    "emacs-nyxt" ;; Interact with Nyxt from Emacs
+
+    "emacs-pinentry" ;; GnuPG Pinentry server implementation
 
     ))
   (packages->manifest (list

@@ -54,6 +54,7 @@
 (timed-require 'k8x1d-org)
 (timed-require 'k8x1d-biblio)
 (timed-require 'k8x1d-corrector)
+(timed-require 'k8x1d-notes-taking)
 
 ;; Programation support
 (timed-require 'k8x1d-julia)
@@ -132,6 +133,9 @@
    `(tab-bar ((t (:inherit nil :background ,(doom-color 'bg-alt)))))
    `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :height 1.5))))
    `(tab-bar-tab-inactive ((t (:inherit nil :background ,(doom-color 'base3) :foreground ,(doom-color 'fg-alt) :height 1.5))))
+   ;; todo 
+   '(org-todo ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
+   '(org-done ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
    )
   )
 
@@ -348,68 +352,6 @@
 ;;  ;; Add LatexMk as a TeX target.
 ;;  (auctex-latexmk-setup))
 
-
-;;
-;; Org-roam
-;;
-(setq org-roam-directory (concat org-directory "/roam"))
-(setq find-file-visit-truename t)
-(setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-
-;; Ui
-(setq org-roam-ui-sync-theme t
-      org-roam-ui-follow t
-      org-roam-ui-update-on-save t
-      org-roam-ui-open-on-start t)
-
-(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
-(global-set-key (kbd "C-c n f") 'org-roam-node-find)
-;;(global-set-key (kbd "C-c n g") 'org-roam-graph)
-(global-set-key (kbd "C-c n g") 'org-roam-ui-open)
-(global-set-key (kbd "C-c n i") 'org-roam-node-insert)
-(global-set-key (kbd "C-c n c") 'org-roam-capture)
-(global-set-key (kbd "C-c n j") 'org-roam-dailies-capture-today)
-
-
-;; Upd database
-(add-hook 'org-mode-hook #'org-roam-db-autosync-mode)
-;;;; Web visualization network
-;;(add-hook 'org-roam-db-autosync-mode-hook #'org-roam-ui-mode)
-;; Integration with citar
-
-(with-eval-after-load 'citar
-  (citar-org-roam-mode 1))
-
-(with-eval-after-load 'org-roam
-  (citar-org-roam-mode 1))
-
-
-;;(use-package consult-org-roam
-;;   :ensure t
-;;   :after org-roam
-;;   :init
-;;   (require 'consult-org-roam)
-;;   ;; Activate the minor mode
-;;   (consult-org-roam-mode 1)
-;;   :custom
-;;   ;; Use `ripgrep' for searching with `consult-org-roam-search'
-;;   (consult-org-roam-grep-func #'consult-ripgrep)
-;;   ;; Configure a custom narrow key for `consult-buffer'
-;;   (consult-org-roam-buffer-narrow-key ?r)
-;;   ;; Display org-roam buffers right after non-org-roam buffers
-;;   ;; in consult-buffer (and not down at the bottom)
-;;   (consult-org-roam-buffer-after-buffers t)
-;;   :config
-;;   ;; Eventually suppress previewing for certain functions
-;;   (consult-customize
-;;    consult-org-roam-forward-links
-;;    :preview-key (kbd "M-."))
-;;   :bind
-;;   ;; Define some convenient keybindings as an addition
-;;   ("C-c n e" . consult-org-roam-file-find)
-;;   ("C-c n b" . consult-org-roam-backlinks)
-;;   ("C-c n l" . consult-org-roam-forward-links)
-;;   ("C-c n r" . consult-org-roam-search))
 
 
 ;;;;
