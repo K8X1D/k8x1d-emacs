@@ -691,6 +691,7 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
     "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
 
     "emacs-doom-themes" ;; Wide collection of color themes for Emacs
+    "emacs-hide-mode-line" ;; Emacs plugin that hides the mode-line
 
     ;;"emacs-emms" ;; The Emacs Multimedia System ;; miss mpd-prev
     "imagemagick" ;; Create, edit, compose, or convert bitmap images

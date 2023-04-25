@@ -22,4 +22,12 @@
 (use-package minions-mode
   :hook (doom-modeline-mode . minions-mode))
 
+(use-package hide-mode-line
+  :hook
+  ((vterm-mode . hide-mode-line-mode)
+   (dired-sidebar-mode . hide-mode-line-mode)
+   (inferior-ess-r-mode . hide-mode-line-mode)
+   (julia-vterm-repl-mode . hide-mode-line-mode))
+  )
+
 (provide 'k8x1d-modeline)
