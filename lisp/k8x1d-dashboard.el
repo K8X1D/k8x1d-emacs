@@ -23,6 +23,8 @@
   (setq dashboard-items '((bookmarks . 5)
 			  (projects . 5)
 			  (agenda . 5)))
+  (setq dashboard-week-agenda t)
+  (setq dashboard-agenda-sort-strategy '(time-up))
   (setq dashboard-center-content t)
   (dashboard-setup-startup-hook))
 

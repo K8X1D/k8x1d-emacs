@@ -33,7 +33,18 @@
 (add-to-list 'load-path (concat user-emacs-directory "/lisp"))
 
 (use-package all-the-icons
-  :if (display-graphic-p))
+  :if (display-graphic-p)
+      :config
+      ;; Make sure the icon fonts are good to go
+      (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
+      (set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
+      (set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
+      (set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
+      (set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
+      (set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append))
+
+
+
 
 
 (timed-require 'k8x1d-packages)
@@ -43,6 +54,8 @@
 (timed-require 'k8x1d-evil)
 (timed-require 'k8x1d-modeline)
 (timed-require 'k8x1d-completion)
+(timed-require 'k8x1d-file-explorer)
+(timed-require 'k8x1d-buffers)
 
 ;; Project management
 (timed-require 'k8x1d-project)
@@ -136,6 +149,10 @@
    ;; todo 
    '(org-todo ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
    '(org-done ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
+   '(font-lock-comment-face ((t (:foreground "#928374"))))
+   ;;'(font-lock-string-face ((t (:foreground "#b8bb26" :family "Hack"))))
+   ;;'(font-lock-string-face ((t (:foreground "#b8bb26" :family "JuliaMono"))))
+   '(font-lock-string-face ((t (:foreground "#b8bb26" :family "DejaVu Sans Mono Nerd Font"))))
    )
   )
 
@@ -183,17 +200,9 @@
 (add-hook 'after-init-hook #'which-key-mode)
 ;; Per buffer exposition
 (add-hook 'after-init-hook #'solaire-global-mode)
-;; add icons to ibuffer 
-(add-hook 'ibuffer-mode-hook #'all-the-icons-ibuffer-mode)
-;; add icons to dired
-(add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
+
 ;; Highlights "TODOs"  
 (add-hook 'after-init-hook #'global-hl-todo-mode)
-
-;;;; Show git info in dired
-;;;; Prone to error
-;;(add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
-
 
 
 ;;
@@ -242,8 +251,6 @@
 ;; Utilities
 ;;
 
-;; Better buffer manager
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Pdf support
 (pdf-loader-install)
@@ -444,3 +451,5 @@
   "q" '(:ignore t :which-key "Quit")
   "qq" '(save-buffers-kill-terminal :which-key "Emacs")
   )
+
+

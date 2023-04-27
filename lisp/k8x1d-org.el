@@ -68,7 +68,7 @@
   :hook
   (org-mode . org-fancy-priorities-mode)
   :config
-  (setq org-fancy-priorities-list '("HIGH" "MID" "LOW")))
+  (setq org-fancy-priorities-list '("[!]" "[*]" "[-]")))
 
 
 (use-package org-auto-tangle

@@ -9,6 +9,7 @@
 	     (gnu packages emacs-xyz)
 	     (gnu packages python-xyz)
 	     (gnu packages check)
+	     (gnu packages statistics)
 	     (guix download)
 	     (guix licenses)
 	     ((guix licenses) #:prefix license:))
@@ -609,6 +610,52 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
   (license #f))
 )
 
+(define-public emacs-ess-view-data 
+  (package
+   (name "emacs-ess-view-data")
+   (version "20220927.353")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/ShuguangSun/ess-view-data.git")
+		  (commit "1b48afef4dcc8fbaed1af98fade7f0df84bd6871")))
+	    (sha256
+	     (base32
+	      "0nybmqj166a5qrhcn0a7mlwdwfijm8hgzizvd3lycycak3ixq6xf"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-ess emacs-csv-mode))
+   (home-page "https://github.com/ShuguangSun/ess-view-data")
+   (synopsis "View Data")
+   (description
+    "Customization: ess-view-data-backend-list: dplyr (default), dplyr+DT,
+data.table+magrittr ess-view-data-print-backend-list: print (default), kable
+ess-view-data-save-backend-list: write.csv (default), readr::write_csv,
+data.table::fwrite kable ess-view-data-complete-backend-list: jsonlite
+ess-view-data-read-string: ess-completing-read (default), completing-read,
+ido-completing-read, ivy-completing-read Utils: NOTE: it will make a copy of the
+data and then does the following action ess-view-data-print: the main function
+to view data Example: In a ess-r buffer or a Rscript buffer, `M-x
+ess-view-data-print` and input `mtcars`.  ess-view-data-set-backend: change
+backend ess-view-data-toggle-maxprint: toggle limitation of lines per page to
+print ess-view-data-verbs Example: In the ESS-V buffer, `M-x
+ess-view-data-verbs` and select the verb to do with.  ess-view-data-filter
+Example: In the ESS-V buffer, `M-x ess-view-data-filter`, `cyl <RET> mpg` to
+select columns and <C-j> to finish input.  An indirect buffer pops up and
+data-masking Expressions can be edited.  ess-view-data-select /
+ess-view-data-unselect Example: In the ESS-V buffer, `M-x ess-view-data-select`,
+`cyl <RET> mpg` to select columns and <C-j> to finish input.  ess-view-data-sort
+ess-view-data-group / ess-view-data-ungroup ess-view-data-mutate
+ess-view-data-slice ess-view-data-wide2long / ess-view-data-long2wide
+ess-view-data-update ess-view-data-reset Example: In the ESS-V buffer, `M-x
+ess-view-data-reset`, an indirect buffer pops up and the action history can be
+edited.  ess-view-data-unique ess-view-data-count Example: In the ESS-V buffer,
+`M-x ess-view-data-count`, `cyl <RET> mpg` to select columns and <C-j> to finish
+input.  In the updated buffer with count information, `M-x ess-view-data-print`
+to go back.  ess-view-data-summarise ess-view-data-overview
+ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
+/ -page-number ess-view-data-save")
+   (license #f))
+  )
 
 
 ;;
@@ -627,6 +674,8 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
     "emacs-undo-fu" ;; Simple, stable linear undo with redo for Emacs
 
     "emacs-ess" ;; Emacs mode for statistical analysis programs
+
+
     "emacs-vterm" ;; Emacs libvterm integration
     "emacs-vterm-toggle" ;; Toggle between a vterm buffer and other buffers
     "emacs-multi-vterm" ;; Manage multiple vterm buffers in Emacs
@@ -680,6 +729,8 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
     "emacs-all-the-icons" ;; Collect icon fonts and propertize them within Emacs
     "emacs-all-the-icons-ibuffer" ;; Display icons for all buffers in ibuffer
     "emacs-all-the-icons-dired" ;; Show icons for each file in `dired-mode'
+    "emacs-all-the-icons-completion" ;; Add icons to completion candidates 
+
     "emacs-org-auto-tangle" ;; Automatically tangle code blocks on save
 
     "emacs-pass" ;; Major mode for `password-store.el'
@@ -745,5 +796,7 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
 		       emacs-emms
 		       ;;python-tinytag ;; don't work
 		       emacs-doom-modeline
+		       emacs-ess-view-data
+		       emacs-all-the-icons
 		       ))
   ))

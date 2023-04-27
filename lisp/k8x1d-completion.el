@@ -9,6 +9,11 @@
   (after-init . vertico-mode)
   )
 
+;; add icons to completion
+(use-package all-the-icons-completion
+  :hook
+  (vertico-mode . all-the-icons-completion-mode))
+
 ;;
 ;; Completion Style
 ;;

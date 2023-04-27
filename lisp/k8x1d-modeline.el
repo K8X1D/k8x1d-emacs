@@ -5,8 +5,9 @@
   (setq doom-modeline-enable-word-count t)
   (setq doom-modeline-minor-modes t) ;; for minions
   ;; Clean-up modeline
-  (setq doom-modeline-buffer-state-icon nil)
-  (setq doom-modeline-major-mode-icon nil)
+  ;; (setq doom-modeline-buffer-state-icon nil)
+  ;; (setq doom-modeline-major-mode-icon nil)
+  (setq doom-modeline-icon nil)
   (setq doom-modeline-workspace-name nil) ;; use tab instead
   (setq doom-modeline-buffer-encoding nil)
   ;; Custom modal indicator for evil, Under test
@@ -19,14 +20,19 @@
 	evil-operator-state-tag (propertize "[Operator]" 'face '((:background ,(doom-color 'violet)))))
   )
 
+
 (use-package minions-mode
-  :hook (doom-modeline-mode . minions-mode))
+  :hook (doom-modeline-mode . minions-mode)
+  :config
+  (setq minions-mode-line-lighter "...")
+  )
 
 (use-package hide-mode-line
   :hook
   ((vterm-mode . hide-mode-line-mode)
    (dired-sidebar-mode . hide-mode-line-mode)
    (inferior-ess-r-mode . hide-mode-line-mode)
+   (org-capture-mode . hide-mode-line-mode)
    (julia-vterm-repl-mode . hide-mode-line-mode))
   )
 

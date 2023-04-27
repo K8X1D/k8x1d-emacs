@@ -16,9 +16,11 @@
    org-todo-keywords
    '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "KILL(k)"))
    org-agenda-files (file-expand-wildcards (concat org-directory "/gtd/*.org"))
-   org-refile-targets '((org-agenda-files :maxlevel . 3)))
+   ;;org-refile-targets '((org-agenda-files :maxlevel . 3)))
+   org-refile-targets
+   '((nil :maxlevel . 3)
+     (org-agenda-files :maxlevel . 3)))
   )
-
 
 
 (provide 'k8x1d-gtd)
