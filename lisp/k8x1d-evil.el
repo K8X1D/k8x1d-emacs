@@ -5,6 +5,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-fu)
   :config
+  (setq evil-echo-state nil)
   (evil-mode 1))
 
 ;; Extend evil support
