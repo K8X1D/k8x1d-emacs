@@ -3,7 +3,6 @@
 ;;
 ;; Project management
 ;;
-(setq multi-vterm-dedicated-window-height 18)
 (defun sidebar-toggle ()
   "Toggle both `dired-sidebar' and `ibuffer-sidebar'."
   (interactive)
