@@ -700,6 +700,7 @@ ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
     "emacs-evil-org" ;; Evil keybindings for Org mode
     ;;"emacs-nano-modeline" ;; Emacs minor mode controlling mode line
     ;;"emacs-simple-modeline" ;; Simple mode-line configuration for Emacs
+    "emacs-telephone-line" ;; Implementation of Powerline for Emacs 
 
     "emacs-f" ;; Emacs API for working with files and directories 
     "emacs-s" ;; Emacs string manipulation library
