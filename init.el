@@ -109,21 +109,21 @@
 
 ;; Fonts
 ;;(set-face-attribute 'default nil :font "Fira Code" :height 150)
-(set-face-attribute 'default nil :font "Hack" :height 100)
+(set-face-attribute 'default nil :font "Hack" :height 120)
 
 ;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil
 		    :font "Hack"
 		    ;;:font "Fira Code"
 		    :weight 'light
-		    :height 100)
+		    :height 120)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil
 		    ;; :font "Cantarell"
 		    :font "Iosevka Aile"
 		    ;;:font "DejaVu Sans"
-		    :height 130
+		    :height 150
 		    :weight 'light)
 
 (use-package mixed-pitch
@@ -143,16 +143,20 @@
 (defun k8x1d/set-theme ()
   (load-theme actual-theme t)
   (custom-set-faces
-   `(tab-bar ((t (:inherit nil :background ,(doom-color 'bg-alt)))))
+   `(tab-bar ((t (:inherit nil :family "Iosevka Aile" :background ,(doom-color 'bg-alt)))))
    `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :height 1.5))))
    `(tab-bar-tab-inactive ((t (:inherit nil :background ,(doom-color 'base3) :foreground ,(doom-color 'fg-alt) :height 1.5))))
    ;; todo 
-   '(org-todo ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
-   '(org-done ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
-   '(font-lock-comment-face ((t (:foreground "#928374"))))
+   `(org-todo ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
+   `(org-done ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
+   `(font-lock-comment-face ((t (:foreground "#928374"))))
    ;;'(font-lock-string-face ((t (:foreground "#b8bb26" :family "Hack"))))
    ;;'(font-lock-string-face ((t (:foreground "#b8bb26" :family "JuliaMono"))))
-   '(font-lock-string-face ((t (:foreground "#b8bb26" :family "DejaVu Sans Mono Nerd Font"))))
+   `(font-lock-string-face ((t (:foreground "#b8bb26" :family "DejaVu Sans Mono Nerd Font"))))
+   `(doom-modeline-evil-normal-state ((t (:foreground ,(doom-color 'green)))))
+   `(doom-modeline-evil-visual-state ((t (:foreground ,(doom-color 'red)))))
+   `(doom-modeline-emphasis ((t (:foreground ,(doom-color 'red)))))
+   `(doom-modeline-evil-insert-state ((t (:foreground ,(doom-color 'teal)))))
    )
   )
 
@@ -224,9 +228,6 @@
 ;;
 
 
-(setq user-emacs-directory (expand-file-name "~/.k8x1d-emacs.d"))
-
-(setq user-emacs-cache-directory (expand-file-name "~/.cache/emacs"))
 
 ;; Backup files
 (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-cache-directory))))
@@ -281,83 +282,6 @@
 
 
 
-
-;;
-;; Latex support
-;; 
-
-;; Reftex (toc and references)
-(setq reftex-toc-split-windows-horizontally t)
-(setq reftex-toc-max-level 3)
-(setq reftex-toc-split-windows-fraction 0.2)
-
-(add-hook 'LaTeX-mode-hook  #'turn-on-reftex)
-(add-hook 'LaTeX-mode-hook  #'eglot-ensure)
-
-;; Default pdf viewer
-(setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-
-;; Wrap text 
-(add-hook 'LaTeX-mode-hook #'visual-line-mode)
-
-
-;; OLD ;;
-;;(use-package reftex
-;;  :hook
-;;  (reftex-mode . visual-line-mode)
-;;  :config
-;;  (setq reftex-toc-split-windows-horizontally t)
-;;  (setq reftex-toc-max-level 3)
-;;  (setq reftex-toc-split-windows-fraction 0.2)
-;;  )
-;;
-;;
-;;(use-package auctex
-;;  :init
-;;  (setq TeX-parse-self t ; parse on load
-;;	TeX-auto-save t  ; parse on save
-;;	;; Use hidden directories for AUCTeX files.
-;;	TeX-auto-local ".auctex-auto"
-;;	TeX-style-local ".auctex-style"
-;;	TeX-source-correlate-mode t
-;;	TeX-source-correlate-method 'synctex
-;;	;; Don't start the Emacs server when correlating sources.
-;;	TeX-source-correlate-start-server nil
-;;	;; Automatically insert braces after sub/superscript in `LaTeX-math-mode'.
-;;	TeX-electric-sub-and-superscript t
-;;	;; Just save, don't ask before each compilation.
-;;	TeX-save-query nil
-;;
-;;	TeX-source-correlate-start-server t
-;;	TeX-PDF-mode t
-;;	;; Set pdf viewer
-;;	TeX-view-program-selection '((output-pdf "PDF Tools"))
-;;	reftex-plug-into-AUCTeX t)
-;;  (add-hook 'TeX-after-compilation-finished-functions
-;;	    #'TeX-revert-document-buffer)
-;;  (custom-set-faces
-;;   `(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold :height 0.8))))
-;;   )
-;;  :hook
-;;  ((LaTeX-mode . eglot-ensure)
-;;   (LaTeX-mode . LaTeX-math-mode)
-;;   (LaTeX-mode . turn-on-reftex))
-;;  ;;(add-hook 'LaTeX-mode-hook 'eglot-ensure)
-;;  ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-;;  ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-;;  )
-;;
-;;(use-package auctex-latexmk
-;;  :defer t
-;;  :after auctex
-;;  :init
-;;  ;; Pass the -pdf flag when TeX-PDF-mode is active.
-;;  (setq auctex-latexmk-inherit-TeX-PDF-mode t)
-;;  ;; Set LatexMk as the default.
-;;  :config
-;;  (setq TeX-command-default "LatexMk")
-;;  ;; Add LatexMk as a TeX target.
-;;  (auctex-latexmk-setup))
 
 
 
