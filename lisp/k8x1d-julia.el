@@ -4,6 +4,7 @@
 
 ;; REPL
 (use-package julia-vterm
+  :defer t
   :hook (julia-mode . julia-vterm-mode)
   :bind 
   (("C-c o r j" . julia-vterm-repl)
@@ -14,6 +15,7 @@
 
 ;; LSP
 (use-package eglot-jl
+  :after julia-mode
   :straight t
   :ensure t
   :hook ((julia-mode . eglot-ensure)
@@ -22,16 +24,16 @@
   (setq eglot-connect-timeout 60) ;; prevent eglot timeout
   (eglot-jl-init)
   )
-
-;; Treesitter support
-(use-package julia-ts-mode
-  :straight t
-  :ensure t
- ;; ;; tmp
- ;; (unless (package-installed-p 'julia-ts-mode)
- ;;   (package-vc-install "https://github.com/ronisbr/julia-ts-mode")
- ;;   )
-  :mode "\\.jl$")
+;;
+;;;; Treesitter support
+;;(use-package julia-ts-mode
+;;  :straight t
+;;  :ensure t
+;; ;; ;; tmp
+;; ;; (unless (package-installed-p 'julia-ts-mode)
+;; ;;   (package-vc-install "https://github.com/ronisbr/julia-ts-mode")
+;; ;;   )
+;;  :mode "\\.jl$")
 
 
 
