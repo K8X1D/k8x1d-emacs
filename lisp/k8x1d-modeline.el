@@ -13,12 +13,6 @@
   (setq doom-modeline-buffer-file-name-style 'file-name)
   ;; Custom modal indicator for evil, Under test
   (setq doom-modeline-modal-icon nil)
- ;; (setq evil-normal-state-tag   (propertize "(N)" 'face '((:background ,(doom-color 'green) :foreground ,(doom-color 'bg))))
- ;;	evil-emacs-state-tag    (propertize "(E)" 'face '((:background ,(doom-color 'orange) :foreground ,(doom-color 'bg))))
- ;;	evil-insert-state-tag   (propertize "(I)" 'face '((:inverse-video t :background ,(doom-color 'teal)) :foreground ,(doom-color 'fg)))
- ;;	evil-motion-state-tag   (propertize "(M)" 'face '((:background ,(doom-color 'blue)) :foreground ,(doom-color 'fg)))
- ;;	evil-visual-state-tag   (propertize "(V)" 'face '((:background ,(doom-color 'red) :foreground ,(doom-color 'bg))))
- ;;	evil-operator-state-tag (propertize "(O)" 'face '((:background ,(doom-color 'violet)))))
   (setq evil-normal-state-tag "(N)"
 	evil-emacs-state-tag "(E)"
 	evil-insert-state-tag "(I)"
