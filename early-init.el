@@ -36,8 +36,12 @@
 ;; Limit message to error
 (setq warning-minimum-level :error)
 
+;; Set paths
+(setq user-emacs-directory (expand-file-name "~/.k8x1d-emacs.d"))
+(setq user-emacs-cache-directory (expand-file-name "~/.cache/emacs"))
+(setq custom-file (concat user-emacs-cache-directory "/custom.el"))
+
 ;; Separate customizatio in a particular file
-(setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
 ;;; early-init.el ends here
