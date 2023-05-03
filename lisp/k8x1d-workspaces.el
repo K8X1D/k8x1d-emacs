@@ -35,7 +35,7 @@
 ;;;; Tab Bar
 ;; Use tab-bar for window grouping and configuration within a project (replaces eyebrowse)
 (use-package tab-bar
-  :hook (after-init . k8x1d/set-initial-workspaces)
+  ;;:hook (after-init . k8x1d/set-initial-workspaces)
   :after (project)
   :commands (tab-bar-new-tab
              tab-bar-switch-to-tab
@@ -128,13 +128,13 @@ questions.  Otherwise use completion to select the tab."
   (defun k8x1d/set-initial-workspaces ()
     "Hook to set-up inital workspaces."
     ;; AIT
-    (tab-bar-switch-to-tab " AIT_udes")
+    (tab-bar-switch-to-tab "BIN")
     (find-file "/extension/Work/Documents/Emplois/2023/H/BIN/AIT_udes/todo.org")
     ;; GTD
-    (tab-bar-switch-to-tab " GTD")
+    (tab-bar-switch-to-tab "GTD")
     (find-file "~/Dropbox/org/gtd/inbox.org")
     ;; K8X1D config
-    (tab-bar-switch-to-tab " k8x1d-emacs")
+    (tab-bar-switch-to-tab "k8x1d-emacs")
     (find-file "/extension/Work/Documents/Developpement/Logiciels/Editeurs/k8x1d-emacs/todo.org")
     ;; Dashboard
     (tab-bar-switch-to-tab "*scratch*")
