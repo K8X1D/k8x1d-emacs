@@ -689,6 +689,7 @@ ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
     "emacs-embark" ;; Emacs mini-buffer actions rooted in keymaps
     "emacs-marginalia" ;; Marginalia in the minibuffer completions
     "emacs-corfu" ;; Completion overlay region function
+    ;;"emacs-company"
     "emacs-kind-icon" ;; Completion kind icons in Emacs
 
     "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
@@ -782,6 +783,10 @@ ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
     "emacs-nyxt" ;; Interact with Nyxt from Emacs
 
     "emacs-pinentry" ;; GnuPG Pinentry server implementation
+
+    "emacs-auctex" ;; Integrated environment for TeX 
+    "emacs-org-edit-latex" ;;  Edit a LaTeX fragment just like editing a source block
+    "emacs-evil-tex" ;;  Evil oriented additions for editing LaTeX 
 
     ))
   (packages->manifest (list
