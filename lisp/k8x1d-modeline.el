@@ -19,7 +19,38 @@
 	evil-motion-state-tag "(M)"
 	evil-visual-state-tag "(V)"
 	evil-operator-state-tag "(O)")
+  ;; Define your custom modeline
+ ;; (doom-modeline-def-modeline 'k8x1d-modeline
+ ;;   ;; Left side
+ ;;   '(bar workspace-name window-number modals matches follow buffer-info remote-host
+ ;;	  ;;buffer-position
+ ;;	  word-count parrot selection-info
+ ;;	  vcs)
+ ;;   ;; Right side
+ ;;   '(compilation objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl
+ ;;		  lsp checker
+ ;;		  input-method indent-info buffer-encoding
+ ;;		  major-mode minor-modes
+ ;;		  ;;process
+ ;;		  time))
+  ;; barebone version
+  (doom-modeline-def-modeline 'k8x1d-modeline
+    ;; Left side
+    '(modals
+      buffer-info
+      word-count
+      vcs)
+    ;; Right side
+    '(compilation
+      lsp checker
+      major-mode minor-modes))
+
+  ;; Set default mode-line
+  (add-hook 'doom-modeline-mode-hook
+	    (lambda ()
+	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)))
   )
+
 
 ;;(use-package telephone-line
 ;;  :hook (after-init . telephone-line-mode)
@@ -41,7 +72,7 @@
   :hook (doom-modeline-mode . minions-mode)
   ;; :hook (telephone-line-mode . minions-mode)
   :init
-  (setq minions-mode-line-lighter "...")
+  (setq minions-mode-line-lighter "minor-modes")
   )
 
 (use-package hide-mode-line
