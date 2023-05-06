@@ -56,6 +56,7 @@
 (timed-require 'k8x1d-completion)
 (timed-require 'k8x1d-file-explorer)
 (timed-require 'k8x1d-buffers)
+(timed-require 'k8x1d-theme)
 
 ;; Project management
 (timed-require 'k8x1d-project)
@@ -130,57 +131,6 @@
   :hook
   ;; If you want it in all text modes:
   (text-mode . mixed-pitch-mode))
-
-;;
-;; Set Theme
-;; 
-
-
-(setq dark-theme 'doom-gruvbox)
-(setq light-theme 'doom-gruvbox-light)
-(setq actual-theme dark-theme) 
-
-(defun k8x1d/set-theme ()
-  (load-theme actual-theme t)
-  (custom-set-faces
-   `(tab-bar ((t (:inherit nil :family "Iosevka Aile" :background ,(doom-color 'bg-alt)))))
-   `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :height 1.5))))
-   `(tab-bar-tab-inactive ((t (:inherit nil :background ,(doom-color 'base3) :foreground ,(doom-color 'fg-alt) :height 1.5))))
-   ;; todo 
-   `(org-todo ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
-   `(org-done ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
-   `(font-lock-comment-face ((t (:foreground "#928374"))))
-   ;;'(font-lock-string-face ((t (:foreground "#b8bb26" :family "Hack"))))
-   ;;'(font-lock-string-face ((t (:foreground "#b8bb26" :family "JuliaMono"))))
-   `(font-lock-string-face ((t (:foreground "#b8bb26" :family "DejaVu Sans Mono Nerd Font"))))
-   `(doom-modeline-evil-normal-state ((t (:foreground ,(doom-color 'green)))))
-   `(doom-modeline-evil-visual-state ((t (:foreground ,(doom-color 'red)))))
-   `(doom-modeline-emphasis ((t (:foreground ,(doom-color 'red)))))
-   `(doom-modeline-evil-insert-state ((t (:foreground ,(doom-color 'teal)))))
-   )
-  )
-
-(defun switch-theme (theme)
-  (disable-theme actual-theme)
-  (setq actual-theme theme)
-  (k8x1d/set-theme)
-   ;;`(org-inline-src-block ((t (:background ,(doom-color 'base3)))))
-  )
-
-(defun k8x1d/dark-light-theme-switch ()
-  (interactive)
-  (if (equal actual-theme dark-theme)
-      (switch-theme light-theme)
-    (switch-theme dark-theme)
-    ))
-
-(global-set-key (kbd "<f5>") 'k8x1d/dark-light-theme-switch)
-
-(add-hook 'after-init-hook (lambda ()
-			     ;;(load-theme 'modus-vivendi)
-			     (k8x1d/set-theme)
-			     ))
-;;(load-theme 'modus-operandi)
 
 
 ;;
