@@ -76,21 +76,23 @@
 
 (use-package org-appear
   :hook
-  ((org-mode . org-appear-mode)
-   (org-mode . (lambda ()
-		 (add-hook 'evil-insert-state-entry-hook
-			   #'org-appear-manual-start
-			   nil
-			   t)
-		 (add-hook 'evil-insert-state-exit-hook
-			   #'org-appear-manual-stop
-			   nil
-			   t))))
+  (org-mode . org-appear-mode)
   :config
   (setq org-hide-emphasis-markers t
 	org-appear-trigger 'manual
 	org-appear-autoemphasis t
 	org-appear-autolinks t)
+  (add-hook 'org-mode-hook (lambda ()
+			     (add-hook 'evil-insert-state-entry-hook
+				       #'org-appear-manual-start
+				       nil
+				       t)
+			     (add-hook 'evil-insert-state-exit-hook
+				       #'org-appear-manual-stop
+				       nil
+				       t)))
   )
+
+
 
 (provide 'k8x1d-org)
