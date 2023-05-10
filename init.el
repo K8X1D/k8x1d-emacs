@@ -75,6 +75,7 @@
 (timed-require 'k8x1d-python)
 (timed-require 'k8x1d-R)
 (timed-require 'k8x1d-lisp)
+(timed-require 'k8x1d-latex)
 
 
 (timed-require 'k8x1d-multimedia)
