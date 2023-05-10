@@ -1,12 +1,12 @@
-;;(use-package emacs
-;;  :hook ((LaTeX-mode . visual-line-mode)
-;;	 (LaTeX-mode . eglot-ensure))
-;;  :config
-;;  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))))
+(use-package emacs
+  :hook ((LaTeX-mode . visual-line-mode)
+	 (LaTeX-mode . eglot-ensure))
+  :config
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))))
 
 (use-package reftex
   :hook
-  ((LaTeX-mode . turn-on-reftex)
+  ((LaTeX-mode . 'turn-on-reftex)
    (reftex-mode . visual-line-mode))
   :config
   (setq reftex-toc-split-windows-horizontally t)
@@ -14,15 +14,15 @@
   (setq reftex-toc-split-windows-fraction 0.2))
 
 (use-package org-edit-latex
-  :after org
+  :hook (org . org-edit-latex-mode)
   :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((latex . t))))
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((latex . t))))
 
 (use-package evil-tex 
   :after evil
-  :hook LaTeX-mode . evil-tex-mode)
+  :hook (LaTeX-mode . evil-tex-mode))
 
 
 (use-package auctex
@@ -52,8 +52,7 @@
    `(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold :height 0.8))))
    )
   :hook
-  ((LaTeX-mode . eglot-ensure)
-   (LaTeX-mode . LaTeX-math-mode))
+   (LaTeX-mode . LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'eglot-ensure)
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
@@ -75,12 +74,5 @@
 
 
 
-
-
-
-
-
-
-
-
+ 	
 (provide 'k8x1d-latex)
