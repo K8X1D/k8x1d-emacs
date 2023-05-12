@@ -77,7 +77,7 @@
 (timed-require 'k8x1d-lisp)
 (timed-require 'k8x1d-latex)
 
-
+;; Other
 (timed-require 'k8x1d-multimedia)
 
 
@@ -166,13 +166,6 @@
 (setq warning-minimum-level :error)
 
 
-(add-hook 'after-init-hook (lambda ()
-				  (evil-mode 1)
-				  (evil-collection-init)))
-
-;; TODO: adjust, set evil-mode when doc ess
-;;(evil-set-initial-state 'inferior-ess-mode 'emacs)
-
 ;;
 ;; Teach emacs to be clean!
 ;; From: https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Cleaning.org 
@@ -193,9 +186,6 @@
 ;; Custom file location
 (setq custom-file (concat user-emacs-cache-directory "/custom.el"))
 
-;;
-;; Completion
-;;
 
 
 
@@ -216,9 +206,6 @@
 (global-set-key (kbd "C-c o g") 'guix)
 
 
-
-
-
 ;; Pomodoro
 (setq org-pomodoro-length 50)
 (setq org-pomodoro-short-break-length 10)
@@ -236,34 +223,35 @@
 
 
 
+;;;;;;
+;;;;;; File explorer
+;;;;;; 
+;;
+;;
+;;
+;;
+;;;;(use-package treemacs
+;;;;  :config
+;;;;  (treemacs-follow-mode 1)
+;;;;  (treemacs-filewatch-mode 1)
+;;;;  (treemacs-project-follow-mode 1)
+;;;;  :bind
+;;;;  ("C-x p o e"   . treemacs)
+;;;;  )
 ;;;;
-;;;; File explorer
-;;;; 
-
-
-
-
-;;(use-package treemacs
-;;  :config
-;;  (treemacs-follow-mode 1)
-;;  (treemacs-filewatch-mode 1)
-;;  (treemacs-project-follow-mode 1)
-;;  :bind
-;;  ("C-x p o e"   . treemacs)
-;;  )
+;;;;(use-package treemacs-evil
+;;;;  :after (treemacs evil)
+;;;;  )
+;;;;
+;;;;(use-package treemacs-magit
+;;;;  :after (treemacs magit)
+;;;;  )
 ;;
-;;(use-package treemacs-evil
-;;  :after (treemacs evil)
-;;  )
+;;;;
+;;;; Geiser support
+;;;;
 ;;
-;;(use-package treemacs-magit
-;;  :after (treemacs magit)
-;;  )
-
 ;;
-;; Geiser support
-;;
-
 
 ;;
 ;; Keybinding
@@ -272,59 +260,59 @@
 ;; ESC Cancels All
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+;;;;
+;;;; Create leader keybinding
+;;;;
+;;					
+;;(use-package general
+;;  :config
+;;  (general-evil-setup t)
 ;;
-;; Create leader keybinding
+;;  (general-create-definer k8x1d/leader-key-def
+;;    :keymaps '(normal insert visual emacs)
+;;    :prefix "SPC"
+;;    :global-prefix "C-SPC"))
 ;;
-					
-(use-package general
-  :config
-  (general-evil-setup t)
-
-  (general-create-definer k8x1d/leader-key-def
-    :keymaps '(normal insert visual emacs)
-    :prefix "SPC"
-    :global-prefix "C-SPC"))
-
-
-(k8x1d/leader-key-def
-  "f"  '(:ignore t :which-key "Find")
-  "ff" '(find-file :which-key "File")
-  "fs" '(save-some-buffers :which-key "Save")
-  "o"  '(:ignore t :which-key "Open")
-  "oa" '(org-agenda :which-key "Agenda")
-  "ot" '(multi-vterm-project :which-key "Terminal")
-  "os" '(dired-sidebar-toggle-sidebar :which-key "Sidebar")
-  "w" '(:ignore t :which-key "Window")
-  "wc" '(evil-window-delete :which-key "Delete")
-  "ws" '(evil-window-split :which-key "Split")
-  "wv" '(evil-window-vsplit :which-key "Vsplit")
-  "wh" '(evil-window-left :which-key "Left")
-  "wj" '(evil-window-down :which-key "Down")
-  "wk" '(evil-window-up :which-key "Up")
-  "wl" '(evil-window-right :which-key "Right")
-  "wH" '(evil-window-move-far-left :which-key "Move Left")
-  "wJ" '(evil-window-move-very-bottom :which-key "Move Down")
-  "wK" '(evil-window-move-very-top :which-key "Move Up")
-  "wL" '(evil-window-move-far-right :which-key "Move Right")
- ;; ;; TODO: add workspaces keys
-  "<tab>" '(:ignore t :which-key "Tabspaces")
-  "<tab> C" '(tabspaces-clear-buffers :which-key "clear-buffers")
-  "<tab> b" '(tabspaces-switch-to-buffer :which-key "switch-to-buffer")
-  "<tab> d" '(tabspaces-close-workspace :which-key "close-workspace")
-  "<tab> k" '(tabspaces-kill-buffers-close-workspace :which-key "kill-buffers-close-workspace")
-  "<tab> o" '(tabspaces-open-or-create-project-and-workspace :which-key "open-or-create-project-and-workspace")
-  "<tab> r" '(tabspaces-remove-current-buffer :which-key "remove-current-buffer")
-  "<tab> R" '(tabspaces-remove-selected-buffer :which-key "remove-selected-buffer")
-  "<tab> s" '(tabspaces-switch-or-create-workspace :which-key "switch-or-create-workspace")
-  "<tab> t" '(tabspaces-switch-buffer-and-tab :which-key "switch-buffer-and-tab")
-
-  ;; TODO: add project keys
-  ;; TODO: add bookmark keys
-
-  "RET" '(bookmark-jump :which-key "Bookmarks")
-  ;;
-  "q" '(:ignore t :which-key "Quit")
-  "qq" '(save-buffers-kill-terminal :which-key "Emacs")
-  )
+;;
+;;(k8x1d/leader-key-def
+;;  "f"  '(:ignore t :which-key "Find")
+;;  "ff" '(find-file :which-key "File")
+;;  "fs" '(save-some-buffers :which-key "Save")
+;;  "o"  '(:ignore t :which-key "Open")
+;;  "oa" '(org-agenda :which-key "Agenda")
+;;  "ot" '(multi-vterm-project :which-key "Terminal")
+;;  "os" '(dired-sidebar-toggle-sidebar :which-key "Sidebar")
+;;  "w" '(:ignore t :which-key "Window")
+;;  "wc" '(evil-window-delete :which-key "Delete")
+;;  "ws" '(evil-window-split :which-key "Split")
+;;  "wv" '(evil-window-vsplit :which-key "Vsplit")
+;;  "wh" '(evil-window-left :which-key "Left")
+;;  "wj" '(evil-window-down :which-key "Down")
+;;  "wk" '(evil-window-up :which-key "Up")
+;;  "wl" '(evil-window-right :which-key "Right")
+;;  "wH" '(evil-window-move-far-left :which-key "Move Left")
+;;  "wJ" '(evil-window-move-very-bottom :which-key "Move Down")
+;;  "wK" '(evil-window-move-very-top :which-key "Move Up")
+;;  "wL" '(evil-window-move-far-right :which-key "Move Right")
+;; ;; ;; TODO: add workspaces keys
+;;  "<tab>" '(:ignore t :which-key "Tabspaces")
+;;  "<tab> C" '(tabspaces-clear-buffers :which-key "clear-buffers")
+;;  "<tab> b" '(tabspaces-switch-to-buffer :which-key "switch-to-buffer")
+;;  "<tab> d" '(tabspaces-close-workspace :which-key "close-workspace")
+;;  "<tab> k" '(tabspaces-kill-buffers-close-workspace :which-key "kill-buffers-close-workspace")
+;;  "<tab> o" '(tabspaces-open-or-create-project-and-workspace :which-key "open-or-create-project-and-workspace")
+;;  "<tab> r" '(tabspaces-remove-current-buffer :which-key "remove-current-buffer")
+;;  "<tab> R" '(tabspaces-remove-selected-buffer :which-key "remove-selected-buffer")
+;;  "<tab> s" '(tabspaces-switch-or-create-workspace :which-key "switch-or-create-workspace")
+;;  "<tab> t" '(tabspaces-switch-buffer-and-tab :which-key "switch-buffer-and-tab")
+;;
+;;  ;; TODO: add project keys
+;;  ;; TODO: add bookmark keys
+;;
+;;  "RET" '(bookmark-jump :which-key "Bookmarks")
+;;  ;;
+;;  "q" '(:ignore t :which-key "Quit")
+;;  "qq" '(save-buffers-kill-terminal :which-key "Emacs")
+;;  )
 
 
