@@ -85,55 +85,23 @@ Containing LEFT, and RIGHT aligned respectively."
 	      (list (format (format "%%%ds" available-width) ""))
 	      right)))
   :config
-;;  (setq-default mode-line-format 
-;;		(list
-;;		  evil-mode-line-tag
-;;		'("%e"
-;;		  mode-line-frame-identification
-;;		  mode-line-buffer-identification
-;;		  "   "
-;;		  ;;mode-line-position 
-;;		  (vc-mode vc-mode)
-;;		  "                       "
-;;		  minions-mode-line-modes
-;;		  mode-line-misc-info
-;;		  mode-line-end-spaces)))
-
-
-(setq-default
- mode-line-format
- '((:eval
-    (simple-mode-line-render
-     ;; Left.
-     (quote ("%e "
-             evil-mode-line-tag
-             mode-line-buffer-identification
-             " %l : %c"
-             "[%*]"
-	    (vc-mode vc-mode)))
-     ;; Right.
-     (quote ("%p "
-             mode-line-frame-identification
-             mode-line-modes
-             mode-line-misc-info))))))
-
-
-;;  (setq-default mode-line-format
-;;		(list
-;;		 evil-mode-line-tag
-;;		 " "
-;;		 ;; buffer name
-;;		 ;;"%b"
-;;		;; ;; line number
-;;		;; "line %l "
-;;  		 '("%e"
-;;		  mode-line-buffer-identification
-;;		 ;; Version control
-;;		   (vc-mode vc-mode)
-;;		   "                                                              "
-;;		   ;; Modes
-;;		   minions-mode-line-modes)
-;;		 ))
+  (setq-default
+   mode-line-format
+   '((:eval
+      (simple-mode-line-render
+       ;; Left.
+       (quote ("%e "
+	       evil-mode-line-tag
+	       " "
+	       mode-line-buffer-identification
+	       " [%l:%c]"
+	       (vc-mode vc-mode)))
+       ;; Right.
+       (quote ("%p "
+	       mode-line-frame-identification
+	       mode-line-misc-info
+	       mode-line-modes
+	       ))))))
   )
 
 (use-package minions-mode

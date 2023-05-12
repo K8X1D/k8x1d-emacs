@@ -5,6 +5,12 @@
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-fu)
   :config
+
+  (setq evil-normal-state-tag "NORMAL")
+  (setq evil-insert-state-tag "INSERT")
+  (setq evil-visual-state-tag "VISUAL")
+  (setq evil-emacs-state-tag "EMACS")
+
   (setq evil-echo-state nil)
   (evil-mode 1))
 
