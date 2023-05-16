@@ -73,11 +73,52 @@
 ;;  (load-theme 'lambda-dark))
 
 
+
+
+
 (use-package emacs
+  :init
+  (setq dark-theme 'modus-vivendi)
+  (setq light-theme 'modus-operandi)
+  (setq actual-theme dark-theme) 
+
+  (custom-set-faces
+   ;; Tab configuration
+   `(tab-bar ((t (:inherit nil :family "Iosevka Aile"))))
+   `(tab-bar-tab ((t (:inherit nil :box nil :height 1.5))))
+   `(tab-bar-tab-inactive ((t (:inherit nil :height 1.5))))
+   )
+
+  (defun k8x1d/set-theme ()
+    (load-theme actual-theme t)
+    )
+
+  (defun switch-theme (theme)
+    (disable-theme actual-theme)
+    (setq actual-theme theme)
+    (if (eq actual-theme dark-theme)
+	(setq modus-themes-common-palette-overrides
+	      `((bg-main "#282828")
+		(fg-main "#ebdbb2")))
+      (setq modus-themes-common-palette-overrides
+	    `((bg-main "#ebdbb2")
+	      (fg-main "#282828")))
+      ) 
+    (k8x1d/set-theme))
+
+  (defun k8x1d/dark-light-theme-switch ()
+    (interactive)
+    (if (equal actual-theme dark-theme)
+	(switch-theme light-theme)
+      (switch-theme dark-theme)
+      ))
+
   :bind
-  ("<f5>" . 'modus-themes-toggle)
+  ("<f5>" . 'k8x1d/dark-light-theme-switch)
   :hook 
-  (after-init . (lambda () (load-theme 'modus-vivendi)))
+  (after-init . (lambda ()
+		  (k8x1d/set-theme)
+		  ))
   :config
   (setq modus-themes-custom-auto-reload nil
 	modus-themes-to-toggle '(modus-operandi modus-vivendi)
@@ -90,22 +131,9 @@
 	modus-themes-prompts nil
 	modus-themes-headings
 	'((agenda-structure . (variable-pitch light 2.2))
-          (agenda-date . (variable-pitch regular 1.3))
+	  (agenda-date . (variable-pitch regular 1.3))
           (t . (regular 1.15))))
-  ;; Custom colors
-  (setq modus-themes-common-palette-overrides
-	`((bg-main "#282828")
-	  (fg-main "#ebdbb2")
-	  ;; (bg-tab-bar      "#313131")
-	  ;; (bg-tab-current  "#282828")
-	  ;; (bg-tab-other    "#928374")
-	  ))
-  (custom-set-faces
-   ;; Tab configuration
-   `(tab-bar ((t (:inherit nil :family "Iosevka Aile"))))
-   `(tab-bar-tab ((t (:inherit nil :height 1.5))))
-   `(tab-bar-tab-inactive ((t (:inherit nil :height 1.5))))
-   )
   )
+
 
 (provide 'k8x1d-theme)
