@@ -314,28 +314,40 @@ navigation.  It is derived from `julia-mode'.")
   (package
    (name "emacs-eglot-jl")
    (version "20230117.1243")
-   (source
-    (origin
-     (method git-fetch)
-     (uri (git-reference
-	   (url "https://github.com/non-Jedi/eglot-jl.git")
-	   (commit
-	    "2e04597223553a369dd5b6520b6365b41e6ea508")))
-     (sha256
-      (base32
-       "1zr5f5hvrj2i7a2yzrgbhdhzfwf6fxhj3p4ws85r0mgvk2kwwlll"))))
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/non-Jedi/eglot-jl.git")
+		  (commit "2e04597223553a369dd5b6520b6365b41e6ea508")))
+	    (sha256
+	     (base32
+	      "1zr5f5hvrj2i7a2yzrgbhdhzfwf6fxhj3p4ws85r0mgvk2kwwlll"))))
    (build-system emacs-build-system)
-   (propagated-inputs (list emacs-eglot))
-   ;;(arguments
-   ;;  '(#:files (:defaults "*.jl" "*.toml")))
-   (home-page
-    "https://github.com/non-Jedi/eglot-jl")
+   (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
+   (arguments
+    '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+		  "^dir$"
+		  "^[^/]+.info$"
+		  "^[^/]+.texi$"
+		  "^[^/]+.texinfo$"
+		  "^doc/dir$"
+		  "^doc/[^/]+.info$"
+		  "^doc/[^/]+.texi$"
+		  "^doc/[^/]+.texinfo$"
+		  "^[^/]+.jl$"
+		  "^[^/]+.toml$")
+      #:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$" "^[^/]+-test.el$"
+		  "^[^/]+-tests.el$")))
+   (home-page "https://github.com/non-Jedi/eglot-jl")
    (synopsis "Julia support for eglot")
    (description
-    "Documentation at https://melpa.org/#/eglot-jl")
+    "This package loads support for the Julia language server into eglot and
+package.el.  This provides IDE-like features for editing julia-mode buffers.
+After installing this package, to load support for the Julia language server,
+run eglot-jl-init.  After that, running the eglot function in a julia-mode
+buffer should work properly.")
    (license #f))
   )
-
 
 (define-public emacs-dired-hacks-utils 
   (package
@@ -657,6 +669,37 @@ ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
    (license #f))
   )
 
+(define-public emacs-auctex-latexmk
+  (package
+   (name "emacs-auctex-latexmk")
+   (version "20221025.1219")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/emacsmirror/auctex-latexmk.git")
+		  (commit "b00a95e6b34c94987fda5a57c20cfe2f064b1c7a")))
+	    (sha256
+	     (base32
+	      "0bbvb4aw9frg4fc0z9qkc5xd2s9x65k6vdscy5svsy0h17iacsbb"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-auctex))
+   (home-page "https://github.com/tom-tan/auctex-latexmk/")
+   (synopsis "Add LatexMk support to AUCTeX")
+   (description
+    "This library adds LatexMk support to AUCTeX. Requirements: * AUCTeX * LatexMk *
+TeXLive (2011 or later if you write TeX source in Japanese) To use this package,
+add the following line to your .emacs file: (require auctex-latexmk)
+(auctex-latexmk-setup) And add the following line to your .latexmkrc file: #
+.latexmkrc starts $pdf_mode = 1; # .latexmkrc ends After that, by using M-x
+TeX-command-master (or C-c C-c), you can use LatexMk command to compile TeX
+source.  For Japanese users: LatexMk command automatically stores the encoding
+of a source file and passes it to latexmk via an environment variable named
+\"LATEXENC\".  Here is the example of .latexmkrc to use \"LATEXENC\": # .latexmkrc
+starts $kanji = \"-kanji=$ENV{\\\"LATEXENC\\\"}\" if defined $ENV{\"LATEXENC\"}; $latex
+= \"platex $kanji\"; $bibtex = \"pbibtex $kanji\"; $dvipdf = dvipdfmx -o %D %S';
+$pdf_mode = 3; # .latexmkrc ends")
+   (license #f))
+  )
 
 ;;
 ;; Manifest
@@ -788,13 +831,19 @@ ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
     "emacs-org-edit-latex" ;;  Edit a LaTeX fragment just like editing a source block
     "emacs-evil-tex" ;;  Evil oriented additions for editing LaTeX 
 
+    "emacs-elfeed" ;; Atom/RSS feed reader for Emacs
+
+    "zip" 
+
+    "emacs-mastodon"
+
     ))
   (packages->manifest (list
 		       emacs-julia-vterm
 		       emacs-ob-julia-vterm
 		       ;;emacs-cl-generic
 		       ;;emacs-julia-ts-mode ;; wrong emacs version when building
-		       ;;emacs-eglot-jl
+		      ;; emacs-eglot-jl ;; problem building
 		       emacs-dired-sidebar
 		       emacs-ibuffer-sidebar
 		       emacs-tabspaces
@@ -804,5 +853,6 @@ ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
 		       emacs-doom-modeline
 		       emacs-ess-view-data
 		       emacs-all-the-icons
+		       ;; emacs-auctex-latexmk ;; dont't work
 		       ))
   ))
