@@ -1,4 +1,4 @@
-;; Install straight.el
+;;;; Install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -13,7 +13,8 @@
   (load bootstrap-file nil 'nomessage))
 
 ;; Configure use-package to use straight.el by default
-(use-package straight)
+(use-package straight
+  :defer)
 
 (provide 'k8x1d-packages)
 

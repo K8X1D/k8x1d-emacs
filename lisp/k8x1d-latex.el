@@ -58,7 +58,7 @@
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   )
 
-;;
+
 ;;(use-package auctex-latexmk
 ;;  :defer t
 ;;  :after auctex
