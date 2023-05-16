@@ -94,10 +94,10 @@ Containing LEFT, and RIGHT aligned respectively."
 	       evil-mode-line-tag
 	       " "
 	       mode-line-buffer-identification
-	       " [%l:%c]"
 	       (vc-mode vc-mode)))
        ;; Right.
-       (quote ("%p "
+       (quote (
+	       " [%l:%c]"
 	       mode-line-frame-identification
 	       mode-line-misc-info
 	       mode-line-modes
@@ -113,14 +113,14 @@ Containing LEFT, and RIGHT aligned respectively."
   (setq minions-mode-line-lighter "...")
   )
 
-;;(use-package hide-mode-line
-;;  :hook
-;;  ((vterm-mode . hide-mode-line-mode)
-;;   (dired-sidebar-mode . hide-mode-line-mode)
-;;   (inferior-ess-r-mode . hide-mode-line-mode)
-;;   (org-capture-mode . hide-mode-line-mode)
-;;   (julia-vterm-repl-mode . hide-mode-line-mode))
-;;  )
+(use-package hide-mode-line
+  :hook
+  ((vterm-mode . hide-mode-line-mode)
+   (dired-sidebar-mode . hide-mode-line-mode)
+   (inferior-ess-r-mode . hide-mode-line-mode)
+   (org-capture-mode . hide-mode-line-mode)
+   (julia-vterm-repl-mode . hide-mode-line-mode))
+  )
 
 
 
