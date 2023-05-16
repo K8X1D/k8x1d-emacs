@@ -79,6 +79,7 @@
 
 ;; Other
 (timed-require 'k8x1d-multimedia)
+(timed-require 'k8x1d-news)
 
 
 
