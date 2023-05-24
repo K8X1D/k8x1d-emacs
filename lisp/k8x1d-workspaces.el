@@ -58,6 +58,14 @@
                     lem--tab-bar-suffix
                     tab-bar-format-add-tab))
   :config
+  ;; Faces
+  (custom-set-faces
+   ;; Tab configuration
+   `(tab-bar ((t (:inherit nil :family "Iosevka Aile"))))
+   `(tab-bar-tab ((t (:inherit nil :box nil :height 1.5))))
+   `(tab-bar-tab-inactive ((t (:inherit nil :height 1.5))))
+   )
+
   ;; Tab bar numbers
   ;; https://christiantietze.de/posts/2022/02/emacs-tab-bar-numbered-tabs/
   (defvar lem-tab-bar--circle-numbers-alist
