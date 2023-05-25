@@ -7,6 +7,18 @@
   :config
   (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
   (setq org-image-actual-width nil)
+
+  ;; Agenda
+  ;; take the whole buffer
+  (setq org-agenda-window-setup 'current-window)
+  ;; Show 10 day (3 before, 7 after)
+  (setq
+   org-agenda-span 10
+   org-agenda-start-on-weekday nil
+   org-agenda-start-day "-3d")
+  ;; Optimize startup 
+  (setq org-agenda-inhibit-startup t)
+
   ;; Babel
   (setq org-confirm-babel-evaluate nil)
   (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
