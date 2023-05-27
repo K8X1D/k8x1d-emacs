@@ -76,6 +76,7 @@
 (timed-require 'k8x1d-R)
 (timed-require 'k8x1d-lisp)
 (timed-require 'k8x1d-latex)
+(timed-require 'k8x1d-docker)
 
 ;; Other
 (timed-require 'k8x1d-multimedia)
@@ -90,18 +91,27 @@
 
 
 ;; Set initial transparency
-(if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
-    (progn
-    (set-frame-parameter nil 'alpha-background 80) ; For current frame
-    (add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
-      )
-  (progn
-   (set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
-   (add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
-    ))
+;;;; FIXME: daemon mode lacks color, seem to use non emacs 29 config
+;;(if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
+;;    (progn
+;;    (set-frame-parameter nil 'alpha-background 100) ; For current frame
+;;    ;;(set-frame-parameter nil 'alpha-background 80) ; For current frame
+;;    (add-to-list 'default-frame-alist '(alpha-background . 100)) ; For all new frames henceforth
+;;    ;;(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
+;;      )
+;;  (progn
+;;   ;;(set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
+;;   ;;(add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
+;;   (set-frame-parameter (selected-frame) 'alpha '(100 . 100)) ; For current frame
+;;   (add-to-list 'default-frame-alist '(alpha . (100 . 100))) ; For all new frames henceforth
+;;    ))
+
+(set-frame-parameter nil 'alpha-background 80) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
+
 
 ;; Set transparency of emacs
-(defun transparency (value)
+(defun k8x1d/transparency (value)
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha-background value))
@@ -109,6 +119,8 @@
 ;;
 ;; Esthetics
 ;;
+
+;; Main typeface
 
 ;; Fonts
 ;;(set-face-attribute 'default nil :font "Fira Code" :height 150)
@@ -119,14 +131,14 @@
 		    :font "Hack"
 		    ;;:font "Fira Code"
 		    :weight 'light
-		    :height 120)
+		    :height 1.0)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil
 		    ;; :font "Cantarell"
 		    :font "Iosevka Aile"
 		    ;;:font "DejaVu Sans"
-		    :height 150
+		    :height 1.0
 		    :weight 'light)
 
 (use-package mixed-pitch
@@ -188,12 +200,13 @@
 (setq custom-file (concat user-emacs-cache-directory "/custom.el"))
 
 
-
-
 ;;
 ;; Utilities
 ;;
 
+;; Defaults browser
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "firefox")
 
 ;; Pdf support
 (pdf-loader-install)
@@ -201,7 +214,11 @@
 
 
 ;; Pass interation
-(global-set-key (kbd "C-c o p") 'pass)
+(use-package pass
+  :bind ("C-c o p" . pass))
+(use-package password-store)
+(use-package password-store-otp)
+
 
 ;; Guix packages management
 (global-set-key (kbd "C-c o g") 'guix)
