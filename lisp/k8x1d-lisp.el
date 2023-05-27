@@ -14,4 +14,14 @@
   (unbind-key "C-c TAB" lisp-mode-map)
   )
 
+(use-package geiser-mode
+  :config
+  ;; Clean binding
+  (require 'bind-key)
+  (unbind-key "C-c TAB" geiser-mode-map))
+
+(use-package geiser-guile)
+
+
+
 (provide 'k8x1d-lisp)
