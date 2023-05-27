@@ -36,9 +36,19 @@
   )
 
 
+(use-package bluetooth
+  :bind ("C-c o b" . bluetooth-list-devices))
+
+(use-package mpv) 
+
+(use-package mpdel
+  :init
+  (setq mpdel-prefix-key (kbd "C-c m"))
+  :hook (after-init . mpdel-mode))
 
 
-
+(use-package transmission
+  :bind ("C-c o T" . transmission))
 
 
 (provide 'k8x1d-multimedia)
