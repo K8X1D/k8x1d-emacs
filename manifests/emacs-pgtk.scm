@@ -283,61 +283,19 @@ navigation.  It is derived from `julia-mode'.")
 
 
 
-;; Don't work
-;;(define-public emacs-eglot-jl 
-;;  (package
-;;   (name "emacs-eglot-jl")
-;;   (version "2.2.1")
-;;   (source (origin
-;;	    (method url-fetch)
-;;	    (uri (string-append "https://stable.melpa.org/packages/eglot-jl-"
-;;				version ".tar"))
-;;	    (sha256
-;;	     (base32
-;;	      "0i993vl9byp8xfdqrv20kfsnfggv8wihpv31npwmh82f7yi36kcz"))))
-;;   (build-system emacs-build-system)
-;;   ;;(propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
-;;   (propagated-inputs (list emacs-eglot emacs-project))
-;;   (home-page "https://github.com/non-Jedi/eglot-jl")
-;;   (synopsis "Julia support for eglot")
-;;   (description
-;;    "This package loads support for the Julia language server into eglot and
-;;package.el.  This provides IDE-like features for editing julia-mode buffers.
-;;After installing this package, to load support for the Julia language server,
-;;run eglot-jl-init.  After that, running the eglot function in a julia-mode
-;;buffer should work properly.")
-;;   (license #f))
-;;  )
-
-;; From https://raw.githubusercontent.com/babariviere/guix-emacs/master/emacs/packages/melpa.scm
-(define-public emacs-eglot-jl
+(define-public emacs-eglot-jl 
   (package
    (name "emacs-eglot-jl")
-   (version "20230117.1243")
+   (version "2.2.1")
    (source (origin
-	    (method git-fetch)
-	    (uri (git-reference
-		  (url "https://github.com/non-Jedi/eglot-jl.git")
-		  (commit "2e04597223553a369dd5b6520b6365b41e6ea508")))
+	    (method url-fetch)
+	    (uri (string-append "https://stable.melpa.org/packages/eglot-jl-"
+				version ".tar"))
 	    (sha256
 	     (base32
-	      "1zr5f5hvrj2i7a2yzrgbhdhzfwf6fxhj3p4ws85r0mgvk2kwwlll"))))
+	      "1kqkxpyx6jd5l1px8n8g5bcv594zhzb0v5an3500xnj4rpcnfxn3"))))
    (build-system emacs-build-system)
    (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
-   (arguments
-    '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-		  "^dir$"
-		  "^[^/]+.info$"
-		  "^[^/]+.texi$"
-		  "^[^/]+.texinfo$"
-		  "^doc/dir$"
-		  "^doc/[^/]+.info$"
-		  "^doc/[^/]+.texi$"
-		  "^doc/[^/]+.texinfo$"
-		  "^[^/]+.jl$"
-		  "^[^/]+.toml$")
-      #:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$" "^[^/]+-test.el$"
-		  "^[^/]+-tests.el$")))
    (home-page "https://github.com/non-Jedi/eglot-jl")
    (synopsis "Julia support for eglot")
    (description
@@ -348,6 +306,46 @@ run eglot-jl-init.  After that, running the eglot function in a julia-mode
 buffer should work properly.")
    (license #f))
   )
+
+;;;; From https://raw.githubusercontent.com/babariviere/guix-emacs/master/emacs/packages/melpa.scm
+;;(define-public emacs-eglot-jl
+;;  (package
+;;   (name "emacs-eglot-jl")
+;;   (version "20230117.1243")
+;;   (source (origin
+;;	    (method git-fetch)
+;;	    (uri (git-reference
+;;		  (url "https://github.com/non-Jedi/eglot-jl.git")
+;;		  (commit "2e04597223553a369dd5b6520b6365b41e6ea508")))
+;;	    (sha256
+;;	     (base32
+;;	      "1zr5f5hvrj2i7a2yzrgbhdhzfwf6fxhj3p4ws85r0mgvk2kwwlll"))))
+;;   (build-system emacs-build-system)
+;;   (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
+;;   (arguments
+;;    '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+;;		  "^dir$"
+;;		  "^[^/]+.info$"
+;;		  "^[^/]+.texi$"
+;;		  "^[^/]+.texinfo$"
+;;		  "^doc/dir$"
+;;		  "^doc/[^/]+.info$"
+;;		  "^doc/[^/]+.texi$"
+;;		  "^doc/[^/]+.texinfo$"
+;;		  "^[^/]+.jl$"
+;;		  "^[^/]+.toml$")
+;;      #:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$" "^[^/]+-test.el$"
+;;		  "^[^/]+-tests.el$")))
+;;   (home-page "https://github.com/non-Jedi/eglot-jl")
+;;   (synopsis "Julia support for eglot")
+;;   (description
+;;    "This package loads support for the Julia language server into eglot and
+;;package.el.  This provides IDE-like features for editing julia-mode buffers.
+;;After installing this package, to load support for the Julia language server,
+;;run eglot-jl-init.  After that, running the eglot function in a julia-mode
+;;buffer should work properly.")
+;;   (license #f))
+;;  )
 
 (define-public emacs-dired-hacks-utils 
   (package
@@ -701,6 +699,36 @@ $pdf_mode = 3; # .latexmkrc ends")
    (license #f))
   )
 
+(define-public emacs-tab-bar-echo-area
+  (package
+   (name "emacs-tab-bar-echo-area")
+    (version "20221115.1953")
+    (source (origin
+             (method git-fetch)
+             (uri (git-reference
+                   (url "https://github.com/fritzgrabo/tab-bar-echo-area.git")
+                   (commit "3ab62ca7db3c1d83f96b7971ea4b3b0101b51ae9")))
+             (sha256 (base32
+                      "0grapqwfqjbi9yzcirgd8gmkg4zkplagwvdyal4jd4aajnnx6sh8"))))
+    (build-system emacs-build-system)
+    (home-page "https://github.com/fritzgrabo/tab-bar-echo-area")
+    (synopsis "Display tab names of the tab bar in the echo area")
+    (description
+     "This package provides a global minor mode to temporarily display a list of
+available tabs and tab groups (with the current tab and group highlighted) in
+the echo area after tab-related commands.  This is intended to be used as an
+unobtrusive replacement for the Emacs built-in display of the tab bar (that is,
+when you have `tab-bar-show set to nil).  The idea is to provide but a quick
+visual orientation aid to the user after tab-related commands, and then get out
+of the way again.  I recommend using this together with the
+tab-bar-lost-commands package, which provides simple and convenient commands
+that help with common tab bar use-cases regarding the creation, selection and
+movement of tabs.  You might also want to check out the tab-bar-groups package,
+which backports a simplified version of Emacs 28 tab groups to Emacs 27 and
+provides an integration with this package.")
+    (license #f))
+  )
+
 ;;
 ;; Manifest
 ;;
@@ -783,6 +811,7 @@ $pdf_mode = 3; # .latexmkrc ends")
     "emacs-password-store-otp" ;; Interact with the `pass-otp' extension for `pass' from Emacs
 
     "emacs-geiser" ;; Collection of Emacs modes for Scheme hacking 
+    "emacs-geiser-guile" ;; Guile Scheme support for Geiser
 
     "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
 
@@ -797,7 +826,6 @@ $pdf_mode = 3; # .latexmkrc ends")
 
     "python-lsp-server" ;; Python implementation of the Language Server Protocol
 
-    "emacs-bluetooth" ;; Manage Bluetooth devices using Emacs
 
     "emacs-org-roam" ;; Non-hierarchical note-taking with Org mode
     "emacs-org-roam-ui" ;; Web User Interface for Org Roam
@@ -837,13 +865,36 @@ $pdf_mode = 3; # .latexmkrc ends")
 
     "emacs-mastodon"
 
+    "emacs-consult-eglot" ;; Consulting-read interface for eglot 
+
+    "aspell" ;; Spell checker 
+    "aspell-dict-fr" ;; French dictionary for GNU Aspell 
+    "aspell-dict-en" ;; English dictionary for GNU Aspell  
+    "emacs-flyspell-correct" ;; Correcting words with flyspell via custom interfaces
+    "emacs-auto-dictionary-mode" ;; Automatic dictionary switcher for Emacs spell checking
+    "emacs-writegood-mode" ;; Polish up poor writing on the fly
+
+
+    "emacs-mpv" ;; Control MPV for easy note taking
+    "emacs-bluetooth" ;; Manage Bluetooth devices using Emacs
+    "emacs-mpdel" ;; Emacs user interface for Music Player Daemon
+    ;;"emacs-simple-mpc" ;; Simple Emacs frontend to mpc
+    "emacs-transmission" ;; Emacs interface to a Transmission session
+
+
+    ;; Docker support
+    "emacs-docker" ;; Manage docker from Emacs 
+    "emacs-dockerfile-mode" ;; Major mode for editing Dockerfile
+    "emacs-docker-tramp" ;; TRAMP integration for docker containers
+    "emacs-docker-compose-mode" ;; Major mode for editing `docker-compose' files
+
     ))
   (packages->manifest (list
 		       emacs-julia-vterm
 		       emacs-ob-julia-vterm
 		       ;;emacs-cl-generic
 		       ;;emacs-julia-ts-mode ;; wrong emacs version when building
-		      ;; emacs-eglot-jl ;; problem building
+		       ;; emacs-eglot-jl ;; problem building
 		       emacs-dired-sidebar
 		       emacs-ibuffer-sidebar
 		       emacs-tabspaces
@@ -854,5 +905,6 @@ $pdf_mode = 3; # .latexmkrc ends")
 		       emacs-ess-view-data
 		       emacs-all-the-icons
 		       ;; emacs-auctex-latexmk ;; dont't work
+               emacs-tab-bar-echo-area
 		       ))
   ))
