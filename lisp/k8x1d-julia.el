@@ -1,11 +1,18 @@
 ;; Syntax highlght
-(use-package julia-mode
-  :defer t)
+;;(use-package julia-mode
+;;  :defer t)
+
+;; Treesitter support
+(use-package julia-ts-mode
+  :ensure t
+  :straight t
+  :mode "\\.jl$")
 
 ;; REPL
 (use-package julia-vterm
   :defer t
-  :hook (julia-mode . julia-vterm-mode)
+  :hook ((julia-mode . julia-vterm-mode)
+	 (julia-ts-mode . julia-vterm-mode))
   :bind 
   (("C-c o r j" . julia-vterm-repl)
    :map julia-vterm-mode-map
@@ -13,29 +20,16 @@
   :config
   (setq vterm-kill-buffer-on-exit nil))
 
-;; LSP
+;;;; LSP
 (use-package eglot-jl
-  :after julia-mode
   :straight t
-  :ensure t
+  :init
+  (eglot-jl-init)
   :hook ((julia-mode . eglot-ensure)
 	 (julia-ts-mode . eglot-ensure))
-  :init
+  :config
   (setq eglot-connect-timeout 60) ;; prevent eglot timeout
-  (eglot-jl-init)
   )
-;;
-;;;; Treesitter support
-;;(use-package julia-ts-mode
-;;  :straight t
-;;  :ensure t
-;; ;; ;; tmp
-;; ;; (unless (package-installed-p 'julia-ts-mode)
-;; ;;   (package-vc-install "https://github.com/ronisbr/julia-ts-mode")
-;; ;;   )
-;;  :mode "\\.jl$")
-
-
 
 
 
