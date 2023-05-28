@@ -71,6 +71,7 @@
 (timed-require 'k8x1d-notes-taking)
 
 ;; Programation support
+;;(timed-require 'k8x1d-treesitter)
 (timed-require 'k8x1d-julia)
 (timed-require 'k8x1d-python)
 (timed-require 'k8x1d-R)
