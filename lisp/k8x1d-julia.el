@@ -4,6 +4,7 @@
 
 ;; Treesitter support
 (use-package julia-ts-mode
+  :defer t
   :ensure t
   :straight t
   :mode "\\.jl$")
@@ -21,14 +22,14 @@
   (setq vterm-kill-buffer-on-exit nil))
 
 ;;;; LSP
+;; FIXME: startup time of (eglot-jl-init) is too high
 (use-package eglot-jl
+  :defer t
   :straight t
   :init
-  (eglot-jl-init)
-  :hook ((julia-mode . eglot-ensure)
-	 (julia-ts-mode . eglot-ensure))
-  :config
   (setq eglot-connect-timeout 60) ;; prevent eglot timeout
+  :hook ((julia-ts-mode . eglot-jl-init)
+	 (julia-ts-mode . eglot-ensure))
   )
 
 
