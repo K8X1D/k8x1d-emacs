@@ -17,6 +17,22 @@
   :hook (ess-r-mode . eglot-ensure)
   )
 
-
+;; TODO: update package
+;; TODO: rewrite package for auto-update
+;; TODO: move package to project on gitlab
+;; TODO: Change R for radian
+(use-package R-vterm
+  :defer t
+  :straight (:type git :host gitlab :repo "K8X1D/r-vterm") 
+  :hook (ess-r-mode . R-vterm-mode)
+  :bind 
+  (("C-c o r r" . R-vterm-repl)
+   :map R-vterm-mode-map
+   ("C-c i" . R-vterm-send-include-buffer-file))
+  :config
+  (setq vterm-kill-buffer-on-exit nil)
+  ;; Use radian instead of R
+  (setq R-vterm-repl-program "radian")
+  )
 
 (provide 'k8x1d-R)
