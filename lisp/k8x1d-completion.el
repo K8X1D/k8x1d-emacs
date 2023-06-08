@@ -9,18 +9,15 @@
   (after-init . vertico-mode)
   )
 
-;; add icons to completion
-(use-package all-the-icons-completion
-  :hook
-  (vertico-mode . all-the-icons-completion-mode))
-
 ;;
 ;; Completion Style
 ;;
 (use-package orderless
   :custom
   (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion))))
+  (completion-category-defaults nil)
+  ;;(completion-category-overrides '((file (styles basic partial-completion))))
+  (completion-category-overrides '((file (styles . (partial-completion)))))
   )
 
 ;;
@@ -112,15 +109,6 @@
   ;; Enable indentation+completion using the TAB key.
   ;; `completion-at-point' is often bound to M-TAB.
   (setq tab-always-indent 'complete))
-
-;; Icons support for corfu
-(use-package kind-icon
-  :after corfu
-  :custom
-  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
-
 
 
 

@@ -103,11 +103,10 @@
 
 ;; General mode caracteristics
 (use-package emacs
-  :defer t
   :config
   ;; Defaults browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "firefox")
+  (setq browse-url-browser-function 'browse-url-generic
+	browse-url-generic-program "firefox")
   ;; follow symlinks 
   (setq vc-follow-symlinks t)
   ;; ibuffer instead of buffer-menu

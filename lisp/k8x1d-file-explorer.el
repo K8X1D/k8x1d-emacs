@@ -32,11 +32,6 @@
 ;;  (setq dgi-auto-hide-details-p nil)
 ;;  )
 
-;; add icon to dired
-(use-package all-the-icons-dired
-  :hook
-  (dired-mode . all-the-icons-dired-mode))
-
 ;;
 
 

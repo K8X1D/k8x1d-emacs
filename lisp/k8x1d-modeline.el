@@ -1,56 +1,46 @@
-;;(use-package doom-modeline
-;;  :hook (after-init . doom-modeline-mode)
-;;  :config
-;;  ;; Add wanted information
-;;  (setq doom-modeline-enable-word-count t)
-;;  (setq doom-modeline-minor-modes t) ;; for minions
-;;  ;; Clean-up modeline
-;;  ;; (setq doom-modeline-buffer-state-icon nil)
-;;  ;; (setq doom-modeline-major-mode-icon nil)
-;;  (setq doom-modeline-icon nil)
-;;  (setq doom-modeline-workspace-name nil) ;; use tab instead
-;;  (setq doom-modeline-buffer-encoding nil)
-;;  (setq doom-modeline-buffer-file-name-style 'file-name)
-;;  ;; Custom modal indicator for evil, Under test
-;;  (setq doom-modeline-modal-icon nil)
-;;  (setq evil-normal-state-tag "(N)"
-;;	evil-emacs-state-tag "(E)"
-;;	evil-insert-state-tag "(I)"
-;;	evil-motion-state-tag "(M)"
-;;	evil-visual-state-tag "(V)"
-;;	evil-operator-state-tag "(O)")
-;;  ;; Define your custom modeline
-;; ;; (doom-modeline-def-modeline 'k8x1d-modeline
-;; ;;   ;; Left side
-;; ;;   '(bar workspace-name window-number modals matches follow buffer-info remote-host
-;; ;;	  ;;buffer-position
-;; ;;	  word-count parrot selection-info
-;; ;;	  vcs)
-;; ;;   ;; Right side
-;; ;;   '(compilation objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl
-;; ;;		  lsp checker
-;; ;;		  input-method indent-info buffer-encoding
-;; ;;		  major-mode minor-modes
-;; ;;		  ;;process
-;; ;;		  time))
-;;  ;; barebone version
-;;  (doom-modeline-def-modeline 'k8x1d-modeline
-;;    ;; Left side
-;;    '(modals
-;;      buffer-info
-;;      word-count
-;;      vcs
-;;      compilation)
-;;    ;; Right side
-;;    '(lsp checker
-;;      minor-modes
-;;      major-mode))
-;;
-;;  ;; Set default mode-line
-;;  (add-hook 'doom-modeline-mode-hook
-;;	    (lambda ()
-;;	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)))
-;;  )
+
+;; Sources:
+;; https://occasionallycogent.com/custom_emacs_modeline/index.html
+
+(use-package doom-modeline
+  ;;:hook (after-init . doom-modeline-mode)
+  :config
+  ;; Add wanted information
+  (setq doom-modeline-enable-word-count t)
+  (setq doom-modeline-minor-modes t) ;; for minions
+  ;; Clean-up modeline
+  ;; (setq doom-modeline-buffer-state-icon nil)
+  ;; (setq doom-modeline-major-mode-icon nil)
+  (setq doom-modeline-icon nil)
+  (setq doom-modeline-workspace-name nil) ;; use tab instead
+  (setq doom-modeline-buffer-encoding nil)
+  (setq doom-modeline-buffer-file-name-style 'file-name)
+  ;; Custom modal indicator for evil, Under test
+  (setq doom-modeline-modal-icon nil)
+  (setq evil-normal-state-tag "NORMAL"
+	evil-emacs-state-tag "EMACS"
+	evil-insert-state-tag "INSERT"
+	evil-motion-state-tag "MOTION"
+	evil-visual-state-tag "VISUAL"
+	evil-operator-state-tag "OPERATOR")
+  ;; Define your custom modeline
+  ;; barebone version
+  (doom-modeline-def-modeline 'k8x1d-modeline
+    ;; Left side
+    '(modals
+      buffer-info
+      vcs
+      compilation)
+    ;; Right side
+    '(lsp checker
+      minor-modes
+      major-mode))
+
+  ;; Set default mode-line
+  (add-hook 'doom-modeline-mode-hook
+	    (lambda ()
+	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)))
+  )
 
 
 ;;(use-package telephone-line

@@ -10,17 +10,6 @@
           (lambda ()
             (setq gc-cons-threshold (expt 2 23))))
 
-;;;; Use a hook so the message doesn't get clobbered by other messages.
-;;(add-hook 'emacs-startup-hook
-;;          (lambda ()
-;;            (message "Emacs ready in %s with %d garbage collections."
-;;                     (format "%.2f seconds"
-;;                             (float-time
-;;                              (time-subtract after-init-time before-init-time)))
-;;                     gcs-done)))
-
-
-
 ;; Define time-mesurement require function 
 (require 'benchmark)
 (defun timed-require (feat)
@@ -32,30 +21,25 @@
 ;; Add modules to path
 (add-to-list 'load-path (concat user-emacs-directory "/lisp"))
 
-(use-package all-the-icons
-  :if (display-graphic-p)
-      :config
-      ;; Make sure the icon fonts are good to go
-      (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
-      (set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
-      (set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
-      (set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
-      (set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
-      (set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append))
 
 
 
+;;
+;; Module to load
+;;
 
 
 (timed-require 'k8x1d-packages)
-(timed-require 'k8x1d-dashboard)
-;;(timed-require 'k8x1d-dashboard-alt)
-;;(timed-require 'lem-setup-splash.el)
 (timed-require 'k8x1d-evil)
-(timed-require 'k8x1d-modeline)
 (timed-require 'k8x1d-completion)
 (timed-require 'k8x1d-file-explorer)
 (timed-require 'k8x1d-buffers)
+
+;; Gui
+(timed-require 'k8x1d-fonts)
+(timed-require 'k8x1d-icons)
+(timed-require 'k8x1d-dashboard)
+(timed-require 'k8x1d-modeline)
 (timed-require 'k8x1d-theme)
 
 ;; Project management
@@ -82,6 +66,7 @@
 ;; Other
 (timed-require 'k8x1d-multimedia)
 (timed-require 'k8x1d-news)
+(timed-require 'k8x1d-password)
 
 
 
@@ -121,33 +106,6 @@
 ;; Esthetics
 ;;
 
-;; Main typeface
-
-;; Fonts
-;;(set-face-attribute 'default nil :font "Fira Code" :height 150)
-(set-face-attribute 'default nil :font "Hack" :height 120)
-
-;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil
-		    :font "Hack"
-		    ;;:font "Fira Code"
-		    :weight 'light
-		    :height 1.0)
-
-;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil
-		    ;; :font "Cantarell"
-		    :font "Iosevka Aile"
-		    ;;:font "DejaVu Sans"
-		    :height 1.0
-		    :weight 'light)
-
-(use-package mixed-pitch
-  :hook
-  ;; If you want it in all text modes:
-  (text-mode . mixed-pitch-mode))
-
-
 ;;
 ;; Emacs characteristics
 ;;
@@ -160,10 +118,13 @@
 
 
 ;; Highlight whole line
-(add-hook 'after-init-hook #'global-hl-line-mode)
+(add-hook 'prog-mode-hook #'hl-line-mode)
+(add-hook 'text-mode-hook #'hl-line-mode)
+
 ;; Better scrolling effects
 (add-hook 'after-init-hook #'pixel-scroll-precision-mode)
 ;; Show line number for programming mode 
+(setq display-line-numbers 'relative)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 ;; Show which key
 (add-hook 'after-init-hook #'which-key-mode)
@@ -213,12 +174,6 @@
 (pdf-loader-install)
 (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode) ;; dark mode by default
 
-
-;; Pass interation
-(use-package pass
-  :bind ("C-c o p" . pass))
-(use-package password-store)
-(use-package password-store-otp)
 
 
 ;; Guix packages management

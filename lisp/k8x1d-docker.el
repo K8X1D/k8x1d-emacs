@@ -6,10 +6,12 @@
 
 (use-package docker
   :bind ("C-c o d" . docker))
-
-(use-package dockerfile-mode)
-(use-package docker-tramp)
-(use-package docker-compose-mode)
+(use-package dockerfile-mode
+  :defer t)
+(use-package docker-tramp
+  :defer t)
+(use-package docker-compose-mode
+  :defer t)
 
 
 

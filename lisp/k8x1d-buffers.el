@@ -11,12 +11,6 @@
   ("C-x C-b" . ibuffer))
 
 
-;; Add icons to ibuffer
-(use-package all-the-icons-ibuffer
-  :hook
-  (ibuffer-mode . all-the-icons-ibuffer-mode))
-
-
 
 ;;;; Group buffers by project in ibuffer
 ;;(use-package ibuffer-project

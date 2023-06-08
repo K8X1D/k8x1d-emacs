@@ -29,7 +29,9 @@
 ;; Spell checking
 ;;
 (use-package flyspell
-  :hook (text-mode . flyspell-mode)
+  ;;:hook (text-mode . flyspell-mode)
+  :hook ((org-mode . flyspell-mode)
+	 (markdown-mode . flyspell-mode))
   :config
   ;; Aspell compatibility
   ;; see https://www.emacswiki.org/emacs/FlySpell#h5o-8

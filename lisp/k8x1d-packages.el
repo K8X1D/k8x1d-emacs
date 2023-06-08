@@ -1,4 +1,6 @@
-;;;; Install straight.el
+;;; lisp/k8x1d-packages.el -*- lexical-binding: t; -*-
+
+;; Install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -17,5 +19,3 @@
   :defer)
 
 (provide 'k8x1d-packages)
-
-

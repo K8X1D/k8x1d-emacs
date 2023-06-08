@@ -5,6 +5,7 @@
 
 
 (use-package elfeed
+  :defer t
   :config
   (setq elfeed-feeds '("https://www.fsf.org/static/fsforg/rss/blogs.xml"
 		       "http://www.fsf.org/static/fsforg/rss/news.xml"

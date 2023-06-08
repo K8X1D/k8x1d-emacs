@@ -1,139 +1,85 @@
-;;(use-package doom-themes
-;;  :init
-;;  (setq dark-theme 'doom-gruvbox)
-;;  (setq light-theme 'doom-gruvbox-light)
-;;  (setq actual-theme dark-theme) 
-;;
-;;  (defun k8x1d/set-theme ()
-;;    (load-theme actual-theme t)
-;;    (custom-set-faces
-;;     ;; Tab configuration
-;;     `(tab-bar ((t (:inherit nil :family "Iosevka Aile" :background ,(doom-color 'bg-alt)))))
-;;     `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :height 1.5))))
-;;     `(tab-bar-tab-inactive ((t (:inherit nil :background ,(doom-color 'base3) :foreground ,(doom-color 'base5) :height 1.5))))
-;;    ;; `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg) :height 1.5))))
-;;    ;; `(tab-bar-tab-inactive ((t (:inverse-video t :height 1.5))))
-;;     ;; todo 
-;;     ;;`(org-todo ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
-;;     ;;`(org-done ((t (:inverse-video t :box '(:line-width (3 . 3) :color ,(doom-color 'fg) :style flat-button) :weight bold))))
-;;     `(font-lock-comment-face ((t (:foreground "#928374"))))
-;;     ;;'(font-lock-string-face ((t (:foreground "#b8bb26" :family "Hack"))))
-;;     ;;'(font-lock-string-face ((t (:foreground "#b8bb26" :family "JuliaMono"))))
-;;     `(font-lock-string-face ((t (:foreground "#b8bb26" :family "DejaVu Sans Mono Nerd Font"))))
-;;     `(doom-modeline-evil-normal-state ((t (:foreground ,(doom-color 'green)))))
-;;     `(doom-modeline-evil-visual-state ((t (:foreground ,(doom-color 'red)))))
-;;     `(doom-modeline-emphasis ((t (:foreground ,(doom-color 'red)))))
-;;     `(doom-modeline-evil-insert-state ((t (:foreground ,(doom-color 'teal)))))
-;;     )
-;;    )
-;;
-;;  (defun switch-theme (theme)
-;;    (disable-theme actual-theme)
-;;    (setq actual-theme theme)
-;;    (k8x1d/set-theme)
-;;    ;;`(org-inline-src-block ((t (:background ,(doom-color 'base3)))))
-;;    )
-;;
-;;  (defun k8x1d/dark-light-theme-switch ()
-;;    (interactive)
-;;    (if (equal actual-theme dark-theme)
-;;	(switch-theme light-theme)
-;;      (switch-theme dark-theme)
-;;      ))
-;;  :bind
-;;  ("<f5>" . 'k8x1d/dark-light-theme-switch)
-;;  :hook 
-;;  (after-init . (lambda ()
-;;		  ;;(load-theme 'modus-vivendi)
-;;		  (k8x1d/set-theme)
-;;		  ))
-;;  :config
-;;  ;; Global settings (defaults)
-;;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;	doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;;  (load-theme 'doom-gruvbox t)
-;;  ;; Enable flashing mode-line on errors
-;;  (doom-themes-visual-bell-config)
-;;  ;; Corrects (and improves) org-mode's native fontification.
-;;  (doom-themes-org-config)
-;;  ;; Brighter comments
-;;  (setq doom-gruvbox-brighter-comments nil)
-;;  )
-
-
-
-;;(use-package lambda-themes
-;;  :straight (:type git :host github :repo "lambda-emacs/lambda-themes") 
-;;  :custom
-;;  (lambda-themes-set-italic-comments t)
-;;  (lambda-themes-set-italic-keywords t)
-;;  (lambda-themes-set-variable-pitch t) 
-;;  :config
-;;  ;; load preferred theme 
-;;  (load-theme 'lambda-dark))
-
-
-
-
-
 (use-package emacs
-  :init
-  (setq dark-theme 'modus-vivendi)
-  (setq light-theme 'modus-operandi)
-  (setq actual-theme dark-theme) 
-
-  (custom-set-faces
-   ;; Tab configuration
-   `(tab-bar ((t (:inherit nil :family "Iosevka Aile"))))
-   `(tab-bar-tab ((t (:inherit nil :box nil :height 1.5))))
-   `(tab-bar-tab-inactive ((t (:inherit nil :height 1.5))))
-   )
-
-  (defun k8x1d/set-theme ()
-    (load-theme actual-theme t)
-    )
-
-  (defun switch-theme (theme)
-    (disable-theme actual-theme)
-    (setq actual-theme theme)
-    (if (eq actual-theme dark-theme)
-	(setq modus-themes-common-palette-overrides
-	      `((bg-main "#282828")
-		(fg-main "#ebdbb2")))
-      (setq modus-themes-common-palette-overrides
-	    `((bg-main "#ebdbb2")
-	      (fg-main "#282828")))
-      ) 
-    (k8x1d/set-theme))
-
-  (defun k8x1d/dark-light-theme-switch ()
-    (interactive)
-    (if (equal actual-theme dark-theme)
-	(switch-theme light-theme)
-      (switch-theme dark-theme)
-      ))
-
   :bind
-  ("<f5>" . 'k8x1d/dark-light-theme-switch)
+  ("<f5>" . 'modus-themes-toggle)
   :hook 
   (after-init . (lambda ()
-		  (k8x1d/set-theme)
+		  (load-theme 'modus-vivendi)
 		  ))
   :config
+  ;; Color customizations 
+  (setq modus-vivendi-palette-overrides
+	`((bg-main "#282828")
+	  (fg-main "#ebdbb2")
+	  (fg-dim "#ebdbb2")
+	  (bg-dim "#282828")
+	  (bg-active "#504945"))
+	modus-operandi-palette-overrides
+	`((bg-main "#ebdbb2")
+	  (fg-main "#282828")
+	  (fg-dim "#282828")
+	  (bg-dim "#ebdbb2")
+	  (bg-active "#bdae93"))
+	)
+
+
+  ;; Org block customization 
+  (setq modus-themes-org-blocks 'tinted-background)
+ ;; (with-eval-after-load 'org
+ ;; ;;  (setq org-src-block-faces (cons org-src-block-faces 
+ ;; ;;				    '(("julia" (:inherit modus-themes-subtle-magenta :extend t)))
+ ;; ;;				    ;;'(("julia-vterm" (:inherit modus-themes-subtle-magenta :extend t)))
+ ;;   (setq org-src-block-faces
+ ;;     `(("emacs-lisp" modus-themes-nuanced-magenta)
+ ;;	("elisp" modus-themes-nuanced-magenta)
+ ;;	("clojure" modus-themes-nuanced-magenta)
+ ;;	("clojurescript" modus-themes-nuanced-magenta)
+ ;;	("c" modus-themes-nuanced-blue)
+ ;;	("c++" modus-themes-nuanced-blue)
+ ;;	("julia" modus-themes-nuanced-magenta)
+ ;;	("julia-vterm" modus-themes-nuanced-magenta)
+ ;;	("sh" modus-themes-nuanced-green)
+ ;;	("shell" modus-themes-nuanced-green)
+ ;;	("html" modus-themes-nuanced-yellow)
+ ;;	("xml" modus-themes-nuanced-yellow)
+ ;;	("css" modus-themes-nuanced-red)
+ ;;	("scss" modus-themes-nuanced-red)
+ ;;	("python" modus-themes-nuanced-green)
+ ;;	("ipython" modus-themes-nuanced-magenta)
+ ;;	("r" modus-themes-nuanced-cyan)
+ ;;	("yaml" modus-themes-nuanced-cyan)
+ ;;	("conf" modus-themes-nuanced-cyan)
+ ;;	("docker" modus-themes-nuanced-cyan)))
+ ;;   )
+
+
+  (setq modus-themes-variable-pitch-ui nil)
+
+  (setq modus-themes-completions
+	'((matches . (extrabold))
+	  (selection . (semibold))))
+
   (setq modus-themes-custom-auto-reload nil
 	modus-themes-to-toggle '(modus-operandi modus-vivendi)
 	modus-themes-mixed-fonts t
-	modus-themes-variable-pitch-ui nil
 	modus-themes-italic-constructs t
 	modus-themes-bold-constructs nil
-	modus-themes-org-blocks nil
-	modus-themes-completions '((t . (extrabold)))
 	modus-themes-prompts nil
 	modus-themes-headings
-	'((agenda-structure . (variable-pitch light 2.2))
+	'(;; Agenda
+	  (agenda-structure . (variable-pitch light 2.0))
 	  (agenda-date . (variable-pitch regular 1.3))
-          (t . (regular 1.15))))
+	  ;; Levels
+	  (1 . (variable-pitch 1.5))
+	  (2 . (variable-pitch 1.2))
+	  (3 . (variable-pitch 1.1))
+	  (t . (regular 1.15))))
+
+  ;; Tmp fix for daemon mode
+  ;; see https://github.com/protesilaos/modus-themes/issues/7
+  (add-to-list 'after-make-frame-functions #'(lambda (x) (load-theme 'modus-vivendi))) 
   )
+
+
 
 
 (provide 'k8x1d-theme)

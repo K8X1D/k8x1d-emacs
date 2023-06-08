@@ -18,48 +18,73 @@
 ;; Packages
 ;;
 
+(define-public emacs-org-appear
+  (package
+   (name "emacs-org-appear")
+    (version "20220617.2355")
+    (source (origin
+	     (method git-fetch)
+	     (uri (git-reference
+		   (url "https://github.com/awth13/org-appear.git")
+		   (commit "eb9f9db40aa529fe4b977235d86494b115281d17")))
+	     (sha256 (base32
+		      "1hawkx6sgh52bg7rj22x148hx8hby276xmqks3kxyzvrxzi8yav9"))))
+    (build-system emacs-build-system)
+    (propagated-inputs (list emacs-org))
+    (home-page "https://github.com/awth13/org-appear")
+    (synopsis "Auto-toggle Org elements")
+    (description
+     "This package enables automatic visibility toggling of various Org elements
+depending on cursor position.  It supports automatic toggling of emphasis
+markers, links, subscripts and superscripts, entities, and keywords.  By
+default, toggling is instantaneous and only affects emphasis markers.  If Org
+mode custom variables that control visibility of elements are configured to show
+hidden parts, the respective `org-appear settings do not have an effect.")
+    (license #f))
+  )
 
-(define-public emacs-emms
-(package
-  (name "emacs-emms")
-  (version "20230329.2020")
-  (source (origin
-            (method git-fetch)
-            (uri (git-reference
-                  (url "https://git.savannah.gnu.org/git/emms.git")
-                  (commit "0f4bd0c551b6ec1debfa834464f28030ce9c287b")))
-            (sha256
-             (base32
-              "1mlvpfm3phmcfna1jnmpjw3q0dxa6ah1dwbarjmgqq15rrjs1841"))))
-  (build-system emacs-build-system)
-  (propagated-inputs (list emacs-nadvice emacs-seq))
-  (arguments
-   '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-                 "^dir$"
-                 "^[^/]+.info$"
-                 "^[^/]+.texi$"
-                 "^[^/]+.texinfo$"
-                 "^doc/dir$"
-                 "^doc/[^/]+.info$"
-                 "^doc/[^/]+.texi$"
-                 "^doc/[^/]+.texinfo$")
-     #:exclude '("^.dir-locals.el$" "^test.el$"
-                 "^tests.el$"
-                 "^[^/]+-test.el$"
-                 "^[^/]+-tests.el$"
-                 "^doc/fdl.texi$"
-                 "^doc/gpl.texi$")))
-  (home-page "https://www.gnu.org/software/emms/")
-  (synopsis "The Emacs Multimedia System")
-  (description
-   "This is the very core of EMMS. It provides ways to play a track using
-`emms-start', to go through the playlist using the commands `emms-next and
-`emms-previous', to stop the playback using `emms-stop', and to see what's
-currently playing using `emms-show'.  But in itself, this core is useless,
-because it doesn't know how to play any tracks --- you need players for this.
-In fact, it doesn't even know how to find any tracks to consider playing --- forthis, you need sources.  A sample configuration is offered in emms-setup.el, andthe Friendly Manual in the doc/ directory is both detailed, and kept up to date.")
-  (license #f))
-)
+
+;; (define-public emacs-emms
+;; (package
+;;   (name "emacs-emms")
+;;   (version "20230329.2020")
+;;   (source (origin
+;;             (method git-fetch)
+;;             (uri (git-reference
+;;                   (url "https://git.savannah.gnu.org/git/emms.git")
+;;                   (commit "0f4bd0c551b6ec1debfa834464f28030ce9c287b")))
+;;             (sha256
+;;              (base32
+;;               "1mlvpfm3phmcfna1jnmpjw3q0dxa6ah1dwbarjmgqq15rrjs1841"))))
+;;   (build-system emacs-build-system)
+;;   (propagated-inputs (list emacs-nadvice emacs-seq))
+;;   (arguments
+;;    '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+;;                  "^dir$"
+;;                  "^[^/]+.info$"
+;;                  "^[^/]+.texi$"
+;;                  "^[^/]+.texinfo$"
+;;                  "^doc/dir$"
+;;                  "^doc/[^/]+.info$"
+;;                  "^doc/[^/]+.texi$"
+;;                  "^doc/[^/]+.texinfo$")
+;;      #:exclude '("^.dir-locals.el$" "^test.el$"
+;;                  "^tests.el$"
+;;                  "^[^/]+-test.el$"
+;;                  "^[^/]+-tests.el$"
+;;                  "^doc/fdl.texi$"
+;;                  "^doc/gpl.texi$")))
+;;   (home-page "https://www.gnu.org/software/emms/")
+;;   (synopsis "The Emacs Multimedia System")
+;;   (description
+;;    "This is the very core of EMMS. It provides ways to play a track using
+;; `emms-start', to go through the playlist using the commands `emms-next and
+;; `emms-previous', to stop the playback using `emms-stop', and to see what's
+;; currently playing using `emms-show'.  But in itself, this core is useless,
+;; because it doesn't know how to play any tracks --- you need players for this.
+;; In fact, it doesn't even know how to find any tracks to consider playing --- forthis, you need sources.  A sample configuration is offered in emms-setup.el, andthe Friendly Manual in the doc/ directory is both detailed, and kept up to date.")
+;;   (license #f))
+;; )
 
 
 
@@ -259,27 +284,27 @@ the two.")
    (license gpl3+))
   )
 
-(define-public emacs-julia-ts-mode 
-(package
-  (name "emacs-julia-ts-mode")
-  (version "20230318.2210")
-  (source (origin
-            (method git-fetch)
-            (uri (git-reference
-                  (url "https://github.com/ronisbr/julia-ts-mode.git")
-                  (commit "33ea957ef696155ad45a952d653a9ff18d45c866")))
-            (sha256
-             (base32
-              "1pqsxdajrm5amvy51a9va2ycx8n4jhmv1a6frmdkjvdn127w2rg0"))))
-  (build-system emacs-build-system)
-  (propagated-inputs (list emacs-julia-mode))
-  (home-page "https://github.com/ronisbr/julia-ts-mode")
-  (synopsis "Major mode for Julia source code using tree-sitter")
-  (description
-   "This major modes uses tree-sitter for font-lock, indentation, imenu, and
-navigation.  It is derived from `julia-mode'.")
-  (license #f))
-)
+;;(define-public emacs-julia-ts-mode 
+;;               (package
+;;                 (name "emacs-julia-ts-mode")
+;;                 (version "0.2.2")
+;;                 (source (origin
+;;                           (method url-fetch)
+;;                           (uri (string-append
+;;                                  "https://stable.melpa.org/packages/julia-ts-mode-" version
+;;                                  ".el"))
+;;                           (sha256 (base32
+;;                                     "03mfxh06clmjhacsanrjf5ki08jkljbdp7a2lg6lx09d2xxc3i6c"))))
+;;                 (build-system emacs-build-system)
+;;                 (propagated-inputs (list emacs-julia-mode))
+;;                 (home-page "https://github.com/ronisbr/julia-ts-mode")
+;;                 (synopsis "Major mode for Julia source code using tree-sitter")
+;;                 (description
+;;                   "This major modes uses tree-sitter for font-lock, indentation, imenu, and
+;;                   navigation.  It is derived from `julia-mode'.")
+;;                   (license #f)
+;;                   ))
+;;)
 
 
 
@@ -291,9 +316,8 @@ navigation.  It is derived from `julia-mode'.")
 	    (method url-fetch)
 	    (uri (string-append "https://stable.melpa.org/packages/eglot-jl-"
 				version ".tar"))
-	    (sha256
-	     (base32
-	      "1kqkxpyx6jd5l1px8n8g5bcv594zhzb0v5an3500xnj4rpcnfxn3"))))
+	    (sha256 (base32
+		     "1kqkxpyx6jd5l1px8n8g5bcv594zhzb0v5an3500xnj4rpcnfxn3"))))
    (build-system emacs-build-system)
    (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
    (home-page "https://github.com/non-Jedi/eglot-jl")
@@ -306,46 +330,6 @@ run eglot-jl-init.  After that, running the eglot function in a julia-mode
 buffer should work properly.")
    (license #f))
   )
-
-;;;; From https://raw.githubusercontent.com/babariviere/guix-emacs/master/emacs/packages/melpa.scm
-;;(define-public emacs-eglot-jl
-;;  (package
-;;   (name "emacs-eglot-jl")
-;;   (version "20230117.1243")
-;;   (source (origin
-;;	    (method git-fetch)
-;;	    (uri (git-reference
-;;		  (url "https://github.com/non-Jedi/eglot-jl.git")
-;;		  (commit "2e04597223553a369dd5b6520b6365b41e6ea508")))
-;;	    (sha256
-;;	     (base32
-;;	      "1zr5f5hvrj2i7a2yzrgbhdhzfwf6fxhj3p4ws85r0mgvk2kwwlll"))))
-;;   (build-system emacs-build-system)
-;;   (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
-;;   (arguments
-;;    '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-;;		  "^dir$"
-;;		  "^[^/]+.info$"
-;;		  "^[^/]+.texi$"
-;;		  "^[^/]+.texinfo$"
-;;		  "^doc/dir$"
-;;		  "^doc/[^/]+.info$"
-;;		  "^doc/[^/]+.texi$"
-;;		  "^doc/[^/]+.texinfo$"
-;;		  "^[^/]+.jl$"
-;;		  "^[^/]+.toml$")
-;;      #:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$" "^[^/]+-test.el$"
-;;		  "^[^/]+-tests.el$")))
-;;   (home-page "https://github.com/non-Jedi/eglot-jl")
-;;   (synopsis "Julia support for eglot")
-;;   (description
-;;    "This package loads support for the Julia language server into eglot and
-;;package.el.  This provides IDE-like features for editing julia-mode buffers.
-;;After installing this package, to load support for the Julia language server,
-;;run eglot-jl-init.  After that, running the eglot function in a julia-mode
-;;buffer should work properly.")
-;;   (license #f))
-;;  )
 
 (define-public emacs-dired-hacks-utils 
   (package
@@ -738,6 +722,13 @@ provides an integration with this package.")
    (list
     "emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
     ;;"emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
+    "hicolor-icon-theme" ;; Freedesktop icon theme 
+    "git" ;; Distributed version control system
+    "coreutils" ;; Core GNU utilities (file, text, shell)
+    "findutils" ;; Operating on files matching given criteria
+
+    ;;"emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
+
     "emacs-guix" ;; Emacs interface for GNU Guix
 
     "emacs-evil" ;; Extensible Vi layer for Emacs
@@ -781,7 +772,8 @@ provides an integration with this package.")
     "emacs-mixed-pitch" ;; Mix variable- and fixed-pitch fonts in the same Emacs buffer
 
     "emacs-org-pomodoro" ;; Pomodoro technique for org-mode
-    "emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
+    ;; FIXME: autolink don't work, see https://github.com/awth13/org-appear/issues/50
+    ;;"emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
 
     "emacs-mood-line" ;; Minimal mode-line for Emacs
     "font-fira-code"
@@ -888,23 +880,28 @@ provides an integration with this package.")
     "emacs-docker-tramp" ;; TRAMP integration for docker containers
     "emacs-docker-compose-mode" ;; Major mode for editing `docker-compose' files
 
+
+    ;;
+    "emacs-csv-mode" ;; Major mode for editing comma/char separated values
+
     ))
   (packages->manifest (list
 		       emacs-julia-vterm
 		       emacs-ob-julia-vterm
 		       ;;emacs-cl-generic
 		       ;;emacs-julia-ts-mode ;; wrong emacs version when building
-		       ;; emacs-eglot-jl ;; problem building
+		       ;;emacs-eglot-jl ;; problem building
 		       emacs-dired-sidebar
 		       emacs-ibuffer-sidebar
 		       emacs-tabspaces
 		       emacs-use-package
-		       emacs-emms
+		       ;;emacs-emms
 		       ;;python-tinytag ;; don't work
 		       emacs-doom-modeline
 		       emacs-ess-view-data
 		       emacs-all-the-icons
 		       ;; emacs-auctex-latexmk ;; dont't work
-               emacs-tab-bar-echo-area
+		       emacs-tab-bar-echo-area
+		       emacs-org-appear
 		       ))
   ))

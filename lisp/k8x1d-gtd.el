@@ -17,7 +17,6 @@
   ;; Org directory
   (setq 
    org-directory "~/Dropbox/org"
-   org-default-notes-file (concat org-directory "/gtd/inbox.org")
    ;; Replaced by doom
    ;;   org-todo-keywords
    ;;   '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "KILL(k)"))
@@ -74,7 +73,22 @@
    org-refile-active-region-within-subtree 'file
    org-outline-path-complete-in-steps nil
    org-refile-allow-creating-parent-nodes t)
+
+;; Capture Configuration (inspired by doom emacs)
+;; See https://github.com/doomemacs/doomemacs/tree/master/modules/lang/org
+;; TODO implement common set-up
+
+(setq org-default-notes-file (concat org-directory "/gtd/inbox.org")) ;; Orig
+
   )
+
+
+
+
+
+
+
+
 
 
 (provide 'k8x1d-gtd)

@@ -27,7 +27,10 @@
 ;; Terminal
 (use-package vterm
   :hook
-  (vterm-mode . visual-line-mode))
+  (vterm-mode . visual-line-mode)
+)
+ ;;  (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))))
+
 
 (use-package multi-vterm
   :bind
