@@ -21,11 +21,9 @@
 		    :weight 'light)
 
 
-;; Test modus theme mixed
-;;(use-package mixed-pitch
-;;  :hook
-;;  ;; If you want it in all text modes:
-;;  (text-mode . mixed-pitch-mode))
+(use-package mixed-pitch
+  :hook
+  (text-mode . mixed-pitch-mode))
 
 
 
