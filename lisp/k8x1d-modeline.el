@@ -3,43 +3,43 @@
 ;; https://occasionallycogent.com/custom_emacs_modeline/index.html
 
 (use-package doom-modeline
-  ;;:hook (after-init . doom-modeline-mode)
+  :hook (after-init . doom-modeline-mode)
   :config
   ;; Add wanted information
-  (setq doom-modeline-enable-word-count t)
   (setq doom-modeline-minor-modes t) ;; for minions
+  (setq doom-modeline-enable-word-count t)
   ;; Clean-up modeline
   ;; (setq doom-modeline-buffer-state-icon nil)
   ;; (setq doom-modeline-major-mode-icon nil)
-  (setq doom-modeline-icon nil)
+  ;;(setq doom-modeline-icon nil)
   (setq doom-modeline-workspace-name nil) ;; use tab instead
   (setq doom-modeline-buffer-encoding nil)
   (setq doom-modeline-buffer-file-name-style 'file-name)
-  ;; Custom modal indicator for evil, Under test
-  (setq doom-modeline-modal-icon nil)
-  (setq evil-normal-state-tag "NORMAL"
-	evil-emacs-state-tag "EMACS"
-	evil-insert-state-tag "INSERT"
-	evil-motion-state-tag "MOTION"
-	evil-visual-state-tag "VISUAL"
-	evil-operator-state-tag "OPERATOR")
-  ;; Define your custom modeline
-  ;; barebone version
-  (doom-modeline-def-modeline 'k8x1d-modeline
-    ;; Left side
-    '(modals
-      buffer-info
-      vcs
-      compilation)
-    ;; Right side
-    '(lsp checker
-      minor-modes
-      major-mode))
+  ;; ;; Custom modal indicator for evil, Under test
+  ;; (setq doom-modeline-modal-icon nil)
+ ;; (setq evil-normal-state-tag "NORMAL"
+ ;;	evil-emacs-state-tag "EMACS"
+ ;;	evil-insert-state-tag "INSERT"
+ ;;	evil-motion-state-tag "MOTION"
+ ;;	evil-visual-state-tag "VISUAL"
+ ;;	evil-operator-state-tag "OPERATOR")
+ ;; ;; Define your custom modeline
+ ;; ;; barebone version
+ ;; (doom-modeline-def-modeline 'k8x1d-modeline
+ ;;   ;; Left side
+ ;;   '(modals
+ ;;     buffer-info
+ ;;     vcs
+ ;;     compilation)
+ ;;   ;; Right side
+ ;;   '(lsp checker
+ ;;     minor-modes
+ ;;     major-mode))
 
-  ;; Set default mode-line
-  (add-hook 'doom-modeline-mode-hook
-	    (lambda ()
-	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)))
+ ;; ;; Set default mode-line
+ ;; (add-hook 'doom-modeline-mode-hook
+ ;;	    (lambda ()
+ ;;	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)))
   )
 
 
@@ -109,6 +109,7 @@ Containing LEFT, and RIGHT aligned respectively."
    (dired-sidebar-mode . hide-mode-line-mode)
    (inferior-ess-r-mode . hide-mode-line-mode)
    (org-capture-mode . hide-mode-line-mode)
+   (compilation-mode . hide-mode-line-mode)
    (julia-vterm-repl-mode . hide-mode-line-mode))
   )
 
