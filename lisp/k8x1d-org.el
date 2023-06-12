@@ -11,8 +11,24 @@
   (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
   (setq org-image-actual-width nil)
 
+  ;; TODO: repair problem adding bullet for DONE
+  ;; Message: car: Symbol’s function definition is void: +org-get-todo-keywords-for
   ;; Item addition (from doom emacs)
   ;; from https://github.com/doomemacs/doomemacs/blob/master/modules/lang/org/autoload/org.el
+  (defun +org-get-todo-keywords-for (&optional keyword)
+    "Returns the list of todo keywords that KEYWORD belongs to."
+    (when keyword
+      (cl-loop for (type . keyword-spec)
+	       in (cl-remove-if-not #'listp org-todo-keywords)
+	       for keywords =
+	       (mapcar (lambda (x) (if (string-match "^\\([^(]+\\)(" x)
+				       (match-string 1 x)
+				     x))
+		       keyword-spec)
+	       if (eq type 'sequence)
+	       if (member keyword keywords)
+	       return keywords)))
+
   (defun +org--insert-item (direction)
     (let ((context (org-element-lineage
 		    (org-element-context)
