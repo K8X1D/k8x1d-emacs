@@ -38,14 +38,19 @@
 	  (
 	   ;; Gitlab homepage
 	   (,(all-the-icons-faicon "gitlab" :height 1.1 :v-adjust 0.0)
-	    "Homepage"
-	    "Browse homepage"
+	    ""
+	    ""
 	    (lambda (&rest _) (browse-url "https://gitlab.com/K8X1D")))
 	   ;; Linkedin
 	   (,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
-	    "Linkedin"
 	    ""
-	    (lambda (&rest _) (browse-url "homepage")))
+	    ""
+	    (lambda (&rest _) (browse-url "https://www.linkedin.com/in/kevin-kaiser-9b3699279/")))
+	   ;; Twitter
+	   (,(all-the-icons-faicon "twitter" :height 1.1 :v-adjust 0.0)
+	    ""
+	    ""
+	    (lambda (&rest _) (browse-url "https://twitter.com/K8X1D")))
 	   )
 
 	 ;; ;; line 2
