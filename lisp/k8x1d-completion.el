@@ -12,13 +12,20 @@
 ;;
 ;; Completion Style
 ;;
+;; FIXME: problem in selecting a file when similarlly name file is present, e.g. emacs.scm when emacs-pgtk.scm
+;;(use-package orderless
+;;  :custom
+;;  (completion-styles '(orderless basic))
+;;  (completion-category-defaults nil)
+;;  ;;(completion-category-overrides '((file (styles basic partial-completion))))
+;;  (completion-category-overrides '((file (styles . (partial-completion)))))
+;;  )
+
 (use-package orderless
   :custom
   (completion-styles '(orderless basic))
-  (completion-category-defaults nil)
-  ;;(completion-category-overrides '((file (styles basic partial-completion))))
-  (completion-category-overrides '((file (styles . (partial-completion)))))
-  )
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
 
 ;;
 ;; Contextual actions
