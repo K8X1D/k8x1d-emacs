@@ -1,8 +1,0 @@
-# full containarized
-# Prob:
-# - don't detect wayland
-# - 
-
-#guix time-machine -C $HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --container --no-cwd --user=k8x1d --network --preserve='^DISPLAY$' --share=$HOME/.k8x1d-emacs.d --share=$HOME/.cache/emacs --share=$HOME/.local/share/fonts --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs-pgtk.scm -- emacs --init-directory=$HOME/.k8x1d-emacs.d
-
-guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs-pgtk.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d

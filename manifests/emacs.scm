@@ -18,6 +18,50 @@
 ;; Packages
 ;;
 
+
+(define-public emacs-ibuffer-project
+  (package
+   (name "emacs-ibuffer-project")
+   (version "2.1")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append
+		  "https://stable.melpa.org/packages/ibuffer-project-"
+		  version ".tar"))
+	    (sha256 (base32
+		     "1zsr0mpkm7762cfghp51pgm1av2fv9djjbi1m9yh3hiv0k7aajr4"))))
+   (build-system emacs-build-system)
+   (home-page "https://github.com/muffinmad/emacs-ibuffer-project")
+   (synopsis "Group ibuffer's list by project or any function")
+   (description
+    "This pacakage provides ibuffer filtering and sorting functions to group buffers
+by function or regexp applied to `default-directory'.  By default buffers are
+grouped by `project-current or by `default-directory'.  Buffer group and group
+type name is determined by function or regexp listed in
+`ibuffer-project-root-functions'.  E.g.  by adding `file-remote-p like this:
+(add-to-list ibuffer-project-root-functions (file-remote-p . \"Remote\")) remote
+buffers will be grouped by protocol and host.  To group buffers set
+`ibuffer-filter-groups to result of `ibuffer-project-generate-filter-groups
+function: (add-hook ibuffer-hook (lambda () (setq ibuffer-filter-groups
+(ibuffer-project-generate-filter-groups)))) This package also provides column
+with filename relative to project.  If there are no file in buffer then column
+will display `buffer-name with `font-lock-comment-face face.  Add
+project-file-relative to `ibuffer-formats': (custom-set-variables
+(ibuffer-formats ((mark modified read-only locked \" \" (name 18 18 :left :elide)
+\" \" (size 9 -1 :right) \" \" (mode 16 16 :left :elide) \" \"
+project-file-relative)))) It's also possible to sort buffers by that column by
+calling `ibuffer-do-sort-by-project-file-relative or: (add-hook ibuffer-hook
+(lambda () (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+(unless (eq ibuffer-sorting-mode project-file-relative)
+(ibuffer-do-sort-by-project-file-relative)))) To avoid calculating project root
+each time, one can set `ibuffer-project-use-cache'.  Root info per directory
+will be stored in the `ibuffer-project-roots-cache variable.  Command
+`ibuffer-project-clear-cache allows to clear project info cache.")
+   (license #f))
+)
+
+
+
 (define-public emacs-org-appear
   (package
    (name "emacs-org-appear")
@@ -713,11 +757,26 @@ provides an integration with this package.")
     (license #f))
   )
 
+
+
+;; Set emacs version according to window system
+(define emacs-distribution "")
+(if (equal? (getenv "XDG_SESSION_TYPE") "x11")
+    (set! emacs-distribution "emacs-next-tree-sitter") ;; Emacs text editor `tree-sitter' support
+    (set! emacs-distribution "emacs-next-pgtk") ;; Emacs text editor with `pgtk' and `tree-sitter' support
+    )
+;;(display emacs-distribution)
+
 ;;
 ;; Manifest
 ;;
 (concatenate-manifests
  (list
+  (specifications->manifest
+   (list
+    emacs-distribution
+    ))
+
   (specifications->manifest
    (list
     ;;"emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
@@ -827,6 +886,7 @@ provides an integration with this package.")
 
     ;;"git"
 
+    "emacs-ibuffer-vc" ;; Group Ibuffer's list by revision control system indications
 
     "emacs-sly" ;; Sylvester the Cat's Common Lisp IDE 
 
@@ -909,6 +969,7 @@ provides an integration with this package.")
 		       ;;emacs-eglot-jl ;; problem building
 		       emacs-dired-sidebar
 		       emacs-ibuffer-sidebar
+		       emacs-ibuffer-project
 		       emacs-tabspaces
 		       emacs-use-package
 		       ;;emacs-emms

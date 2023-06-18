@@ -80,6 +80,15 @@
 
 
 
+;; Test if pgtk
+
+(defun k8x1d/test-if-pgtk ()
+  (interactive)
+(if (eq window-system 'pgtk)
+    (message "pgtk version in use")
+  (message "non-pgtk version in use"))
+)
+
 ;; Set initial transparency
 ;;;; FIXME: daemon mode lacks color, seem to use non emacs 29 config
 (if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
