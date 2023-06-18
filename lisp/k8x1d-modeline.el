@@ -23,23 +23,40 @@
  ;;	evil-motion-state-tag "MOTION"
  ;;	evil-visual-state-tag "VISUAL"
  ;;	evil-operator-state-tag "OPERATOR")
- ;; ;; Define your custom modeline
- ;; ;; barebone version
- ;; (doom-modeline-def-modeline 'k8x1d-modeline
- ;;   ;; Left side
- ;;   '(modals
- ;;     buffer-info
- ;;     vcs
- ;;     compilation)
- ;;   ;; Right side
- ;;   '(lsp checker
- ;;     minor-modes
- ;;     major-mode))
+  ;; Define your custom modeline
+  ;; barebone version
+  (doom-modeline-def-modeline 'k8x1d-modeline
+    ;; Left side
+    '(modals
+      buffer-info
+      vcs
+      buffer-position
+      selection-info
+      compilation)
+    ;; Right side
+    '(misc-info
+      lsp checker
+      minor-modes
+      major-mode))
 
- ;; ;; Set default mode-line
- ;; (add-hook 'doom-modeline-mode-hook
- ;;	    (lambda ()
- ;;	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)))
+;;(doom-modeline-def-modeline 'main
+;;  '(bar workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count parrot selection-info)
+;;  '(compilation objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs checker time))
+
+
+
+  ;; Set default mode-line
+  (add-hook 'doom-modeline-mode-hook
+ 	    (lambda ()
+ 	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)))
+
+  ;; set particulat font for modeline
+  (setq doom-modeline-height 1) ; optional
+  (if (facep 'mode-line-active)
+      (set-face-attribute 'mode-line-active nil :family "Noto Sans" :height 130) ; For 29+
+    (set-face-attribute 'mode-line nil :family "Noto Sans" :height 130))
+  (set-face-attribute 'mode-line-inactive nil :family "Noto Sans" :height 130)
+
   )
 
 
