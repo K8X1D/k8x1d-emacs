@@ -20,7 +20,6 @@
 ;; TODO: update package
 ;; TODO: rewrite package for auto-update
 ;; TODO: move package to project on gitlab
-;; TODO: Change R for radian
 (use-package R-vterm
   :defer t
   :straight (:type git :host gitlab :repo "K8X1D/r-vterm") 
