@@ -21,13 +21,9 @@
 ;; Add modules to path
 (add-to-list 'load-path (concat user-emacs-directory "/lisp"))
 
-
-
-
 ;;
 ;; Module to load
 ;;
-
 
 (timed-require 'k8x1d-packages)
 (timed-require 'k8x1d-evil)
@@ -67,6 +63,7 @@
 (timed-require 'k8x1d-multimedia)
 (timed-require 'k8x1d-news)
 (timed-require 'k8x1d-password)
+(timed-require 'k8x1d-presentation)
 
 
 
@@ -75,32 +72,39 @@
 ;; Frames characteristics
 ;;
 
+;; Scratch message 
+(setq initial-scratch-message
+      ";; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.")
+
+
 
 ;; Set initial transparency
 ;;;; FIXME: daemon mode lacks color, seem to use non emacs 29 config
-;;(if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
-;;    (progn
-;;    (set-frame-parameter nil 'alpha-background 100) ; For current frame
-;;    ;;(set-frame-parameter nil 'alpha-background 80) ; For current frame
-;;    (add-to-list 'default-frame-alist '(alpha-background . 100)) ; For all new frames henceforth
-;;    ;;(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
-;;      )
-;;  (progn
-;;   ;;(set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
-;;   ;;(add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
-;;   (set-frame-parameter (selected-frame) 'alpha '(100 . 100)) ; For current frame
-;;   (add-to-list 'default-frame-alist '(alpha . (100 . 100))) ; For all new frames henceforth
-;;    ))
+(if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
+    (progn
+      (set-frame-parameter nil 'alpha-background 80) ; For current frame
+      (add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
+      )
+  (progn
+    (set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
+    (add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
+    ))
 
-(set-frame-parameter nil 'alpha-background 80) ; For current frame
-(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
+;;(set-frame-parameter nil 'alpha-background 80) ; For current frame
+;;(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
 
 
 ;; Set transparency of emacs
 (defun k8x1d/transparency (value)
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
-  (set-frame-parameter (selected-frame) 'alpha-background value))
+  (if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
+      (set-frame-parameter (selected-frame) 'alpha-background value)
+  (set-frame-parameter (selected-frame) 'alpha value)))
+
+
 
 ;;
 ;; Esthetics
@@ -124,12 +128,18 @@
 ;; Better scrolling effects
 (add-hook 'after-init-hook #'pixel-scroll-precision-mode)
 ;; Show line number for programming mode 
-(setq display-line-numbers 'relative)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'display-line-numbers-mode-hook (lambda()
+					    (setq display-line-numbers 'relative)
+					    ))
+
 ;; Show which key
 (add-hook 'after-init-hook #'which-key-mode)
+
 ;; Per buffer exposition
-(add-hook 'after-init-hook #'solaire-global-mode)
+(use-package solaire-mode
+  :hook (after-init . solaire-global-mode))
+
 
 ;; Highlights "TODOs"  
 (add-hook 'after-init-hook #'global-hl-todo-mode)
