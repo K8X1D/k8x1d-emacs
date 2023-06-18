@@ -7,8 +7,3 @@ then
 else
     guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d
 fi
-
-
-
-
-
