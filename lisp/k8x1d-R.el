@@ -33,6 +33,8 @@
   (setq vterm-kill-buffer-on-exit nil)
   ;; Use radian instead of R
   (setq R-vterm-repl-program "radian")
+  (require 'bind-key)
+  (unbind-key "C-c TAB" R-vterm-mode-map)
   )
 
 (provide 'k8x1d-R)
