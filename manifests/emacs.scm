@@ -783,6 +783,7 @@ provides an integration with this package.")
     "emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
     "hicolor-icon-theme" ;; Freedesktop icon theme 
     "git" ;; Distributed version control system
+    "nss-certs" ;; CA certificates from Mozilla
     "coreutils" ;; Core GNU utilities (file, text, shell)
     "findutils" ;; Operating on files matching given criteria
 
