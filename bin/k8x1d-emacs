@@ -1,9 +1,2 @@
 #!/bin/sh
-
-# Lauch pgtk if wayland
-if [ "$XDG_SESSION_TYPE" == "wayland" ]
-then
-    guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs-pgtk.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d
-else
-    guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d
-fi
+guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d
