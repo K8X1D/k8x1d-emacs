@@ -884,7 +884,7 @@ provides an integration with this package.")
     "emacs-citar-org-roam" ;; Emacs package to provide tighter Citar and Org-Roam integration
     "emacs-consult-org-roam" ;; Consult integration for Org Roam
 
-    ;;"git"
+    "git"
 
     "emacs-ibuffer-vc" ;; Group Ibuffer's list by revision control system indications
 
