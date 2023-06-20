@@ -837,6 +837,13 @@ provides an integration with this package.")
     "font-fira-code"
     "font-fira-mono"
     "font-fira-sans"
+    "font-iosevka-term" ;; Coders' typeface, built from code
+    "font-iosevka" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
+    "font-iosevka-aile" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
+    "font-hack" ;; Typeface designed for source code
+
+
+
 
     ;;"emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
     "emacs-minions" ;; Minor-mode menu for the mode line
