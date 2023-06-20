@@ -786,7 +786,6 @@ provides an integration with this package.")
     "coreutils" ;; Core GNU utilities (file, text, shell)
     "findutils" ;; Operating on files matching given criteria
 
-    ;;"emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
 
     "emacs-guix" ;; Emacs interface for GNU Guix
 
