@@ -4,6 +4,7 @@
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-fu)
+  :hook (after-init . evil-mode)
   :config
 
   (setq evil-normal-state-tag "NORMAL")
@@ -11,8 +12,7 @@
   (setq evil-visual-state-tag "VISUAL")
   (setq evil-emacs-state-tag "EMACS")
 
-  (setq evil-echo-state nil)
-  (evil-mode 1))
+  (setq evil-echo-state nil))
 
 ;; Extend evil support
 (use-package evil-collection
