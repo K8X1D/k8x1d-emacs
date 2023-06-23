@@ -1,12 +1,6 @@
-;; Syntax highlght
-;;(use-package julia-mode
-;;  :defer t)
-
 ;; Treesitter support
 (use-package julia-ts-mode
   :defer t
-  :ensure t
-  :straight t
   :mode "\\.jl$")
 
 ;; REPL
@@ -25,7 +19,6 @@
 ;; FIXME: startup time of (eglot-jl-init) is too high
 (use-package eglot-jl
   :defer t
-  :straight t
   :init
   (setq eglot-connect-timeout 60) ;; prevent eglot timeout
   :hook ((julia-ts-mode . eglot-jl-init)

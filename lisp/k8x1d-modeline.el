@@ -17,12 +17,6 @@
   (setq doom-modeline-buffer-file-name-style 'file-name)
   ;; ;; Custom modal indicator for evil, Under test
   ;; (setq doom-modeline-modal-icon nil)
- ;; (setq evil-normal-state-tag "NORMAL"
- ;;	evil-emacs-state-tag "EMACS"
- ;;	evil-insert-state-tag "INSERT"
- ;;	evil-motion-state-tag "MOTION"
- ;;	evil-visual-state-tag "VISUAL"
- ;;	evil-operator-state-tag "OPERATOR")
   ;; Define your custom modeline
   ;; barebone version
   (doom-modeline-def-modeline 'k8x1d-modeline
@@ -34,7 +28,8 @@
       selection-info
       compilation)
     ;; Right side
-    '(misc-info
+    '(process
+      misc-info
       lsp checker
       minor-modes
       major-mode))
@@ -53,9 +48,9 @@
   ;; set particulat font for modeline
   (setq doom-modeline-height 1) ; optional
   (if (facep 'mode-line-active)
-      (set-face-attribute 'mode-line-active nil :family "Noto Sans" :height 130) ; For 29+
-    (set-face-attribute 'mode-line nil :family "Noto Sans" :height 130))
-  (set-face-attribute 'mode-line-inactive nil :family "Noto Sans" :height 130)
+      (set-face-attribute 'mode-line-active nil :family "Hack" :height 120) ; For 29+
+    (set-face-attribute 'mode-line nil :family "Hack" :height 120))
+  (set-face-attribute 'mode-line-inactive nil :family "Hack" :height 120)
 
   )
 
@@ -127,6 +122,7 @@ Containing LEFT, and RIGHT aligned respectively."
    (inferior-ess-r-mode . hide-mode-line-mode)
    (org-capture-mode . hide-mode-line-mode)
    (compilation-mode . hide-mode-line-mode)
+   (geiser-mode . hide-mode-line-mode)
    (julia-vterm-repl-mode . hide-mode-line-mode))
   )
 

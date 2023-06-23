@@ -4,15 +4,76 @@
 ;;
 (use-modules (guix packages)
 	     (guix git-download)
+
 	     (guix build-system emacs)
 	     (guix build-system python)
+	     (guix build-system gnu)
+
 	     (gnu packages emacs-xyz)
 	     (gnu packages python-xyz)
 	     (gnu packages check)
 	     (gnu packages statistics)
+
 	     (guix download)
 	     (guix licenses)
+	     (guix status)
+
+	     ((guix build emacs-build-system)
+	      #:select (%default-include %default-exclude))
+	     (guix store)
+	     (guix utils)
+	     (guix packages)
+	     (guix gexp)
+	     (guix monads)
+	     (guix search-paths)
+	     (guix build-system)
+	     (guix build-system gnu)
+
+
 	     ((guix licenses) #:prefix license:))
+
+;;
+;; Modules
+;;
+
+;; Create building module for emacs with version > 29
+(define (emacs-treesitter)
+  "Return the treesitter Emacs package."
+  ;; Lazily resolve the binding to avoid a circular dependency.
+  (let ((emacs-mod (resolve-interface '(gnu packages emacs))))
+    (module-ref emacs-mod 'emacs-next-tree-sitter)))
+
+(define* (lower name
+                #:key source inputs native-inputs outputs system target
+                (emacs (emacs-treesitter))
+                #:allow-other-keys
+                #:rest arguments)
+  "Return a bag for NAME."
+  (define private-keywords
+    '(#:target #:emacs #:inputs #:native-inputs))
+
+  (and (not target)                               ;XXX: no cross-compilation
+       (bag
+         (name name)
+         (system system)
+         (host-inputs `(,@(if source
+                              `(("source" ,source))
+                              '())
+                        ,@inputs
+
+                        ;; Keep the standard inputs of 'gnu-build-system'.
+                        ,@(standard-packages)))
+         (build-inputs `(("emacs" ,emacs)
+                         ,@native-inputs))
+         (outputs outputs)
+         (build emacs-build)
+         (arguments (strip-keyword-arguments private-keywords arguments)))))
+
+(define emacs-next-build-system
+  (build-system
+    (name 'emacs)
+    (description "The build system for Emacs packages")
+    (lower lower)))
 
 ;;
 ;; Packages
@@ -86,50 +147,6 @@ mode custom variables that control visibility of elements are configured to show
 hidden parts, the respective `org-appear settings do not have an effect.")
     (license #f))
   )
-
-
-;; (define-public emacs-emms
-;; (package
-;;   (name "emacs-emms")
-;;   (version "20230329.2020")
-;;   (source (origin
-;;             (method git-fetch)
-;;             (uri (git-reference
-;;                   (url "https://git.savannah.gnu.org/git/emms.git")
-;;                   (commit "0f4bd0c551b6ec1debfa834464f28030ce9c287b")))
-;;             (sha256
-;;              (base32
-;;               "1mlvpfm3phmcfna1jnmpjw3q0dxa6ah1dwbarjmgqq15rrjs1841"))))
-;;   (build-system emacs-build-system)
-;;   (propagated-inputs (list emacs-nadvice emacs-seq))
-;;   (arguments
-;;    '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-;;                  "^dir$"
-;;                  "^[^/]+.info$"
-;;                  "^[^/]+.texi$"
-;;                  "^[^/]+.texinfo$"
-;;                  "^doc/dir$"
-;;                  "^doc/[^/]+.info$"
-;;                  "^doc/[^/]+.texi$"
-;;                  "^doc/[^/]+.texinfo$")
-;;      #:exclude '("^.dir-locals.el$" "^test.el$"
-;;                  "^tests.el$"
-;;                  "^[^/]+-test.el$"
-;;                  "^[^/]+-tests.el$"
-;;                  "^doc/fdl.texi$"
-;;                  "^doc/gpl.texi$")))
-;;   (home-page "https://www.gnu.org/software/emms/")
-;;   (synopsis "The Emacs Multimedia System")
-;;   (description
-;;    "This is the very core of EMMS. It provides ways to play a track using
-;; `emms-start', to go through the playlist using the commands `emms-next and
-;; `emms-previous', to stop the playback using `emms-stop', and to see what's
-;; currently playing using `emms-show'.  But in itself, this core is useless,
-;; because it doesn't know how to play any tracks --- you need players for this.
-;; In fact, it doesn't even know how to find any tracks to consider playing --- forthis, you need sources.  A sample configuration is offered in emms-setup.el, andthe Friendly Manual in the doc/ directory is both detailed, and kept up to date.")
-;;   (license #f))
-;; )
-
 
 
 (define-public emacs-bind-key
@@ -256,7 +273,6 @@ inferior Julia process.")
    (license #f))
   )
 
-
 (define-public emacs-ob-julia-vterm 
   (package
    (name "emacs-ob-julia-vterm")
@@ -283,6 +299,52 @@ https://github.com/shg/ob-julia-vterm.el for installation instructions.")
    (license #f))
   )
 
+(define-public emacs-julia-ts-mode 
+  (package
+   (name "emacs-julia-ts-mode")
+   (version "0.2.2")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append
+		  "https://stable.melpa.org/packages/julia-ts-mode-" version
+		  ".tar"))
+	    (sha256 (base32
+		     "14xm99yk6kxbxfg0068w23x4filq5v7pfnqwichwqihzan1yyak4"))))
+   (build-system emacs-next-build-system)
+   (propagated-inputs (list emacs-julia-mode))
+   (home-page "https://github.com/ronisbr/julia-ts-mode")
+   (synopsis "Major mode for Julia source code using tree-sitter")
+   (description
+    "This major modes uses tree-sitter for font-lock, indentation, imenu, and
+navigation.  It is derived from `julia-mode'.")
+   (license #f)))
+
+
+(define-public emacs-r-vterm
+  (package
+   (name "emacs-r-vterm")
+   (version "0.1")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://gitlab.com/K8X1D/r-vterm.git")
+		  (commit "51c116208b62cd022049420477c10f0d0bc328cb")))
+	    (sha256
+	     (base32
+	      "1j1a4msmgxw7ykmxsqf7ci6bzhbrk1z259iddrdp4li9hg59wx1n"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-vterm))
+   (home-page "https://github.com/shg/julia-vterm.el")
+   (synopsis "A mode for Julia REPL using vterm")
+   (description
+    "This package provides a major-mode for inferior R process that runs in
+vterm, and a minor-mode that extends ess-R-mode to support interaction with the
+inferior R process. (is a clone of julia-vterm")
+   (license #f))
+  )
+
+
+
 ;; Don't work
 (define-public emacs-cl-generic 
   (package
@@ -295,7 +357,7 @@ https://github.com/shg/ob-julia-vterm.el for installation instructions.")
 	    (sha256
 	     (base32
 	      "0vb338bhjpsnrf60qgxny4z5rjrnifahnrv9axd4shay89d894zq"))))
-   (build-system emacs-build-system)
+   (build-system emacs-next-build-system)
    (home-page "http://elpa.gnu.org/packages/cl-generic.html")
    (synopsis "Forward cl-generic compatibility for Emacs<25")
    (description
@@ -328,29 +390,6 @@ the two.")
    (license gpl3+))
   )
 
-;;(define-public emacs-julia-ts-mode 
-;;               (package
-;;                 (name "emacs-julia-ts-mode")
-;;                 (version "0.2.2")
-;;                 (source (origin
-;;                           (method url-fetch)
-;;                           (uri (string-append
-;;                                  "https://stable.melpa.org/packages/julia-ts-mode-" version
-;;                                  ".el"))
-;;                           (sha256 (base32
-;;                                     "03mfxh06clmjhacsanrjf5ki08jkljbdp7a2lg6lx09d2xxc3i6c"))))
-;;                 (build-system emacs-build-system)
-;;                 (propagated-inputs (list emacs-julia-mode))
-;;                 (home-page "https://github.com/ronisbr/julia-ts-mode")
-;;                 (synopsis "Major mode for Julia source code using tree-sitter")
-;;                 (description
-;;                   "This major modes uses tree-sitter for font-lock, indentation, imenu, and
-;;                   navigation.  It is derived from `julia-mode'.")
-;;                   (license #f)
-;;                   ))
-;;)
-
-
 
 (define-public emacs-eglot-jl 
   (package
@@ -362,7 +401,7 @@ the two.")
 				version ".tar"))
 	    (sha256 (base32
 		     "1kqkxpyx6jd5l1px8n8g5bcv594zhzb0v5an3500xnj4rpcnfxn3"))))
-   (build-system emacs-build-system)
+   (build-system emacs-next-build-system)
    (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
    (home-page "https://github.com/non-Jedi/eglot-jl")
    (synopsis "Julia support for eglot")
@@ -903,7 +942,7 @@ provides an integration with this package.")
     "emacs-langtool" ;; Emacs interface to LanguageTool
     "tree-sitter"
 
-    "emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
+    ;;"emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
     "emacs-poly-r" ;; Polymodes for the R language
     "emacs-polymode-markdown" ;; Polymode for Markdown mode
 
@@ -971,9 +1010,10 @@ provides an integration with this package.")
   (packages->manifest (list
 		       emacs-julia-vterm
 		       emacs-ob-julia-vterm
-		       ;;emacs-cl-generic
-		       ;;emacs-julia-ts-mode ;; wrong emacs version when building
-		       ;;emacs-eglot-jl ;; problem building
+		       emacs-julia-ts-mode
+		       emacs-r-vterm
+		       emacs-cl-generic
+		       emacs-eglot-jl ;; problem building
 		       emacs-dired-sidebar
 		       emacs-ibuffer-sidebar
 		       emacs-ibuffer-project

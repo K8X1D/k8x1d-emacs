@@ -22,7 +22,7 @@
 ;; TODO: move package to project on gitlab
 (use-package R-vterm
   :defer t
-  :straight (:type git :host gitlab :repo "K8X1D/r-vterm") 
+  ;;:straight (:type git :host gitlab :repo "K8X1D/r-vterm") ;; integrated trought guix
   :hook (ess-r-mode . R-vterm-mode)
   :bind 
   (("C-c o r r" . R-vterm-repl)

@@ -25,7 +25,7 @@
 ;; Module to load
 ;;
 
-(timed-require 'k8x1d-packages)
+;;(timed-require 'k8x1d-packages) ;; all packages are now defined in emacs.scm
 (timed-require 'k8x1d-evil)
 (timed-require 'k8x1d-completion)
 (timed-require 'k8x1d-file-explorer)
