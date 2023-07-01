@@ -7,6 +7,14 @@
   :bind
   (("C-c c" . 'org-capture)
    ("C-c o a" . 'org-agenda))
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'org-mode-map
+    "t" '(org-todo :which-key "Todos")
+    "c" '(:ignore t :which-key "Clock")
+    "ci" '(org-clock-in :which-key "In")
+    "co" '(org-clock-out :which-key "Out")
+    )
   :config
   ;; Org agenda configuration
   (setq
@@ -74,12 +82,11 @@
    org-outline-path-complete-in-steps nil
    org-refile-allow-creating-parent-nodes t)
 
-;; Capture Configuration (inspired by doom emacs)
-;; See https://github.com/doomemacs/doomemacs/tree/master/modules/lang/org
-;; TODO implement common set-up
+  ;; Capture Configuration (inspired by doom emacs)
+  ;; See https://github.com/doomemacs/doomemacs/tree/master/modules/lang/org
+  ;; TODO implement common set-up
 
-(setq org-default-notes-file (concat org-directory "/gtd/inbox.org")) ;; Orig
-
+  (setq org-default-notes-file (concat org-directory "/gtd/inbox.org")) ;; Orig
   )
 
 

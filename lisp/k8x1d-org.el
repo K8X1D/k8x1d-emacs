@@ -1,4 +1,9 @@
 (use-package org
+  :general
+  (k8x1d/leader-keys
+   "oa" '(org-agenda :which-key "Agenda")
+   "oc" '(org-clock-goto :which-key "Clock")
+   )
   :bind
   (("C-c l" . org-store-link)
    :map org-mode-map
@@ -234,5 +239,15 @@
 	org-appear-autolinks t)
   )
 
+
+;; Table of content
+;; From https://github.com/doomemacs/doomemacs/blob/master/modules/lang/org/config.el
+(use-package toc-org
+  ;;:bind (:map markdown-mode-map
+  ;;	      ("C-c C-o" . toc-org-markdown-follow-thing-at-point))
+  :hook ((org-mode . toc-org-mode)
+	 (markdown-mode . toc-org-mode))
+  :config
+  (setq toc-org-hrefify-default "gh"))
 
 (provide 'k8x1d-org)

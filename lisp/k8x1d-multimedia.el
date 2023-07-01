@@ -38,21 +38,29 @@
 
 
 (use-package bluetooth
-  :defer t
-  :bind ("C-c o b" . bluetooth-list-devices))
+  :general
+  (k8x1d/leader-keys
+    "ob" '(bluetooth-list-devices :which-key "Bluetooth"))
+  :defer t)
 
 (use-package mpv
   :defer t)
 
 (use-package mpdel
   :defer t
-  :init
-  (setq mpdel-prefix-key (kbd "C-c m"))
+  ;;:init
+  ;;(setq mpdel-prefix-key (kbd "C-c m"))
+  :general
+  (k8x1d/leader-keys
+    "om" '(mpdel-core-map :which-key "Music Player"))
   :hook (after-init . mpdel-mode))
 
 
 (use-package transmission
-  :bind ("C-c o T" . transmission))
+  :general
+  (k8x1d/leader-keys
+    "oT" '(transmission :which-key "Transmission")))
+  ;;:bind ("C-c o T" . transmission))
 
 
 (provide 'k8x1d-multimedia)

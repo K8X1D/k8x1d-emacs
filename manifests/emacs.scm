@@ -872,6 +872,7 @@ provides an integration with this package.")
     "emacs-org-pomodoro" ;; Pomodoro technique for org-mode
     ;; FIXME: autolink don't work, see https://github.com/awth13/org-appear/issues/50
     ;;"emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
+    "emacs-toc-org" ;; Table of Contents generator for Emacs Org mode
 
     "emacs-mood-line" ;; Minimal mode-line for Emacs
     "font-fira-code"
@@ -882,8 +883,7 @@ provides an integration with this package.")
     "font-iosevka-aile" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
     "font-hack" ;; Typeface designed for source code
 
-
-
+    "emacs-general" ;; More convenient key definitions in emacs
 
     ;;"emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
     "emacs-minions" ;; Minor-mode menu for the mode line

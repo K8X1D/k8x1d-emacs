@@ -6,6 +6,15 @@
 ;; REPL
 (use-package julia-vterm
   :defer t
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'julia-ts-mode-map
+    "'" '(julia-vterm-switch-to-repl-buffer :which-key "Open REPL")
+    "l" '(julia-vterm-send-region-or-current-line :which-key "Send line")
+    "b" '(julia-vterm-send-buffer :which-key "Send buffer")
+    "f" '(julia-vterm-send-include-buffer-file :which-key "Send file")
+    "r" '(julia-vterm-send-region-or-current-line :which-key "Send region")
+    )
   :hook ((julia-mode . julia-vterm-mode)
 	 (julia-ts-mode . julia-vterm-mode))
   :bind 

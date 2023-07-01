@@ -26,6 +26,7 @@
 ;;
 
 ;;(timed-require 'k8x1d-packages) ;; all packages are now defined in emacs.scm
+(timed-require 'k8x1d-keybindings)
 (timed-require 'k8x1d-evil)
 (timed-require 'k8x1d-completion)
 (timed-require 'k8x1d-file-explorer)
@@ -74,9 +75,7 @@
 
 ;; Scratch message 
 (setq initial-scratch-message
-      ";; This buffer is for notes you don't want to save, and for Lisp evaluation.
-;; If you want to create a file, visit that file with C-x C-f,
-;; then enter the text in that file's own buffer.")
+      ";; This buffer is for notes you don't want to save, and for Lisp evaluation.\n ;; If you want to create a file, visit that file with C-x C-f,\n ;; then enter the text in that file's own buffer.\n")
 
 
 

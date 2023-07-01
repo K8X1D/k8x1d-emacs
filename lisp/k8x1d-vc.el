@@ -10,21 +10,39 @@
     (magit-todos-mode)
     (magit-status)
     (forge-pull))
-  :bind
-   (("C-x g y" . 'k8x1d/magit-status-w-forge-upd)
-   ("C-x g s" . 'magit-status)))
+  :general
+  (k8x1d/leader-keys
+    "g"  '(:ignore t :which-key "Git")
+    "gg" '(k8x1d/magit-status-w-forge-upd :which-key "Status"))
+  )
+
+;;  :bind
+;;   (("C-x g y" . 'k8x1d/magit-status-w-forge-upd)
+;;   ("C-x g s" . 'magit-status)))
 
 (use-package forge
   :after magit
-  :bind ("C-x g i c" ("Create" . forge-create-issue)
-	 "C-x g i l" ("List" . forge-list-issues))
+  :general
+  (k8x1d/leader-keys
+    "gl" '(:ignore t :which-key "List")
+    "gli" '(forge-list-issues :which-key "Issues")
+    "gc" '(:ignore t :which-key "Create")
+    "gci" '(forge-create-issue :which-key "Issues")
+    )
+  ;; :bind ("C-x g i c" ("Create" . )
+  ;; 	 "C-x g i l" ("List" . forge-list-issues))
   :config
   (setq auth-sources '("~/.authinfo.gpg")))
 
 
 (use-package magit-todos
   :after magit
-  :bind ("C-x g t l" ("List" . magit-todos-list)))
+  :general
+  (k8x1d/leader-keys
+    "glt" '(magit-todos-list :which-key "Todos")
+    )
+ ;; :bind ("C-x g t l" ("List" . magit-todos-list))
+  )
 
 (use-package magit-org-todos
   :after magit
