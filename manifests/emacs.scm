@@ -983,7 +983,7 @@ provides an integration with this package.")
     ;; Docker support
     "emacs-docker" ;; Manage docker from Emacs 
     "emacs-dockerfile-mode" ;; Major mode for editing Dockerfile
-    "emacs-docker-tramp" ;; TRAMP integration for docker containers
+    ;; "emacs-docker-tramp" ;; TRAMP integration for docker containers ;; Obsolete...
     "emacs-docker-compose-mode" ;; Major mode for editing `docker-compose' files
 
 
