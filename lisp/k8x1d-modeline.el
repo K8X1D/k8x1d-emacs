@@ -124,7 +124,8 @@ Containing LEFT, and RIGHT aligned respectively."
    (compilation-mode . hide-mode-line-mode)
    (geiser-repl-mode . hide-mode-line-mode)
    (inferior-python-mode . hide-mode-line-mode)
-   (julia-vterm-repl-mode . hide-mode-line-mode))
+   (julia-vterm-repl-mode . hide-mode-line-mode)
+  (pdf-view-mode . hide-mode-line-mode))
   )
 
 (provide 'k8x1d-modeline)
