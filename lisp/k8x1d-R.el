@@ -24,6 +24,10 @@
   :defer t
   ;;:straight (:type git :host gitlab :repo "K8X1D/r-vterm") ;; integrated trought guix
   :hook (ess-r-mode . R-vterm-mode)
+  :general
+  (k8x1d/leader-keys
+    "orr" '(R-vterm-repl :which-key "R")
+    )
   :bind 
   (("C-c o r r" . R-vterm-repl)
    :map R-vterm-mode-map

@@ -32,6 +32,7 @@
    "o"  '(:ignore t :which-key "Open")
    "ot" '(multi-vterm-project :which-key "Terminal")
    "os" '(dired-sidebar-toggle-sidebar :which-key "Sidebar")
+   "or"  '(:ignore t :which-key "REPL")
    "q" '(:ignore t :which-key "Quit")
    "qq" '(save-buffers-kill-terminal :which-key "Emacs")
    ))

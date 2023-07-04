@@ -1,7 +1,14 @@
 ;; Better buffer manager
 (use-package emacs
-  :bind
-  ("C-x C-b" . ibuffer))
+  :general
+  (k8x1d/leader-keys
+    "b" '(:ignore t :which-key "Buffer")
+    "bi" '(ibuffer :which-key "Ibuffer")
+    "bs" '(switch-to-buffer :which-key "Switch")
+    "bk" '(kill-buffer :which-key "Kill")
+    ))
+;;  :bind
+;;  ("C-x C-b" . ibuffer))
 
 
 ;; Group buffers by vc dir in ibuffer
