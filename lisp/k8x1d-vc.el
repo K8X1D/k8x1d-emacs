@@ -14,6 +14,8 @@
   (k8x1d/leader-keys
     "g"  '(:ignore t :which-key "Git")
     "gg" '(k8x1d/magit-status-w-forge-upd :which-key "Status"))
+  :hook
+  (with-editor-mode . evil-insert-state)
   )
 
 ;;  :bind
