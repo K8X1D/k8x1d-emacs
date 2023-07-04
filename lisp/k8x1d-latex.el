@@ -1,7 +1,36 @@
-(use-package emacs
+(use-package latex
+  :init
+  ;; TODO: fuse function
+  (defun k8x1d/insert-latex-item-below ()
+    "Insert a latex item below the current line."
+    (interactive)
+    (evil-open-below 1)
+    (latex-insert-item)
+    )
+  (defun k8x1d/insert-latex-item-above ()
+    "Insert a latex item above the current line."
+    (interactive)
+    (evil-open-above 1)
+    (latex-insert-item)
+    )
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'LaTeX-mode-map
+   "m" '(TeX-command-master :which-key "Command Master")
+   "i" '(:ignore t :which-key "Insert")
+   "ie" '(LaTeX-environment :which-key "Environment")
+    )
   :hook ((LaTeX-mode . visual-line-mode)
 	 (LaTeX-mode . eglot-ensure))
+  :bind
+  (:map LaTeX-mode-map
+	(("C-<return>" . k8x1d/insert-latex-item-below)
+	 ("C-S-<return>" . k8x1d/insert-latex-item-above))
+	)
   :config
+  (require 'bind-key)
+  (unbind-key "C-<return>" LaTeX-mode-map)
+  (setq LaTeX-indent-level 4)
   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))))
 
 (use-package reftex
