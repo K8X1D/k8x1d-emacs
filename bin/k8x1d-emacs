@@ -1,3 +1,2 @@
 #!/bin/sh
-#guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --container --network --preserve='^DISPLAY$' --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d
-guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d
+guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d --debug-init

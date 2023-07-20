@@ -25,6 +25,7 @@
 ;; Module to load
 ;;
 
+;;(setq use-package-always-defer t)
 ;;(timed-require 'k8x1d-packages) ;; all packages are now defined in emacs.scm
 (timed-require 'k8x1d-keybindings)
 (timed-require 'k8x1d-evil)
@@ -50,9 +51,11 @@
 (timed-require 'k8x1d-biblio)
 (timed-require 'k8x1d-corrector)
 (timed-require 'k8x1d-notes-taking)
+(timed-require 'k8x1d-markdown)
 
 ;; Programation support
 ;;(timed-require 'k8x1d-treesitter)
+(timed-require 'k8x1d-lsp)
 (timed-require 'k8x1d-julia)
 (timed-require 'k8x1d-python)
 (timed-require 'k8x1d-R)
@@ -61,21 +64,26 @@
 (timed-require 'k8x1d-docker)
 
 ;; Other
+(timed-require 'k8x1d-terminal)
 (timed-require 'k8x1d-multimedia)
 (timed-require 'k8x1d-news)
 (timed-require 'k8x1d-password)
 (timed-require 'k8x1d-presentation)
 
 
-
-
 ;;
 ;; Frames characteristics
 ;;
 
+
+
+;; take alle the available space for window
+(setq frame-resize-pixelwise t)
+
+
 ;; Scratch message 
 (setq initial-scratch-message
-      ";; This buffer is for notes you don't want to save, and for Lisp evaluation.\n ;; If you want to create a file, visit that file with C-x C-f,\n ;; then enter the text in that file's own buffer.\n")
+      ";; This buffer is for notes you don't want to save, and for Lisp evaluation.\n;; If you want to create a file, visit that file with C-x C-f,\n;; then enter the text in that file's own buffer.\n")
 
 
 
@@ -137,9 +145,9 @@
 (add-hook 'after-init-hook #'pixel-scroll-precision-mode)
 ;; Show line number for programming mode 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-(add-hook 'display-line-numbers-mode-hook (lambda()
-					    (setq display-line-numbers 'relative)
-					    ))
+ (add-hook 'display-line-numbers-mode-hook (lambda()
+ 					    (setq display-line-numbers 'relative)
+ 					    ))
 
 ;; Show which key
 (add-hook 'after-init-hook #'which-key-mode)
@@ -207,14 +215,6 @@
 
 
 
-
-
-
-
-
-
-
-
 ;;;;;;
 ;;;;;; File explorer
 ;;;;;; 
@@ -251,60 +251,4 @@
 
 ;; ESC Cancels All
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-;;;;
-;;;; Create leader keybinding
-;;;;
-;;					
-;;(use-package general
-;;  :config
-;;  (general-evil-setup t)
-;;
-;;  (general-create-definer k8x1d/leader-key-def
-;;    :keymaps '(normal insert visual emacs)
-;;    :prefix "SPC"
-;;    :global-prefix "C-SPC"))
-;;
-;;
-;;(k8x1d/leader-key-def
-;;  "f"  '(:ignore t :which-key "Find")
-;;  "ff" '(find-file :which-key "File")
-;;  "fs" '(save-some-buffers :which-key "Save")
-;;  "o"  '(:ignore t :which-key "Open")
-;;  "oa" '(org-agenda :which-key "Agenda")
-;;  "ot" '(multi-vterm-project :which-key "Terminal")
-;;  "os" '(dired-sidebar-toggle-sidebar :which-key "Sidebar")
-;;  "w" '(:ignore t :which-key "Window")
-;;  "wc" '(evil-window-delete :which-key "Delete")
-;;  "ws" '(evil-window-split :which-key "Split")
-;;  "wv" '(evil-window-vsplit :which-key "Vsplit")
-;;  "wh" '(evil-window-left :which-key "Left")
-;;  "wj" '(evil-window-down :which-key "Down")
-;;  "wk" '(evil-window-up :which-key "Up")
-;;  "wl" '(evil-window-right :which-key "Right")
-;;  "wH" '(evil-window-move-far-left :which-key "Move Left")
-;;  "wJ" '(evil-window-move-very-bottom :which-key "Move Down")
-;;  "wK" '(evil-window-move-very-top :which-key "Move Up")
-;;  "wL" '(evil-window-move-far-right :which-key "Move Right")
-;; ;; ;; TODO: add workspaces keys
-;;  "<tab>" '(:ignore t :which-key "Tabspaces")
-;;  "<tab> C" '(tabspaces-clear-buffers :which-key "clear-buffers")
-;;  "<tab> b" '(tabspaces-switch-to-buffer :which-key "switch-to-buffer")
-;;  "<tab> d" '(tabspaces-close-workspace :which-key "close-workspace")
-;;  "<tab> k" '(tabspaces-kill-buffers-close-workspace :which-key "kill-buffers-close-workspace")
-;;  "<tab> o" '(tabspaces-open-or-create-project-and-workspace :which-key "open-or-create-project-and-workspace")
-;;  "<tab> r" '(tabspaces-remove-current-buffer :which-key "remove-current-buffer")
-;;  "<tab> R" '(tabspaces-remove-selected-buffer :which-key "remove-selected-buffer")
-;;  "<tab> s" '(tabspaces-switch-or-create-workspace :which-key "switch-or-create-workspace")
-;;  "<tab> t" '(tabspaces-switch-buffer-and-tab :which-key "switch-buffer-and-tab")
-;;
-;;  ;; TODO: add project keys
-;;  ;; TODO: add bookmark keys
-;;
-;;  "RET" '(bookmark-jump :which-key "Bookmarks")
-;;  ;;
-;;  "q" '(:ignore t :which-key "Quit")
-;;  "qq" '(save-buffers-kill-terminal :which-key "Emacs")
-;;  )
-
 

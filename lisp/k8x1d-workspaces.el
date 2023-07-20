@@ -2,7 +2,8 @@
   :after project
   :config
   (setq tab-bar-show nil)
-  (setq tab-bar-new-tab-choice "*dashboard*")
+  (setq tab-bar-new-tab-choice "*scratch*")
+  ;;(setq tab-bar-new-tab-choice "*dashboard*")
   (setq tab-bar-select-tab-modifiers '(alt))
   )
 
@@ -33,6 +34,10 @@
 
 ;; FIXME: Ispell message is covering tab bar name for text file...
 (use-package tab-bar-echo-area
+  :config
+  ;; prevent ispell message covering tab bar name
+  (setq inhibit-message-regexps '("ispell"))
+  (setq set-message-functions '(inhibit-message))
   :hook
   (after-init . tab-bar-echo-area-mode)
  ;; :config
@@ -47,6 +52,9 @@
  ;;	(advice-remove #'message message-off))))
  ;; (advice-add #'ispell-init-process :around #'message-off-advice)
   )
+
+(inhibit-message "ispell")
+
 
 
 

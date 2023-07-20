@@ -28,8 +28,6 @@
 ;; FIXME: startup time of (eglot-jl-init) is too high
 (use-package eglot-jl
   :defer t
-  :init
-  (setq eglot-connect-timeout 60) ;; prevent eglot timeout
   :hook ((julia-ts-mode . eglot-jl-init)
 	 (julia-ts-mode . eglot-ensure))
   )

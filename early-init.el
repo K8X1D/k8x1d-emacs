@@ -41,7 +41,8 @@
 (setq user-emacs-cache-directory (expand-file-name "~/.cache/emacs"))
 (setq custom-file (concat user-emacs-cache-directory "/custom.el"))
 
-;; Separate customizatio in a particular file
-(load custom-file)
+;; Separate customization in a particular file
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;;; early-init.el ends here

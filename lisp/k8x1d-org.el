@@ -3,16 +3,22 @@
   (k8x1d/leader-keys
    "oa" '(org-agenda :which-key "Agenda")
    "oc" '(org-clock-goto :which-key "Clock")
+   "X" '(org-capture :which-key "Capture")
    )
   :bind
   (("C-c l" . org-store-link)
    :map org-mode-map
    ("C-<return>" . +org/insert-item-below)
-   ("C-S-<return>" . +org/insert-item-above))
+   ("C-S-<return>" . +org/insert-item-above)
+   )
   :hook
   ((org-mode . org-indent-mode)
    (org-mode . visual-line-mode))
   :config
+
+  ;; Prettify
+  (setq org-pretty-entities t)
+
   (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
   (setq org-image-actual-width nil)
 
@@ -146,11 +152,19 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((sql . t)
+     (shell . t)
      (julia-vterm . t)))
 
   ;; Src block
   (setq org-src-preserve-indentation t)
   )
+
+
+(use-package org-agenda
+  :bind
+  (:map org-agenda-mode-map
+   ("C-SPC" . org-agenda-show-and-scroll-up)))
+
 
 ;;(use-package org-modern
 ;;  :hook (after-init . global-org-modern-mode)

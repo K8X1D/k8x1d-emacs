@@ -13,7 +13,7 @@
   (general-evil-setup)
 
   (general-create-definer k8x1d/leader-keys
-			  :states '(normal insert visual emacs)
+			  :states '(normal insert visual emacs motion)
 			  :keymaps 'override
 			  :prefix "SPC"
 			  :global-prefix "C-SPC")
@@ -26,11 +26,14 @@
 
   (k8x1d/leader-keys
    "<escape>" 'keyboard-escape-quit
+   "B"  '(:ignore t :which-key "Bookmarks")
+   "Bg"  '(bookmark-jump :which-key "Goto")
+   "Bm"  '(bookmark-set :which-key "Set")
+   "Br"  '(bookmark-delete :which-key "Remove")
    "f"  '(:ignore t :which-key "Find")
    "ff" '(find-file :which-key "File")
    "fs" '(save-buffer :which-key "Save")
    "o"  '(:ignore t :which-key "Open")
-   "ot" '(multi-vterm-project :which-key "Terminal")
    "os" '(dired-sidebar-toggle-sidebar :which-key "Sidebar")
    "or"  '(:ignore t :which-key "REPL")
    "q" '(:ignore t :which-key "Quit")

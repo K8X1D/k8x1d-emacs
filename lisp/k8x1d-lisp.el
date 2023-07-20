@@ -13,6 +13,12 @@
 
 (use-package geiser-mode
   :defer t
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'geiser-mode-map
+    "'" '(run-geiser :which-key "Open REPL")
+    "r" '(geiser-eval-region :which-key "Send region")
+    )
   :config
   ;; Clean binding
   (require 'bind-key)

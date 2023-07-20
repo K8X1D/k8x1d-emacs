@@ -3,6 +3,7 @@
 ;;
 
 (use-package langtool
+  :defer t
   :bind 
   (("C-c h w" . 'langtool-check)
    ("C-c h W" . 'langtool-check-done)
@@ -16,19 +17,10 @@
    `(langtool-errline ((nil (:foreground "#ff5f59"))))
   ))
 
-;;(use-package eglot-ltex
-;;  :straight (:type git :host github :repo "emacs-languagetool/eglot-ltex") 
-;;  :ensure t
-;;  :hook (text-mode . (lambda ()
-;;                       (require 'eglot-ltex)
-;;                       (eglot-ensure)))
-;;  :init
-;;  (setq eglot-languagetool-server-path (concat user-emacs-directory "/ltex-ls-16.0.0/")))
-
-;;
 ;; Spell checking
 ;;
 (use-package flyspell
+  :defer t
   ;;:hook (text-mode . flyspell-mode)
   :hook ((org-mode . flyspell-mode)
 	 (markdown-mode . flyspell-mode))
@@ -41,6 +33,7 @@
   )
 
 (use-package flyspell-correct
+  :defer t
   :after flyspell
   :bind (:map flyspell-mode-map
 	      ("C-c $" . flyspell-correct-at-point))
@@ -52,6 +45,7 @@
   (setq flyspell-mark-duplications-flag nil))
 
 (use-package auto-dictionary-mode
+  :defer t
   :hook (flyspell-mode . auto-dictionary-mode))
 
 ;;
@@ -59,9 +53,29 @@
 ;;
 
 (use-package writegood-mode
+  :defer t
   :bind
   (("C-c e g" . writegood-grade-level)
    ("C-c e r" . writegood-reading-ease))
   :hook (text-mode . writegood-mode))
+
+
+;;
+;; ltex support
+;;
+
+;; FIXME: heavy demand on ram
+(use-package eglot-ltex
+  :defer t
+  :hook (text-mode . (lambda ()
+                       (require 'eglot-ltex)
+                       (eglot-ensure)))
+  :init
+  ;;(setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-ls-16.0.0_w_java/"))
+  ;;(setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-ls-16.0.0_wo_java/"))
+  ;; TODO: find right version to download, for now, the one collected by doom emacs lsp is used. Seem to be a problem with guix...
+  (setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-test/"))
+  )
+
 
 (provide 'k8x1d-corrector)

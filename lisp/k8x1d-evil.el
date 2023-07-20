@@ -46,5 +46,4 @@
   (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
   (evil-org-agenda-set-keys))
 
-
 (provide 'k8x1d-evil)

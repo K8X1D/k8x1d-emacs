@@ -4,6 +4,10 @@
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
+  ;; ((after-init . doom-modeline-mode)
+  ;; 	 (doom-modeline-mode . display-battery-mode)
+  ;; 	 (doom-modeline-mode . display-time-mode))
+
   :config
   ;; Add wanted information
   (setq doom-modeline-minor-modes t) ;; for minions
@@ -28,7 +32,9 @@
       selection-info
       compilation)
     ;; Right side
-    '(process
+    '(battery
+      time
+      process
       misc-info
       lsp checker
       minor-modes
@@ -43,10 +49,10 @@
   ;; Set default mode-line
   (add-hook 'doom-modeline-mode-hook
  	    (lambda ()
- 	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)))
+ 	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)) )
 
   ;; set particulat font for modeline
-  (setq doom-modeline-height 1) ; optional
+ ;; (setq doom-modeline-height 1) ; optional
   (if (facep 'mode-line-active)
       (set-face-attribute 'mode-line-active nil :family "Hack" :height 120) ; For 29+
     (set-face-attribute 'mode-line nil :family "Hack" :height 120))
@@ -125,7 +131,8 @@ Containing LEFT, and RIGHT aligned respectively."
    (geiser-repl-mode . hide-mode-line-mode)
    (inferior-python-mode . hide-mode-line-mode)
    (julia-vterm-repl-mode . hide-mode-line-mode)
-  (pdf-view-mode . hide-mode-line-mode))
+   (special-mode . hide-mode-line-mode)
+   (pdf-view-mode . hide-mode-line-mode))
   )
 
 (provide 'k8x1d-modeline)

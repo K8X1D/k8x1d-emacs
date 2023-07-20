@@ -302,14 +302,14 @@ https://github.com/shg/ob-julia-vterm.el for installation instructions.")
 (define-public emacs-julia-ts-mode 
   (package
    (name "emacs-julia-ts-mode")
-   (version "0.2.2")
+   (version "0.2.5")
    (source (origin
 	    (method url-fetch)
 	    (uri (string-append
 		  "https://stable.melpa.org/packages/julia-ts-mode-" version
 		  ".tar"))
 	    (sha256 (base32
-		     "14xm99yk6kxbxfg0068w23x4filq5v7pfnqwichwqihzan1yyak4"))))
+		     "07l349nzw1qxn4i28ixy5gr3a0h3xq9044i4r3fsqc0s9nc4d8qw"))))
    (build-system emacs-next-build-system)
    (propagated-inputs (list emacs-julia-mode))
    (home-page "https://github.com/ronisbr/julia-ts-mode")
@@ -343,6 +343,29 @@ inferior R process. (is a clone of julia-vterm")
    (license #f))
   )
 
+
+
+(define-public emacs-eglot-ltex
+  (package
+   (name "emacs-eglot-ltex")
+   (version "0.1.0")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/emacs-languagetool/eglot-ltex.git")
+		  (commit "95cf7a920c59ea8bdcf81e3f3250aef180214ac7")))
+	    (sha256
+	     (base32
+	      "0an3x9d972lyr3byw7cvw3xhmbrf7z34y2mb3blvmlp18gmaf0hv"))
+	    ))
+   (build-system emacs-next-build-system)
+   (propagated-inputs (list emacs-vterm emacs-f))
+   (home-page "https://github.com/emacs-languagetool/eglot-ltex")
+   (synopsis "Eglot Clients for LTEX")
+   (description
+    "Eglot client leveraging LTEX Language Server.")
+   (license #f))
+  )
 
 
 ;; Don't work
@@ -391,28 +414,6 @@ the two.")
   )
 
 
-(define-public emacs-eglot-jl 
-  (package
-   (name "emacs-eglot-jl")
-   (version "2.2.1")
-   (source (origin
-	    (method url-fetch)
-	    (uri (string-append "https://stable.melpa.org/packages/eglot-jl-"
-				version ".tar"))
-	    (sha256 (base32
-		     "1kqkxpyx6jd5l1px8n8g5bcv594zhzb0v5an3500xnj4rpcnfxn3"))))
-   (build-system emacs-next-build-system)
-   (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
-   (home-page "https://github.com/non-Jedi/eglot-jl")
-   (synopsis "Julia support for eglot")
-   (description
-    "This package loads support for the Julia language server into eglot and
-package.el.  This provides IDE-like features for editing julia-mode buffers.
-After installing this package, to load support for the Julia language server,
-run eglot-jl-init.  After that, running the eglot function in a julia-mode
-buffer should work properly.")
-   (license #f))
-  )
 
 (define-public emacs-dired-hacks-utils 
   (package
@@ -796,7 +797,129 @@ provides an integration with this package.")
     (license #f))
   )
 
+(define-public emacs-emms 
+  (package
+   (name "emacs-emms")
+    (version "20230619.1857")
+    (source (origin
+	     (method git-fetch)
+	     (uri (git-reference
+		   (url "https://git.savannah.gnu.org/git/emms.git")
+		   (commit "9e08a4b081abcf18c375214a50ff47f8919f8ab1")))
+	     (sha256 (base32
+		      "1hzvga5pqfndrhja3gkv382qrb7nvd9kxds9sphpr2s6f17wcwl2"))))
+    (build-system emacs-build-system)
+    (propagated-inputs (list emacs-nadvice emacs-seq))
+    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+			     "^dir$"
+			     "^[^/]+.info$"
+			     "^[^/]+.texi$"
+			     "^[^/]+.texinfo$"
+			     "^doc/dir$"
+			     "^doc/[^/]+.info$"
+			     "^doc/[^/]+.texi$"
+			     "^doc/[^/]+.texinfo$")
+		 #:exclude '("^.dir-locals.el$" "^test.el$"
+			     "^tests.el$"
+			     "^[^/]+-test.el$"
+			     "^[^/]+-tests.el$"
+			     "^doc/fdl.texi$"
+			     "^doc/gpl.texi$")))
+    (home-page "https://www.gnu.org/software/emms/")
+    (synopsis "The Emacs Multimedia System")
+    (description
+     "This is the very core of EMMS. It provides ways to play a track using
+`emms-start', to go through the playlist using the commands `emms-next and
+`emms-previous', to stop the playback using `emms-stop', and to see what's
+currently playing using `emms-show'.  But in itself, this core is useless,
+because it doesn't know how to play any tracks --- you need players for this.
+In fact, it doesn't even know how to find any tracks to consider playing --- for
+this, you need sources.  A sample configuration is offered in emms-setup.el, and
+the Friendly Manual in the doc/ directory is both detailed, and kept up to date.")
+    (license #f))
+  )
 
+ (define-public emacs-eglot-jl 
+   (package
+    (name "emacs-eglot-jl")
+    (version "20230601.1335")
+    (source (origin
+ 	    (method git-fetch)
+ 	    (uri (git-reference
+ 		  (url "https://github.com/non-Jedi/eglot-jl.git")
+ 		  (commit "7dc604fe42a459a987853d065cd6d0f3c4cbc02a")))
+ 	    (sha256 (base32
+ 		     "0ska1i7n2ykyxm3w64661x24ycfdn2vl7px0hv33llg2sbd9famf"))))
+    (build-system emacs-build-system)
+    (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
+    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+ 			    "^dir$"
+ 			    "^[^/]+.info$"
+ 			    "^[^/]+.texi$"
+ 			    "^[^/]+.texinfo$"
+ 			    "^doc/dir$"
+ 			    "^doc/[^/]+.info$"
+ 			    "^doc/[^/]+.texi$"
+ 			    "^doc/[^/]+.texinfo$"
+ 			    "^[^/]+.jl$"
+ 			    "^[^/]+.toml$")
+ 		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
+ 			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
+    (home-page "https://github.com/non-Jedi/eglot-jl")
+    (synopsis "Julia support for eglot")
+    (description
+     "This package loads support for the Julia language server into eglot and
+ package.el.  This provides IDE-like features for editing julia-mode buffers.
+ After installing this package, to load support for the Julia language server,
+ run eglot-jl-init.  After that, running the eglot function in a julia-mode
+ buffer should work properly.")
+    (license #f))
+ )
+
+;; Doesn't seems to work; mention problem with eglot-jl file not findable
+;; (define-public emacs-eglot-jl 
+;;   (package
+;;    (name "emacs-eglot-jl")
+;;    (version "2.2.1")
+;;    (source (origin
+;; 	    (method url-fetch)
+;; 	    (uri (string-append "https://stable.melpa.org/packages/eglot-jl-"
+;; 				version ".tar"))
+;; 	    (sha256 (base32
+;; 		     "1kqkxpyx6jd5l1px8n8g5bcv594zhzb0v5an3500xnj4rpcnfxn3"))))   (build-system emacs-build-system)
+;; 		     (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
+;; 		     (home-page "https://github.com/non-Jedi/eglot-jl")
+;; 		     (synopsis "Julia support for eglot")
+;; 		     (description
+;; 		      "This package loads support for the Julia language server into eglot and
+;; package.el.  This provides IDE-like features for editing julia-mode buffers.
+;; After installing this package, to load support for the Julia language server,
+;; run eglot-jl-init.  After that, running the eglot function in a julia-mode
+;; buffer should work properly.")
+;; 		     (license #f))
+;;   )
+
+
+(define-public emacs-dashboard
+  (package
+   (name "emacs-dashboard")
+   (version "1.7.0")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append
+		  "https://stable.melpa.org/packages/dashboard-" version
+		  ".tar"))
+	    (sha256 (base32
+		     "1c0x369x6fp156r2kv3pw7yh0cp34271dvly4l96r3apa1yn1by6"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-page-break-lines))
+   (home-page "https://github.com/emacs-dashboard/emacs-dashboard")
+   (synopsis "A startup screen extracted from Spacemacs")
+   (description
+    "An extensible Emacs dashboard, with sections for bookmarks, projectile projects,
+org-agenda and more.")
+   (license #f))
+  )
 
 ;; Set emacs version according to window system
 (define emacs-distribution "")
@@ -806,16 +929,22 @@ provides an integration with this package.")
     )
 ;;(display emacs-distribution)
 
+
+
+
+
+
+
+
 ;;
 ;; Manifest
 ;;
 (concatenate-manifests
  (list
   (specifications->manifest
-   (list
-    emacs-distribution
-    ))
-
+   (list 
+     emacs-distribution
+     ))
   (specifications->manifest
    (list
     ;;"emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
@@ -887,6 +1016,7 @@ provides an integration with this package.")
 
     ;;"emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
     "emacs-minions" ;; Minor-mode menu for the mode line
+    "emacs-spaceline-next" ;; Powerline theme from Spacemacs
 
     "emacs-magit" ;; Emacs interface for the Git version control system
     "emacs-magit-todos" ;; Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
@@ -913,6 +1043,13 @@ provides an integration with this package.")
     "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
 
     "emacs-doom-themes" ;; Wide collection of color themes for Emacs
+    "emacs-gruvbox-theme" ;; Gruvbox is a retro groove color scheme ported from Vim
+    "emacs-zenburn-theme" ;; Low contrast color theme for Emacs
+    "emacs-dream-theme" ;; High-contrast Emacs theme
+    "emacs-solarized-theme" ;; Port of the Solarized theme for Emacs
+    "emacs-spacemacs-theme" ;; Light and dark theme for spacemacs that supports GUI and terminal  
+    "emacs-monokai-theme" ;; High contrast color theme for Emacs
+
     "emacs-hide-mode-line" ;; Emacs plugin that hides the mode-line
 
     ;;"emacs-emms" ;; The Emacs Multimedia System ;; miss mpd-prev
@@ -936,7 +1073,7 @@ provides an integration with this package.")
 
     "emacs-sly" ;; Sylvester the Cat's Common Lisp IDE 
 
-    "emacs-dashboard" ;; Startup screen extracted from Spacemacs
+    "emacs-dashboard" ;; Startup screen extracted from Spacemacs ;; version make shortcut don't work with compilation, see https://github.com/emacs-dashboard/emacs-dashboard/issues/97
     "emacs-page-break-lines" ;; Display page breaks as tidy horizontal lines
 
     "emacs-langtool" ;; Emacs interface to LanguageTool
@@ -1006,6 +1143,10 @@ provides an integration with this package.")
     "emacs-org-tree-slide" ;; Presentation tool for Org mode
     "emacs-hide-lines" ;; Commands for hiding lines based on a regexp
 
+
+    "openjdk" ;; Java development kit
+    "java-slf4j-simple" ;; Simple implementation of simple logging facade for Java
+
     ))
   (packages->manifest (list
 		       emacs-julia-vterm
@@ -1019,7 +1160,7 @@ provides an integration with this package.")
 		       emacs-ibuffer-project
 		       emacs-tabspaces
 		       emacs-use-package
-		       ;;emacs-emms
+		       emacs-emms
 		       ;;python-tinytag ;; don't work
 		       emacs-doom-modeline
 		       emacs-ess-view-data
@@ -1027,5 +1168,7 @@ provides an integration with this package.")
 		       ;; emacs-auctex-latexmk ;; dont't work
 		       emacs-tab-bar-echo-area
 		       emacs-org-appear
+		       emacs-eglot-ltex
+		       ;; emacs-dashboard ;; do work well with emacs 29
 		       ))
   ))

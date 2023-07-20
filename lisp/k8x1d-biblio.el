@@ -1,4 +1,15 @@
 (use-package citar
+  :after org
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'org-mode-map
+    "b" '(:ignore t :which-key "Bibliography")
+    "bi" '(:ignore t :which-key "Insert")
+    "bic" '(citar-insert-citation :which-key "Citation")
+    "bir" '(citar-insert-reference :which-key "Reference")
+    "bo" '(citar-open :which-key "Open")
+    "bO" '(citar-open-note :which-key "Open Note")
+    )
   :bind (("C-c b i c" . citar-insert-citation)
 	 ("C-c b i r" . citar-insert-reference)
 	 ("C-c b o f" . citar-open)

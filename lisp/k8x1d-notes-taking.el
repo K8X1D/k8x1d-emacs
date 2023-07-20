@@ -11,6 +11,16 @@
 ;; Base
 ;;
 (use-package org-roam
+  :general
+  (k8x1d/leader-keys
+    "n" '(:ignore t :which-key "Notes")
+    "nl" '(org-roam-buffer-toggle :which-key "Buffer")
+    "nf" '(org-roam-node-find :which-key "Find")
+    "ng" '(org-roam-graph :which-key "Graph")
+    "ni" '(org-roam-node-insert :which-key "Insert")
+    "nc" '(org-roam-capture :which-key "Capture")
+    "nj" '(org-roam-dailies-capture-today :which-key "Journal")
+    )
   :custom
   (org-roam-directory (concat org-directory "/roam"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
