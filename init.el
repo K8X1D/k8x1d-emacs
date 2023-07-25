@@ -36,7 +36,7 @@
 ;; Gui
 (timed-require 'k8x1d-fonts)
 (timed-require 'k8x1d-icons)
-(timed-require 'k8x1d-dashboard)
+;; (timed-require 'k8x1d-dashboard) appear superflous
 (timed-require 'k8x1d-modeline)
 (timed-require 'k8x1d-theme)
 
@@ -204,12 +204,6 @@
 
 ;; Guix packages management
 (global-set-key (kbd "C-c o g") 'guix)
-
-
-;; Pomodoro
-(setq org-pomodoro-length 50)
-(setq org-pomodoro-short-break-length 10)
-(setq org-pomodoro-long-break-length 30)
 
 
 
