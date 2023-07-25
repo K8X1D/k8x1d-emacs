@@ -29,6 +29,9 @@
 	     (guix build-system)
 	     (guix build-system gnu)
 
+	     (gnu packages python)
+	     (gnu packages python-crypto)
+
 
 	     ((guix licenses) #:prefix license:))
 
@@ -317,7 +320,8 @@ https://github.com/shg/ob-julia-vterm.el for installation instructions.")
    (description
     "This major modes uses tree-sitter for font-lock, indentation, imenu, and
 navigation.  It is derived from `julia-mode'.")
-   (license #f)))
+   (license #f))
+  )
 
 
 (define-public emacs-r-vterm
@@ -929,11 +933,53 @@ org-agenda and more.")
     )
 ;;(display emacs-distribution)
 
+;; Don't build, org-noter is missing
+(define-public emacs-org-pdftools 
+  (package
+   (name "emacs-org-pdftools")
+    (version "20220320.301")
+    (source (origin
+	     (method git-fetch)
+	     (uri (git-reference
+		   (url "https://github.com/fuxialexander/org-pdftools.git")
+		   (commit "967f48fb5038bba32915ee9da8dc4e8b10ba3376")))
+	     (sha256 (base32
+		      "0f47ww8r00b7lb1msybnmnqdhm9i2vwz5lrz9m9bn6gbh97mzhn8"))))
+    (build-system emacs-next-build-system)
+    (propagated-inputs (list emacs-org emacs-pdf-tools emacs-org-noter))
+    (arguments '(#:include '("^org-pdftools.el$")
+		 #:exclude '()))
+    (home-page "https://github.com/fuxialexander/org-pdftools")
+    (synopsis "Support for links to documents in pdfview mode")
+    (description
+     "Add support for org links from pdftools buffers with more precise location
+control.  https://github.com/fuxialexander/org-pdftools/")
+    (license #f))
+  )
 
 
+(define-public emacs-lsp-bridge
+  (package
+   (name "emacs-lsp-bridge")
+    (version "0.1")
+    (source (origin
+	     (method git-fetch)
+	     (uri (git-reference
+		   (url "https://github.com/manateelazycat/lsp-bridge.git")
+		   (commit "e959f3dd930dadb8b929a2ff5e93bb547e5ddb52")))
+	     (sha256 (base32
+		      "0fcjjm0sa7fwm2kfv2gcyg5nnnynpqhqlaaz233blja4jbw5rgl2"))))
+    (build-system emacs-next-build-system)
+    ;;(arguments '(#:tests? #f))
 
-
-
+    ;;(build-system python-build-system)
+    (propagated-inputs (list python python-epc python-sexpdata python-six python-paramiko emacs-markdown-mode emacs-yasnippet))
+    (home-page "https://github.com/manateelazycat/lsp-bridge")
+    (synopsis " A blazingly fast LSP client for Emacs")
+    (description
+     "Python LSP client implementation for the Emacs ecosystem")
+    (license #f))
+  )
 
 
 ;;
@@ -968,7 +1014,7 @@ org-agenda and more.")
     "emacs-vterm" ;; Emacs libvterm integration
     "emacs-vterm-toggle" ;; Toggle between a vterm buffer and other buffers
     "emacs-multi-vterm" ;; Manage multiple vterm buffers in Emacs
-    "emacs-julia-mode" ;; Major mode for Julia
+    ;;"emacs-julia-mode" ;; Major mode for Julia
     ;;"emacs-julia-repl" ;; Minor mode for interacting with a Julia REPL ;; Replaced by julia-vterm since support org-babel via ob-julia-vterm
     "emacs-no-littering" ;; Help keep `~/.emacs.d/' clean
     "emacs-pdf-tools" ;; Emacs support library for PDF files
@@ -998,7 +1044,6 @@ org-agenda and more.")
 
     "emacs-mixed-pitch" ;; Mix variable- and fixed-pitch fonts in the same Emacs buffer
 
-    "emacs-org-pomodoro" ;; Pomodoro technique for org-mode
     ;; FIXME: autolink don't work, see https://github.com/awth13/org-appear/issues/50
     ;;"emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
     "emacs-toc-org" ;; Table of Contents generator for Emacs Org mode
@@ -1051,6 +1096,8 @@ org-agenda and more.")
     "emacs-monokai-theme" ;; High contrast color theme for Emacs
 
     "emacs-hide-mode-line" ;; Emacs plugin that hides the mode-line
+    "emacs-emms-mode-line-cycle" ;; Display the EMMS mode line as a ticker
+    "emacs-powerline" ;; Mode-line plugin for Emacs
 
     ;;"emacs-emms" ;; The Emacs Multimedia System ;; miss mpd-prev
     "imagemagick" ;; Create, edit, compose, or convert bitmap images
@@ -1085,6 +1132,7 @@ org-agenda and more.")
 
     "emacs-org-superstar" ;; Prettify headings and plain lists in Org mode
     "emacs-org-fancy-priorities" ;; Display org priorities as custom strings 
+    "emacs-org-pomodoro" ;; Pomodoro technique for org-mode 
 
     "emacs-nyxt" ;; Interact with Nyxt from Emacs
 
@@ -1117,6 +1165,9 @@ org-agenda and more.")
     "emacs-transmission" ;; Emacs interface to a Transmission session
 
 
+    "emacs-yasnippet"
+
+
     ;; Docker support
     "emacs-docker" ;; Manage docker from Emacs 
     "emacs-dockerfile-mode" ;; Major mode for editing Dockerfile
@@ -1147,6 +1198,12 @@ org-agenda and more.")
     "openjdk" ;; Java development kit
     "java-slf4j-simple" ;; Simple implementation of simple logging facade for Java
 
+    ;; LSP
+    ;;"texlive-digestif" ;;Editor plugin for LaTeX, ConTeXt etc.
+
+
+    ;;"emacs-julia-mode" ;; Major mode for Julia
+
     ))
   (packages->manifest (list
 		       emacs-julia-vterm
@@ -1170,5 +1227,7 @@ org-agenda and more.")
 		       emacs-org-appear
 		       emacs-eglot-ltex
 		       ;; emacs-dashboard ;; do work well with emacs 29
+		       ;; emacs-org-pdftools ;; don't build
+		       ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
 		       ))
   ))
