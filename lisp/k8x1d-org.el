@@ -5,6 +5,10 @@
    "oc" '(org-clock-goto :which-key "Clock")
    "X" '(org-capture :which-key "Capture")
    )
+  (k8x1d/local-leader-keys
+    :keymaps 'org-mode-map
+    "p" '(org-priority :which-key "Priority")
+    )
   :bind
   (("C-c l" . org-store-link)
    :map org-mode-map
@@ -263,5 +267,43 @@
 	 (markdown-mode . toc-org-mode))
   :config
   (setq toc-org-hrefify-default "gh"))
+
+
+;; Pomodoro
+;; (use-package org-pomodoro
+;;   :config
+;;   (setq org-pomodoro-length 50)
+;;   (setq org-pomodoro-short-break-length 10)
+;;   (setq org-pomodoro-long-break-length 30)
+;;   (setq org-pomodoro-start-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
+;;   )
+
+
+;; Inspirations:
+;; - https://github.com/japhir/ArchConfigs/blob/master/myinit.org#play-bell-sound-when-task-is-marked-as-done 
+(use-package org-pomodoro
+  :after org
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'org-mode-map
+    "P" '(org-pomodoro :which-key "Pomodoro")
+    )
+  :hook (org-pomodoro-break-finished . org-pomodoro-prompt)
+  :custom
+  (org-pomodoro-manual-break t)
+  (org-pomodoro-long-break-length 15)
+  ;;(org-pomodoro-start-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
+  :config
+  (defun org-pomodoro-prompt ()
+    (interactive)
+    (org-clock-goto)
+    (if (y-or-n-p "Start a new pomodoro?")
+        (progn
+          (org-pomodoro))))
+  )
+
+;; (use-package org-pdftools
+;;   :after (org pdf-tools)
+;;   :hook (org-mode . org-pdftools-setup-link))
 
 (provide 'k8x1d-org)
