@@ -1,3 +1,6 @@
+;; Inspirations:
+;; - https://emacs.stackexchange.com/questions/64532/emms-and-mpd-configuration
+
 ;; Multimedia player
  (use-package emms
    :defer t
@@ -26,8 +29,9 @@
    ;; Mpd interactions
    (require 'emms-setup)
    (require 'emms-player-mpd)
-   (add-to-list 'emms-info-functions 'emms-info-mpd)
+   (add-to-list 'emms-info-functions 'emms-info-mpd) ;; To get track information from MusicPD
    (add-to-list 'emms-player-list 'emms-player-mpd)
+
    ;; Socket is not supported
    (setq emms-player-mpd-server-name "localhost")
    (setq emms-player-mpd-server-port "6600")
@@ -36,6 +40,7 @@
    ;; Video player config
    (add-to-list 'emms-player-list 'emms-player-mpv)
    (setq emms-player-mpv-parameters '("--sub-auto=all" ))
+   (setq emms-player-mpv-update-metadata t) ;; reduce title info
 
    )
 
