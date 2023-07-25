@@ -67,14 +67,13 @@
 ;; FIXME: heavy demand on ram
 (use-package eglot-ltex
   :defer t
-  :hook (text-mode . (lambda ()
-                       (require 'eglot-ltex)
-                       (eglot-ensure)))
+ ;; :hook (text-mode . (lambda ()
+ ;;                      (require 'eglot-ltex)
+ ;;                      (eglot-ensure)))
   :init
-  ;;(setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-ls-16.0.0_w_java/"))
-  ;;(setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-ls-16.0.0_wo_java/"))
-  ;; TODO: find right version to download, for now, the one collected by doom emacs lsp is used. Seem to be a problem with guix...
-  (setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-test/"))
+  ;; FIXME: find way to ignore markup (e.g. org, tex, etc); Problem is not present with lsp-ltex (solved by lsp https://github.com/emacs-languagetool/lsp-ltex/issues/10)
+  ;;(setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-ls-16.0.0/")) ;; don't work
+  (setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-ls-15.2.0/"))
   )
 
 
