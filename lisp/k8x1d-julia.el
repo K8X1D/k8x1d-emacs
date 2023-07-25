@@ -1,7 +1,14 @@
-;; Treesitter support
-(use-package julia-ts-mode
-  :defer t
-  :mode "\\.jl$")
+
+
+;;(use-package julia-mode
+;;  :defer t)
+
+ ;; Treesitter support
+ ;; FIXME: no syntax highlighting... test other version of package
+ (use-package julia-ts-mode
+   :defer t
+   :mode "\\.jl$")
+
 
 ;; REPL
 (use-package julia-vterm
@@ -24,13 +31,13 @@
   :config
   (setq vterm-kill-buffer-on-exit nil))
 
-;;;; LSP
-;; FIXME: startup time of (eglot-jl-init) is too high
-(use-package eglot-jl
-  :defer t
-  :hook ((julia-ts-mode . eglot-jl-init)
-	 (julia-ts-mode . eglot-ensure))
-  )
+;;;;;; LSP
+;;;; FIXME: startup time of (eglot-jl-init) is too high
+;;(use-package eglot-jl
+;;  :defer t
+;;  :hook ((julia-ts-mode . eglot-jl-init)
+;;	 (julia-ts-mode . eglot-ensure))
+;;  )
 
 
 
