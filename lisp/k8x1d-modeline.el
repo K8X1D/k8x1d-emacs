@@ -19,10 +19,9 @@
   (setq doom-modeline-workspace-name nil) ;; use tab instead
   (setq doom-modeline-buffer-encoding nil)
   (setq doom-modeline-buffer-file-name-style 'file-name)
-  ;; ;; Custom modal indicator for evil, Under test
-  ;; (setq doom-modeline-modal-icon nil)
+  ;; Custom modal indicator for evil, Under test
+  (setq doom-modeline-modal-icon nil)
   ;; Define your custom modeline
-  ;; barebone version
   (doom-modeline-def-modeline 'k8x1d-modeline
     ;; Left side
     '(modals
@@ -32,13 +31,14 @@
       selection-info
       compilation)
     ;; Right side
-    '(battery
-      time
-      process
+    '(;;battery
+      ;;time
+      ;;process
       misc-info
-      lsp checker
-      minor-modes
-      major-mode))
+      ;;lsp
+      ;;checker
+      major-mode
+      minor-modes))
 
 ;;(doom-modeline-def-modeline 'main
 ;;  '(bar workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count parrot selection-info)
@@ -94,6 +94,7 @@ Containing LEFT, and RIGHT aligned respectively."
 	      right)))
   :config
   (setq-default
+  ;; (setq
    mode-line-format
    '((:eval
       (simple-mode-line-render
@@ -102,10 +103,13 @@ Containing LEFT, and RIGHT aligned respectively."
 	       evil-mode-line-tag
 	       " "
 	       mode-line-buffer-identification
-	       (vc-mode vc-mode)))
+	       (vc-mode vc-mode)
+	       " [%l:%c]"
+	       ))
+	       ;;
        ;; Right.
        (quote (
-	       " [%l:%c]"
+	       " "
 	       mode-line-frame-identification
 	       mode-line-misc-info
 	       mode-line-modes
@@ -134,5 +138,25 @@ Containing LEFT, and RIGHT aligned respectively."
    (special-mode . hide-mode-line-mode)
    (pdf-view-mode . hide-mode-line-mode))
   )
+
+
+;; (use-package emms-mode-line-cycle
+;;   :config
+;;   (emms-mode-line 1)
+;;   (emms-playing-time 1)
+
+;;   ;; `emms-mode-line-cycle' can be used with emms-mode-line-icon.
+;;   (require 'emms-mode-line-icon)
+;;   (setq emms-mode-line-cycle-use-icon-p t)
+
+;;   (emms-mode-line-cycle 1)
+;;   )
+
+;; (use-package powerline
+;;   :hook (after-init . powerline-vim-theme)
+;; ;;(powerline-center-evil-theme)
+;; )
+
+
 
 (provide 'k8x1d-modeline)
