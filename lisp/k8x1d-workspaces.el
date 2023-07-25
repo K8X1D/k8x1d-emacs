@@ -32,7 +32,6 @@
   ;;(tabspaces-session-auto-restore t)
   )
 
-;; FIXME: Ispell message is covering tab bar name for text file...
 (use-package tab-bar-echo-area
   :config
   ;; prevent ispell message covering tab bar name
