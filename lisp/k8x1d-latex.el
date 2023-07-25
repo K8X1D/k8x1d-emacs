@@ -21,7 +21,8 @@
    "ie" '(LaTeX-environment :which-key "Environment")
     )
   :hook ((LaTeX-mode . visual-line-mode)
-	 (LaTeX-mode . eglot-ensure))
+	;; (LaTeX-mode . eglot-ensure)
+	 )
   :bind
   (:map LaTeX-mode-map
 	(("C-<return>" . k8x1d/insert-latex-item-below)
@@ -30,6 +31,7 @@
   :config
   (require 'bind-key)
   (unbind-key "C-<return>" LaTeX-mode-map)
+
   (setq LaTeX-indent-level 4)
   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))))
 
@@ -51,7 +53,11 @@
 
 (use-package evil-tex 
   :after evil
-  :hook (LaTeX-mode . evil-tex-mode))
+  :hook (LaTeX-mode . evil-tex-mode)
+  :config
+  (require 'bind-key)
+  (unbind-key "M-n" evil-tex-mode-map) ;; Clean keys for lsp-bridge in latex
+  )
 
 
 (use-package auctex

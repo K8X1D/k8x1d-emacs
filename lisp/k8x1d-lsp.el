@@ -15,21 +15,41 @@
 
 (use-package lsp-bridge
   :hook (after-init . global-lsp-bridge-mode)
-  ;;:config (setq acm-enable-icon t)
-  ;; Don't work, stick with original
-  ;; :config
-  ;;:bind
-  ;;(:map lsp-bridge-mode-map
-  ;;	(("TAB" . acm-select-next)
-  ;;	 ("<backtab>" . acm-select-prev)))
-  ;; :bind (("TAB" . acm-select-next)
-  ;; 	 ("<backtab>" . acm-select-prev)
-  ;; 	 ("RET" . acm-complete))
-  ;;:init
-  ;;(require 'bind-key)
-  ;;(unbind-key "TAB" lsp-bridge-mode-map)
-)
- 
+  :config
+  ;;(setq lsp-bridge-tex-lsp-server "texlab")
+  (setq lsp-bridge-tex-lsp-server "digestif")
+  (setq lsp-bridge-python-lsp-server "pylsp")
+
+  ;; Modeline
+  (defun lsp-bridge--mode-line-format ()
+    "Compose the LSP-bridge's mode-line."
+    (setq-local mode-face
+		(if (lsp-bridge-epc-live-p lsp-bridge-epc-process)
+		    'lsp-bridge-alive-mode-line
+		  'lsp-bridge-kill-mode-line))
+
+    (when lsp-bridge-server
+      (propertize "lsp"'face mode-face)))
+
+  ;; Add auctex support (not initially in)
+  (setq lsp-bridge-default-mode-hooks (append lsp-bridge-default-mode-hooks '(LaTeX-mode-hook)))
+
+  ;; Add support to julia-ts-mode
+  (add-to-list 'lsp-bridge-single-lang-server-mode-list '(julia-ts-mode . "julials"))
+  (setq lsp-bridge-default-mode-hooks (append lsp-bridge-default-mode-hooks '(julia-ts-mode)))
+
+  ;; Add support for guile
+  (add-to-list 'lsp-bridge-single-lang-server-mode-list '(scheme-mode . "guile-scheme"))
+  (setq lsp-bridge-default-mode-hooks (append lsp-bridge-default-mode-hooks '(scheme-mode-mode)))
+
+
+
+  ;; ;; Add ltex support;; Don't work
+  ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '(text-mode . "ltex"))
+  ;; (setq lsp-bridge-default-mode-hooks (append lsp-bridge-default-mode-hooks '(text-mode-hook)))
+
+  )
+
 
 ;; Diagnostics
 (use-package flymake

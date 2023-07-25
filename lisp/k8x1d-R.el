@@ -14,7 +14,7 @@
 
 
 (use-package ess
-  :hook (ess-r-mode . eglot-ensure)
+  ;;:hook (ess-r-mode . eglot-ensure)
   )
 
 ;; TODO: update package
