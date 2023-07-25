@@ -3,6 +3,7 @@
 
 ;; Pass interation
 (use-package pass
+  :defer t
   :init
   ;; From https://github.com/doomemacs/doomemacs/blob/master/modules/tools/pass/autoload/consult.el
   (defun +pass/consult (arg pass)
