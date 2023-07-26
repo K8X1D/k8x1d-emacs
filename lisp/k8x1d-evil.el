@@ -25,6 +25,8 @@
   (setq evil-insert-state-tag "INSERT")
   (setq evil-visual-state-tag "VISUAL")
   (setq evil-emacs-state-tag "EMACS")
+  (setq evil-operator-state-tag "OPERATOR") 
+  (setq evil-replace-state-tag "REPLACE")
   (setq evil-echo-state nil))
 
 ;; Extend evil support
