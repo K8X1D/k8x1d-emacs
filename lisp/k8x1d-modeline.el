@@ -13,14 +13,19 @@
   (setq doom-modeline-minor-modes t) ;; for minions
   (setq doom-modeline-enable-word-count t)
   ;; Clean-up modeline
+  ;; (setq doom-modeline-icon nil) ;; remove all icons from modeline
   (setq doom-modeline-buffer-state-icon nil)
-  (setq doom-modeline-major-mode-icon nil)
-  ;;(setq doom-modeline-icon nil)
+  (setq doom-modeline-major-mode-icon t)
+  (setq doom-modeline-major-mode-color-icon t)
+
   (setq doom-modeline-workspace-name nil) ;; use tab instead
   (setq doom-modeline-buffer-encoding nil)
-  (setq doom-modeline-buffer-file-name-style 'file-name)
-  ;; Custom modal indicator for evil, Under test
+ ;; (setq doom-modeline-buffer-file-name-style 'file-name) ;; only the file name
+  (setq doom-modeline-buffer-file-name-style 'auto)
+
+  ;; Custom modal indicator for evil, Under test, see  k8x1d-evil.el.
   (setq doom-modeline-modal-icon nil)
+
   ;; Define your custom modeline
   (doom-modeline-def-modeline 'k8x1d-modeline
     ;; Left side
