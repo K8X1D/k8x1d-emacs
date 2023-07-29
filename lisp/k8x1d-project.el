@@ -10,7 +10,6 @@
   (ibuffer-sidebar-toggle-sidebar))
 ;; Project
 (use-package project
-  :defer t
   :general 
   (k8x1d/leader-keys
    "p"  '(:ignore t :which-key "Projects")

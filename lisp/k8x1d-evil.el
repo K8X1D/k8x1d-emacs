@@ -32,8 +32,8 @@
 ;; Extend evil support
 (use-package evil-collection
   :after evil
-  :config
-  (evil-collection-init))
+  :hook (evil-mode . evil-collection-init)
+  )
 
 ;; Redo system
 (use-package undo-fu

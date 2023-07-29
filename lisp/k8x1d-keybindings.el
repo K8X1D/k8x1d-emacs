@@ -3,7 +3,6 @@
 ;; ESC Cancels All
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-
 ;;
 ;; Create leader keybinding
 ;;

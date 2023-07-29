@@ -1,0 +1,23 @@
+#!/bin/sh
+PROJECT_NAME=k8x1d-emacs
+GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
+GUIX_EXTRA=$HOME/.guix-extra
+PROJECT_ROOT=$PWD/..
+
+mkdir -p "$GUIX_EXTRA/$PROJECT_NAME"
+guix pull --allow-downgrades --channels=channels.scm --profile="$GUIX_EXTRA/$PROJECT_NAME/guix"
+
+mkdir -p "$GUIX_EXTRA_PROFILES/$PROJECT_NAME"
+"$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest=k8x1d-emacs.scm --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
+
+mkdir $HOME/.local/share/applications
+ln -s $PROJECT_ROOT/k8x1d-emacs.desktop $HOME/.local/share/applications/doom-emacs.desktop
+mkdir $HOME/.local/share/icons
+ln -s $PROJECT_ROOT/banners/k8x1d-avatar_dark.png $HOME/.local/share/icons/k8x1d-avatar_dark.png
+# TODO: separate barebone config from user config
+#mkdir $HOME/.k8x1d-emacs.d
+#ln -s $PROJECT_ROOT/config.el ~/.doom.d/config.el
+#ln -s $PROJECT_ROOT/packages.el ~/.doom.d/packages.el
+#ln -s $PROJECT_ROOT/config.el ~/.doom.d/config.el
+#ln -s $PROJECT_ROOT/splash ~/.doom.d/
+#ln -s $PROJECT_ROOT/bin/doom-emacs ~/.local/bin

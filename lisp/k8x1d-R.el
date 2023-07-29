@@ -15,6 +15,7 @@
 
 (use-package ess
   ;;:hook (ess-r-mode . eglot-ensure)
+  :defer t
   )
 
 ;; TODO: update package

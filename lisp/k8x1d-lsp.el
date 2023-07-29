@@ -1,5 +1,6 @@
 ;;;; Lsp
 ;;(use-package eglot
+
 ;;  :defer t
 ;;  :init
 ;;  (setq eglot-connect-timeout 180) ;; prevent eglot timeout
@@ -10,11 +11,17 @@
 (add-to-list 'load-path (concat user-emacs-directory "/lsp-bridge"))
 
 
+;; (use-package yasnippet
+;;   :hook (after-init . yas-global-mode)) 
+
 (use-package yasnippet
-  :hook (after-init . yas-global-mode)) 
+  :hook (prog-mode . yas-minor-mode)
+  :config
+  (yas-reload-all)) 
 
 (use-package lsp-bridge
-  :hook (after-init . global-lsp-bridge-mode)
+  ;;:hook (after-init . global-lsp-bridge-mode)
+  :hook (prog-mode . lsp-bridge-mode)
   :config
   ;;(setq lsp-bridge-tex-lsp-server "texlab")
   (setq lsp-bridge-tex-lsp-server "digestif")

@@ -1,4 +1,5 @@
 (use-package org
+  :defer t
   :general
   (k8x1d/leader-keys
    "oa" '(org-agenda :which-key "Agenda")
@@ -165,6 +166,7 @@
 
 
 (use-package org-agenda
+  :defer t
   :bind
   (:map org-agenda-mode-map
    ("C-SPC" . org-agenda-show-and-scroll-up)))
@@ -202,6 +204,7 @@
 
 ;; Prettify bullets
 (use-package org-superstar
+  :defer t
   :hook
   (org-mode . org-superstar-mode)
   :config
@@ -222,6 +225,7 @@
 
 ;; Prettify priorities
 (use-package org-fancy-priorities
+  :defer t
   :hook
   (org-mode . org-fancy-priorities-mode)
   :config
@@ -229,10 +233,12 @@
 
 
 (use-package org-auto-tangle
+  :defer t
   :hook (org-mode . org-auto-tangle-mode))
 
 ;;;; FIXME: don't work
 (use-package org-appear
+  :defer t
   :init
   (add-hook 'org-mode-hook (lambda ()
 			     (add-hook 'evil-insert-state-entry-hook
@@ -261,6 +267,7 @@
 ;; Table of content
 ;; From https://github.com/doomemacs/doomemacs/blob/master/modules/lang/org/config.el
 (use-package toc-org
+  :defer t
   ;;:bind (:map markdown-mode-map
   ;;	      ("C-c C-o" . toc-org-markdown-follow-thing-at-point))
   :hook ((org-mode . toc-org-mode)
@@ -282,6 +289,7 @@
 ;; Inspirations:
 ;; - https://github.com/japhir/ArchConfigs/blob/master/myinit.org#play-bell-sound-when-task-is-marked-as-done 
 (use-package org-pomodoro
+  :defer t
   :after org
   :general
   (k8x1d/local-leader-keys

@@ -6,8 +6,9 @@
      "cts" '(k8x1d/dark-to-light-to-dark :which-key "Switch Light/Dark")
      )
    :init
-   (defvar k8x1d/doom-dark-theme 'doom-one)
-   (defvar k8x1d/doom-light-theme 'doom-one-light)
+   (defvar k8x1d/doom-dark-theme 'doom-palenight)
+   ;;(defvar k8x1d/doom-dark-theme 'doom-one)
+   (defvar k8x1d/doom-light-theme 'doom-nord-light)
    (defvar k8x1d/actual-theme k8x1d/doom-dark-theme)
 
    (defun k8x1d/switch-theme (old-theme new-theme)
@@ -15,8 +16,8 @@
      (load-theme new-theme t)
      ;; Customization
      ;; Must be used *after* the theme is loaded
-     (custom-set-faces
-      `(cursor ((t (:background ,(doom-color 'fg) :foreground ,(doom-color 'bg))))))
+     ;;(custom-set-faces
+     ;; `(cursor ((t (:background ,(doom-color 'fg) :foreground ,(doom-color 'bg))))))
      (setq k8x1d/actual-theme new-theme))
 
    (defun k8x1d/dark-to-light-to-dark ()

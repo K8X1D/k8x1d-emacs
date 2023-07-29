@@ -1096,7 +1096,7 @@ control.  https://github.com/fuxialexander/org-pdftools/")
     "emacs-monokai-theme" ;; High contrast color theme for Emacs
 
     "emacs-hide-mode-line" ;; Emacs plugin that hides the mode-line
-    "emacs-emms-mode-line-cycle" ;; Display the EMMS mode line as a ticker
+    ;;"emacs-emms-mode-line-cycle" ;; Display the EMMS mode line as a ticker
     "emacs-powerline" ;; Mode-line plugin for Emacs
 
     ;;"emacs-emms" ;; The Emacs Multimedia System ;; miss mpd-prev

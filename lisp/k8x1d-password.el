@@ -29,9 +29,11 @@
   )
   ;;:bind ("C-c o p" . +pass/consult))
 
-(use-package password-store)
+(use-package password-store
+  :defer t)
 
-(use-package password-store-otp)
+(use-package password-store-otp
+  :defer t)
 
 
 (provide 'k8x1d-password)

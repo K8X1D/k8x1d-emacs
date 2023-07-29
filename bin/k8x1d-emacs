@@ -1,5 +1,10 @@
 #!/bin/sh
-# FIXME: Don't work
-#EMACS_ENV=$(guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs.scm)
+PROJECT_NAME=k8x1d-emacs
+GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
+PROJET_PATH="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
+export EMACSLOADPATH=$PROJET_PATH/share/emacs/site-lisp
 
-guix time-machine --channels=$HOME/.k8x1d-emacs.d/manifests/channels.scm -- shell --manifest=$HOME/.k8x1d-emacs.d/manifests/emacs.scm -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d --debug-init
+$PROJET_PATH/bin/emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d --debug-init
+
+
+
