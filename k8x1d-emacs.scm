@@ -35,6 +35,7 @@
 
 	     ((guix licenses) #:prefix license:))
 
+
 ;;
 ;; Modules
 ;;
@@ -1278,7 +1279,7 @@ options, do `M-x customize-group empv`.")
 		       emacs-julia-ts-mode
 		       emacs-r-vterm
 		       emacs-cl-generic
-		       emacs-eglot-jl ;; problem building
+		       ;;emacs-eglot-jl ;; manual set-up in test
 		       emacs-dired-sidebar
 		       emacs-ibuffer-sidebar
 		       emacs-ibuffer-project
