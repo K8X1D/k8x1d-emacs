@@ -1,7 +1,8 @@
 
 
 ;; ESC Cancels All
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit) ;; esc break windowing, try alternative  
+;;(global-set-key (kbd "<escape>") 'keyboard-quit)
 
 ;;
 ;; Create leader keybinding
@@ -29,10 +30,12 @@
    "Bg"  '(bookmark-jump :which-key "Goto")
    "Bm"  '(bookmark-set :which-key "Set")
    "Br"  '(bookmark-delete :which-key "Remove")
-   "h"  '(:ignore t :which-key "Help")
-   "hv"  '(describe-variable :which-key "Variable")
-   "hf"  '(describe-function :which-key "Function")
-   "hF"  '(describe-face :which-key "Face")
+   "h" '(:keymap help-map
+		  :which-key "Help")
+   ;; "h"  '(:ignore t :which-key "Help")
+   ;; "hv"  '(describe-variable :which-key "Variable")
+   ;; "hf"  '(describe-function :which-key "Function")
+   ;; "hF"  '(describe-face :which-key "Face")
    "f"  '(:ignore t :which-key "Find")
    "ff" '(find-file :which-key "File")
    "fs" '(save-buffer :which-key "Save")

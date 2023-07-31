@@ -52,11 +52,9 @@
     "ob" '(bluetooth-list-devices :which-key "Bluetooth"))
   :defer t)
 
-(use-package mpv
-  :defer t)
+(use-package mpv)
 
 (use-package mpdel
-  :defer t
   ;;:init
   ;;(setq mpdel-prefix-key (kbd "C-c m"))
   :general
@@ -64,11 +62,25 @@
     "om" '(mpdel-core-map :which-key "Music Player"))
   :hook (after-init . mpdel-mode))
 
+(use-package empv
+  :defer nil
+  :general
+  (k8x1d/leader-keys
+   "ov" '(:keymap empv-map
+		  :which-key "Video Player"))
+  ;; (k8x1d/leader-keys
+  ;;   :keymaps 'empv-map
+  ;;   "ov" '(:ignore t :which-key "Video Player"))
+ ;; :config
+  ;;(bind-key "C-x m" empv-map)
+  )
+
 
 (use-package transmission
   :general
   (k8x1d/leader-keys
-    "oT" '(transmission :which-key "Transmission")))
+    "oT" '(transmission :which-key "Transmission"))
+  )
   ;;:bind ("C-c o T" . transmission))
 
 

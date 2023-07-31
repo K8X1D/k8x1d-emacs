@@ -16,6 +16,14 @@
     (if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
 	(set-frame-parameter (selected-frame) 'alpha-background value)
       (set-frame-parameter (selected-frame) 'alpha value)))
+  ;; Define time-mesurement require function 
+  (require 'benchmark)
+  (defun timed-require (feat)
+    (if (featurep feat)
+	(progn (message "erraneous usage: '%s'" feat) nil)
+      (message "'%s' loaded in %.2fs" feat
+	       (benchmark-elapse (load-library (symbol-name feat))))))
+
   )
 
 (provide 'k8x1d-utilities)
