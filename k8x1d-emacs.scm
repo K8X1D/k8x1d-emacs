@@ -982,6 +982,35 @@ control.  https://github.com/fuxialexander/org-pdftools/")
   )
 
 
+(define-public emacs-empv
+  (package
+   (name "emacs-empv")
+   (version "4.0.0")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append "https://stable.melpa.org/packages/empv-"
+				version ".tar"))
+	    (sha256 (base32
+		     "1hrf1kbvg6j79jypq6gj0lzhx92vnn7yz5vq5njganh10adhrazd"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-s))
+   (home-page "https://github.com/isamert/empv.el")
+   (synopsis "A multimedia player/manager, YouTube interface")
+   (description
+    "An Emacs media player, based on mpv.  More precisely this package provides
+somewhat comprehensive interface to mpv with bunch of convenient functionality
+like an embedded radio manager, @code{YouTube} interface, local music/video
+library manager etc.  Lots of interactive functions are at your disposal.  To
+view the most essential ones, type `M-x describe-keymap empv-map`.  It is
+advised that you bind this keymap to a key for convenience.  Additionally, empv
+has versatile customization options.  For an overview of all customization
+options, do `M-x customize-group empv`.")
+   (license #f))
+  )
+
+
+
+
 ;;
 ;; Manifest
 ;;
@@ -1133,10 +1162,13 @@ control.  https://github.com/fuxialexander/org-pdftools/")
     "emacs-org-superstar" ;; Prettify headings and plain lists in Org mode
     "emacs-org-fancy-priorities" ;; Display org priorities as custom strings 
     "emacs-org-pomodoro" ;; Pomodoro technique for org-mode 
+    ;;"mplayer" ;; Audio and video player
+    "mpv" ;; Audio and video player
 
     "emacs-nyxt" ;; Interact with Nyxt from Emacs
 
     "emacs-pinentry" ;; GnuPG Pinentry server implementation
+    "pinentry-emacs" ;; GnuPG's interface to passphrase input
 
     "emacs-auctex" ;; Integrated environment for TeX 
     "emacs-org-edit-latex" ;;  Edit a LaTeX fragment just like editing a source block
@@ -1199,8 +1231,11 @@ control.  https://github.com/fuxialexander/org-pdftools/")
     "java-slf4j-simple" ;; Simple implementation of simple logging facade for Java
 
     ;; LSP
+    "ccls" ;; C/C++/Objective-C language server
     ;;"texlive-digestif" ;;Editor plugin for LaTeX, ConTeXt etc.
 
+    ;; Terminal
+    "emacs-eat" ;; Terminal emulator in Emacs
 
     ;;"emacs-julia-mode" ;; Major mode for Julia
 
@@ -1229,5 +1264,6 @@ control.  https://github.com/fuxialexander/org-pdftools/")
 		       ;; emacs-dashboard ;; do work well with emacs 29
 		       ;; emacs-org-pdftools ;; don't build
 		       ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
+		       emacs-empv
 		       ))
   ))
