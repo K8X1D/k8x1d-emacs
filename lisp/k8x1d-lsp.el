@@ -15,10 +15,15 @@
    (julia-mode . eglot-ensure)
    (julia-ts-mode . eglot-ensure)
    (python-mode . eglot-ensure)
-   (python-ts-mode . eglot-ensure))
+   (python-ts-mode . eglot-ensure)
+   (scheme-mode . eglot-ensure)
+   (scheme-mode . eglot-ensure)
+   )
   :config
   (add-to-list 'eglot-server-programs '(r-ts-mode . ("R" "--slave" "-e" "languageserver::run()")))
   (add-to-list 'eglot-server-programs '(julia-ts-mode . ("julia" "-e" "using LanguageServer; runserver()")))
+  (add-to-list 'eglot-server-programs
+             '(scheme-mode . ("guile-lsp-server")))
 )
 
 ;; ;;
