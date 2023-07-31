@@ -23,3 +23,4 @@ viper
 session.*
 url
 lsp-bridge
+scheme-lsp-server
