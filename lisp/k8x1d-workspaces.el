@@ -10,12 +10,14 @@
 (use-package tabspaces
   :general
   (k8x1d/leader-keys
-   "TAB"  '(:ignore t :which-key "Workspaces")
-   "TAB o" '(tabspaces-open-or-create-project-and-workspace :which-key "Open project")
-   "TAB d" '(tabspaces-kill-buffers-close-workspace :which-key "Close")
-   "TAB s" '(tabspaces-switch-to-buffer :which-key "Select/Create")
-   "TAB n" '(tab-new :which-key "Create")
-   "TAB r" '(tab-rename :which-key "Rename")
+   "TAB" '(:keymap tabspaces-command-map
+		  :which-key "Workspaces")
+   ;; "TAB"  '(:ignore t :which-key "Workspaces")
+   ;; "TAB o" '(tabspaces-open-or-create-project-and-workspace :which-key "Open project")
+   ;; "TAB d" '(tabspaces-kill-buffers-close-workspace :which-key "Close")
+   ;; "TAB s" '(tabspaces-switch-or-create-workspace :which-key "Select/Create")
+   ;; "TAB n" '(tab-new :which-key "Create")
+   ;; "TAB r" '(tab-rename :which-key "Rename")
     )
   :hook (after-init . tabspaces-mode) 
   :commands (tabspaces-switch-or-create-workspace

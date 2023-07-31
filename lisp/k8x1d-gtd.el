@@ -35,8 +35,9 @@
    ;; Replaced by doom
    ;;   org-todo-keywords
    ;;   '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "KILL(k)"))
-   org-agenda-files (append (file-expand-wildcards (concat org-directory "/gtd/*.org"))
-			    (file-expand-wildcards "~/Dropbox/org/doom/*.org")))
+   org-agenda-files (append (file-expand-wildcards "~/Dropbox/org/gtd/*.org")
+			    (file-expand-wildcards "~/Dropbox/org/doom/*.org")
+			    (file-expand-wildcards "~/Dropbox/org/gtd_alt/*.org")))
 
 
   ;; From doom configuration
@@ -95,14 +96,6 @@
 
   (setq org-default-notes-file (concat org-directory "/gtd/inbox.org")) ;; Orig
   )
-
-
-
-
-
-
-
-
 
 
 (provide 'k8x1d-gtd)

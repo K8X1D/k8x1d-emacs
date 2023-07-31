@@ -8,7 +8,7 @@
 
 
 ;; FIXME: remplace by guix package
-(add-to-list 'load-path (concat user-emacs-directory "/lsp-bridge"))
+;;(add-to-list 'load-path (concat user-emacs-directory "/lsp-bridge"))
 
 
 ;; (use-package yasnippet
@@ -20,12 +20,15 @@
   (yas-reload-all)) 
 
 (use-package lsp-bridge
+  ;;:load-path (concat user-emacs-directory "/lsp-bridge")
+  :load-path "~/.k8x1d-emacs.d/lsp-bridge"
   ;;:hook (after-init . global-lsp-bridge-mode)
   :hook (prog-mode . lsp-bridge-mode)
   :config
   ;;(setq lsp-bridge-tex-lsp-server "texlab")
   (setq lsp-bridge-tex-lsp-server "digestif")
   (setq lsp-bridge-python-lsp-server "pylsp")
+  (setq lsp-bridge-c-lsp-server "ccls")
 
   ;; Modeline
   (defun lsp-bridge--mode-line-format ()

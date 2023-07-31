@@ -1,21 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 
 ;;
-;; Startup time
+;; Utilities
 ;;
-
-
-;; Minimize garbage collection during startup
-(setq gc-cons-threshold most-positive-fixnum)
-
-;; Lower threshold back to 8 MiB (default is 800kB)
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq gc-cons-threshold (expt 2 23))))
-
-
-;; Add modules to path
-(add-to-list 'load-path (concat user-emacs-directory "/lisp"))
+(require 'k8x1d-utilities)
 
 ;;
 ;; Module to load
@@ -29,7 +17,6 @@
 (timed-require 'k8x1d-file-explorer)
 (timed-require 'k8x1d-buffers)
 (timed-require 'k8x1d-frames)
-(timed-require 'k8x1d-utilities)
 (timed-require 'k8x1d-clean)
 (timed-require 'k8x1d-ui)
 
@@ -47,7 +34,6 @@
 (timed-require 'k8x1d-gtd)
 (timed-require 'k8x1d-vc)
 
-;; no time diff
 ;; Writing support
 (timed-require 'k8x1d-org)
 (timed-require 'k8x1d-biblio)
@@ -55,7 +41,6 @@
 (timed-require 'k8x1d-notes-taking)
 (timed-require 'k8x1d-markdown)
 
-;; no time diff
 ;; Programation support
 ;;(timed-require 'k8x1d-treesitter)
 (timed-require 'k8x1d-lsp)
@@ -66,7 +51,6 @@
 (timed-require 'k8x1d-latex)
 (timed-require 'k8x1d-docker)
 
-;; no time diff
 ;; Other
 (timed-require 'k8x1d-terminal)
 (timed-require 'k8x1d-multimedia)
@@ -75,3 +59,30 @@
 (timed-require 'k8x1d-presentation)
 (timed-require 'k8x1d-system)
 (timed-require 'k8x1d-pdf)
+
+;; cleanup and reset after startup
+(add-hook 'emacs-startup-hook
+    (lambda () (setq gc-cons-threshold 16777216 gc-cons-percentage 0.1)))
+
+(setq gc-cons-threshold (* 2 1000 1000))
+
+
+;;
+;; Old
+;;
+;; ;; Minimize garbage collection during startup
+;; (setq gc-cons-threshold most-positive-fixnum)
+
+;; ;; Lower threshold back to 8 MiB (default is 800kB)
+;; (add-hook 'emacs-startup-hook
+;;           (lambda ()
+;;             (setq gc-cons-threshold (expt 2 23))))
+
+
+;;
+;; In test
+;;
+(defun pinentry-emacs (desc prompt ok error)
+  (let ((str (read-passwd (concat (replace-regexp-in-string "%22" "\"" (replace-regexp-in-string "%0A" "\n" desc)) prompt ": "))))
+    str))
+(pinentry-start)

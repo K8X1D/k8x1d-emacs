@@ -24,5 +24,11 @@
   (setq multi-vterm-dedicated-window-height 17)
   (setq vterm-keymap-exceptions nil))
 
+;; In test
+(use-package eat
+  :config
+  (eat-eshell-mode)
+  (setq eshell-visual-commands '()))
+
 
 (provide 'k8x1d-terminal)

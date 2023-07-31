@@ -9,6 +9,8 @@
   (k8x1d/local-leader-keys
     :keymaps 'org-mode-map
     "p" '(org-priority :which-key "Priority")
+    "it" '(org-insert-structure-template :which-key "Template")
+    "f" '(org-footnote-action :which-key "Footnotes")
     )
   :bind
   (("C-c l" . org-store-link)
@@ -276,39 +278,67 @@
   (setq toc-org-hrefify-default "gh"))
 
 
-;; Pomodoro
-;; (use-package org-pomodoro
-;;   :config
-;;   (setq org-pomodoro-length 50)
-;;   (setq org-pomodoro-short-break-length 10)
-;;   (setq org-pomodoro-long-break-length 30)
-;;   (setq org-pomodoro-start-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
-;;   )
-
-
 ;; Inspirations:
 ;; - https://github.com/japhir/ArchConfigs/blob/master/myinit.org#play-bell-sound-when-task-is-marked-as-done 
 (use-package org-pomodoro
-  :defer t
   :after org
   :general
   (k8x1d/local-leader-keys
     :keymaps 'org-mode-map
-    "P" '(org-pomodoro :which-key "Pomodoro")
+    "P" '(k8x1d/org-pomodoro-custom-time :which-key "Pomodoro")
     )
-  :hook (org-pomodoro-break-finished . org-pomodoro-prompt)
+  :hook (org-pomodoro-break-finished . k8x1d/org-pomodoro-prompt)
   :custom
   (org-pomodoro-manual-break t)
   (org-pomodoro-long-break-length 15)
   ;;(org-pomodoro-start-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
   :config
-  (defun org-pomodoro-prompt ()
+  (setq org-pomodoro-length 50)
+  ;;(setq org-pomodoro-length 0.1) ;; for test
+  (setq org-pomodoro-short-break-length 10)
+  (setq org-pomodoro-long-break-length 30)
+  (setq org-pomodoro-start-sound "~/Music/Sounds/hourly_dong.wav")
+  (setq org-pomodoro-short-break-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
+  (setq org-pomodoro-long-break-sound "~/Music/Sounds/hourly_dong.wav")
+  (setq org-pomodoro-overtime-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
+  (setq org-pomodoro-finished-sound "~/Music/Sounds/hourly_dong.wav")
+  (setq org-pomodoro-audio-player "mpv")
+
+  (defun k8x1d/org-pomodoro-prompt ()
     (interactive)
     (org-clock-goto)
     (if (y-or-n-p "Start a new pomodoro?")
         (progn
-          (org-pomodoro))))
+          (k8x1d/org-pomodoro-custom-time))))
+
+  (defun k8x1d/org-pomodoro-custom-time (min)
+    "Set pomodoro with custom time pomodoro-time"
+    (interactive "nSet pomodoro (total) length (in min): ")
+        (progn
+	  ;; keep original values
+	  (setq org-pomodoro-length-initial-value org-pomodoro-length)
+	  (setq org-pomodoro-short-break-length-initial-value org-pomodoro-short-break-length)
+	  (setq org-pomodoro-long-break-initial-value org-pomodoro-long-break-length)
+	  ;; Set new values
+	  (setq org-pomodoro-length (floor (* min 0.9)))
+	  (setq org-pomodoro-short-break-length (ceiling (* min 0.1)))
+	  (setq org-pomodoro-long-break-length (floor (* min 0.5)))
+	  ;; Start pomodoro
+          (org-pomodoro)
+	  ;; Set back original values
+	  (setq org-pomodoro-length org-pomodoro-length-initial-value)
+	  (setq org-pomodoro-short-break-length org-pomodoro-short-break-length-initial-value)
+	  (setq org-pomodoro-long-break-length org-pomodoro-long-break-initial-value)
+	  ))
   )
+
+
+
+(print (ceiling (* 9 0.1)))
+(print (floor (* 9 0.9)))
+(print (floor (* 9 0.5)))
+
+
 
 ;; (use-package org-pdftools
 ;;   :after (org pdf-tools)
