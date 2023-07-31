@@ -42,7 +42,7 @@
 (timed-require 'k8x1d-markdown)
 
 ;; Programation support
-;;(timed-require 'k8x1d-treesitter)
+(timed-require 'k8x1d-treesitter)
 (timed-require 'k8x1d-lsp)
 (timed-require 'k8x1d-julia)
 (timed-require 'k8x1d-python)

@@ -40,7 +40,7 @@
       ;;time
       ;;process
       misc-info
-      ;;lsp
+      lsp
       ;;checker
       major-mode
       minor-modes))

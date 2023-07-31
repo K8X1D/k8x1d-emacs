@@ -1011,6 +1011,36 @@ options, do `M-x customize-group empv`.")
 
 
 
+
+
+(define-public emacs-r-ts-mode
+  (package
+   (name "emacs-r-ts-mode")
+    (version "0.1")
+    (source (origin
+	     (method git-fetch)
+	     (uri (git-reference
+		   (url "https://github.com/sje30/r-ts-mode.git")
+		   (commit "8745d782f7d6687844ecf022d2f0f3590b02d5c7")))
+	     (sha256 (base32
+		      "011jhydhjsbkxs6yl5yd8lyyb9w99qwxy70vi2y9j0j4jvfas5da"))))
+    (build-system emacs-next-build-system)
+    ;;(arguments '(#:tests? #f))
+
+    ;;(build-system python-build-system)
+    ;;(propagated-inputs (list python python-epc python-sexpdata python-six python-paramiko emacs-markdown-mode emacs-yasnippet))
+    (home-page "https://github.com/sje30/r-ts-mode")
+    (synopsis "Emacs mode for R (treesit)")
+    (description
+     "...")
+    (license #f))
+  )
+
+
+
+
+
+
 ;;
 ;; Manifest
 ;;
@@ -1037,7 +1067,7 @@ options, do `M-x customize-group empv`.")
     "emacs-evil-collection" ;; Collection of Evil bindings for many major and minor modes
     "emacs-undo-fu" ;; Simple, stable linear undo with redo for Emacs
 
-    "emacs-ess" ;; Emacs mode for statistical analysis programs
+    ;;"emacs-ess" ;; Emacs mode for statistical analysis programs
 
 
     "emacs-vterm" ;; Emacs libvterm integration
@@ -1053,9 +1083,11 @@ options, do `M-x customize-group empv`.")
     "emacs-embark" ;; Emacs mini-buffer actions rooted in keymaps
     "emacs-marginalia" ;; Marginalia in the minibuffer completions
     "emacs-corfu" ;; Completion overlay region function
+    "emacs-corfu-doc" ;; Documentation popup for Corfu
+    "emacs-kind-icon" ;; Completion kind icons in Emacs 
+    "emacs-svg-lib" ;; Emacs SVG library for creating tags, icons and bars 
+    "emacs-cape" ;; Completion at point extensions for Emacs
     ;;"emacs-company"
-    "emacs-kind-icon" ;; Completion kind icons in Emacs
-
     "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
     "emacs-emprise" ;; Control MPRIS supported media players from Emacs
     "emacs-marginalia-emprise" ;; Annotate Emprise with Marginalia
@@ -1255,7 +1287,7 @@ options, do `M-x customize-group empv`.")
 		       emacs-emms
 		       ;;python-tinytag ;; don't work
 		       emacs-doom-modeline
-		       emacs-ess-view-data
+		       ;;emacs-ess-view-data
 		       emacs-all-the-icons
 		       ;; emacs-auctex-latexmk ;; dont't work
 		       emacs-tab-bar-echo-area
@@ -1265,5 +1297,6 @@ options, do `M-x customize-group empv`.")
 		       ;; emacs-org-pdftools ;; don't build
 		       ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
 		       emacs-empv
+		       emacs-r-ts-mode ;; use native insteat
 		       ))
   ))

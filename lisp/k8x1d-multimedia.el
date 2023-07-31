@@ -52,7 +52,7 @@
     "ob" '(bluetooth-list-devices :which-key "Bluetooth"))
   :defer t)
 
-(use-package mpv)
+;;(use-package mpv)
 
 (use-package mpdel
   ;;:init
@@ -63,17 +63,17 @@
   :hook (after-init . mpdel-mode))
 
 (use-package empv
-  :defer nil
   :general
   (k8x1d/leader-keys
    "ov" '(:keymap empv-map
 		  :which-key "Video Player"))
-  ;; (k8x1d/leader-keys
-  ;;   :keymaps 'empv-map
-  ;;   "ov" '(:ignore t :which-key "Video Player"))
- ;; :config
-  ;;(bind-key "C-x m" empv-map)
+  :config
+  (setq empv-invidious-instance "https://invidious.flokinet.to/api/v1")
+  (setq empv-youtube-use-tabulated-results t)
+  (add-to-list 'empv-mpv-args "--ytdl-format=best")
   )
+
+
 
 
 (use-package transmission

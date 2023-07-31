@@ -4,19 +4,15 @@
 
 ;;;; Treesitter support
 ;;(use-package r-ts-mode
-;;  :init
-;;  ;; tmp
-;;  (unless (package-installed-p 'r-ts-mode)
-;;    (package-vc-install "https://github.com/sje30/r-ts-mode")
-;;    )
 ;;  :mode "\\.R$")
 
 
 
 (use-package ess
-  ;;:hook (ess-r-mode . eglot-ensure)
   :defer t
   )
+
+
 
 ;; TODO: update package
 ;; TODO: rewrite package for auto-update
@@ -33,13 +29,23 @@
     (R-vterm-repl)
     (evil-insert-state)
     )
-  :hook (ess-r-mode . R-vterm-mode)
+  :hook ((r-mode . R-vterm-mode)
+	 (r-ts-mode . R-vterm-mode))
   :general
   (k8x1d/leader-keys
     "orr" '(R-vterm-repl :which-key "R")
     )
   (k8x1d/local-leader-keys
     :keymaps 'ess-r-mode-map
+    ;;"'" '(julia-vterm-switch-to-repl-buffer :which-key "Open REPL")
+    "'" '(k8x1d/open-R-repl-at-bottom :which-key "Open REPL")
+    "l" '(R-vterm-send-region-or-current-line :which-key "Send line")
+    "b" '(R-vterm-send-buffer :which-key "Send buffer")
+    "f" '(R-vterm-send-include-buffer-file :which-key "Send file")
+    "r" '(R-vterm-send-region-or-current-line :which-key "Send region")
+    )
+  (k8x1d/local-leader-keys
+    :keymaps 'r-ts-mode-map
     ;;"'" '(julia-vterm-switch-to-repl-buffer :which-key "Open REPL")
     "'" '(k8x1d/open-R-repl-at-bottom :which-key "Open REPL")
     "l" '(R-vterm-send-region-or-current-line :which-key "Send line")

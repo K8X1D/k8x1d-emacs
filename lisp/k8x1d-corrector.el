@@ -66,10 +66,9 @@
 
 ;; FIXME: heavy demand on ram
 (use-package eglot-ltex
-  :defer t
- ;; :hook (text-mode . (lambda ()
- ;;                      (require 'eglot-ltex)
- ;;                      (eglot-ensure)))
+  :hook (text-mode . (lambda ()
+                       (require 'eglot-ltex)
+                       (eglot-ensure)))
   :init
   ;; FIXME: find way to ignore markup (e.g. org, tex, etc); Problem is not present with lsp-ltex (solved by lsp https://github.com/emacs-languagetool/lsp-ltex/issues/10)
   ;;(setq eglot-languagetool-server-path (concat user-emacs-cache-directory "/ltex-ls-16.0.0/")) ;; don't work

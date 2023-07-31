@@ -19,12 +19,11 @@
 
 ;; Add icons to corfu
 (use-package kind-icon
+  :defer nil
   :after corfu
-  :custom
-  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
   :config
+  (setq kind-icon-default-face 'corfu-default) ;; to compute blended backgrounds correctly
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
-
 
 ;; Add icons to dired
 (use-package all-the-icons-dired

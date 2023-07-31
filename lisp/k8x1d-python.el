@@ -1,3 +1,9 @@
+;; Inspirations:
+;; - https://www.adventuresinwhy.com/post/eglot/
+
+;; Open python files in tree-sitter mode.
+;;(add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+
 (use-package python-mode
   :general
   (k8x1d/local-leader-keys
