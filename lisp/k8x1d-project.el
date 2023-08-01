@@ -12,17 +12,12 @@
 (use-package project
   :general 
   (k8x1d/leader-keys
-   "p"  '(:ignore t :which-key "Projects")
-   "pp" '(project-switch-project :which-key "Switch")
-   "pc" '(project-compile :which-key "Compile")
-   "pe" '(dired-sidebar-toggle-sidebar :which-key "Explorer")
-   "pf" '(project-find-file :which-key "Find file")
-   "pd" '(project-find-dir :which-key "Find dir")
-   "pr" '(project-find-regexp :which-key "Find regexp")
+   "p" '(:keymap project-prefix-map
+		 :which-key "Project")
+    :keymaps 'project-prefix-map
+    "po" '(:ignore t :which-key "Open")
+    "poe" '(dired-sidebar-toggle-sidebar :which-key "Explorer")
    )
-  :bind
-  (("C-x p o t" . multi-vterm-project)
-   ("C-x p o e" . dired-sidebar-toggle-sidebar))
   )
 
 

@@ -11,9 +11,11 @@
   :defer t
   :general 
   (k8x1d/leader-keys
-    "p"  '(:ignore t :which-key "Projects")
-    "pt" '(multi-vterm-project :which-key "Terminal")
     "ot" '(multi-vterm-dedicated-toggle :which-key "Terminal")
+   )
+  (k8x1d/leader-keys
+    :keymaps 'project-prefix-map
+    "pt" '(multi-vterm-project :which-key "Terminal")
    )
   :config
   (add-hook 'vterm-mode-hook
