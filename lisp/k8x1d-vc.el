@@ -48,7 +48,10 @@
 
 (use-package magit-org-todos
   :after magit
-  :bind ("C-x p t" ("Todo list" . magit-org-todos--magit-visit-org-todo))
+  :general
+  (k8x1d/leader-keys
+    :keymaps 'project-prefix-map
+    "pl" '(magit-org-todos--magit-visit-org-todo :which-key "Todo list"))
   :config
   (magit-org-todos-autoinsert))
 
