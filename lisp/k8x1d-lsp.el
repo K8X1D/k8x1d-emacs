@@ -8,7 +8,10 @@
   :general
   (k8x1d/leader-keys
     "l" '(:ignore t :which-key "LSP")
-    "la" '(eglot-code-actions :which-key "Action"))
+    "la" '(eglot-code-actions :which-key "Action")
+    "lc" '(eglot-show-workspace-configuration :which-key "Show config")
+    "ld" '(eglot-shutdown :which-key "Disconnect")
+    "lD" '(eglot-shutdown-all :which-key "Disconnect all"))
   :hook
   ((ess-r-mode . eglot-ensure)
    (r-ts-mode . eglot-ensure)
@@ -17,14 +20,16 @@
    (python-mode . eglot-ensure)
    (python-ts-mode . eglot-ensure)
    (scheme-mode . eglot-ensure)
-   (scheme-mode . eglot-ensure)
-   )
+   (LaTeX-mode . eglot-ensure)
+   (text-mode . eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(r-ts-mode . ("R" "--slave" "-e" "languageserver::run()")))
   (add-to-list 'eglot-server-programs '(julia-ts-mode . ("julia" "-e" "using LanguageServer; runserver()")))
-  (add-to-list 'eglot-server-programs
-             '(scheme-mode . ("guile-lsp-server")))
+  (add-to-list 'eglot-server-programs '(scheme-mode . ("guile-lsp-server")))
+  ;; TODO: update to version 16.0, don't work for now, see https://github.com/valentjn/ltex-ls/issues/262
+  (add-to-list 'eglot-server-programs '(text-mode . ("ltex-ls")))
 )
+
 
 ;; ;;
 ;; ;; LSP-bridge configuration
