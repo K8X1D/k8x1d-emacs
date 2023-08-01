@@ -21,7 +21,6 @@
    "ie" '(LaTeX-environment :which-key "Environment")
     )
   :hook ((LaTeX-mode . visual-line-mode)
-	;; (LaTeX-mode . eglot-ensure)
 	 )
   :bind
   (:map LaTeX-mode-map
