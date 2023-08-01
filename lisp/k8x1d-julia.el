@@ -22,6 +22,9 @@
     (evil-insert-state)
     )
   :general
+  (k8x1d/leader-keys
+    "orj" '(julia-vterm-repl :which-key "Julia")
+    )
   (k8x1d/local-leader-keys
     :keymaps 'julia-ts-mode-map
     ;;"'" '(julia-vterm-switch-to-repl-buffer :which-key "Open REPL")
@@ -33,10 +36,6 @@
     )
   :hook ((julia-mode . julia-vterm-mode)
 	 (julia-ts-mode . julia-vterm-mode))
-  :bind 
-  (("C-c o r j" . julia-vterm-repl)
-   :map julia-vterm-mode-map
-   ("C-c i" . julia-vterm-send-include-buffer-file))
   :config
   (setq vterm-kill-buffer-on-exit nil))
 
