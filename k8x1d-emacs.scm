@@ -1293,7 +1293,7 @@ options, do `M-x customize-group empv`.")
 		       ;; emacs-auctex-latexmk ;; dont't work
 		       emacs-tab-bar-echo-area
 		       emacs-org-appear
-		       emacs-eglot-ltex
+		       ;; emacs-eglot-ltex
 		       ;; emacs-dashboard ;; do work well with emacs 29
 		       ;; emacs-org-pdftools ;; don't build
 		       ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
