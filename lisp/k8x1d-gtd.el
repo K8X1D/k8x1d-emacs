@@ -31,13 +31,13 @@
 
   ;; Org directory
   (setq 
-   org-directory "~/Dropbox/org"
+   org-directory "~/Dropbox/Gmail/org"
    ;; Replaced by doom
    ;;   org-todo-keywords
    ;;   '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "KILL(k)"))
-   org-agenda-files (append (file-expand-wildcards "~/Dropbox/org/gtd/*.org")
-			    (file-expand-wildcards "~/Dropbox/org/doom/*.org")
-			    (file-expand-wildcards "~/Dropbox/org/gtd_alt/*.org")))
+   org-agenda-files (append (file-expand-wildcards "~/Dropbox/Gmail/org/gtd/*.org")
+			    (file-expand-wildcards "~/Dropbox/Gmail/org/doom/*.org")
+			    (file-expand-wildcards "~/Dropbox/Gmail/org/gtd_alt/*.org")))
 
 
   ;; From doom configuration

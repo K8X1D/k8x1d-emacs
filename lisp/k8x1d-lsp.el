@@ -6,12 +6,27 @@
   :init
   (setq eglot-connect-timeout 180) ;; prevent eglot timeout
   :general
-  (k8x1d/leader-keys
-    "l" '(:ignore t :which-key "LSP")
-    "la" '(eglot-code-actions :which-key "Action")
-    "lc" '(eglot-show-workspace-configuration :which-key "Show config")
-    "ld" '(eglot-shutdown :which-key "Disconnect")
-    "lD" '(eglot-shutdown-all :which-key "Disconnect all"))
+  ;; Set to local instead
+  ;; (k8x1d/leader-keys
+  ;;   "l" '(:ignore t :which-key "LSP")
+  ;;   "la" '(eglot-code-actions :which-key "Action")
+  ;;   "lc" '(eglot-show-workspace-configuration :which-key "Show config")
+  ;;   "lf" '(:ignore t :which-key "Format")
+  ;;   "lfr" '(eglot-format :which-key "Region")
+  ;;   "lff" '(eglot-format-buffer :which-key "File")
+  ;;   "ld" '(eglot-shutdown :which-key "Disconnect")
+  ;;   "lD" '(eglot-shutdown-all :which-key "Disconnect all"))
+  (k8x1d/local-leader-keys
+    :keymaps 'eglot-mode-map
+    "L" '(:ignore t :which-key "LSP")
+    "La" '(eglot-code-actions :which-key "Action")
+    "Lc" '(eglot-show-workspace-configuration :which-key "Show config")
+    "K" '(eldoc :which-key "Documentation")
+    "Lf" '(:ignore t :which-key "Format")
+    "Lfr" '(eglot-format :which-key "Region")
+    "Lff" '(eglot-format-buffer :which-key "File")
+    "Ld" '(eglot-shutdown :which-key "Disconnect")
+    "LD" '(eglot-shutdown-all :which-key "Disconnect all"))
   :hook
   ((ess-r-mode . eglot-ensure)
    (r-ts-mode . eglot-ensure)
@@ -23,6 +38,10 @@
    (LaTeX-mode . eglot-ensure)
    (text-mode . eglot-ensure))
   :config
+  ;; eldoc
+  (setq eldoc-idle-delay nil)
+
+  ;; Extra language support
   (add-to-list 'eglot-server-programs '(r-ts-mode . ("R" "--slave" "-e" "languageserver::run()")))
   (add-to-list 'eglot-server-programs '(julia-ts-mode . ("julia" "-e" "using LanguageServer; runserver()")))
   (add-to-list 'eglot-server-programs '(scheme-mode . ("guile-lsp-server")))
@@ -81,7 +100,8 @@
 (use-package flymake
   :defer t
   :general
-  (k8x1d/leader-keys
+  (k8x1d/local-leader-keys
+    :keymaps 'flymake-mode-map
     "d" '(:ignore t :which-key "Diagnostic")
     "db" '(flymake-show-buffer-diagnostics :which-key "List")
     "dn" '(flymake-goto-next-error :which-key "Next")

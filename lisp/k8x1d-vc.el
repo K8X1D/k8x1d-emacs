@@ -3,7 +3,6 @@
 ;;
 
 (use-package magit
-  :defer t
   :init
   (defun k8x1d/magit-status-w-forge-upd ()
     (interactive)

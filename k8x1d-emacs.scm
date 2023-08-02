@@ -1270,6 +1270,9 @@ options, do `M-x customize-group empv`.")
     ;; Terminal
     "emacs-eat" ;; Terminal emulator in Emacs
 
+    ;; Notifications
+    "emacs-ednc" ;; Emacs Desktop Notification Center
+
     ;;"emacs-julia-mode" ;; Major mode for Julia
 
     ))

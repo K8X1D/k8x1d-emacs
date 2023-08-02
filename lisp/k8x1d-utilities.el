@@ -26,6 +26,25 @@
 
   )
 
+;; Notification management
+(use-package ednc
+  :hook (after-init . ednc-mode)
+  :config
+  (defun list-notifications ()
+    (mapconcat #'ednc-format-notification (ednc-notifications) ""))
+  (defun stack-notifications (&optional hide)
+    (mapconcat (lambda (notification)
+		 (let ((app-name (ednc-notification-app-name notification)))
+		   (unless (member app-name hide)
+		     (push app-name hide)
+		     (ednc-format-notification notification))))
+	       (ednc-notifications) ""))
+  (nconc global-mode-string '((:eval (stack-notifications))))  ; or list 
+  (add-hook 'ednc-notification-presentation-functions
+  	    (lambda (&rest _) (force-mode-line-update t)))
+  )
+
+
 (provide 'k8x1d-utilities)
 
 

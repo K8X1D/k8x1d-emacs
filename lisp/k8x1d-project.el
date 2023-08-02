@@ -13,8 +13,8 @@
   :general 
   (k8x1d/leader-keys
    "p" '(:keymap project-prefix-map
-		 :which-key "Project")
-    :keymaps 'project-prefix-map
+		 :which-key "Project"))
+  (k8x1d/leader-keys
     "po" '(:ignore t :which-key "Open")
     "poe" '(dired-sidebar-toggle-sidebar :which-key "Explorer")
    )

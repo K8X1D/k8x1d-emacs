@@ -22,6 +22,8 @@
   ((org-mode . org-indent-mode)
    (org-mode . visual-line-mode))
   :config
+  ;; Footnotes
+  (setq org-footnote-auto-adjust t)
 
   ;; Prettify
   (setq org-pretty-entities t)
@@ -331,13 +333,6 @@
 	  (setq org-pomodoro-long-break-length org-pomodoro-long-break-initial-value)
 	  ))
   )
-
-
-
-(print (ceiling (* 9 0.1)))
-(print (floor (* 9 0.9)))
-(print (floor (* 9 0.5)))
-
 
 
 ;; (use-package org-pdftools
