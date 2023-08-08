@@ -4,5 +4,5 @@ GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
 GUIX_EXTRA=$HOME/.guix-extra
 PROJECT_ROOT=$PWD/..
 
-guix pull --allow-downgrades --channels=channels.scm --profile="$GUIX_EXTRA/$PROJECT_NAME/guix"
+guix pull --channels=channels.scm --profile="$GUIX_EXTRA/$PROJECT_NAME/guix"
 "$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest=k8x1d-emacs.scm --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
