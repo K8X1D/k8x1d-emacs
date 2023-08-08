@@ -35,11 +35,17 @@
    (doom-themes-visual-bell-config)
    ;; Corrects (and improves) org-mode's native fontification.
    (doom-themes-org-config)
+
+;; Must be used *after* the theme is loaded
+    (custom-set-faces
+     `(org-block ((t (:background "#28003d"))))
+     `(org-inline-src-block ((t (:background "#28003d"))))
+     `(org-block-begin-line ((t (:background "#28003d"))))
+     `(org-block-end-line ((t (:background "#28003d")))))
    :hook
    (after-init . (lambda () 
  		  (load-theme k8x1d/actual-theme t)))
    )
-
 
 ;; (use-package emacs
 ;;   ;;:hook (after-init . (lambda () (load-theme 'modus-vivendi)))

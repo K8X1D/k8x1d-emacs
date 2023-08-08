@@ -59,9 +59,9 @@
   ;; set particulat font for modeline
  ;; (setq doom-modeline-height 1) ; optional
   (if (facep 'mode-line-active)
-      (set-face-attribute 'mode-line-active nil :family "Hack" :height 120) ; For 29+
-    (set-face-attribute 'mode-line nil :family "Hack" :height 120))
-  (set-face-attribute 'mode-line-inactive nil :family "Hack" :height 120)
+      (set-face-attribute 'mode-line-active nil :family "Iosevka Term" :height 120) ; For 29+
+    (set-face-attribute 'mode-line nil :family "Iosevka Term" :height 120))
+  (set-face-attribute 'mode-line-inactive nil :family "Iosevka Term" :height 120)
 
   )
 

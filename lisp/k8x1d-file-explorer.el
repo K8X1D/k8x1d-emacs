@@ -5,6 +5,11 @@
 
 ;; General configurations
 (use-package dired
+  :general
+  (k8x1d/leader-keys
+    "od" '(dired-jump :which-key "Directory")
+    "oD" '(dired :which-key "File explorer")
+    )
   :config
   (setq dired-auto-revert-buffer t))
 
@@ -12,7 +17,11 @@
 
 ;; File explorer
 (use-package dired-sidebar
-  :bind (("C-c o e" . dired-sidebar-toggle-sidebar))
+  :after project
+  :general 
+  (k8x1d/leader-keys
+    "poe" '(dired-sidebar-toggle-sidebar :which-key "Explorer")
+   )
   :commands (dired-sidebar-toggle-sidebar)
   :init
   (add-hook 'dired-sidebar-mode-hook

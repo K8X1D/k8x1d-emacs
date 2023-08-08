@@ -39,11 +39,12 @@
    (text-mode . eglot-ensure))
   :config
   ;; eldoc
-  (setq eldoc-idle-delay nil)
+  ;;(setq eldoc-idle-delay nil)
 
   ;; Extra language support
   (add-to-list 'eglot-server-programs '(r-ts-mode . ("R" "--slave" "-e" "languageserver::run()")))
-  (add-to-list 'eglot-server-programs '(julia-ts-mode . ("julia" "-e" "using LanguageServer; runserver()")))
+  (add-to-list 'eglot-server-programs '(ess-r-mode . ("R" "--slave" "-e" "languageserver::run()")))
+  (add-to-list 'eglot-server-programs '(julia-ts-mode . ("julia" "--project=~/.julia/packages/LanguageServer/0vsx2/src" "-e" "using LanguageServer; runserver()")))
   (add-to-list 'eglot-server-programs '(scheme-mode . ("guile-lsp-server")))
   ;; TODO: update to version 16.0, don't work for now, see https://github.com/valentjn/ltex-ls/issues/262
   (add-to-list 'eglot-server-programs '(text-mode . ("ltex-ls")))

@@ -30,14 +30,11 @@
    org-agenda-skip-timestamp-if-done t)
 
   ;; Org directory
-  (setq 
-   org-directory "~/Dropbox/Gmail/org"
-   ;; Replaced by doom
-   ;;   org-todo-keywords
-   ;;   '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "KILL(k)"))
-   org-agenda-files (append (file-expand-wildcards "~/Dropbox/Gmail/org/gtd/*.org")
-			    (file-expand-wildcards "~/Dropbox/Gmail/org/doom/*.org")
-			    (file-expand-wildcards "~/Dropbox/Gmail/org/gtd_alt/*.org")))
+  (setq org-directory "~/org")
+  (setq org-agenda-files (append (file-expand-wildcards "~/Dropbox/Gmail/org/gtd/*.org")
+				 (file-expand-wildcards "~/Dropbox/Gmail/org/doom/*.org")
+				 (file-expand-wildcards "~/org/gtd/*.org")
+				 ))
 
 
   ;; From doom configuration
@@ -59,25 +56,12 @@
 	   "|"
 	   "DONE(d)"  ; Task successfully completed
 	   "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
-	  (sequence
-	   "[ ](T)"   ; A task that needs doing
-	   "[-](S)"   ; Task is in progress
-	   "[?](W)"   ; Task is being held up or paused
-	   "|"
-	   "[X](D)")  ; Task was completed
-	  (sequence
-	   "|"
-	   "OKAY(o)"
-	   "YES(y)"
-	   "NO(n)"))
+	  )
 	org-todo-keyword-faces
-	'(("[-]"  . +org-todo-active)
-	  ("STRT" . +org-todo-active)
-	  ("[?]"  . +org-todo-onhold)
+	'(("STRT" . +org-todo-active)
 	  ("WAIT" . +org-todo-onhold)
 	  ("HOLD" . +org-todo-onhold)
 	  ("PROJ" . +org-todo-project)
-	  ("NO"   . +org-todo-cancel)
 	  ("KILL" . +org-todo-cancel)))
 
   ;; Refile configuration

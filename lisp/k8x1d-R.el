@@ -1,18 +1,11 @@
-
-
-
-
 ;;;; Treesitter support
+;; Not complete enough...
 ;;(use-package r-ts-mode
 ;;  :mode "\\.R$")
-
-
 
 (use-package ess
   :defer t
   )
-
-
 
 ;; TODO: update package
 ;; TODO: rewrite package for auto-update

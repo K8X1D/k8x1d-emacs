@@ -1,5 +1,4 @@
 (use-package org
-  :defer t
   :general
   (k8x1d/leader-keys
    "oa" '(org-agenda :which-key "Agenda")
@@ -26,7 +25,7 @@
   (setq org-footnote-auto-adjust t)
 
   ;; Prettify
-  (setq org-pretty-entities t)
+  (setq org-pretty-entities t) ;;
 
   (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
   (setq org-image-actual-width nil)
@@ -162,53 +161,44 @@
    'org-babel-load-languages
    '((sql . t)
      (shell . t)
-     (julia-vterm . t)))
+     (julia . t)
+     (R . t)
+     (python . t)))
 
   ;; Src block
   (setq org-src-preserve-indentation t)
+
   )
 
 
-(use-package org-agenda
-  :defer t
-  :bind
-  (:map org-agenda-mode-map
-   ("C-SPC" . org-agenda-show-and-scroll-up)))
-
-
-;;(use-package org-modern
-;;  :hook (after-init . global-org-modern-mode)
-;; ;; :custom
-;;;;  (org-modern-table nil)
-;;  :config
-;;  ;; Tmp fix, see https://github.com/minad/org-modern/issues/5
-;;  (custom-set-variables '(org-modern-table nil))
-;;  (setq
+;; (use-package org-modern
+;;   :hook ((org-mode . org-modern-mode)
+;; 	 (org-agenda-finalize . org-modern-agenda))
+;;   :config
 ;;   ;; Edit settings
-;;   org-auto-align-tags nil
-;;   org-tags-column 0
-;;   org-catch-invisible-edits 'show-and-error
-;;   org-special-ctrl-a/e t
-;;   org-insert-heading-respect-content t
-;;
+;;   (setq org-auto-align-tags nil)
+;;   (setq org-tags-column 0)
+;;   (setq org-catch-invisible-edits 'show-and-error)
+;;   (setq org-special-ctrl-a/e t)
+;;   (setq org-insert-heading-respect-content t)
+
 ;;   ;; Org styling, hide markup etc.
-;;   org-pretty-entities t
-;;   org-ellipsis "…"
-;;
+;;   (setq org-hide-emphasis-markers t)
+;;   (setq org-pretty-entities t)
+;;   (setq org-ellipsis "…")
+
 ;;   ;; Agenda styling
-;;   org-agenda-tags-column 0
-;;   org-agenda-block-separator ?─
-;;   org-agenda-time-grid
-;;   '((daily today require-timed)
-;;     (800 1000 1200 1400 1600 1800 2000)
-;;     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
-;;   org-agenda-current-time-string
-;;   "⭠ now ─────────────────────────────────────────────────")
-;;  )
+;;   (setq org-agenda-tags-column 0)
+;;   (setq org-agenda-block-separator ?─)
+;;   (setq org-agenda-time-grid
+;; 	'((daily today require-timed)
+;; 	  (800 1000 1200 1400 1600 1800 2000)
+;; 	  " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+;;   (setq org-agenda-current-time-string "⭠ now ─────────────────────────────────────────────────")
+;;   )
 
 ;; Prettify bullets
 (use-package org-superstar
-  :defer t
   :hook
   (org-mode . org-superstar-mode)
   :config
@@ -227,6 +217,11 @@
 					  (?- . ?•)))
   )
 
+(use-package org-agenda
+  :bind
+  (:map org-agenda-mode-map
+   ("C-SPC" . org-agenda-show-and-scroll-up)))
+
 ;; Prettify priorities
 (use-package org-fancy-priorities
   :defer t
@@ -236,13 +231,68 @@
   (setq org-fancy-priorities-list '("[!]" "[*]" "[-]")))
 
 
+
+;; Prettify tags 
+(use-package svg-tag-mode
+  :init
+  ;; Set faces
+  (defface svg-tag-todo '((t (:inherit org-todo  :height 0.5))) "Face for todo")
+  (defface svg-tag-wait '((t (:inherit +org-todo-onhold :height 0.5))) "Face for wait")
+  (defface svg-tag-kill '((t (:inherit +org-todo-cancel :height 0.5))) "Face for kill")
+  (defface svg-tag-done '((t (:inherit org-done  :height 0.5))) "Face for done")
+
+
+  (defface svg-tag-proj '((t (:inherit +org-todo-project  :height 0.5))) "Face for proj")
+  (defface svg-tag-loop '((t (:inherit org-todo  :height 0.5))) "Face for loop")
+  (defface svg-tag-strt '((t (:inherit +org-todo-active  :height 0.5))) "Face for strt")
+  (defface svg-tag-hold '((t (:inherit +org-todo-onhold  :height 0.5))) "Face for hold")
+  (defface svg-tag-idea '((t (:inherit org-todo  :height 0.5))) "Face for idea")
+  ;; Org agenda tweak for showing svg
+  (defun org-agenda-show-svg ()
+    (let* ((case-fold-search nil)
+           (keywords (mapcar #'svg-tag--build-keywords svg-tag--active-tags))
+           (keyword (car keywords)))
+      (while keyword
+        (save-excursion
+          (while (re-search-forward (nth 0 keyword) nil t)
+            (overlay-put (make-overlay
+                          (match-beginning 0) (match-end 0))
+                         'display  (nth 3 (eval (nth 2 keyword)))) ))
+        (pop keywords)
+        (setq keyword (car keywords)))))
+
+  ;; fix font problem, see https://github.com/rougier/svg-tag-mode/issues/38;; Don't work for new tags
+  (add-hook 'after-setting-font-hook (lambda () (setq svg-lib-style-default (svg-lib-style-compute-default))))
+ ;; :hook ((org-mode . svg-tag-mode)
+ ;;	 (org-agenda-mode . svg-tag-mode)
+ ;;	 (org-agenda-finalize . org-agenda-show-svg))
+  :config
+  ;; fix font problem, see https://github.com/rougier/svg-tag-mode/issues/38
+  (plist-put svg-lib-style-default :font-family "Iosevka Term")
+  (plist-put svg-lib-style-default :font-size 14)
+  (setq tree-sitter-hl-use-font-lock-keywords t)
+  (setq svg-tag-tags
+	'(
+	  ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'svg-tag-todo :inverse t))))
+	  ("WAIT" . ((lambda (tag) (svg-tag-make "WAIT" :face 'svg-tag-wait :inverse t))))
+	  ("KILL" . ((lambda (tag) (svg-tag-make "KILL" :face 'svg-tag-kill :inverse t))))
+	  ("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'svg-tag-done :inverse t))))
+	  ("PROJ" . ((lambda (tag) (svg-tag-make "PROJ" :face 'svg-tag-proj :inverse t))))
+	  ("LOOP" . ((lambda (tag) (svg-tag-make "LOOP" :face 'svg-tag-loop :inverse t))))
+	  ("STRT" . ((lambda (tag) (svg-tag-make "STRT" :face 'svg-tag-strt :inverse t))))
+	  ("HOLD" . ((lambda (tag) (svg-tag-make "HOLD" :face 'svg-tag-hold :inverse t))))
+	  ("IDEA" . ((lambda (tag) (svg-tag-make "IDEA" :face 'svg-tag-idea :inverse t))))
+
+	  ;;(":.+:" . ((lambda (tag) (svg-tag-make tag))))
+	  ("#\\+[A-Z]+:" . ((lambda (tag) (svg-tag-make tag))))
+	  )
+	)
+  )
+
 (use-package org-auto-tangle
-  :defer t
   :hook (org-mode . org-auto-tangle-mode))
 
-;;;; FIXME: don't work
 (use-package org-appear
-  :defer t
   :init
   (add-hook 'org-mode-hook (lambda ()
 			     (add-hook 'evil-insert-state-entry-hook
@@ -271,7 +321,6 @@
 ;; Table of content
 ;; From https://github.com/doomemacs/doomemacs/blob/master/modules/lang/org/config.el
 (use-package toc-org
-  :defer t
   ;;:bind (:map markdown-mode-map
   ;;	      ("C-c C-o" . toc-org-markdown-follow-thing-at-point))
   :hook ((org-mode . toc-org-mode)
@@ -333,6 +382,9 @@
 	  (setq org-pomodoro-long-break-length org-pomodoro-long-break-initial-value)
 	  ))
   )
+
+
+
 
 
 ;; (use-package org-pdftools

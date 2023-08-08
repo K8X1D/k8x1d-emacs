@@ -136,5 +136,12 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
 )
 
+;;
+;; Company
+;;
+
+
+(use-package company)
+(use-package company-posframe)
 
 (provide 'k8x1d-completion)

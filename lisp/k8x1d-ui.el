@@ -4,8 +4,7 @@
   :hook (
 	 (after-init . global-hl-todo-mode) ;; Highlights "TODOs" 
 	 (after-init . global-auto-revert-mode) ;; Update buffer when file change
-	 (prog-mode-hook . hl-line-mode) ;; Highlight whole line
-	 (text-mode-hook . hl-line-mode) ;; Highlight whole line
+	 (after-init . global-hl-line-mode) ;; Highlight whole line
 	 (after-init . pixel-scroll-precision-mode) ;; Better scrolling effects
 	 ;; Show line number for programming mode 
 	 (prog-mode . display-line-numbers-mode)

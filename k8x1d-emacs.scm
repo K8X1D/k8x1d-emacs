@@ -1,4 +1,3 @@
-;; TODO: fuse with emacs-pgtk
 ;;
 ;; Modules
 ;;
@@ -22,7 +21,6 @@
 	      #:select (%default-include %default-exclude))
 	     (guix store)
 	     (guix utils)
-	     (guix packages)
 	     (guix gexp)
 	     (guix monads)
 	     (guix search-paths)
@@ -48,36 +46,36 @@
     (module-ref emacs-mod 'emacs-next-tree-sitter)))
 
 (define* (lower name
-                #:key source inputs native-inputs outputs system target
-                (emacs (emacs-treesitter))
-                #:allow-other-keys
-                #:rest arguments)
+		#:key source inputs native-inputs outputs system target
+		(emacs (emacs-treesitter))
+		#:allow-other-keys
+		#:rest arguments)
   "Return a bag for NAME."
   (define private-keywords
     '(#:target #:emacs #:inputs #:native-inputs))
 
   (and (not target)                               ;XXX: no cross-compilation
        (bag
-         (name name)
-         (system system)
-         (host-inputs `(,@(if source
-                              `(("source" ,source))
-                              '())
-                        ,@inputs
+	(name name)
+	(system system)
+	(host-inputs `(,@(if source
+			     `(("source" ,source))
+			     '())
+		       ,@inputs
 
-                        ;; Keep the standard inputs of 'gnu-build-system'.
-                        ,@(standard-packages)))
-         (build-inputs `(("emacs" ,emacs)
-                         ,@native-inputs))
-         (outputs outputs)
-         (build emacs-build)
-         (arguments (strip-keyword-arguments private-keywords arguments)))))
+		       ;; Keep the standard inputs of 'gnu-build-system'.
+		       ,@(standard-packages)))
+	(build-inputs `(("emacs" ,emacs)
+			,@native-inputs))
+	(outputs outputs)
+	(build emacs-build)
+	(arguments (strip-keyword-arguments private-keywords arguments)))))
 
 (define emacs-next-build-system
   (build-system
-    (name 'emacs)
-    (description "The build system for Emacs packages")
-    (lower lower)))
+   (name 'emacs)
+   (description "The build system for Emacs packages")
+   (lower lower)))
 
 ;;
 ;; Packages
@@ -123,33 +121,33 @@ each time, one can set `ibuffer-project-use-cache'.  Root info per directory
 will be stored in the `ibuffer-project-roots-cache variable.  Command
 `ibuffer-project-clear-cache allows to clear project info cache.")
    (license #f))
-)
+  )
 
 
 
 (define-public emacs-org-appear
   (package
    (name "emacs-org-appear")
-    (version "20220617.2355")
-    (source (origin
-	     (method git-fetch)
-	     (uri (git-reference
-		   (url "https://github.com/awth13/org-appear.git")
-		   (commit "eb9f9db40aa529fe4b977235d86494b115281d17")))
-	     (sha256 (base32
-		      "1hawkx6sgh52bg7rj22x148hx8hby276xmqks3kxyzvrxzi8yav9"))))
-    (build-system emacs-build-system)
-    (propagated-inputs (list emacs-org))
-    (home-page "https://github.com/awth13/org-appear")
-    (synopsis "Auto-toggle Org elements")
-    (description
-     "This package enables automatic visibility toggling of various Org elements
+   (version "20220617.2355")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/awth13/org-appear.git")
+		  (commit "eb9f9db40aa529fe4b977235d86494b115281d17")))
+	    (sha256 (base32
+		     "1hawkx6sgh52bg7rj22x148hx8hby276xmqks3kxyzvrxzi8yav9"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-org))
+   (home-page "https://github.com/awth13/org-appear")
+   (synopsis "Auto-toggle Org elements")
+   (description
+    "This package enables automatic visibility toggling of various Org elements
 depending on cursor position.  It supports automatic toggling of emphasis
 markers, links, subscripts and superscripts, entities, and keywords.  By
 default, toggling is instantaneous and only affects emphasis markers.  If Org
 mode custom variables that control visibility of elements are configured to show
 hidden parts, the respective `org-appear settings do not have an effect.")
-    (license #f))
+   (license #f))
   )
 
 
@@ -580,26 +578,26 @@ https://github.com/florommel/bufferlo")
   )
 
 (define-public emacs-embark-consult
-(package
-  (name "emacs-embark-consult")
-  (version "20230327.1843")
-  (source (origin
-            (method git-fetch)
-            (uri (git-reference
-                  (url "https://github.com/oantolin/embark.git")
-                  (commit "846b3fd311d06dd0f9aa20f133907ae10855c9ae")))
-            (sha256
-             (base32
-              "18kyh2pfzyvy3nx60wln255x1qqbncr4hlnjq7fd82aklghcdjc6"))))
-  (build-system emacs-build-system)
-  (propagated-inputs (list emacs-embark emacs-consult))
-  (arguments
-   '(#:include '("^embark-consult.el$")
-     #:exclude '()))
-  (home-page "https://github.com/oantolin/embark")
-  (synopsis "Consult integration for Embark")
-  (description
-   "This package provides integration between Embark and Consult.  The package will
+  (package
+   (name "emacs-embark-consult")
+   (version "20230327.1843")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/oantolin/embark.git")
+		  (commit "846b3fd311d06dd0f9aa20f133907ae10855c9ae")))
+	    (sha256
+	     (base32
+	      "18kyh2pfzyvy3nx60wln255x1qqbncr4hlnjq7fd82aklghcdjc6"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-embark emacs-consult))
+   (arguments
+    '(#:include '("^embark-consult.el$")
+      #:exclude '()))
+   (home-page "https://github.com/oantolin/embark")
+   (synopsis "Consult integration for Embark")
+   (description
+    "This package provides integration between Embark and Consult.  The package will
 be loaded automatically by Embark.  Some of the functionality here was
 previously contained in Embark itself: - Support for consult-buffer, so that you
 get the correct actions for each type of entry in consult-buffer's list. -
@@ -616,54 +614,54 @@ whenever it possible use: (add-hook embark-collect-mode-hook
 #'consult-preview-at-point-mode) If you don't want the minor mode automatically
 on and prefer to trigger the consult previews manually use this instead:
 (keymap-set embark-collect-mode-map \"C-j\" #'consult-preview-at-point)")
-  (license #f))
-)
+   (license #f))
+  )
 
 ;; TODO: repair
 (define-public python-tinytag 
-(package
-  (name "python-tinytag")
-  (version "1.8.1")
-  (source (origin
-            (method url-fetch)
-            (uri (pypi-uri "tinytag" version))
-            (sha256
-             (base32
-              "0vb3hy2dpmb55qip1msl89xiryqmm6mn385ad25mk99ig08b6fin"))))
-  (build-system python-build-system)
-  (native-inputs (list python-flake8 python-pytest python-pytest-cov))
-  (home-page "https://github.com/devsnd/tinytag")
-  (synopsis
-   "Read music meta data and length of MP3, OGG, OPUS, MP4, M4A, FLAC, WMA and Wave files")
-  (description
-   "Read music meta data and length of MP3, OGG, OPUS, MP4, M4A, FLAC, WMA and Wave
+  (package
+   (name "python-tinytag")
+   (version "1.8.1")
+   (source (origin
+	    (method url-fetch)
+	    (uri (pypi-uri "tinytag" version))
+	    (sha256
+	     (base32
+	      "0vb3hy2dpmb55qip1msl89xiryqmm6mn385ad25mk99ig08b6fin"))))
+   (build-system python-build-system)
+   (native-inputs (list python-flake8 python-pytest python-pytest-cov))
+   (home-page "https://github.com/devsnd/tinytag")
+   (synopsis
+    "Read music meta data and length of MP3, OGG, OPUS, MP4, M4A, FLAC, WMA and Wave files")
+   (description
+    "Read music meta data and length of MP3, OGG, OPUS, MP4, M4A, FLAC, WMA and Wave
 files")
-  (license license:expat))
+   (license license:expat))
 
-)
+  )
 
 
 ;; guix version don't have access to spinner symbol for lsp 
 ;; error in process filter: Symbol’s function definition is void: eglot--spinner
 
 (define-public emacs-doom-modeline 
-(package
-  (name "emacs-doom-modeline")
-  (version "20230415.1710")
-  (source (origin
-            (method git-fetch)
-            (uri (git-reference
-                  (url "https://github.com/seagle0128/doom-modeline.git")
-                  (commit "ed72a56f4b1ae7c13cfb14aa17c77b9400fd222f")))
-            (sha256
-             (base32
-              "007c666c49g4h8nn4wizmnwfgvsgmql48n17499nm3ambk2jcysk"))))
-  (build-system emacs-build-system)
-  (propagated-inputs (list emacs-compat emacs-shrink-path))
-  (home-page "https://github.com/seagle0128/doom-modeline")
-  (synopsis "A minimal and modern mode-line")
-  (description
-   "This package offers a fancy and fast mode-line inspired by minimalism design.
+  (package
+   (name "emacs-doom-modeline")
+   (version "20230415.1710")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/seagle0128/doom-modeline.git")
+		  (commit "ed72a56f4b1ae7c13cfb14aa17c77b9400fd222f")))
+	    (sha256
+	     (base32
+	      "007c666c49g4h8nn4wizmnwfgvsgmql48n17499nm3ambk2jcysk"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-compat emacs-shrink-path))
+   (home-page "https://github.com/seagle0128/doom-modeline")
+   (synopsis "A minimal and modern mode-line")
+   (description
+    "This package offers a fancy and fast mode-line inspired by minimalism design.
 It's integrated into Doom Emacs (https://github.com/hlissner/doom-emacs) and
 Centaur Emacs (https://github.com/seagle0128/.emacs.d).  The doom-modeline
 offers: - A match count panel (for anzu, iedit, multiple-cursors,
@@ -690,8 +688,8 @@ New mode-line for git-timemachine buffers Installation: From melpa, `M-x
 package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
 (doom-modeline-mode 1) or (use-package doom-modeline :ensure t :hook (after-init
 .  doom-modeline-mode))")
-  (license #f))
-)
+   (license #f))
+  )
 
 (define-public emacs-ess-view-data 
   (package
@@ -775,19 +773,19 @@ $pdf_mode = 3; # .latexmkrc ends")
 (define-public emacs-tab-bar-echo-area
   (package
    (name "emacs-tab-bar-echo-area")
-    (version "20221115.1953")
-    (source (origin
-             (method git-fetch)
-             (uri (git-reference
-                   (url "https://github.com/fritzgrabo/tab-bar-echo-area.git")
-                   (commit "3ab62ca7db3c1d83f96b7971ea4b3b0101b51ae9")))
-             (sha256 (base32
-                      "0grapqwfqjbi9yzcirgd8gmkg4zkplagwvdyal4jd4aajnnx6sh8"))))
-    (build-system emacs-build-system)
-    (home-page "https://github.com/fritzgrabo/tab-bar-echo-area")
-    (synopsis "Display tab names of the tab bar in the echo area")
-    (description
-     "This package provides a global minor mode to temporarily display a list of
+   (version "20221115.1953")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/fritzgrabo/tab-bar-echo-area.git")
+		  (commit "3ab62ca7db3c1d83f96b7971ea4b3b0101b51ae9")))
+	    (sha256 (base32
+		     "0grapqwfqjbi9yzcirgd8gmkg4zkplagwvdyal4jd4aajnnx6sh8"))))
+   (build-system emacs-build-system)
+   (home-page "https://github.com/fritzgrabo/tab-bar-echo-area")
+   (synopsis "Display tab names of the tab bar in the echo area")
+   (description
+    "This package provides a global minor mode to temporarily display a list of
 available tabs and tab groups (with the current tab and group highlighted) in
 the echo area after tab-related commands.  This is intended to be used as an
 unobtrusive replacement for the Emacs built-in display of the tab bar (that is,
@@ -799,41 +797,41 @@ that help with common tab bar use-cases regarding the creation, selection and
 movement of tabs.  You might also want to check out the tab-bar-groups package,
 which backports a simplified version of Emacs 28 tab groups to Emacs 27 and
 provides an integration with this package.")
-    (license #f))
+   (license #f))
   )
 
 (define-public emacs-emms 
   (package
    (name "emacs-emms")
-    (version "20230619.1857")
-    (source (origin
-	     (method git-fetch)
-	     (uri (git-reference
-		   (url "https://git.savannah.gnu.org/git/emms.git")
-		   (commit "9e08a4b081abcf18c375214a50ff47f8919f8ab1")))
-	     (sha256 (base32
-		      "1hzvga5pqfndrhja3gkv382qrb7nvd9kxds9sphpr2s6f17wcwl2"))))
-    (build-system emacs-build-system)
-    (propagated-inputs (list emacs-nadvice emacs-seq))
-    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-			     "^dir$"
-			     "^[^/]+.info$"
-			     "^[^/]+.texi$"
-			     "^[^/]+.texinfo$"
-			     "^doc/dir$"
-			     "^doc/[^/]+.info$"
-			     "^doc/[^/]+.texi$"
-			     "^doc/[^/]+.texinfo$")
-		 #:exclude '("^.dir-locals.el$" "^test.el$"
-			     "^tests.el$"
-			     "^[^/]+-test.el$"
-			     "^[^/]+-tests.el$"
-			     "^doc/fdl.texi$"
-			     "^doc/gpl.texi$")))
-    (home-page "https://www.gnu.org/software/emms/")
-    (synopsis "The Emacs Multimedia System")
-    (description
-     "This is the very core of EMMS. It provides ways to play a track using
+   (version "20230619.1857")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://git.savannah.gnu.org/git/emms.git")
+		  (commit "9e08a4b081abcf18c375214a50ff47f8919f8ab1")))
+	    (sha256 (base32
+		     "1hzvga5pqfndrhja3gkv382qrb7nvd9kxds9sphpr2s6f17wcwl2"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-nadvice emacs-seq))
+   (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+			    "^dir$"
+			    "^[^/]+.info$"
+			    "^[^/]+.texi$"
+			    "^[^/]+.texinfo$"
+			    "^doc/dir$"
+			    "^doc/[^/]+.info$"
+			    "^doc/[^/]+.texi$"
+			    "^doc/[^/]+.texinfo$")
+		#:exclude '("^.dir-locals.el$" "^test.el$"
+			    "^tests.el$"
+			    "^[^/]+-test.el$"
+			    "^[^/]+-tests.el$"
+			    "^doc/fdl.texi$"
+			    "^doc/gpl.texi$")))
+   (home-page "https://www.gnu.org/software/emms/")
+   (synopsis "The Emacs Multimedia System")
+   (description
+    "This is the very core of EMMS. It provides ways to play a track using
 `emms-start', to go through the playlist using the commands `emms-next and
 `emms-previous', to stop the playback using `emms-stop', and to see what's
 currently playing using `emms-show'.  But in itself, this core is useless,
@@ -841,45 +839,45 @@ because it doesn't know how to play any tracks --- you need players for this.
 In fact, it doesn't even know how to find any tracks to consider playing --- for
 this, you need sources.  A sample configuration is offered in emms-setup.el, and
 the Friendly Manual in the doc/ directory is both detailed, and kept up to date.")
-    (license #f))
+   (license #f))
   )
 
- (define-public emacs-eglot-jl 
-   (package
-    (name "emacs-eglot-jl")
-    (version "20230601.1335")
-    (source (origin
- 	    (method git-fetch)
- 	    (uri (git-reference
- 		  (url "https://github.com/non-Jedi/eglot-jl.git")
- 		  (commit "7dc604fe42a459a987853d065cd6d0f3c4cbc02a")))
- 	    (sha256 (base32
- 		     "0ska1i7n2ykyxm3w64661x24ycfdn2vl7px0hv33llg2sbd9famf"))))
-    (build-system emacs-build-system)
-    (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
-    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
- 			    "^dir$"
- 			    "^[^/]+.info$"
- 			    "^[^/]+.texi$"
- 			    "^[^/]+.texinfo$"
- 			    "^doc/dir$"
- 			    "^doc/[^/]+.info$"
- 			    "^doc/[^/]+.texi$"
- 			    "^doc/[^/]+.texinfo$"
- 			    "^[^/]+.jl$"
- 			    "^[^/]+.toml$")
- 		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
- 			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
-    (home-page "https://github.com/non-Jedi/eglot-jl")
-    (synopsis "Julia support for eglot")
-    (description
-     "This package loads support for the Julia language server into eglot and
+(define-public emacs-eglot-jl 
+  (package
+   (name "emacs-eglot-jl")
+   (version "20230601.1335")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/non-Jedi/eglot-jl.git")
+		  (commit "7dc604fe42a459a987853d065cd6d0f3c4cbc02a")))
+	    (sha256 (base32
+		     "0ska1i7n2ykyxm3w64661x24ycfdn2vl7px0hv33llg2sbd9famf"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
+   (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+			    "^dir$"
+			    "^[^/]+.info$"
+			    "^[^/]+.texi$"
+			    "^[^/]+.texinfo$"
+			    "^doc/dir$"
+			    "^doc/[^/]+.info$"
+			    "^doc/[^/]+.texi$"
+			    "^doc/[^/]+.texinfo$"
+			    "^[^/]+.jl$"
+			    "^[^/]+.toml$")
+		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
+			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
+   (home-page "https://github.com/non-Jedi/eglot-jl")
+   (synopsis "Julia support for eglot")
+   (description
+    "This package loads support for the Julia language server into eglot and
  package.el.  This provides IDE-like features for editing julia-mode buffers.
  After installing this package, to load support for the Julia language server,
  run eglot-jl-init.  After that, running the eglot function in a julia-mode
  buffer should work properly.")
-    (license #f))
- )
+   (license #f))
+  )
 
 ;; Doesn't seems to work; mention problem with eglot-jl file not findable
 ;; (define-public emacs-eglot-jl 
@@ -938,48 +936,48 @@ org-agenda and more.")
 (define-public emacs-org-pdftools 
   (package
    (name "emacs-org-pdftools")
-    (version "20220320.301")
-    (source (origin
-	     (method git-fetch)
-	     (uri (git-reference
-		   (url "https://github.com/fuxialexander/org-pdftools.git")
-		   (commit "967f48fb5038bba32915ee9da8dc4e8b10ba3376")))
-	     (sha256 (base32
-		      "0f47ww8r00b7lb1msybnmnqdhm9i2vwz5lrz9m9bn6gbh97mzhn8"))))
-    (build-system emacs-next-build-system)
-    (propagated-inputs (list emacs-org emacs-pdf-tools emacs-org-noter))
-    (arguments '(#:include '("^org-pdftools.el$")
-		 #:exclude '()))
-    (home-page "https://github.com/fuxialexander/org-pdftools")
-    (synopsis "Support for links to documents in pdfview mode")
-    (description
-     "Add support for org links from pdftools buffers with more precise location
+   (version "20220320.301")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/fuxialexander/org-pdftools.git")
+		  (commit "967f48fb5038bba32915ee9da8dc4e8b10ba3376")))
+	    (sha256 (base32
+		     "0f47ww8r00b7lb1msybnmnqdhm9i2vwz5lrz9m9bn6gbh97mzhn8"))))
+   (build-system emacs-next-build-system)
+   (propagated-inputs (list emacs-org emacs-pdf-tools emacs-org-noter))
+   (arguments '(#:include '("^org-pdftools.el$")
+		#:exclude '()))
+   (home-page "https://github.com/fuxialexander/org-pdftools")
+   (synopsis "Support for links to documents in pdfview mode")
+   (description
+    "Add support for org links from pdftools buffers with more precise location
 control.  https://github.com/fuxialexander/org-pdftools/")
-    (license #f))
+   (license #f))
   )
 
 
 (define-public emacs-lsp-bridge
   (package
    (name "emacs-lsp-bridge")
-    (version "0.1")
-    (source (origin
-	     (method git-fetch)
-	     (uri (git-reference
-		   (url "https://github.com/manateelazycat/lsp-bridge.git")
-		   (commit "e959f3dd930dadb8b929a2ff5e93bb547e5ddb52")))
-	     (sha256 (base32
-		      "0fcjjm0sa7fwm2kfv2gcyg5nnnynpqhqlaaz233blja4jbw5rgl2"))))
-    (build-system emacs-next-build-system)
-    ;;(arguments '(#:tests? #f))
+   (version "0.1")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/manateelazycat/lsp-bridge.git")
+		  (commit "e959f3dd930dadb8b929a2ff5e93bb547e5ddb52")))
+	    (sha256 (base32
+		     "0fcjjm0sa7fwm2kfv2gcyg5nnnynpqhqlaaz233blja4jbw5rgl2"))))
+   (build-system emacs-next-build-system)
+   ;;(arguments '(#:tests? #f))
 
-    ;;(build-system python-build-system)
-    (propagated-inputs (list python python-epc python-sexpdata python-six python-paramiko emacs-markdown-mode emacs-yasnippet))
-    (home-page "https://github.com/manateelazycat/lsp-bridge")
-    (synopsis " A blazingly fast LSP client for Emacs")
-    (description
-     "Python LSP client implementation for the Emacs ecosystem")
-    (license #f))
+   ;;(build-system python-build-system)
+   (propagated-inputs (list python python-epc python-sexpdata python-six python-paramiko emacs-markdown-mode emacs-yasnippet))
+   (home-page "https://github.com/manateelazycat/lsp-bridge")
+   (synopsis " A blazingly fast LSP client for Emacs")
+   (description
+    "Python LSP client implementation for the Emacs ecosystem")
+   (license #f))
   )
 
 
@@ -1009,298 +1007,325 @@ options, do `M-x customize-group empv`.")
    (license #f))
   )
 
-
-
-
-
-
 (define-public emacs-r-ts-mode
   (package
    (name "emacs-r-ts-mode")
-    (version "0.1")
-    (source (origin
-	     (method git-fetch)
-	     (uri (git-reference
-		   (url "https://github.com/sje30/r-ts-mode.git")
-		   (commit "8745d782f7d6687844ecf022d2f0f3590b02d5c7")))
-	     (sha256 (base32
-		      "011jhydhjsbkxs6yl5yd8lyyb9w99qwxy70vi2y9j0j4jvfas5da"))))
-    (build-system emacs-next-build-system)
-    ;;(arguments '(#:tests? #f))
+   (version "0.1")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/sje30/r-ts-mode.git")
+		  (commit "8745d782f7d6687844ecf022d2f0f3590b02d5c7")))
+	    (sha256 (base32
+		     "011jhydhjsbkxs6yl5yd8lyyb9w99qwxy70vi2y9j0j4jvfas5da"))))
+   (build-system emacs-next-build-system)
+   ;;(arguments '(#:tests? #f))
 
-    ;;(build-system python-build-system)
-    ;;(propagated-inputs (list python python-epc python-sexpdata python-six python-paramiko emacs-markdown-mode emacs-yasnippet))
-    (home-page "https://github.com/sje30/r-ts-mode")
-    (synopsis "Emacs mode for R (treesit)")
-    (description
-     "...")
-    (license #f))
+   ;;(build-system python-build-system)
+   ;;(propagated-inputs (list python python-epc python-sexpdata python-six python-paramiko emacs-markdown-mode emacs-yasnippet))
+   (home-page "https://github.com/sje30/r-ts-mode")
+   (synopsis "Emacs mode for R (treesit)")
+   (description
+    "...")
+   (license #f))
   )
 
+(define-public emacs-forge
+  (package
+   (name "emacs-forge")
+   (version "20230723.47")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/magit/forge.git")
+		  (commit "ecbcce94a5581077f8e1cda3e3f2a66c6dd52766")))
+	    (sha256 (base32
+		     "1nq6xiq1hsrl0y7md16ddnkr2ycrsdbf2jjqjyaj3ldvdx9zbs6d"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-compat
+			    emacs-closql
+			    emacs-dash
+			    emacs-emacsql
+			    emacs-ghub
+			    emacs-let-alist
+			    emacs-magit
+			    emacs-markdown-mode
+			    emacs-transient
+			    emacs-yaml))
+   (home-page "https://github.com/magit/forge")
+   (synopsis "Access Git forges from Magit.")
+   (description
+    "Work with Git forges, such as Github and Gitlab, from the comfort of Magit and
+the rest of Emacs.  The schema of the database has not been finalized yet.
+Until that has happened it will occasionally have to be discarded.  For now the
+database does not contain any information that cannot simply be fetched again.")
+   (license #f))
+  )
 
-
-
-
-
-;;
-;; Manifest
-;;
-(concatenate-manifests
- (list
-  (specifications->manifest
-   (list 
-     emacs-distribution
-     ))
-  (specifications->manifest
+  ;;
+  ;; Manifest
+  ;;
+  (concatenate-manifests
    (list
-    ;;"emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
-    "emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
-    "hicolor-icon-theme" ;; Freedesktop icon theme 
-    "git" ;; Distributed version control system
-    "nss-certs" ;; CA certificates from Mozilla
-    "coreutils" ;; Core GNU utilities (file, text, shell)
-    "findutils" ;; Operating on files matching given criteria
+    (specifications->manifest
+     (list 
+      emacs-distribution
+      ))
+    (specifications->manifest
+     (list
+      ;;"emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
+      "emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
+      "hicolor-icon-theme" ;; Freedesktop icon theme 
+      "git" ;; Distributed version control system
+      "nss-certs" ;; CA certificates from Mozilla
+      "coreutils" ;; Core GNU utilities (file, text, shell)
+      "findutils" ;; Operating on files matching given criteria
 
 
-    "emacs-guix" ;; Emacs interface for GNU Guix
+      "emacs-guix" ;; Emacs interface for GNU Guix
 
-    "emacs-evil" ;; Extensible Vi layer for Emacs
-    "emacs-evil-collection" ;; Collection of Evil bindings for many major and minor modes
-    "emacs-undo-fu" ;; Simple, stable linear undo with redo for Emacs
+      "emacs-evil" ;; Extensible Vi layer for Emacs
+      "emacs-evil-collection" ;; Collection of Evil bindings for many major and minor modes
+      "emacs-undo-fu" ;; Simple, stable linear undo with redo for Emacs
 
-    ;;"emacs-ess" ;; Emacs mode for statistical analysis programs
-
-
-    "emacs-vterm" ;; Emacs libvterm integration
-    "emacs-vterm-toggle" ;; Toggle between a vterm buffer and other buffers
-    "emacs-multi-vterm" ;; Manage multiple vterm buffers in Emacs
-    ;;"emacs-julia-mode" ;; Major mode for Julia
-    ;;"emacs-julia-repl" ;; Minor mode for interacting with a Julia REPL ;; Replaced by julia-vterm since support org-babel via ob-julia-vterm
-    "emacs-no-littering" ;; Help keep `~/.emacs.d/' clean
-    "emacs-pdf-tools" ;; Emacs support library for PDF files
-
-    "emacs-vertico" ;; Vertical interactive completion
-    "emacs-orderless" ;; Emacs completion style that matches multiple regexps in any order
-    "emacs-embark" ;; Emacs mini-buffer actions rooted in keymaps
-    "emacs-marginalia" ;; Marginalia in the minibuffer completions
-    "emacs-corfu" ;; Completion overlay region function
-    "emacs-corfu-doc" ;; Documentation popup for Corfu
-    "emacs-kind-icon" ;; Completion kind icons in Emacs 
-    "emacs-svg-lib" ;; Emacs SVG library for creating tags, icons and bars 
-    "emacs-cape" ;; Completion at point extensions for Emacs
-    ;;"emacs-company"
-    "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
-    "emacs-emprise" ;; Control MPRIS supported media players from Emacs
-    "emacs-marginalia-emprise" ;; Annotate Emprise with Marginalia
-    "emacs-which-key" ;; Display available key bindings in popup 
-    "emacs-general" ;; More convenient key definitions in emacs
-    "emacs-org-modern" ;; Modern Org Style
-    "emacs-evil-org" ;; Evil keybindings for Org mode
-    ;;"emacs-nano-modeline" ;; Emacs minor mode controlling mode line
-    ;;"emacs-simple-modeline" ;; Simple mode-line configuration for Emacs
-    "emacs-telephone-line" ;; Implementation of Powerline for Emacs 
-
-    "emacs-f" ;; Emacs API for working with files and directories 
-    "emacs-s" ;; Emacs string manipulation library
-    "emacs-dash"
-
-    "emacs-mixed-pitch" ;; Mix variable- and fixed-pitch fonts in the same Emacs buffer
-
-    ;; FIXME: autolink don't work, see https://github.com/awth13/org-appear/issues/50
-    ;;"emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
-    "emacs-toc-org" ;; Table of Contents generator for Emacs Org mode
-
-    "emacs-mood-line" ;; Minimal mode-line for Emacs
-    "font-fira-code"
-    "font-fira-mono"
-    "font-fira-sans"
-    "font-iosevka-term" ;; Coders' typeface, built from code
-    "font-iosevka" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
-    "font-iosevka-aile" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
-    "font-hack" ;; Typeface designed for source code
-
-    "emacs-general" ;; More convenient key definitions in emacs
-
-    ;;"emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
-    "emacs-minions" ;; Minor-mode menu for the mode line
-    "emacs-spaceline-next" ;; Powerline theme from Spacemacs
-
-    "emacs-magit" ;; Emacs interface for the Git version control system
-    "emacs-magit-todos" ;; Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
-    "emacs-magit-org-todos-el" ;; Get todo.org into Emacs Magit status
-
-    "emacs-forge" ;; Access Git forges from Magit
-    ;;"emacs-dired-sidebar" ;; Sidebar for Emacs using Dired ;; problem with git versioned project, version too old
-    "emacs-dired-git-info" ;; Show git info in Emacs Dired
-    "emacs-solaire-mode" ;; Change background of file-visiting buffers in Emacs
-    "emacs-all-the-icons" ;; Collect icon fonts and propertize them within Emacs
-    "emacs-all-the-icons-ibuffer" ;; Display icons for all buffers in ibuffer
-    "emacs-all-the-icons-dired" ;; Show icons for each file in `dired-mode'
-    "emacs-all-the-icons-completion" ;; Add icons to completion candidates 
-
-    "emacs-org-auto-tangle" ;; Automatically tangle code blocks on save
-
-    "emacs-pass" ;; Major mode for `password-store.el'
-    "emacs-password-store" ;; Password store (pass) support for Emacs
-    "emacs-password-store-otp" ;; Interact with the `pass-otp' extension for `pass' from Emacs
-
-    "emacs-geiser" ;; Collection of Emacs modes for Scheme hacking 
-    "emacs-geiser-guile" ;; Guile Scheme support for Geiser
-
-    "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
-
-    "emacs-doom-themes" ;; Wide collection of color themes for Emacs
-    "emacs-gruvbox-theme" ;; Gruvbox is a retro groove color scheme ported from Vim
-    "emacs-zenburn-theme" ;; Low contrast color theme for Emacs
-    "emacs-dream-theme" ;; High-contrast Emacs theme
-    "emacs-solarized-theme" ;; Port of the Solarized theme for Emacs
-    "emacs-spacemacs-theme" ;; Light and dark theme for spacemacs that supports GUI and terminal  
-    "emacs-monokai-theme" ;; High contrast color theme for Emacs
-
-    "emacs-hide-mode-line" ;; Emacs plugin that hides the mode-line
-    ;;"emacs-emms-mode-line-cycle" ;; Display the EMMS mode line as a ticker
-    "emacs-powerline" ;; Mode-line plugin for Emacs
-
-    ;;"emacs-emms" ;; The Emacs Multimedia System ;; miss mpd-prev
-    "imagemagick" ;; Create, edit, compose, or convert bitmap images
-    ;;"python-flake8" ;; The modular source code checker: pep8, pyflakes and co
-    "emacs-mpv" ;; Control MPV for easy note taking
-    ;;"emacs-emms-mode-line-cycle" ;;  Display the EMMS mode line as a ticker
-
-    "python-lsp-server" ;; Python implementation of the Language Server Protocol
+      ;;"emacs-ess" ;; Emacs mode for statistical analysis programs
 
 
-    "emacs-org-roam" ;; Non-hierarchical note-taking with Org mode
-    "emacs-org-roam-ui" ;; Web User Interface for Org Roam
-    "emacs-websocket" ;;  Emacs WebSocket client and server 
-    "emacs-citar-org-roam" ;; Emacs package to provide tighter Citar and Org-Roam integration
-    "emacs-consult-org-roam" ;; Consult integration for Org Roam
+      "emacs-vterm" ;; Emacs libvterm integration
+      "emacs-vterm-toggle" ;; Toggle between a vterm buffer and other buffers
+      "emacs-multi-vterm" ;; Manage multiple vterm buffers in Emacs
+      ;;"emacs-julia-mode" ;; Major mode for Julia
+      ;;"emacs-julia-repl" ;; Minor mode for interacting with a Julia REPL ;; Replaced by julia-vterm since support org-babel via ob-julia-vterm
+      "emacs-no-littering" ;; Help keep `~/.emacs.d/' clean
+      "emacs-pdf-tools" ;; Emacs support library for PDF files
 
-    "git"
+      "emacs-vertico" ;; Vertical interactive completion
+      "emacs-orderless" ;; Emacs completion style that matches multiple regexps in any order
+      "emacs-embark" ;; Emacs mini-buffer actions rooted in keymaps
+      "emacs-marginalia" ;; Marginalia in the minibuffer completions
+      "emacs-corfu" ;; Completion overlay region function
+      "emacs-corfu-doc" ;; Documentation popup for Corfu
+      "emacs-kind-icon" ;; Completion kind icons in Emacs 
+      "emacs-svg-lib" ;; Emacs SVG library for creating tags, icons and bars 
+      "emacs-cape" ;; Completion at point extensions for Emacs
 
-    "emacs-ibuffer-vc" ;; Group Ibuffer's list by revision control system indications
+      "emacs-company"
+      "emacs-company-posframe"
 
-    "emacs-sly" ;; Sylvester the Cat's Common Lisp IDE 
+      "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
+      "emacs-emprise" ;; Control MPRIS supported media players from Emacs
+      "emacs-marginalia-emprise" ;; Annotate Emprise with Marginalia
+      "emacs-which-key" ;; Display available key bindings in popup 
+      "emacs-general" ;; More convenient key definitions in emacs
+      "emacs-org-modern" ;; Modern Org Style
+      "emacs-svg-tag-mode" ;; Replace keywords with SVG tags 
+      "emacs-evil-org" ;; Evil keybindings for Org mode
+      ;;"emacs-nano-modeline" ;; Emacs minor mode controlling mode line
+      ;;"emacs-simple-modeline" ;; Simple mode-line configuration for Emacs
+      "emacs-telephone-line" ;; Implementation of Powerline for Emacs 
 
-    "emacs-dashboard" ;; Startup screen extracted from Spacemacs ;; version make shortcut don't work with compilation, see https://github.com/emacs-dashboard/emacs-dashboard/issues/97
-    "emacs-page-break-lines" ;; Display page breaks as tidy horizontal lines
+      "emacs-f" ;; Emacs API for working with files and directories 
+      "emacs-s" ;; Emacs string manipulation library
+      "emacs-dash"
 
-    "emacs-langtool" ;; Emacs interface to LanguageTool
-    "tree-sitter"
+      "emacs-mixed-pitch" ;; Mix variable- and fixed-pitch fonts in the same Emacs buffer
 
-    ;;"emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
-    "emacs-poly-r" ;; Polymodes for the R language
-    "emacs-polymode-markdown" ;; Polymode for Markdown mode
+      ;; FIXME: autolink don't work, see https://github.com/awth13/org-appear/issues/50
+      ;;"emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
+      "emacs-toc-org" ;; Table of Contents generator for Emacs Org mode
 
-    "emacs-org-superstar" ;; Prettify headings and plain lists in Org mode
-    "emacs-org-fancy-priorities" ;; Display org priorities as custom strings 
-    "emacs-org-pomodoro" ;; Pomodoro technique for org-mode 
-    ;;"mplayer" ;; Audio and video player
-    "mpv" ;; Audio and video player
+      "emacs-mood-line" ;; Minimal mode-line for Emacs
+      "font-fira-code"
+      "font-fira-mono"
+      "font-fira-sans"
+      "font-iosevka-term" ;; Coders' typeface, built from code
+      "font-iosevka" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
+      "font-iosevka-aile" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
+      "font-hack" ;; Typeface designed for source code
 
-    "emacs-nyxt" ;; Interact with Nyxt from Emacs
+      "emacs-general" ;; More convenient key definitions in emacs
 
-    "emacs-pinentry" ;; GnuPG Pinentry server implementation
-    "pinentry-emacs" ;; GnuPG's interface to passphrase input
+      ;;"emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
+      "emacs-minions" ;; Minor-mode menu for the mode line
+      "emacs-spaceline-next" ;; Powerline theme from Spacemacs
 
-    "emacs-auctex" ;; Integrated environment for TeX 
-    "emacs-org-edit-latex" ;;  Edit a LaTeX fragment just like editing a source block
-    "emacs-evil-tex" ;;  Evil oriented additions for editing LaTeX 
+      "emacs-magit" ;; Emacs interface for the Git version control system
+      "emacs-magit-todos" ;; Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
+      "emacs-magit-org-todos-el" ;; Get todo.org into Emacs Magit status
 
-    "emacs-elfeed" ;; Atom/RSS feed reader for Emacs
+      "emacs-forge" ;; Access Git forges from Magit
+      ;;"emacs-dired-sidebar" ;; Sidebar for Emacs using Dired ;; problem with git versioned project, version too old
+      "emacs-dired-git-info" ;; Show git info in Emacs Dired
+      "emacs-solaire-mode" ;; Change background of file-visiting buffers in Emacs
+      "emacs-all-the-icons" ;; Collect icon fonts and propertize them within Emacs
+      "emacs-all-the-icons-ibuffer" ;; Display icons for all buffers in ibuffer
+      "emacs-all-the-icons-dired" ;; Show icons for each file in `dired-mode'
+      "emacs-all-the-icons-completion" ;; Add icons to completion candidates 
 
-    "zip" 
+      "emacs-org-auto-tangle" ;; Automatically tangle code blocks on save
 
-    "emacs-mastodon"
+      "emacs-pass" ;; Major mode for `password-store.el'
+      "emacs-password-store" ;; Password store (pass) support for Emacs
+      "emacs-password-store-otp" ;; Interact with the `pass-otp' extension for `pass' from Emacs
 
-    "emacs-consult-eglot" ;; Consulting-read interface for eglot 
+      "emacs-geiser" ;; Collection of Emacs modes for Scheme hacking 
+      "emacs-geiser-guile" ;; Guile Scheme support for Geiser
 
-    "aspell" ;; Spell checker 
-    "aspell-dict-fr" ;; French dictionary for GNU Aspell 
-    "aspell-dict-en" ;; English dictionary for GNU Aspell  
-    "emacs-flyspell-correct" ;; Correcting words with flyspell via custom interfaces
-    "emacs-auto-dictionary-mode" ;; Automatic dictionary switcher for Emacs spell checking
-    "emacs-writegood-mode" ;; Polish up poor writing on the fly
+      "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
 
+      "emacs-doom-themes" ;; Wide collection of color themes for Emacs
+      "emacs-gruvbox-theme" ;; Gruvbox is a retro groove color scheme ported from Vim
+      "emacs-zenburn-theme" ;; Low contrast color theme for Emacs
+      "emacs-dream-theme" ;; High-contrast Emacs theme
+      "emacs-solarized-theme" ;; Port of the Solarized theme for Emacs
+      "emacs-spacemacs-theme" ;; Light and dark theme for spacemacs that supports GUI and terminal  
+      "emacs-monokai-theme" ;; High contrast color theme for Emacs
 
-    "emacs-mpv" ;; Control MPV for easy note taking
-    "emacs-bluetooth" ;; Manage Bluetooth devices using Emacs
-    "emacs-mpdel" ;; Emacs user interface for Music Player Daemon
-    ;;"emacs-simple-mpc" ;; Simple Emacs frontend to mpc
-    "emacs-transmission" ;; Emacs interface to a Transmission session
+      "emacs-hide-mode-line" ;; Emacs plugin that hides the mode-line
+      ;;"emacs-emms-mode-line-cycle" ;; Display the EMMS mode line as a ticker
+      "emacs-powerline" ;; Mode-line plugin for Emacs
 
+      ;;"emacs-emms" ;; The Emacs Multimedia System ;; miss mpd-prev
+      "imagemagick" ;; Create, edit, compose, or convert bitmap images
+      ;;"python-flake8" ;; The modular source code checker: pep8, pyflakes and co
+      "emacs-mpv" ;; Control MPV for easy note taking
+      ;;"emacs-emms-mode-line-cycle" ;;  Display the EMMS mode line as a ticker
 
-    "emacs-yasnippet"
-
-
-    ;; Docker support
-    "emacs-docker" ;; Manage docker from Emacs 
-    "emacs-dockerfile-mode" ;; Major mode for editing Dockerfile
-    ;; "emacs-docker-tramp" ;; TRAMP integration for docker containers ;; Obsolete...
-    "emacs-docker-compose-mode" ;; Major mode for editing `docker-compose' files
-
-
-    ;;
-    "emacs-csv-mode" ;; Major mode for editing comma/char separated values
-
-
-    ;; File manager
-    "emacs-dirvish" ;; Improved version of the Emacs package Dired 
-    "fd" ;; Simple, fast and user-friendly alternative to find
-    "imagemagick" ;; Create, edit, compose, or convert bitmap images
-    "poppler" ;; PDF rendering library
-    ;;"emacs-pdf-tools" ;; Emacs support library for PDF files
-    "ffmpegthumbnailer" ;; Create thumbnails from video files
-    "mediainfo" ;; Utility for reading media metadata
-    "tar" ;; Managing tar archives
-    "unzip" ;; Decompression and file extraction utility
+      "python-lsp-server" ;; Python implementation of the Language Server Protocol
 
 
-    "emacs-org-tree-slide" ;; Presentation tool for Org mode
-    "emacs-hide-lines" ;; Commands for hiding lines based on a regexp
+      "emacs-org-roam" ;; Non-hierarchical note-taking with Org mode
+      "emacs-org-roam-ui" ;; Web User Interface for Org Roam
+      "emacs-websocket" ;;  Emacs WebSocket client and server 
+      "emacs-citar-org-roam" ;; Emacs package to provide tighter Citar and Org-Roam integration
+      "emacs-consult-org-roam" ;; Consult integration for Org Roam
+
+      "git"
+
+      "emacs-ibuffer-vc" ;; Group Ibuffer's list by revision control system indications
+
+      "emacs-sly" ;; Sylvester the Cat's Common Lisp IDE 
+
+      "emacs-dashboard" ;; Startup screen extracted from Spacemacs ;; version make shortcut don't work with compilation, see https://github.com/emacs-dashboard/emacs-dashboard/issues/97
+      "emacs-page-break-lines" ;; Display page breaks as tidy horizontal lines
+
+      "emacs-langtool" ;; Emacs interface to LanguageTool
+      "tree-sitter"
+
+      ;;"emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
+      "emacs-poly-r" ;; Polymodes for the R language
+      "emacs-polymode-markdown" ;; Polymode for Markdown mode
+
+      "emacs-org-superstar" ;; Prettify headings and plain lists in Org mode
+      "emacs-org-fancy-priorities" ;; Display org priorities as custom strings 
+      "emacs-org-pomodoro" ;; Pomodoro technique for org-mode 
+      ;;"mplayer" ;; Audio and video player
+      "mpv" ;; Audio and video player
+
+      "emacs-nyxt" ;; Interact with Nyxt from Emacs
+
+      "emacs-pinentry" ;; GnuPG Pinentry server implementation
+      "pinentry-emacs" ;; GnuPG's interface to passphrase input
+
+      "emacs-auctex" ;; Integrated environment for TeX 
+      "emacs-org-edit-latex" ;;  Edit a LaTeX fragment just like editing a source block
+      "emacs-evil-tex" ;;  Evil oriented additions for editing LaTeX 
+
+      "emacs-elfeed" ;; Atom/RSS feed reader for Emacs
+
+      "zip" 
+
+      "emacs-mastodon"
+
+      "emacs-consult-eglot" ;; Consulting-read interface for eglot 
+
+      "aspell" ;; Spell checker 
+      "aspell-dict-fr" ;; French dictionary for GNU Aspell 
+      "aspell-dict-en" ;; English dictionary for GNU Aspell  
+      "emacs-flyspell-correct" ;; Correcting words with flyspell via custom interfaces
+      "emacs-auto-dictionary-mode" ;; Automatic dictionary switcher for Emacs spell checking
+      "emacs-writegood-mode" ;; Polish up poor writing on the fly
 
 
-    "openjdk" ;; Java development kit
-    "java-slf4j-simple" ;; Simple implementation of simple logging facade for Java
+      "emacs-mpv" ;; Control MPV for easy note taking
+      "emacs-bluetooth" ;; Manage Bluetooth devices using Emacs
+      "emacs-mpdel" ;; Emacs user interface for Music Player Daemon
+      ;;"emacs-simple-mpc" ;; Simple Emacs frontend to mpc
+      "emacs-transmission" ;; Emacs interface to a Transmission session
 
-    ;; LSP
-    "ccls" ;; C/C++/Objective-C language server
-    ;;"texlive-digestif" ;;Editor plugin for LaTeX, ConTeXt etc.
 
-    ;; Terminal
-    "emacs-eat" ;; Terminal emulator in Emacs
+      "emacs-yasnippet"
 
-    ;; Notifications
-    "emacs-ednc" ;; Emacs Desktop Notification Center
 
-    ;;"emacs-julia-mode" ;; Major mode for Julia
+      ;; Docker support
+      "emacs-docker" ;; Manage docker from Emacs 
+      "emacs-dockerfile-mode" ;; Major mode for editing Dockerfile
+      ;; "emacs-docker-tramp" ;; TRAMP integration for docker containers ;; Obsolete...
+      "emacs-docker-compose-mode" ;; Major mode for editing `docker-compose' files
 
+
+      ;;
+      "emacs-csv-mode" ;; Major mode for editing comma/char separated values
+
+
+      ;; File manager
+      "emacs-dirvish" ;; Improved version of the Emacs package Dired 
+      "fd" ;; Simple, fast and user-friendly alternative to find
+      "imagemagick" ;; Create, edit, compose, or convert bitmap images
+      "poppler" ;; PDF rendering library
+      ;;"emacs-pdf-tools" ;; Emacs support library for PDF files
+      "ffmpegthumbnailer" ;; Create thumbnails from video files
+      "mediainfo" ;; Utility for reading media metadata
+      "tar" ;; Managing tar archives
+      "unzip" ;; Decompression and file extraction utility
+
+
+      "emacs-org-tree-slide" ;; Presentation tool for Org mode
+      "emacs-hide-lines" ;; Commands for hiding lines based on a regexp
+
+
+      "openjdk" ;; Java development kit
+      "java-slf4j-simple" ;; Simple implementation of simple logging facade for Java
+
+      ;; LSP
+      "ccls" ;; C/C++/Objective-C language server
+      ;;"texlive-digestif" ;;Editor plugin for LaTeX, ConTeXt etc.
+
+      ;; Terminal
+      "emacs-eat" ;; Terminal emulator in Emacs
+
+      ;; Notifications
+      "emacs-ednc" ;; Emacs Desktop Notification Center
+
+      ;;"emacs-julia-mode" ;; Major mode for Julia
+
+      ))
+    (packages->manifest (list
+			 emacs-julia-vterm
+			 emacs-ob-julia-vterm
+			 emacs-julia-ts-mode
+			 emacs-r-vterm
+			 emacs-cl-generic
+			 ;;emacs-eglot-jl ;; manual set-up in test
+			 emacs-dired-sidebar
+			 emacs-ibuffer-sidebar
+			 emacs-ibuffer-project
+			 emacs-tabspaces
+			 emacs-use-package
+			 emacs-emms
+			 ;;python-tinytag ;; don't work
+			 emacs-doom-modeline
+			 ;;emacs-ess-view-data
+			 emacs-all-the-icons
+			 ;; emacs-auctex-latexmk ;; dont't work
+			 emacs-tab-bar-echo-area
+			 emacs-org-appear
+			 ;; emacs-eglot-ltex
+			 ;; emacs-dashboard ;; do work well with emacs 29
+			 ;; emacs-org-pdftools ;; don't build
+			 ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
+			 emacs-empv
+			 emacs-r-ts-mode
+			 ;; emacs-forge
+			 ))
     ))
-  (packages->manifest (list
-		       emacs-julia-vterm
-		       emacs-ob-julia-vterm
-		       emacs-julia-ts-mode
-		       emacs-r-vterm
-		       emacs-cl-generic
-		       ;;emacs-eglot-jl ;; manual set-up in test
-		       emacs-dired-sidebar
-		       emacs-ibuffer-sidebar
-		       emacs-ibuffer-project
-		       emacs-tabspaces
-		       emacs-use-package
-		       emacs-emms
-		       ;;python-tinytag ;; don't work
-		       emacs-doom-modeline
-		       ;;emacs-ess-view-data
-		       emacs-all-the-icons
-		       ;; emacs-auctex-latexmk ;; dont't work
-		       emacs-tab-bar-echo-area
-		       emacs-org-appear
-		       ;; emacs-eglot-ltex
-		       ;; emacs-dashboard ;; do work well with emacs 29
-		       ;; emacs-org-pdftools ;; don't build
-		       ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
-		       emacs-empv
-		       emacs-r-ts-mode ;; use native insteat
-		       ))
-  ))

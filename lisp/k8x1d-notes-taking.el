@@ -21,8 +21,6 @@
     "nc" '(org-roam-capture :which-key "Capture")
     "nj" '(org-roam-dailies-capture-today :which-key "Journal")
     )
-  :custom
-  (org-roam-directory (concat org-directory "/roam"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n g" . org-roam-graph)
@@ -31,6 +29,7 @@
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
+  (setq org-roam-directory (concat org-directory "/roam"))
   (setq find-file-visit-truename t)
   ;; If you're using a vertical completion framework, you might want a more informative completion interface
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))

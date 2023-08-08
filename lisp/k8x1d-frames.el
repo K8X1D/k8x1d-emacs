@@ -10,8 +10,9 @@
 	(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
 	)
     (progn
-      (set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
-      (add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
+      ;; TMP fix for emacs daemon
+      ;;(set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
+      ;;(add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
       ))
 
   ;;(set-frame-parameter nil 'alpha-background 80) ; For current frame
