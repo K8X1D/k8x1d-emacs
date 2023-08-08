@@ -1284,6 +1284,8 @@ database does not contain any information that cannot simply be fetched again.")
       "emacs-hide-lines" ;; Commands for hiding lines based on a regexp
 
 
+      "emacs-lua-mode" ;; Major mode for lua
+
       "openjdk" ;; Java development kit
       "java-slf4j-simple" ;; Simple implementation of simple logging facade for Java
 
