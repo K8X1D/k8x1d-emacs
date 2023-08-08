@@ -50,6 +50,8 @@
 (timed-require 'k8x1d-lisp)
 (timed-require 'k8x1d-latex)
 (timed-require 'k8x1d-docker)
+;; (timed-require 'k8x1d-repl)
+(timed-require 'k8x1d-ssh)
 
 ;; Other
 (timed-require 'k8x1d-terminal)
@@ -59,6 +61,8 @@
 (timed-require 'k8x1d-presentation)
 (timed-require 'k8x1d-system)
 (timed-require 'k8x1d-pdf)
+
+
 
 ;; cleanup and reset after startup
 (add-hook 'emacs-startup-hook
@@ -79,10 +83,11 @@
 ;;             (setq gc-cons-threshold (expt 2 23))))
 
 
+
 ;;
 ;; In test
 ;;
-(defun pinentry-emacs (desc prompt ok error)
-  (let ((str (read-passwd (concat (replace-regexp-in-string "%22" "\"" (replace-regexp-in-string "%0A" "\n" desc)) prompt ": "))))
-    str))
-(pinentry-start)
+;;(defun pinentry-emacs (desc prompt ok error)
+;;  (let ((str (read-passwd (concat (replace-regexp-in-string "%22" "\"" (replace-regexp-in-string "%0A" "\n" desc)) prompt ": "))))
+;;    str))
+;;(pinentry-start)
