@@ -6,6 +6,8 @@
     "bi" '(ibuffer :which-key "Ibuffer")
     "bs" '(switch-to-buffer :which-key "Switch")
     "bk" '(kill-buffer :which-key "Kill")
+    "bp" '(previous-buffer :which-key "Previous")
+    "bn" '(next-buffer :which-key "Next")
     ))
 ;;  :bind
 ;;  ("C-x C-b" . ibuffer))
