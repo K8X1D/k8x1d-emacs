@@ -6,6 +6,15 @@
 (require 'k8x1d-utilities)
 
 ;;
+;; General config
+;;
+(setq k8x1d-lsp-module "lsp-mode")
+;;(setq k8x1d-lsp-module "lsp-bridge")
+;;(setq k8x1d-lsp-module "eglot")
+
+
+
+;;
 ;; Module to load
 ;;
 
