@@ -16,6 +16,7 @@
      (list current-prefix-arg
 	   (progn
 	     (require 'consult)
+	     (require 'pass)
 	     (consult--read (password-store-list)
 			    :prompt "Pass: "
 			    :sort nil

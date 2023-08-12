@@ -29,7 +29,6 @@
   (tabspaces-default-tab "Default")
   (tabspaces-remove-to-default t)
   (tabspaces-include-buffers '("*scratch*"))
-  (setq tabspaces-keymap-prefix "SPC TAB")
   ;;;; sessions
   ;;(tabspaces-session t)
   ;;(tabspaces-session-auto-restore t)

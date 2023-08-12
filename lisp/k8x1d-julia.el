@@ -11,7 +11,6 @@
 
 ;; REPL
 (use-package julia-vterm
-  :defer t
   :init
   (defun k8x1d/open-julia-repl-at-bottom ()
      (interactive)

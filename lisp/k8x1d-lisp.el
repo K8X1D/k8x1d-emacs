@@ -2,7 +2,6 @@
 
 
 (use-package lisp-mode
-  :defer t
   :config
   ;; Clean binding
   ;;(define-key lisp-mode-map (kbd "C-c <tab>") nil)
@@ -24,8 +23,7 @@
   (require 'bind-key)
   (unbind-key "C-c TAB" geiser-mode-map))
 
-(use-package geiser-guile
-  :defer t)
+(use-package geiser-guile)
 
 
 

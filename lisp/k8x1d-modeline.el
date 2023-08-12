@@ -41,9 +41,10 @@
       ;;process
       misc-info
       lsp
-      ;;checker
+      checker
       major-mode
-      minor-modes))
+      minor-modes
+      ))
 
 ;;(doom-modeline-def-modeline 'main
 ;;  '(bar workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count parrot selection-info)

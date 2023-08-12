@@ -3,7 +3,6 @@
 ;;
 
 (use-package langtool
-  :defer t
   :bind 
   (("C-c h w" . 'langtool-check)
    ("C-c h W" . 'langtool-check-done)
@@ -20,8 +19,6 @@
 ;; Spell checking
 ;;
 (use-package flyspell
-  :defer t
-  ;;:hook (text-mode . flyspell-mode)
   :hook ((org-mode . flyspell-mode)
 	 (markdown-mode . flyspell-mode))
   :config
@@ -33,7 +30,6 @@
   )
 
 (use-package flyspell-correct
-  :defer t
   :after flyspell
   :bind (:map flyspell-mode-map
 	      ("C-c $" . flyspell-correct-at-point))
@@ -45,7 +41,6 @@
   (setq flyspell-mark-duplications-flag nil))
 
 (use-package auto-dictionary-mode
-  :defer t
   :hook (flyspell-mode . auto-dictionary-mode))
 
 ;;
@@ -53,7 +48,6 @@
 ;;
 
 (use-package writegood-mode
-  :defer t
   :bind
   (("C-c e g" . writegood-grade-level)
    ("C-c e r" . writegood-reading-ease))

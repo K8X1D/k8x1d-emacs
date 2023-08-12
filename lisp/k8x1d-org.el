@@ -162,6 +162,7 @@
    '((sql . t)
      (shell . t)
      (julia . t)
+     (scheme . t)
      (R . t)
      (python . t)))
 
@@ -262,15 +263,15 @@
         (setq keyword (car keywords)))))
 
   ;; fix font problem, see https://github.com/rougier/svg-tag-mode/issues/38;; Don't work for new tags
-  (add-hook 'after-setting-font-hook (lambda () (setq svg-lib-style-default (svg-lib-style-compute-default))))
+  ;;(add-hook 'after-setting-font-hook (lambda () (setq svg-lib-style-default (svg-lib-style-compute-default))))
  ;; :hook ((org-mode . svg-tag-mode)
  ;;	 (org-agenda-mode . svg-tag-mode)
  ;;	 (org-agenda-finalize . org-agenda-show-svg))
   :config
   ;; fix font problem, see https://github.com/rougier/svg-tag-mode/issues/38
-  (plist-put svg-lib-style-default :font-family "Iosevka Term")
-  (plist-put svg-lib-style-default :font-size 14)
-  (setq tree-sitter-hl-use-font-lock-keywords t)
+  ;; (plist-put svg-lib-style-default :font-family "Iosevka Term")
+  ;; (plist-put svg-lib-style-default :font-size 14)
+  ;; (setq tree-sitter-hl-use-font-lock-keywords t)
   (setq svg-tag-tags
 	'(
 	  ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'svg-tag-todo :inverse t))))
@@ -331,6 +332,7 @@
 
 ;; Inspirations:
 ;; - https://github.com/japhir/ArchConfigs/blob/master/myinit.org#play-bell-sound-when-task-is-marked-as-done 
+;; Clumsy, try native org function
 (use-package org-pomodoro
   :after org
   :general
@@ -339,11 +341,8 @@
     "P" '(k8x1d/org-pomodoro-custom-time :which-key "Pomodoro")
     )
   :hook (org-pomodoro-break-finished . k8x1d/org-pomodoro-prompt)
-  :custom
-  (org-pomodoro-manual-break t)
-  (org-pomodoro-long-break-length 15)
-  ;;(org-pomodoro-start-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
   :config
+  (setq org-pomodoro-manual-break t)
   (setq org-pomodoro-length 50)
   ;;(setq org-pomodoro-length 0.1) ;; for test
   (setq org-pomodoro-short-break-length 10)
@@ -371,9 +370,12 @@
 	  (setq org-pomodoro-short-break-length-initial-value org-pomodoro-short-break-length)
 	  (setq org-pomodoro-long-break-initial-value org-pomodoro-long-break-length)
 	  ;; Set new values
-	  (setq org-pomodoro-length (floor (* min 0.9)))
-	  (setq org-pomodoro-short-break-length (ceiling (* min 0.1)))
-	  (setq org-pomodoro-long-break-length (floor (* min 0.5)))
+	  ;;(setq org-pomodoro-length (floor (* min 0.9)))
+	  ;;(setq org-pomodoro-short-break-length (ceiling (* min 0.1)))
+	  ;;(setq org-pomodoro-long-break-length (floor (* min 0.5)))
+	  (setq org-pomodoro-short-break-length (/ min (/ org-pomodoro-length-initial-value org-pomodoro-short-break-length-initial-value)))
+	  (setq org-pomodoro-length (- (* org-pomodoro-short-break-length (/ org-pomodoro-length-initial-value org-pomodoro-short-break-length-initial-value)) org-pomodoro-short-break-length))
+	  (setq org-pomodoro-long-break-length (/ org-pomodoro-length 2))
 	  ;; Start pomodoro
           (org-pomodoro)
 	  ;; Set back original values
@@ -382,10 +384,6 @@
 	  (setq org-pomodoro-long-break-length org-pomodoro-long-break-initial-value)
 	  ))
   )
-
-
-
-
 
 ;; (use-package org-pdftools
 ;;   :after (org pdf-tools)

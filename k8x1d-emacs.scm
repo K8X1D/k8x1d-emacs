@@ -171,35 +171,35 @@ hidden parts, the respective `org-appear settings do not have an effect.")
    (synopsis "A simple way to manage personal keybindings")
    (description
     "If you have lots of keybindings set in your init file, it can be hard to know
-which ones you haven't set yet, and which may now be overriding some new default
-in a new Emacs version.  This module aims to solve that problem.  Bind keys as
-follows in your init file: (bind-key \"C-c x\" my-ctrl-c-x-command) If the
-keybinding argument is a vector, it is passed straight to `define-key', so
-remapping a key with `[remap COMMAND] works as expected: (bind-key [remap
-original-ctrl-c-x-command] my-ctrl-c-x-command) If you want the keybinding to
-override all minor modes that may also bind the same key, use the `bind-key*
-form: (bind-key* \"<C-return>\" other-window) If you want to rebind a key only in
-a particular keymap, use: (bind-key \"C-c x\" my-ctrl-c-x-command
-some-other-mode-map) To unbind a key within a keymap (for example, to stop your
-favorite major mode from changing a binding that you don't want to override
-everywhere), use `unbind-key': (unbind-key \"C-c x\" some-other-mode-map) To bind
-multiple keys at once, or set up a prefix map, a `bind-keys macro is provided.
-It accepts keyword arguments, please see its documentation for a detailed
-description.  To add keys into a specific map, use :map argument (bind-keys :map
-dired-mode-map (\"o\" .  dired-omit-mode) (\"a\" .  some-custom-dired-function)) To
-set up a prefix map, use `:prefix-map and `:prefix arguments (both are required)
-(bind-keys :prefix-map my-customize-prefix-map :prefix \"C-c c\" (\"f\" .
-customize-face) (\"v\" .  customize-variable)) You can combine all the keywords
-together.  Additionally, `:prefix-docstring can be specified to set
-documentation of created `:prefix-map variable.  To bind multiple keys in a
-`bind-key* way (to be sure that your bindings will not be overridden by other
-modes), you may use `bind-keys* macro: (bind-keys* (\"C-o\" .  other-window)
-(\"C-M-n\" .  forward-page) (\"C-M-p\" .  backward-page)) After Emacs loads, you can
-see a summary of all your personal keybindings currently in effect with this
-command: M-x describe-personal-keybindings This display will tell you if you've
-overridden a default keybinding, and what the default was.  Also, it will tell
-you if the key was rebound after your binding it with `bind-key', and what it
-was rebound it to.  See the `use-package info manual for more information.")
+    which ones you haven't set yet, and which may now be overriding some new default
+    in a new Emacs version.  This module aims to solve that problem.  Bind keys as
+    follows in your init file: (bind-key \"C-c x\" my-ctrl-c-x-command) If the
+    keybinding argument is a vector, it is passed straight to `define-key', so
+    remapping a key with `[remap COMMAND] works as expected: (bind-key [remap
+									original-ctrl-c-x-command] my-ctrl-c-x-command) If you want the keybinding to
+									override all minor modes that may also bind the same key, use the `bind-key*
+									form: (bind-key* \"<C-return>\" other-window) If you want to rebind a key only in
+									a particular keymap, use: (bind-key \"C-c x\" my-ctrl-c-x-command
+													    some-other-mode-map) To unbind a key within a keymap (for example, to stop your
+																				      favorite major mode from changing a binding that you don't want to override
+																				      everywhere), use `unbind-key': (unbind-key \"C-c x\" some-other-mode-map) To bind
+																				      multiple keys at once, or set up a prefix map, a `bind-keys macro is provided.
+																				      It accepts keyword arguments, please see its documentation for a detailed
+																				      description.  To add keys into a specific map, use :map argument (bind-keys :map
+																														  dired-mode-map (\"o\" .  dired-omit-mode) (\"a\" .  some-custom-dired-function)) To
+																														  set up a prefix map, use `:prefix-map and `:prefix arguments (both are required)
+																														  (bind-keys :prefix-map my-customize-prefix-map :prefix \"C-c c\" (\"f\" .
+																																						    customize-face) (\"v\" .  customize-variable)) You can combine all the keywords
+																																						    together.  Additionally, `:prefix-docstring can be specified to set
+																																						    documentation of created `:prefix-map variable.  To bind multiple keys in a
+																																						    `bind-key* way (to be sure that your bindings will not be overridden by other
+																																								       modes), you may use `bind-keys* macro: (bind-keys* (\"C-o\" .  other-window)
+																																															  (\"C-M-n\" .  forward-page) (\"C-M-p\" .  backward-page)) After Emacs loads, you can
+																																															  see a summary of all your personal keybindings currently in effect with this
+																																															  command: M-x describe-personal-keybindings This display will tell you if you've
+																																															  overridden a default keybinding, and what the default was.  Also, it will tell
+																																															  you if the key was rebound after your binding it with `bind-key', and what it
+																																															  was rebound it to.  See the `use-package info manual for more information.")
    (license #f))
   )
 
@@ -241,11 +241,11 @@ was rebound it to.  See the `use-package info manual for more information.")
    (synopsis "A configuration macro for simplifying your .emacs")
    (description
     "The `use-package declaration macro allows you to isolate package configuration
-in your init file in a way that is performance-oriented and, well, just tidy.  I
-created it because I have over 80 packages that I use in Emacs, and things were
-getting difficult to manage.  Yet with this utility my total load time is just
-under 1 second, with no loss of functionality! See the `use-package info manual
-for more information.")
+    in your init file in a way that is performance-oriented and, well, just tidy.  I
+    created it because I have over 80 packages that I use in Emacs, and things were
+    getting difficult to manage.  Yet with this utility my total load time is just
+    under 1 second, with no loss of functionality! See the `use-package info manual
+    for more information.")
    (license #f))
   )
 
@@ -270,8 +270,8 @@ for more information.")
    (synopsis "A mode for Julia REPL using vterm")
    (description
     "This package provides a major-mode for inferior Julia process that runs in
-vterm, and a minor-mode that extends julia-mode to support interaction with the
-inferior Julia process.")
+    vterm, and a minor-mode that extends julia-mode to support interaction with the
+    inferior Julia process.")
    (license #f))
   )
 
@@ -293,11 +293,11 @@ inferior Julia process.")
    (synopsis "Babel Functions for Julia in VTerm")
    (description
     "Org-Babel support for Julia source code block using julia-vterm. ; Requirements:
-This package uses julia-vterm to run Julia code.  You also need to have
-Suppressor.jl package installed in your Julia environment to use :results
-output. - https://github.com/shg/julia-vterm.el -
-https://github.com/JuliaIO/Suppressor.jl See
-https://github.com/shg/ob-julia-vterm.el for installation instructions.")
+    This package uses julia-vterm to run Julia code.  You also need to have
+    Suppressor.jl package installed in your Julia environment to use :results
+    output. - https://github.com/shg/julia-vterm.el -
+    https://github.com/JuliaIO/Suppressor.jl See
+    https://github.com/shg/ob-julia-vterm.el for installation instructions.")
    (license #f))
   )
 
@@ -318,7 +318,7 @@ https://github.com/shg/ob-julia-vterm.el for installation instructions.")
    (synopsis "Major mode for Julia source code using tree-sitter")
    (description
     "This major modes uses tree-sitter for font-lock, indentation, imenu, and
-navigation.  It is derived from `julia-mode'.")
+    navigation.  It is derived from `julia-mode'.")
    (license #f))
   )
 
@@ -341,8 +341,8 @@ navigation.  It is derived from `julia-mode'.")
    (synopsis "A mode for Julia REPL using vterm")
    (description
     "This package provides a major-mode for inferior R process that runs in
-vterm, and a minor-mode that extends ess-R-mode to support interaction with the
-inferior R process. (is a clone of julia-vterm")
+    vterm, and a minor-mode that extends ess-R-mode to support interaction with the
+    inferior R process. (is a clone of julia-vterm")
    (license #f))
   )
 
@@ -388,31 +388,31 @@ inferior R process. (is a clone of julia-vterm")
    (synopsis "Forward cl-generic compatibility for Emacs<25")
    (description
     "This is a forward compatibility package, which provides (a subset of) the
-features of the cl-generic package introduced in Emacs-25, for use on previous
-emacsen.  Make sure this is installed *late* in your `load-path`, i.e.  after
-Emacs's built-in .../lisp/emacs-lisp directory, so that if/when you upgrade to
-Emacs≥25, the built-in version of the file will take precedence, otherwise you
-could get into trouble (although we try to hack our way around the problem in
-case it happens).  AFAIK, the main incompatibilities between cl-generic and
-EIEIO's defmethod are: - EIEIO does not support multiple dispatch.  We ignore
-this difference here and rely on EIEIO to detect and signal the problem. - EIEIOonly supports primary, :before, and :after qualifiers.  We ignore this
-difference here and rely on EIEIO to detect and signal the problem. - EIEIO doesnot support specializers other than classes.  We ignore this difference here andrely on EIEIO to detect and signal the problem. - EIEIO uses :static instead of
-(subclass <foo>) and :static methods match both class arguments as well as
-object argument of that class.  Here we turn (subclass <foo>) into a :static
-qualifier and ignore the semantic difference, hoping noone will notice. -
-EIEIO's defgeneric does not reset the function.  We ignore this difference and
-hope for the best. - EIEIO uses `call-next-method and `next-method-p while
-cl-defmethod uses `cl-next-method-p and `cl-call-next-method (simple matter of
-renaming).  We handle that by renaming the calls in the `cl-defmethod macro. -
-The errors signaled are slightly different.  We make cl-no-applicable-method
-into a \"parent\" error of no-method-definition, which should cover the usual
-cases. - EIEIO's no-next-method and no-applicable-method have different calling
-conventions from cl-generic's.  We don't try to handle this, so just refrain
-from trying to call (or add methods to) `cl-no-next-method or
-`cl-no-applicable-method'. - EIEIO's `call-next-method and `next-method-p have
-dynamic scope whereas cl-generic's `cl-next-method-p and `cl-call-next-method
-are lexically scoped.  The cl-defmethod here handles the common subset between
-the two.")
+    features of the cl-generic package introduced in Emacs-25, for use on previous
+    emacsen.  Make sure this is installed *late* in your `load-path`, i.e.  after
+    Emacs's built-in .../lisp/emacs-lisp directory, so that if/when you upgrade to
+    Emacs≥25, the built-in version of the file will take precedence, otherwise you
+    could get into trouble (although we try to hack our way around the problem in
+				     case it happens).  AFAIK, the main incompatibilities between cl-generic and
+				     EIEIO's defmethod are: - EIEIO does not support multiple dispatch.  We ignore
+				     this difference here and rely on EIEIO to detect and signal the problem. - EIEIOonly supports primary, :before, and :after qualifiers.  We ignore this
+				     difference here and rely on EIEIO to detect and signal the problem. - EIEIO doesnot support specializers other than classes.  We ignore this difference here andrely on EIEIO to detect and signal the problem. - EIEIO uses :static instead of
+				     (subclass <foo>) and :static methods match both class arguments as well as
+				     object argument of that class.  Here we turn (subclass <foo>) into a :static
+				     qualifier and ignore the semantic difference, hoping noone will notice. -
+				     EIEIO's defgeneric does not reset the function.  We ignore this difference and
+				     hope for the best. - EIEIO uses `call-next-method and `next-method-p while
+				     cl-defmethod uses `cl-next-method-p and `cl-call-next-method (simple matter of
+													  renaming).  We handle that by renaming the calls in the `cl-defmethod macro. -
+													  The errors signaled are slightly different.  We make cl-no-applicable-method
+													  into a \"parent\" error of no-method-definition, which should cover the usual
+													  cases. - EIEIO's no-next-method and no-applicable-method have different calling
+													  conventions from cl-generic's.  We don't try to handle this, so just refrain
+													  from trying to call (or add methods to) `cl-no-next-method or
+													  `cl-no-applicable-method'. - EIEIO's `call-next-method and `next-method-p have
+													  dynamic scope whereas cl-generic's `cl-next-method-p and `cl-call-next-method
+													  are lexically scoped.  The cl-defmethod here handles the common subset between
+													  the two.")
    (license gpl3+))
   )
 
@@ -439,11 +439,11 @@ the two.")
    (synopsis "Utilities and helpers for dired-hacks collection")
    (description
     "Utilities and helpers for `dired-hacks collection of dired improvements.  This
-package also provides these interactive functions: * `dired-hacks-next-file - goto next file, skipping empty and non-file lines * `dired-hacks-previous-file -
-go to previous file, skipping empty and non-file lines *
-`dired-utils-format-information-line-mode - Format the information (summary)
-line file sizes to be human readable (e.g. 1GB instead of 1048576).  See
-https://github.com/Fuco1/dired-hacks for the entire collection")
+    package also provides these interactive functions: * `dired-hacks-next-file - goto next file, skipping empty and non-file lines * `dired-hacks-previous-file -
+    go to previous file, skipping empty and non-file lines *
+    `dired-utils-format-information-line-mode - Format the information (summary)
+    line file sizes to be human readable (e.g. 1GB instead of 1048576).  See
+    https://github.com/Fuco1/dired-hacks for the entire collection")
    (license #f))
 
   )
@@ -470,29 +470,29 @@ https://github.com/Fuco1/dired-hacks for the entire collection")
    (synopsis "Insert subdirectories in a tree-like fashion")
    (description
     "Introduction ------------ The basic command to work with subdirectories in dired
-is `i', which inserts the subdirectory as a separate listing in the active diredbuffer.  This package defines function `dired-subtree-insert which instead
-inserts the subdirectory directly below its line in the original listing, and
-indent the listing of subdirectory to resemble a tree-like structure (somewhat
-similar to tree(1) except the pretty graphics).  The tree display is somewhat
-more intuitive than the default \"flat\" subdirectory manipulation provided by
-`i'.  There are several presentation options and faces you can customize to
-change the way subtrees are displayed.  You can further remove the unwanted
-lines from the subtree by using `k command or some of the built-in \"focusing\"
-functions, such as `dired-subtree-only-* (see list below).  If you have the
-package `dired-filter', you can additionally filter the subtrees with global or
-local filters.  A demo of basic functionality is available on youtube:
-https://www.youtube.com/watch?v=z26b8HKFsNE Interactive functions
---------------------- Here's a list of available interactive functions.  You canread more about each one by using the built-in documentation facilities of
-emacs.  It is adviced to place bindings for these into a convenient prefix key
-map, for example C-, * `dired-subtree-insert * `dired-subtree-remove *
-`dired-subtree-toggle * `dired-subtree-cycle * `dired-subtree-revert *
-`dired-subtree-narrow * `dired-subtree-up * `dired-subtree-down *
-`dired-subtree-next-sibling * `dired-subtree-previous-sibling *
-`dired-subtree-beginning * `dired-subtree-end * `dired-subtree-mark-subtree *
-`dired-subtree-unmark-subtree * `dired-subtree-only-this-file *
-`dired-subtree-only-this-directory If you have package `dired-filter',
-additional command `dired-subtree-apply-filter is available.  See
-https://github.com/Fuco1/dired-hacks for the entire collection.")
+    is `i', which inserts the subdirectory as a separate listing in the active diredbuffer.  This package defines function `dired-subtree-insert which instead
+    inserts the subdirectory directly below its line in the original listing, and
+    indent the listing of subdirectory to resemble a tree-like structure (somewhat
+									  similar to tree(1) except the pretty graphics).  The tree display is somewhat
+									  more intuitive than the default \"flat\" subdirectory manipulation provided by
+									  `i'.  There are several presentation options and faces you can customize to
+									  change the way subtrees are displayed.  You can further remove the unwanted
+									  lines from the subtree by using `k command or some of the built-in \"focusing\"
+									  functions, such as `dired-subtree-only-* (see list below).  If you have the
+									  package `dired-filter', you can additionally filter the subtrees with global or
+									  local filters.  A demo of basic functionality is available on youtube:
+									  https://www.youtube.com/watch?v=z26b8HKFsNE Interactive functions
+									  --------------------- Here's a list of available interactive functions.  You canread more about each one by using the built-in documentation facilities of
+									  emacs.  It is adviced to place bindings for these into a convenient prefix key
+									  map, for example C-, * `dired-subtree-insert * `dired-subtree-remove *
+									  `dired-subtree-toggle * `dired-subtree-cycle * `dired-subtree-revert *
+									  `dired-subtree-narrow * `dired-subtree-up * `dired-subtree-down *
+									  `dired-subtree-next-sibling * `dired-subtree-previous-sibling *
+									  `dired-subtree-beginning * `dired-subtree-end * `dired-subtree-mark-subtree *
+									  `dired-subtree-unmark-subtree * `dired-subtree-only-this-file *
+									  `dired-subtree-only-this-directory If you have package `dired-filter',
+									  additional command `dired-subtree-apply-filter is available.  See
+									  https://github.com/Fuco1/dired-hacks for the entire collection.")
    (license #f))
 
   )
@@ -515,9 +515,9 @@ https://github.com/Fuco1/dired-hacks for the entire collection.")
    (synopsis "Tree browser leveraging dired")
    (description
     "This package provides a tree browser similar to `neotree or `treemacs but
-leverages `dired to do the job of display. (use-package dired-sidebar :bind
-((\"C-x C-n\" .  dired-sidebar-toggle-sidebar)) :ensure nil :commands
-(dired-sidebar-toggle-sidebar))")
+    leverages `dired to do the job of display. (use-package dired-sidebar :bind
+							    ((\"C-x C-n\" .  dired-sidebar-toggle-sidebar)) :ensure nil :commands
+							    (dired-sidebar-toggle-sidebar))")
    (license #f))
   )
 
@@ -539,9 +539,9 @@ leverages `dired to do the job of display. (use-package dired-sidebar :bind
    (synopsis "Sidebar for `ibuffer'")
    (description
     "This package provides a sidebar interface similar to `dired-sidebar', but for
-`ibuffer'. (use-package ibuffer-sidebar :bind ((\"C-x C-b\" .
-ibuffer-sidebar-toggle-sidebar)) :ensure nil :commands
-(ibuffer-sidebar-toggle-sidebar))")
+    `ibuffer'. (use-package ibuffer-sidebar :bind ((\"C-x C-b\" .
+						    ibuffer-sidebar-toggle-sidebar)) :ensure nil :commands
+						    (ibuffer-sidebar-toggle-sidebar))")
    (license #f))
   )
 
@@ -563,16 +563,16 @@ ibuffer-sidebar-toggle-sidebar)) :ensure nil :commands
    (synopsis "Leverage tab-bar and project for buffer-isolated workspaces")
    (description
     "This package provides several functions to facilitate a single frame-based
-workflow with one workspace per tab, integration with project.el (for
-project-based workspaces) and buffer isolation per tab (i.e.  a \"tabspace\"
-workspace).  The package assumes project.el and tab-bar.el are both present
-(they are built-in to Emacs 27.1+).  This file is not part of GNU Emacs. ;
-Acknowledgements Much of the package code is inspired by: -
-https://github.com/kaz-yos/emacs -
-https://github.com/wamei/elscreen-separate-buffer-list/issues/8 -
-https://www.rousette.org.uk/archives/using-the-tab-bar-in-emacs/ -
-https://github.com/minad/consult#multiple-sources -
-https://github.com/florommel/bufferlo")
+    workflow with one workspace per tab, integration with project.el (for
+								      project-based workspaces) and buffer isolation per tab (i.e.  a \"tabspace\"
+																    workspace).  The package assumes project.el and tab-bar.el are both present
+																    (they are built-in to Emacs 27.1+).  This file is not part of GNU Emacs. ;
+																    Acknowledgements Much of the package code is inspired by: -
+																    https://github.com/kaz-yos/emacs -
+																    https://github.com/wamei/elscreen-separate-buffer-list/issues/8 -
+																    https://www.rousette.org.uk/archives/using-the-tab-bar-in-emacs/ -
+																    https://github.com/minad/consult#multiple-sources -
+																    https://github.com/florommel/bufferlo")
    (license #f))
 
   )
@@ -598,22 +598,22 @@ https://github.com/florommel/bufferlo")
    (synopsis "Consult integration for Embark")
    (description
     "This package provides integration between Embark and Consult.  The package will
-be loaded automatically by Embark.  Some of the functionality here was
-previously contained in Embark itself: - Support for consult-buffer, so that you
-get the correct actions for each type of entry in consult-buffer's list. -
-Support for consult-line, consult-outline, consult-mark and consult-global-mark,
-so that the insert and save actions don't include a weird unicode character at
-the start of the line, and so you can export from them to an occur buffer (where
-occur-edit-mode works!).  Just load this package to get the above functionality,
-no further configuration is necessary.  Additionally this package contains some
-functionality that has never been in Embark: access to Consult preview from
-auto-updating Embark Collect buffer that is associated to an active minibuffer
-for a Consult command.  For information on Consult preview, see Consult's info
-manual or its readme on GitHub.  If you always want the minor mode enabled
-whenever it possible use: (add-hook embark-collect-mode-hook
-#'consult-preview-at-point-mode) If you don't want the minor mode automatically
-on and prefer to trigger the consult previews manually use this instead:
-(keymap-set embark-collect-mode-map \"C-j\" #'consult-preview-at-point)")
+    be loaded automatically by Embark.  Some of the functionality here was
+    previously contained in Embark itself: - Support for consult-buffer, so that you
+    get the correct actions for each type of entry in consult-buffer's list. -
+    Support for consult-line, consult-outline, consult-mark and consult-global-mark,
+    so that the insert and save actions don't include a weird unicode character at
+    the start of the line, and so you can export from them to an occur buffer (where
+									       occur-edit-mode works!).  Just load this package to get the above functionality,
+									       no further configuration is necessary.  Additionally this package contains some
+									       functionality that has never been in Embark: access to Consult preview from
+									       auto-updating Embark Collect buffer that is associated to an active minibuffer
+									       for a Consult command.  For information on Consult preview, see Consult's info
+									       manual or its readme on GitHub.  If you always want the minor mode enabled
+									       whenever it possible use: (add-hook embark-collect-mode-hook
+														   #'consult-preview-at-point-mode) If you don't want the minor mode automatically
+														   on and prefer to trigger the consult previews manually use this instead:
+														   (keymap-set embark-collect-mode-map \"C-j\" #'consult-preview-at-point)")
    (license #f))
   )
 
@@ -635,7 +635,7 @@ on and prefer to trigger the consult previews manually use this instead:
     "Read music meta data and length of MP3, OGG, OPUS, MP4, M4A, FLAC, WMA and Wave files")
    (description
     "Read music meta data and length of MP3, OGG, OPUS, MP4, M4A, FLAC, WMA and Wave
-files")
+    files")
    (license license:expat))
 
   )
@@ -662,32 +662,32 @@ files")
    (synopsis "A minimal and modern mode-line")
    (description
     "This package offers a fancy and fast mode-line inspired by minimalism design.
-It's integrated into Doom Emacs (https://github.com/hlissner/doom-emacs) and
-Centaur Emacs (https://github.com/seagle0128/.emacs.d).  The doom-modeline
-offers: - A match count panel (for anzu, iedit, multiple-cursors,
-symbol-overlay, evil-search and evil-substitute) - An indicator for recording a
-macro - Current environment version (e.g. python, ruby, go, etc.) in the
-major-mode - A customizable mode-line height (see doom-modeline-height) - A
-minor modes segment which is compatible with minions - An error/warning count
-segment for flymake/flycheck - A workspace number segment for eyebrowse - A
-perspective name segment for persp-mode - A window number segment for winum and
-window-numbering - An indicator for modal editing state, including evil,
-overwrite, god, ryo and xah-fly-keys, etc. - An indicator for battery status -
-An indicator for current input method - An indicator for debug state - An
-indicator for remote host - An indicator for LSP state with lsp-mode or eglot -
-An indicator for github notifications - An indicator for unread emails with
-mu4e-alert - An indicator for unread emails with gnus (basically builtin) - An
-indicator for irc notifications with circe, rcirc or erc. - An indicator for
-buffer position which is compatible with nyan-mode or poke-line - An indicator
-for party parrot - An indicator for PDF page number with pdf-tools - An
-indicator for markdown/org previews with grip - Truncated file name, file icon,
-buffer state and project name in buffer information segment, which is compatible
-with project, find-file-in-project and projectile - New mode-line for Info-mode
-buffers - New package mode-line for paradox - New mode-line for helm buffers -
-New mode-line for git-timemachine buffers Installation: From melpa, `M-x
-package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
-(doom-modeline-mode 1) or (use-package doom-modeline :ensure t :hook (after-init
-.  doom-modeline-mode))")
+    It's integrated into Doom Emacs (https://github.com/hlissner/doom-emacs) and
+    Centaur Emacs (https://github.com/seagle0128/.emacs.d).  The doom-modeline
+    offers: - A match count panel (for anzu, iedit, multiple-cursors,
+				       symbol-overlay, evil-search and evil-substitute) - An indicator for recording a
+				       macro - Current environment version (e.g. python, ruby, go, etc.) in the
+				       major-mode - A customizable mode-line height (see doom-modeline-height) - A
+				       minor modes segment which is compatible with minions - An error/warning count
+				       segment for flymake/flycheck - A workspace number segment for eyebrowse - A
+				       perspective name segment for persp-mode - A window number segment for winum and
+				       window-numbering - An indicator for modal editing state, including evil,
+				       overwrite, god, ryo and xah-fly-keys, etc. - An indicator for battery status -
+				       An indicator for current input method - An indicator for debug state - An
+				       indicator for remote host - An indicator for LSP state with lsp-mode or eglot -
+				       An indicator for github notifications - An indicator for unread emails with
+				       mu4e-alert - An indicator for unread emails with gnus (basically builtin) - An
+				       indicator for irc notifications with circe, rcirc or erc. - An indicator for
+				       buffer position which is compatible with nyan-mode or poke-line - An indicator
+				       for party parrot - An indicator for PDF page number with pdf-tools - An
+				       indicator for markdown/org previews with grip - Truncated file name, file icon,
+				       buffer state and project name in buffer information segment, which is compatible
+				       with project, find-file-in-project and projectile - New mode-line for Info-mode
+				       buffers - New package mode-line for paradox - New mode-line for helm buffers -
+				       New mode-line for git-timemachine buffers Installation: From melpa, `M-x
+				       package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
+				       (doom-modeline-mode 1) or (use-package doom-modeline :ensure t :hook (after-init
+													     .  doom-modeline-mode))")
    (license #f))
   )
 
@@ -709,32 +709,32 @@ package-install RET doom-modeline RET`.  In `init.el`, (require doom-modeline)
    (synopsis "View Data")
    (description
     "Customization: ess-view-data-backend-list: dplyr (default), dplyr+DT,
-data.table+magrittr ess-view-data-print-backend-list: print (default), kable
-ess-view-data-save-backend-list: write.csv (default), readr::write_csv,
-data.table::fwrite kable ess-view-data-complete-backend-list: jsonlite
-ess-view-data-read-string: ess-completing-read (default), completing-read,
-ido-completing-read, ivy-completing-read Utils: NOTE: it will make a copy of the
-data and then does the following action ess-view-data-print: the main function
-to view data Example: In a ess-r buffer or a Rscript buffer, `M-x
-ess-view-data-print` and input `mtcars`.  ess-view-data-set-backend: change
-backend ess-view-data-toggle-maxprint: toggle limitation of lines per page to
-print ess-view-data-verbs Example: In the ESS-V buffer, `M-x
-ess-view-data-verbs` and select the verb to do with.  ess-view-data-filter
-Example: In the ESS-V buffer, `M-x ess-view-data-filter`, `cyl <RET> mpg` to
-select columns and <C-j> to finish input.  An indirect buffer pops up and
-data-masking Expressions can be edited.  ess-view-data-select /
-ess-view-data-unselect Example: In the ESS-V buffer, `M-x ess-view-data-select`,
-`cyl <RET> mpg` to select columns and <C-j> to finish input.  ess-view-data-sort
-ess-view-data-group / ess-view-data-ungroup ess-view-data-mutate
-ess-view-data-slice ess-view-data-wide2long / ess-view-data-long2wide
-ess-view-data-update ess-view-data-reset Example: In the ESS-V buffer, `M-x
-ess-view-data-reset`, an indirect buffer pops up and the action history can be
-edited.  ess-view-data-unique ess-view-data-count Example: In the ESS-V buffer,
-`M-x ess-view-data-count`, `cyl <RET> mpg` to select columns and <C-j> to finish
-input.  In the updated buffer with count information, `M-x ess-view-data-print`
-to go back.  ess-view-data-summarise ess-view-data-overview
-ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
-/ -page-number ess-view-data-save")
+    data.table+magrittr ess-view-data-print-backend-list: print (default), kable
+    ess-view-data-save-backend-list: write.csv (default), readr::write_csv,
+    data.table::fwrite kable ess-view-data-complete-backend-list: jsonlite
+    ess-view-data-read-string: ess-completing-read (default), completing-read,
+    ido-completing-read, ivy-completing-read Utils: NOTE: it will make a copy of the
+    data and then does the following action ess-view-data-print: the main function
+    to view data Example: In a ess-r buffer or a Rscript buffer, `M-x
+    ess-view-data-print` and input `mtcars`.  ess-view-data-set-backend: change
+    backend ess-view-data-toggle-maxprint: toggle limitation of lines per page to
+    print ess-view-data-verbs Example: In the ESS-V buffer, `M-x
+    ess-view-data-verbs` and select the verb to do with.  ess-view-data-filter
+    Example: In the ESS-V buffer, `M-x ess-view-data-filter`, `cyl <RET> mpg` to
+    select columns and <C-j> to finish input.  An indirect buffer pops up and
+    data-masking Expressions can be edited.  ess-view-data-select /
+    ess-view-data-unselect Example: In the ESS-V buffer, `M-x ess-view-data-select`,
+    `cyl <RET> mpg` to select columns and <C-j> to finish input.  ess-view-data-sort
+    ess-view-data-group / ess-view-data-ungroup ess-view-data-mutate
+    ess-view-data-slice ess-view-data-wide2long / ess-view-data-long2wide
+    ess-view-data-update ess-view-data-reset Example: In the ESS-V buffer, `M-x
+    ess-view-data-reset`, an indirect buffer pops up and the action history can be
+    edited.  ess-view-data-unique ess-view-data-count Example: In the ESS-V buffer,
+    `M-x ess-view-data-count`, `cyl <RET> mpg` to select columns and <C-j> to finish
+    input.  In the updated buffer with count information, `M-x ess-view-data-print`
+    to go back.  ess-view-data-summarise ess-view-data-overview
+    ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
+    / -page-number ess-view-data-save")
    (license #f))
   )
 
@@ -756,17 +756,17 @@ ess-view-data-goto-page / -next-page / -preious-page / -first-page / -last-page
    (synopsis "Add LatexMk support to AUCTeX")
    (description
     "This library adds LatexMk support to AUCTeX. Requirements: * AUCTeX * LatexMk *
-TeXLive (2011 or later if you write TeX source in Japanese) To use this package,
-add the following line to your .emacs file: (require auctex-latexmk)
-(auctex-latexmk-setup) And add the following line to your .latexmkrc file: #
-.latexmkrc starts $pdf_mode = 1; # .latexmkrc ends After that, by using M-x
-TeX-command-master (or C-c C-c), you can use LatexMk command to compile TeX
-source.  For Japanese users: LatexMk command automatically stores the encoding
-of a source file and passes it to latexmk via an environment variable named
-\"LATEXENC\".  Here is the example of .latexmkrc to use \"LATEXENC\": # .latexmkrc
-starts $kanji = \"-kanji=$ENV{\\\"LATEXENC\\\"}\" if defined $ENV{\"LATEXENC\"}; $latex
-= \"platex $kanji\"; $bibtex = \"pbibtex $kanji\"; $dvipdf = dvipdfmx -o %D %S';
-$pdf_mode = 3; # .latexmkrc ends")
+    TeXLive (2011 or later if you write TeX source in Japanese) To use this package,
+    add the following line to your .emacs file: (require auctex-latexmk)
+    (auctex-latexmk-setup) And add the following line to your .latexmkrc file: #
+    .latexmkrc starts $pdf_mode = 1; # .latexmkrc ends After that, by using M-x
+    TeX-command-master (or C-c C-c), you can use LatexMk command to compile TeX
+    source.  For Japanese users: LatexMk command automatically stores the encoding
+    of a source file and passes it to latexmk via an environment variable named
+    \"LATEXENC\".  Here is the example of .latexmkrc to use \"LATEXENC\": # .latexmkrc
+    starts $kanji = \"-kanji=$ENV{\\\"LATEXENC\\\"}\" if defined $ENV{\"LATEXENC\"}; $latex
+    = \"platex $kanji\"; $bibtex = \"pbibtex $kanji\"; $dvipdf = dvipdfmx -o %D %S';
+    $pdf_mode = 3; # .latexmkrc ends")
    (license #f))
   )
 
@@ -1062,6 +1062,335 @@ database does not contain any information that cannot simply be fetched again.")
    (license #f))
   )
 
+
+
+
+;; Lsp-mode
+
+(define-public emacs-lv
+  (package
+   (name "emacs-lv")
+   (version "20200507.1518")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/abo-abo/hydra.git")
+		  (commit "317e1de33086637579a7aeb60f77ed0405bf359b")))
+	    (sha256 (base32
+		     "1nbp0kpxb0m4igyjji1b8zi06am4l5m2m6rmxgz0jvks8cyri6dm"))))
+   (build-system emacs-build-system)
+   (arguments '(#:include '("^lv.el$")
+		#:exclude '()))
+   (home-page "unspecified")
+   (synopsis "Other echo area")
+   (description
+    "This package provides `lv-message intended to be used in place of `message when
+semi-permanent hints are needed, in order to not interfere with Echo Area. \"Я
+тихо-тихо пiдглядаю, І тiшуся собi, як бачу то, Шо страшить i не пiдпускає, А
+iншi п’ють тебе, як воду пiсок.\" -- Андрій Кузьменко, L.V.")
+   (license #f))
+  )
+
+
+;; (define-public emacs-lsp-mode
+;;   (package
+;;    (name "emacs-lsp-mode")
+;;    (version "20230809.1200")
+;;    (source (origin
+;; 	    (method git-fetch)
+;; 	    (uri (git-reference
+;; 		  (url "https://github.com/emacs-lsp/lsp-mode.git")
+;; 		  (commit "ee58d9eb66f85c2258b9745f721965f0d62071fb")))
+;; 	    (sha256 (base32
+;; 		     "1fcc66whiwbxwxvyk4mc785505icfq0j8azplq4iqmn3pkynga49"))))
+;;    (build-system emacs-build-system)
+;;    (propagated-inputs (list emacs-dash
+;; 			    emacs-f
+;; 			    emacs-ht
+;; 			    emacs-spinner
+;; 			    emacs-markdown-mode
+;; 			    emacs-lv
+;; 			    emacs-eldoc))
+;;    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+;; 			    "^dir$"
+;; 			    "^[^/]+.info$"
+;; 			    "^[^/]+.texi$"
+;; 			    "^[^/]+.texinfo$"
+;; 			    "^doc/dir$"
+;; 			    "^doc/[^/]+.info$"
+;; 			    "^doc/[^/]+.texi$"
+;; 			    "^doc/[^/]+.texinfo$"
+;; 			    "^clients/[^/]+.el$")
+;; 		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
+;; 			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
+;;    (home-page "https://github.com/emacs-lsp/lsp-mode")
+;;    (synopsis "LSP mode")
+;;    (description "Emacs client/library for the Language Server Protocol")
+;;    (license #f))
+;;   )
+
+(define-public emacs-lsp-mode
+  (package
+   (name "emacs-lsp-mode")
+   (version "8.0.0")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append "https://stable.melpa.org/packages/lsp-mode-"
+				version ".tar"))
+	    (sha256 (base32
+		     "0pjlrsn0g1h2c6nzpwzlq119pav013i72rjrbfgilkpdpjl7kbcb"))))   (build-system emacs-build-system)
+		     (propagated-inputs (list emacs-dash
+					      emacs-f
+					      emacs-ht
+					      emacs-spinner
+					      emacs-markdown-mode
+					      emacs-lv))
+		     (home-page "https://github.com/emacs-lsp/lsp-mode")
+		     (synopsis "LSP mode")
+		     (description "Emacs client/library for the Language Server Protocol")
+		     (license #f))
+  )
+
+
+;; (define-public emacs-lsp-ui
+;;   (package
+;;    (name "emacs-lsp-ui")
+;;    (version "20230116.2024")
+;;    (source (origin
+;; 	    (method git-fetch)
+;; 	    (uri (git-reference
+;; 		  (url "https://github.com/emacs-lsp/lsp-ui.git")
+;; 		  (commit "9d28c2ca1e79614215ea678583435d5d1189e4bc")))
+;; 	    (sha256 (base32
+;; 		     "0kd76ckyl6jfmr93jw8bnzna8968mvmk7knxlndm3ljyxzdwbciq"))))
+;;    (build-system emacs-build-system)
+;;    (propagated-inputs (list emacs-dash emacs-lsp-mode emacs-markdown-mode))
+;;    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+;; 			    "^dir$"
+;; 			    "^[^/]+.info$"
+;; 			    "^[^/]+.texi$"
+;; 			    "^[^/]+.texinfo$"
+;; 			    "^doc/dir$"
+;; 			    "^doc/[^/]+.info$"
+;; 			    "^doc/[^/]+.texi$"
+;; 			    "^doc/[^/]+.texinfo$"
+;; 			    "^lsp-ui-doc.html$"
+;; 			    "^resources$")
+;; 		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
+;; 			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
+;;    (home-page "https://github.com/emacs-lsp/lsp-ui")
+;;    (synopsis "UI modules for lsp-mode")
+;;    (description
+;;     "lsp-ui contains a series of useful UI integrations for lsp-mode, like flycheck
+;; support and code lenses.")
+;;    (license #f))
+;;   )
+
+(define-public emacs-lsp-ui
+  (package
+   (name "emacs-lsp-ui")
+   (version "8.0.1")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append "https://stable.melpa.org/packages/lsp-ui-"
+				version ".tar"))
+	    (sha256 (base32
+		     "1s6cizb9696if20m11ygawlgisa1797h9c8y2596m7v0fkvcqwr0"))))   (build-system emacs-build-system)
+		     (propagated-inputs (list emacs-dash emacs-lsp-mode emacs-markdown-mode))
+		     (home-page "https://github.com/emacs-lsp/lsp-ui")
+		     (synopsis "UI modules for lsp-mode")
+		     (description
+		      "lsp-ui contains a series of useful UI integrations for lsp-mode, like flycheck
+support and code lenses.")
+		     (license #f))
+  )
+
+
+
+
+;; (define-public emacs-lsp-julia
+;;   (package
+;;    (name "emacs-lsp-julia")
+;;    (version "20230414.2107")
+;;    (source (origin
+;; 	    (method git-fetch)
+;; 	    (uri (git-reference
+;; 		  (url "https://github.com/gdkrmr/lsp-julia.git")
+;; 		  (commit "c584f79c7fee6176bbb6120f4cb0f1001bcf8113")))
+;; 	    (sha256 (base32
+;; 		     "0p32qjj9r7p423vpm7zyy4zrxbsical22yw4m2sv9lmbny5r4pzf"))))
+;;    (build-system emacs-build-system)
+;;    (propagated-inputs (list emacs-lsp-mode emacs-julia-mode))
+;;    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+;; 			    "^dir$"
+;; 			    "^[^/]+.info$"
+;; 			    "^[^/]+.texi$"
+;; 			    "^[^/]+.texinfo$"
+;; 			    "^doc/dir$"
+;; 			    "^doc/[^/]+.info$"
+;; 			    "^doc/[^/]+.texi$"
+;; 			    "^doc/[^/]+.texinfo$"
+;; 			    "^languageserver$")
+;; 		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
+;; 			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
+;;    (home-page "https://github.com/gdkrmr/lsp-julia")
+;;    (synopsis "Julia support for lsp-mode")
+;;    (description
+;;     "This version of lsp-julia requires julia 1.7 to run.  Manual installation:
+;; (require julia-mode) (push \"/path/to/lsp-julia\" load-path) (require lsp-julia)
+;; (require lsp-mode) ;; Configure lsp + julia (add-hook julia-mode-hook
+;; #'lsp-mode) (add-hook julia-mode-hook #'lsp)")
+;;    (license #f))
+;;   )
+
+
+(define-public emacs-lsp-julia
+(package
+  (name "emacs-lsp-julia")
+   (version "0.7.2")
+   (source (origin
+             (method url-fetch)
+             (uri (string-append
+                   "https://stable.melpa.org/packages/lsp-julia-" version
+                   ".tar"))
+             (sha256 (base32
+                      "0w80fhljilhivik9dvxp9b2q870sgns3qphlfmznxrkjp634nzf0"))))   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-lsp-mode emacs-julia-mode))
+   (home-page "https://github.com/gdkrmr/lsp-julia")
+   (synopsis "Julia support for lsp-mode")
+   (description
+    "This version of lsp-julia requires julia 1.7 to run.  Manual installation:
+(require julia-mode) (push \"/path/to/lsp-julia\" load-path) (require lsp-julia)(require lsp-mode) ;; Configure lsp + julia (add-hook julia-mode-hook
+#'lsp-mode) (add-hook julia-mode-hook #'lsp)")
+   (license #f))
+)
+
+(define-public emacs-lsp-ltex
+  (package
+   (name "emacs-lsp-ltex")
+   (version "0.2.1")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append "https://stable.melpa.org/packages/lsp-ltex-"
+				version ".tar"))
+	    (sha256 (base32
+		     "1bmnc5049drg3hlsbcmmgw2n33yyav1yzd48xvcg8bznfgxzyy65"))))   (build-system emacs-build-system)
+		     (propagated-inputs (list emacs-lsp-mode emacs-f emacs-s))
+		     (home-page "https://github.com/emacs-languagetool/lsp-ltex")
+		     (synopsis "LSP Clients for LTEX")
+		     (description "LSP server implementation for LTEX")
+		     (license #f))
+  )
+
+
+
+(define-public emacs-lsp-docker
+  (package
+   (name "emacs-lsp-docker")
+   (version "20230627.1601")
+   (source (origin
+	    (method git-fetch)
+	    (uri (git-reference
+		  (url "https://github.com/emacs-lsp/lsp-docker.git")
+		  (commit "9adabe57393c6e8740789710c614d011a697b1ed")))
+	    (sha256 (base32
+		     "0y01hf3phxbcr0qzhv4i5nwxkwlbadpg2yg8v8fb7cy91qjwzf86"))))   (build-system emacs-build-system)
+		     (propagated-inputs (list emacs-dash
+					      emacs-lsp-mode
+					      emacs-f
+					      emacs-s
+					      emacs-yaml
+					      emacs-ht))
+		     (home-page "https://github.com/emacs-lsp/lsp-docker")
+		     (synopsis "LSP Docker integration")
+		     (description "Run language servers in containers")
+		     (license #f))
+  )
+
+;; (define-public emacs-lsp-ltex
+;;   (package
+;;    (name "emacs-dap-mode")
+;;    (version "20230810.703")
+;;    (source (origin
+;; 	    (method git-fetch)
+;; 	    (uri (git-reference
+;; 		  (url "https://github.com/emacs-lsp/dap-mode.git")
+;; 		  (commit "de41d62fc4f94f61ffdf7713a043dca9c02297c8")))
+;; 	    (sha256 (base32
+;; 		     "0ksgpnprgdyz9mjgllzjg7x0ghgvyh44yisj8ml1lqagdla7bpm8"))))   (build-system emacs-build-system)
+;; 		     (propagated-inputs (list emacs-dash
+;; 					      emacs-lsp-mode
+;; 					      emacs-bui
+;; 					      emacs-f
+;; 					      emacs-s
+;; 					      emacs-lsp-treemacs
+;; 					      emacs-posframe
+;; 					      emacs-ht
+;; 					      emacs-lsp-docker))
+;; 		     (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
+;; 					      "^dir$"
+;; 					      "^[^/]+.info$"
+;; 					      "^[^/]+.texi$"
+;; 					      "^[^/]+.texinfo$"
+;; 					      "^doc/dir$"
+;; 					      "^doc/[^/]+.info$"
+;; 					      "^doc/[^/]+.texi$"
+;; 					      "^doc/[^/]+.texinfo$"
+;; 					      "^icons$")
+;; 				  #:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
+;; 					      "^[^/]+-test.el$" "^[^/]+-tests.el$")))
+;; 		     (home-page "https://github.com/emacs-lsp/dap-mode")
+;; 		     (synopsis "Debug Adapter Protocol mode")
+;; 		     (description "Debug Adapter Protocol client for Emacs.")
+;; 		     (license #f))
+;;   )
+
+
+(define-public emacs-lsp-scheme
+  (package
+   (name "emacs-lsp-scheme")
+   (version "0.1.1")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append
+		  "https://stable.melpa.org/packages/lsp-scheme-" version
+		  ".tar"))
+	    (sha256 (base32
+		     "13n4i1i76808f2pk651gwaj5gzd6hgvqmi5a55lg6kp4q8lh6j3x"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-f emacs-lsp-mode))
+   (home-page "https://codeberg.org/rgherdt/emacs-lsp-scheme")
+   (synopsis "Scheme support for lsp-mode")
+   (description
+    "Client for the Scheme LSP server.  Currently this client only supports CHICKEN 5
+and Guile 3, since those are supported by scheme-lsp-server. ;; Installation
+Make sure your chosen Scheme implementation is installed and on your load-path.
+Implementation support depends on availability of a corresponding LSP server, as
+mentioned, for now only CHICKEN and Guile are supported.  On first run you
+should be prompted to install an lsp server.  The extension will install it to
+its cache directory.  In case something goes wrong, manually install the server
+available at https://codeberg.org/rgherdt/scheme-lsp-server (and make sure to
+create an issue at our repository).  In order to achieve better results, follow
+these instructions to update CHICKEN's documentation: - install needed eggs:
+chicken-install -s r7rs apropos chicken-doc srfi-18 srfi-130 - update
+documentation database: $ cd `csi -R chicken.platform -p (chicken-home)'` $ curl
+https://3e8.org/pub/chicken-doc/chicken-doc-repo-5.tgz | sudo tar zx 
+								      ;; Setup
+Add the following lines to your Emacs configuration file: (require lsp-scheme)
+(add-hook scheme-mode-hook #'lsp-scheme) (setq lsp-scheme-implementation
+\"guile\") ;;; customizable 
+			     ;; Usage This LSP client tries to implement an
+workflow similar to other Lisp-related Emacs modes.  For instance, it relies on
+the interaction between the user and the REPL to load information needed.  The
+interaction is currently based on Emacs built-in Scheme inferior-mode.  So, for
+instance, in order to load the current buffer you can just issue C-c C-l.  Since
+the REPL is connected to the LSP server, this will allow it to fetch symbols
+defined in the buffer, as well as libraries imported by it.")
+   (license #f))
+  )
+
+
+
   ;;
   ;; Manifest
   ;;
@@ -1091,9 +1420,6 @@ database does not contain any information that cannot simply be fetched again.")
       ;;"emacs-ess" ;; Emacs mode for statistical analysis programs
 
 
-      "emacs-vterm" ;; Emacs libvterm integration
-      "emacs-vterm-toggle" ;; Toggle between a vterm buffer and other buffers
-      "emacs-multi-vterm" ;; Manage multiple vterm buffers in Emacs
       ;;"emacs-julia-mode" ;; Major mode for Julia
       ;;"emacs-julia-repl" ;; Minor mode for interacting with a Julia REPL ;; Replaced by julia-vterm since support org-babel via ob-julia-vterm
       "emacs-no-littering" ;; Help keep `~/.emacs.d/' clean
@@ -1221,6 +1547,7 @@ database does not contain any information that cannot simply be fetched again.")
       "emacs-org-pomodoro" ;; Pomodoro technique for org-mode 
       ;;"mplayer" ;; Audio and video player
       "mpv" ;; Audio and video player
+      "mpv-mpris" ;; MPRIS plugin for mpv
 
       "emacs-nyxt" ;; Interact with Nyxt from Emacs
 
@@ -1237,7 +1564,6 @@ database does not contain any information that cannot simply be fetched again.")
 
       "emacs-mastodon"
 
-      "emacs-consult-eglot" ;; Consulting-read interface for eglot 
 
       "aspell" ;; Spell checker 
       "aspell-dict-fr" ;; French dictionary for GNU Aspell 
@@ -1254,7 +1580,6 @@ database does not contain any information that cannot simply be fetched again.")
       "emacs-transmission" ;; Emacs interface to a Transmission session
 
 
-      "emacs-yasnippet"
 
 
       ;; Docker support
@@ -1283,7 +1608,6 @@ database does not contain any information that cannot simply be fetched again.")
       "emacs-org-tree-slide" ;; Presentation tool for Org mode
       "emacs-hide-lines" ;; Commands for hiding lines based on a regexp
 
-
       "emacs-lua-mode" ;; Major mode for lua
 
       "openjdk" ;; Java development kit
@@ -1293,13 +1617,30 @@ database does not contain any information that cannot simply be fetched again.")
       "ccls" ;; C/C++/Objective-C language server
       ;;"texlive-digestif" ;;Editor plugin for LaTeX, ConTeXt etc.
 
+      ;; Eglot
+      "emacs-consult-eglot" ;; Consulting-read interface for eglot 
+
+
       ;; Terminal
       "emacs-eat" ;; Terminal emulator in Emacs
+      "emacs-vterm" ;; Emacs libvterm integration
+      "emacs-vterm-toggle" ;; Toggle between a vterm buffer and other buffers
+      "emacs-multi-vterm" ;; Manage multiple vterm buffers in Emacs
 
-      ;; Notifications
-      "emacs-ednc" ;; Emacs Desktop Notification Center
+      ;; Lsp-bridge dependencies
+      "python-epc" ;; Remote procedure call (RPC) stack for Emacs Lisp and Python
+      "python-orjson" ;; Python JSON library supporting dataclasses, datetimes, and numpy
+      "python-sexpdata" ;; S-expression parser for Python
+      "python-six" ;; Python 2 and 3 compatibility utilities
+      "python-paramiko" ;; SSHv2 protocol library
+      "emacs-yasnippet" ;; Yet another snippet extension for Emacs
 
-      ;;"emacs-julia-mode" ;; Major mode for Julia
+      "julia"
+
+      ;; LSP-mode
+      ;;"emacs-lsp-mode" ;; Emacs client and library for the Language Server Protocol
+      ;;"emacs-lsp-ui" ;; User interface extensions for `lsp-mode'
+      ;; "emacs-dap-mode" ;; Emacs client/library for Debug Adapter Protocol
 
       ))
     (packages->manifest (list
@@ -1322,12 +1663,20 @@ database does not contain any information that cannot simply be fetched again.")
 			 ;; emacs-auctex-latexmk ;; dont't work
 			 emacs-tab-bar-echo-area
 			 emacs-org-appear
-			 ;; emacs-eglot-ltex
+			 emacs-eglot-ltex
 			 ;; emacs-dashboard ;; do work well with emacs 29
 			 ;; emacs-org-pdftools ;; don't build
 			 ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
 			 emacs-empv
 			 emacs-r-ts-mode
+
 			 ;; emacs-forge
+
+			 emacs-lsp-mode
+			 emacs-lsp-ui
+			 emacs-lsp-julia
+			 emacs-lsp-ltex
+			 emacs-lsp-scheme
+
 			 ))
     ))

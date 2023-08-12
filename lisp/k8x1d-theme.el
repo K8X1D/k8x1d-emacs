@@ -7,26 +7,39 @@
      )
    :init
    (defvar k8x1d/doom-dark-theme 'doom-palenight)
-   ;;(defvar k8x1d/doom-dark-theme 'doom-one)
-   (defvar k8x1d/doom-light-theme 'doom-nord-light)
+   (defvar k8x1d/doom-light-theme 'doom-one-light)
    (defvar k8x1d/actual-theme k8x1d/doom-dark-theme)
+
+   (defun k8x1d/adjust-theme ()
+     (if (equal k8x1d/actual-theme k8x1d/doom-dark-theme) 
+	 (custom-set-faces
+	  ;;`(hl-line ((t (:background "#28003d"))))
+	  `(hl-line ((t (:background "#28003d"))))
+	  `(org-block ((t (:background "#28003d"))))
+	  `(org-inline-src-block ((t (:background "#28003d"))))
+	  `(org-block-begin-line ((t (:background "#28003d"))))
+	  `(org-block-end-line ((t (:background "#28003d")))))
+       (custom-set-faces
+	;;`(hl-line ((t (:background "#28003d"))))
+	`(hl-line ((t (:background ,(doom-color 'region)))))
+	`(org-block ((t (:background ,(doom-color 'base1)))))
+	`(org-inline-src-block ((t (:background ,(doom-color 'base1)))))
+	`(org-block-begin-line ((t (:background ,(doom-color 'base1)))))
+	`(org-block-end-line ((t (:background ,(doom-color 'base1))))))
+       ))
 
    (defun k8x1d/switch-theme (old-theme new-theme)
      (disable-theme old-theme)
      (load-theme new-theme t)
-     ;; Customization
-     ;; Must be used *after* the theme is loaded
-     ;;(custom-set-faces
-     ;; `(cursor ((t (:background ,(doom-color 'fg) :foreground ,(doom-color 'bg))))))
      (setq k8x1d/actual-theme new-theme))
 
    (defun k8x1d/dark-to-light-to-dark ()
      (interactive)
      (if (eq k8x1d/actual-theme k8x1d/doom-dark-theme)
- 	(k8x1d/switch-theme k8x1d/doom-dark-theme k8x1d/doom-light-theme)
-       (k8x1d/switch-theme k8x1d/doom-light-theme k8x1d/doom-dark-theme)))
-   ;; :bind
-   ;; ("<f5>" . 'k8x1d/dark-to-light-to-dark)
+	 (k8x1d/switch-theme k8x1d/doom-dark-theme k8x1d/doom-light-theme)
+       (k8x1d/switch-theme k8x1d/doom-light-theme k8x1d/doom-dark-theme))
+     (k8x1d/adjust-theme)
+     )
    :config
    ;; Global settings (defaults)
    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -36,15 +49,10 @@
    ;; Corrects (and improves) org-mode's native fontification.
    (doom-themes-org-config)
 
-;; Must be used *after* the theme is loaded
-    (custom-set-faces
-     `(org-block ((t (:background "#28003d"))))
-     `(org-inline-src-block ((t (:background "#28003d"))))
-     `(org-block-begin-line ((t (:background "#28003d"))))
-     `(org-block-end-line ((t (:background "#28003d")))))
    :hook
    (after-init . (lambda () 
- 		  (load-theme k8x1d/actual-theme t)))
+ 		   (load-theme k8x1d/actual-theme t)
+		   (k8x1d/adjust-theme)))
    )
 
 ;; (use-package emacs

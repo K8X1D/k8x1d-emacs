@@ -31,10 +31,11 @@
 
   ;; Org directory
   (setq org-directory "~/org")
-  (setq org-agenda-files (append (file-expand-wildcards "~/Dropbox/Gmail/org/gtd/*.org")
-				 (file-expand-wildcards "~/Dropbox/Gmail/org/doom/*.org")
-				 (file-expand-wildcards "~/org/gtd/*.org")
-				 ))
+  (setq org-agenda-files (append
+			  ;;(file-expand-wildcards "~/Dropbox/Gmail/org/gtd/*.org")
+			  ;;(file-expand-wildcards "~/Dropbox/Gmail/org/doom/*.org")
+			  (file-expand-wildcards "~/org/gtd/*.org")
+			  ))
 
 
   ;; From doom configuration
@@ -80,6 +81,17 @@
 
   (setq org-default-notes-file (concat org-directory "/gtd/inbox.org")) ;; Orig
   )
+
+
+;; Habits
+;; see https://stackoverflow.com/questions/8751287/weekly-repeating-tasks-emacs-org-mode
+;; see http://orgmode.org/manual/Tracking-your-habits.html
+(use-package org
+  :config
+  (add-to-list 'org-modules "org-habit")
+  (require 'org-habit)
+  )
+
 
 
 (provide 'k8x1d-gtd)

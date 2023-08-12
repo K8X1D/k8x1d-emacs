@@ -70,11 +70,11 @@
   :config
   (setq empv-invidious-instance "https://invidious.flokinet.to/api/v1")
   (setq empv-youtube-use-tabulated-results t)
+  ;; Mpv options
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
+  (add-to-list 'empv-mpv-args "--script=$GUIX_EXTRA_PROFILES/k8x1d-emacs/k8x1d-emacs/lib/mpris.so")
+  (add-to-list 'empv-mpv-args "--sub-auto=all")
   )
-
-
-
 
 (use-package transmission
   :general

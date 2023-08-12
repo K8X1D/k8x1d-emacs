@@ -25,8 +25,13 @@
   ;;:bind (:map python-mode-map
   ;;	      ("C-c C-z" . run-python))
   ;;:hook (python-mode . eglot-ensure)
+  :config
+  (setq python-indent-offset 4)
   )
 
+(use-package python-ts-mode
+  :config
+  (setq python-indent-offset 4))
 
 (use-package python-vterm
   :load-path "~/.k8x1d-emacs.d/lisp/python-vterm.el"
