@@ -7,7 +7,12 @@
 (use-package vertico
   :hook
   (after-init . vertico-mode)
-  )
+  :bind  (:map vertico-map
+	  ("M-j" . vertico-next)
+	  ("M-n" . vertico-next)
+	  ("M-k" . vertico-previous)
+	  ("M-p" . vertico-previous))
+)
 
 ;;
 ;; Completion Style
@@ -20,6 +25,7 @@
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
+  :if (equal (equal k8x1d-lsp-module "lsp-bridge") nil)
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
@@ -78,7 +84,7 @@
 ;; Completion interface (pop-up)
 ;;
 (use-package corfu
- ;; :hook (after-init . global-corfu-mode)
+  :if (equal (equal k8x1d-lsp-module "lsp-bridge") nil)
   :hook ((prog-mode . corfu-mode)
           (shell-mode . corfu-mode)
           (eshell-mode . corfu-mode)
