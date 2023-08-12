@@ -166,6 +166,7 @@
   (add-to-list 'lsp-language-id-configuration '(python-ts-mode . "python"))
   (add-to-list 'lsp-language-id-configuration '(R-mode . "r"))
   (add-to-list 'lsp-language-id-configuration '(org-mode . "org"))
+  (add-to-list 'lsp-language-id-configuration '(org-journal-mode . "org"))
   )
 
 ;; Corfu support
