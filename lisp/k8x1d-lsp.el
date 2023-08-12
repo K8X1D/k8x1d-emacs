@@ -146,10 +146,12 @@
   :if (equal k8x1d-lsp-module "lsp-mode")
   :init
   ;;(setq lsp-keymap-prefix "SPC m L")
+  ;;(require 'lsp-scheme)
   :hook ((ess-r-mode . lsp-deferred)
 	 (python-ts-mode . lsp-deferred)
 	 (LaTeX-mode . lsp-deferred)
 	 (org-mode . lsp-deferred)
+	 (scheme-mode . lsp-deferred)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :config
@@ -163,6 +165,16 @@
   (add-to-list 'lsp-language-id-configuration '(R-mode . "r"))
   (add-to-list 'lsp-language-id-configuration '(org-mode . "org"))
   (add-to-list 'lsp-language-id-configuration '(org-journal-mode . "org"))
+
+;; Guile scheme support
+;; Use shopify-cli / theme-check-language-server for Shopify's liquid syntax
+  (add-to-list 'lsp-language-id-configuration '(scheme-mode . "guile-scheme"))
+
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-stdio-connection "guile-lsp-server")
+                     :activation-fn (lsp-activate-on "guile-scheme")
+                     :server-id 'theme-check))
+
   )
 
 ;; Corfu support
@@ -237,21 +249,20 @@
     ;; in test
     ;; (defalias 'org-babel-execute:ess-r 'org-babel-execute:R)
     ;; (defalias 'org-babel-variable-assignments:ess-r 'org-babel-variable-assignments:R)
-
     )
 
 
+  ;; FIXME: don't work; temporary manual implementation
+  ;; (use-package lsp-scheme
+  ;;   :if (equal k8x1d-lsp-module "lsp-mode")
+  ;;   :hook (scheme-mode . (lambda ()
+  ;; 			   (require 'lsp-scheme)
+  ;; 			   (lsp-deferred)))  
+  ;;   :config
+  ;;   (setq lsp-scheme-implementation "guile") ;;; also customizable
+  ;;   )
 
-  ;; FIXME: don't work
-  (use-package lsp-scheme
-    :if (equal k8x1d-lsp-module "lsp-mode")
-    :hook (scheme-mode . (lambda ()
-			   (require 'lsp-scheme)
-			   (lsp-deferred)))  
-    :config
-    (setq lsp-scheme-implementation "guile") ;;; also customizable
-    )
-  
+;;(add-hook 'scheme-mode-hook #'lsp-scheme-guile)
 
 
 
