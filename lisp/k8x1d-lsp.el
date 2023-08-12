@@ -127,18 +127,14 @@
 ;;
 (use-package flymake
   :general
-  (k8x1d/local-leader-keysVous avez envoyé
-			       Salut Léa-Raphaëlle, pour suivi, je confirme avoir reçu ton troisième virement! 
-			       Donc, ça fait 609$ reçu en date du 10 août 2023
-			       Reste: 1015-609 = 406$
-			       À plus!
-			       :keymaps 'flymake-mode-map
-			       "d" '(:ignore t :which-key "Diagnostic")
-			       "db" '(flymake-show-buffer-diagnostics :which-key "List")
-			       "dn" '(flymake-goto-next-error :which-key "Next")
-			       "dp" '(flymake-goto-prev-error :which-key "Previous")
-			       "ds" '(consult-flymake :which-key "Search")
-			       )
+  (k8x1d/local-leader-keys
+    :keymaps 'flymake-mode-map
+    "d" '(:ignore t :which-key "Diagnostic")
+    "db" '(flymake-show-buffer-diagnostics :which-key "List")
+    "dn" '(flymake-goto-next-error :which-key "Next")
+    "dp" '(flymake-goto-prev-error :which-key "Previous")
+    "ds" '(consult-flymake :which-key "Search")
+    )
   )
 
 
