@@ -1635,12 +1635,15 @@ defined in the buffer, as well as libraries imported by it.")
       "python-paramiko" ;; SSHv2 protocol library
       "emacs-yasnippet" ;; Yet another snippet extension for Emacs
 
-      "julia"
+      "julia" ;; High-performance dynamic language for technical computing
 
       ;; LSP-mode
       ;;"emacs-lsp-mode" ;; Emacs client and library for the Language Server Protocol
       ;;"emacs-lsp-ui" ;; User interface extensions for `lsp-mode'
       ;; "emacs-dap-mode" ;; Emacs client/library for Debug Adapter Protocol
+
+      "emacs-alsamixer-el"
+      "alsa-utils" ;; Utilities for the Advanced Linux Sound Architecture (ALSA)
 
       ))
     (packages->manifest (list
