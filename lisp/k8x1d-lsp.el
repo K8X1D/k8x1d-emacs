@@ -129,11 +129,11 @@
   :general
   (k8x1d/local-leader-keys
     :keymaps 'flymake-mode-map
-    "d" '(:ignore t :which-key "Diagnostic")
-    "db" '(flymake-show-buffer-diagnostics :which-key "List")
-    "dn" '(flymake-goto-next-error :which-key "Next")
-    "dp" '(flymake-goto-prev-error :which-key "Previous")
-    "ds" '(consult-flymake :which-key "Search")
+    "D" '(:ignore t :which-key "Diagnostic")
+    "Db" '(flymake-show-buffer-diagnostics :which-key "List")
+    "Dn" '(flymake-goto-next-error :which-key "Next")
+    "Dp" '(flymake-goto-prev-error :which-key "Previous")
+    "Ds" '(consult-flymake :which-key "Search")
     )
   )
 
@@ -216,7 +216,7 @@
   :config
   (setq lsp-julia-default-environment "~/.julia/environments/v1.8")
   ;;(setq lsp-julia-package-dir nil)
-  (setq lsp-julia-command "/home/k8x1d/.guix-extra-profiles/k8x1d-emacs/k8x1d-emacs/bin/julia")
+  (setq lsp-julia-command "julia")
   (add-to-list 'lsp-language-id-configuration
 	       '(julia-ts-mode . "julia"))
 
