@@ -88,7 +88,6 @@
 ;; see http://orgmode.org/manual/Tracking-your-habits.html
 (use-package org
   :config
-  (add-to-list 'org-modules "org-habit")
   (require 'org-habit)
   )
 

@@ -26,6 +26,7 @@
 
   )
 
+
 ;; Prefer system wide notification manager
 ;;;; Notification management
 ;;(use-package ednc
