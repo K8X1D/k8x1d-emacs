@@ -1,10 +1,11 @@
 #!/bin/sh
-PROJECT_NAME=k8x1d-emacs
-GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
-PROJET_PATH="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
-export EMACSLOADPATH=$PROJET_PATH/share/emacs/site-lisp
+# Old, problem? clutter the environment (e.g. packages are loaded by doom emacs)
+#PROJECT_NAME=k8x1d-emacs
+#GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
+#PROJET_PATH="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
+#export EMACSLOADPATH=$PROJET_PATH/share/emacs/site-lisp
+#$PROJET_PATH/bin/emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d --debug-init
 
-$PROJET_PATH/bin/emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d --debug-init
-
+guix shell --manifest=$HOME/.k8x1d-emacs.d/k8x1d-emacs.scm  -- emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d --debug-init
 
 
