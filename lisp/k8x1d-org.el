@@ -330,6 +330,19 @@
   (setq toc-org-hrefify-default "gh"))
 
 
+
+;; Specific timers
+(use-package org
+  :init
+  (defun k8x1d/daily-thesis-timer ()
+    (interactive)
+    (org-timer-set-timer "00:10:00")
+  )
+  :config
+  (setq org-clock-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
+  (setq org-clock-clocked-in-display "frame-title")
+  )
+
 ;; Inspirations:
 ;; - https://github.com/japhir/ArchConfigs/blob/master/myinit.org#play-bell-sound-when-task-is-marked-as-done 
 ;; Clumsy, try native org function
