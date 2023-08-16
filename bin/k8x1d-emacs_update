@@ -1,5 +1,7 @@
 #!/bin/sh
 K8X1D_EMACS_PROFILES=$HOME/.k8x1d-emacs-profiles
-K8X1D_EMACS=$HOME/.k8x1d-emacs
+GUIX_EXTRA=$HOME/.guix-extra
 
-"$K8X1D_EMACS/$XDG_SESSION_TYPE"/guix/bin/guix package --manifest=k8x1d-emacs.scm --profile="$K8X1D_EMACS_PROFILES/$WIN/$WIN"
+"$GUIX_EXTRA"/k8x1d-emacs/guix/bin/guix package --manifest=~/.k8x1d-emacs.d/k8x1d-emacs.scm --profile="$K8X1D_EMACS_PROFILES/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE"
+
+notify-send -a "k8x1d-emacs" "Update" "Finished"
