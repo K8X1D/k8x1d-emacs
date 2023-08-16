@@ -1,7 +1,5 @@
 #!/bin/sh
-PROJECT_NAME=k8x1d-emacs
-GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
-GUIX_EXTRA=$HOME/.guix-extra
-PROJECT_ROOT=$PWD/..
+K8X1D_EMACS_PROFILES=$HOME/.k8x1d-emacs-profiles
+K8X1D_EMACS=$HOME/.k8x1d-emacs
 
-"$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest=k8x1d-emacs.scm --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
+"$K8X1D_EMACS/$XDG_SESSION_TYPE"/guix/bin/guix package --manifest=k8x1d-emacs.scm --profile="$K8X1D_EMACS_PROFILES/$WIN/$WIN"

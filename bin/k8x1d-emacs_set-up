@@ -1,23 +1,11 @@
 #!/bin/sh
-PROJECT_NAME=k8x1d-emacs
-GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
-GUIX_EXTRA=$HOME/.guix-extra
-PROJECT_ROOT=$PWD/..
+# Adapted from https://guix.gnu.org/cookbook/en/html_node/Reproducible-profiles.html
 
-mkdir -p "$GUIX_EXTRA/$PROJECT_NAME"
-guix pull --allow-downgrades --channels=channels.scm --profile="$GUIX_EXTRA/$PROJECT_NAME/guix"
+K8X1D_EMACS_PROFILES=$HOME/.k8x1d-emacs-profiles
+K8X1D_EMACS=$HOME/.k8x1d-emacs
 
-mkdir -p "$GUIX_EXTRA_PROFILES/$PROJECT_NAME"
-"$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest=k8x1d-emacs.scm --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
+mkdir -p "$K8X1D_EMACS/$XDG_SESSION_TYPE"
+guix pull --channels=channels.scm --profile="$K8X1D_EMACS/$XDG_SESSION_TYPE/guix"
 
-mkdir $HOME/.local/share/applications
-ln -s $PROJECT_ROOT/k8x1d-emacs.desktop $HOME/.local/share/applications/doom-emacs.desktop
-mkdir $HOME/.local/share/icons
-ln -s $PROJECT_ROOT/banners/k8x1d-avatar_dark.png $HOME/.local/share/icons/k8x1d-avatar_dark.png
-# TODO: separate barebone config from user config
-#mkdir $HOME/.k8x1d-emacs.d
-#ln -s $PROJECT_ROOT/config.el ~/.doom.d/config.el
-#ln -s $PROJECT_ROOT/packages.el ~/.doom.d/packages.el
-#ln -s $PROJECT_ROOT/config.el ~/.doom.d/config.el
-#ln -s $PROJECT_ROOT/splash ~/.doom.d/
-#ln -s $PROJECT_ROOT/bin/doom-emacs ~/.local/bin
+mkdir -p "$K8X1D_EMACS_PROFILES/$XDG_SESSION_TYPE"
+"$K8X1D_EMACS/$XDG_SESSION_TYPE"/guix/bin/guix package --manifest=k8x1d-emacs.scm --profile="$K8X1D_EMACS_PROFILES/$WIN/$WIN"
