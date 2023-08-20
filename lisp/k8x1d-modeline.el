@@ -1,3 +1,12 @@
+;;; package --- Summary
+
+;;; Commentary:
+
+;;; Code:
+
+
+
+
 
 ;; Sources:
 ;; https://occasionallycogent.com/custom_emacs_modeline/index.html
@@ -153,3 +162,4 @@ Containing LEFT, and RIGHT aligned respectively."
 
 
 (provide 'k8x1d-modeline)
+;;; k8x1d-modeline.el ends here
