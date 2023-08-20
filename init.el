@@ -10,8 +10,7 @@
 ;;
 (setq k8x1d-lsp-module "lsp-mode")
 (setq k8x1d-consult-integration t)
-
-
+(setq week-aims-path "~/org/objectifs_hebdomadaires.txt")
 
 ;;
 ;; Module to load

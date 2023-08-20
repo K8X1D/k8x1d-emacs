@@ -129,6 +129,7 @@
   :config
   (setq org-edna-use-inheritance t)
   (setq org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
+  ;;(setq org-gtd-areas-of-focus ("Home" "Health" "Family" "Career"))
   :general
   (k8x1d/leader-keys
     "d" '(:ignore t :which-key "GTD")
@@ -142,6 +143,28 @@
    ("C-c c" . org-gtd-organize)
   ))
 
+
+;;
+;; Initial buffer containing week objectivs
+;;
+(require 'f)
+(if (boundp 'week-aims-path)  
+    (when (file-exists-p week-aims-path)
+	(setq startup-text (f-read-text week-aims-path)))
+  (setq startup-text "Aucun objectif n'a été fixé pour la semaine...")
+  )
+(defun k8x1d/get-startup-buffer-create ()
+  "Return the *startup* buffer, creating a new one if needed."
+  (or (get-buffer "*startup**")
+      (let ((startup (get-buffer-create "*startup*")))
+        ;; Don't touch the buffer contents or mode unless we know that
+        ;; we just created it.
+	(with-current-buffer startup
+	  (insert (substitute-command-keys startup-text))
+	  (set-buffer-modified-p nil)
+	  )
+        startup)))
+(setq initial-buffer-choice (lambda () (k8x1d/get-startup-buffer-create)))
 
 (provide 'k8x1d-gtd)
 ;;; k8x1d-gtd.el ends here
