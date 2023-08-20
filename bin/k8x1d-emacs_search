@@ -1,0 +1,7 @@
+#!/bin/sh
+# Inspiration:
+# - try/catch: https://stackoverflow.com/questions/22009364/is-there-a-try-catch-command-in-bash
+K8X1D_EMACS_PROFILES=$HOME/.k8x1d-emacs-profiles
+GUIX_EXTRA=$HOME/.guix-extra
+
+"$GUIX_EXTRA"/k8x1d-emacs/guix/bin/guix search $@

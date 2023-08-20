@@ -1,3 +1,0 @@
-#!/bin/sh
-GUIX_PROFILE="$HOME/.k8x1d-emacs-profiles/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE" ; . "$GUIX_PROFILE"/etc/profile
-emacs -bg "#282828" --init-directory=$HOME/.k8x1d-emacs.d --debug-init || notify-send -a "k8x1d-emacs" "Launch" "Failed..."

@@ -1,0 +1,85 @@
+#!/bin/sh
+# See https://www.redhat.com/sysadmin/arguments-options-bash-scripts
+# Adapted from https://guix.gnu.org/cookbook/en/html_node/Reproducible-profiles.html
+############################################################
+#  Variables                                               #
+############################################################
+K8X1D_EMACS_PROFILE=$HOME/.k8x1d-emacs-profile
+GUIX_EXTRA=$HOME/.guix-extra
+K8X1D_EMACS_DIRECTORY=$HOME/.k8x1d-emacs.d
+
+############################################################
+# Commands                                                 #
+############################################################
+Help()
+{
+    # Display Help
+    echo "Add description of the script functions here."
+    echo
+    echo "Syntax: scriptTemplate [-g|h|v|V]"
+    echo "options:"
+    echo "g     Print the GPL license notification."
+    echo "h     Print this Help."
+    echo "v     Verbose mode."
+    echo "V     Print software version and exit."
+    echo
+}
+
+Install()
+{
+    { # try
+	mkdir -p "$GUIX_EXTRA/k8x1d-emacs"
+	mkdir -p "$K8X1D_EMACS_PROFILE/$XDG_SESSION_TYPE"
+	guix pull --channels=$K8X1D_EMACS_DIRECTORY/channels.scm --profile="$GUIX_EXTRA/k8x1d-emacs/guix" &&
+	    "$GUIX_EXTRA"/k8x1d-emacs/guix/bin/guix package --manifest=$K8X1D_EMACS_DIRECTORY/manifest.scm --profile="$K8X1D_EMACS_PROFILE/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE" &&
+	    STATUS="Finished"
+    } || { # catch
+	STATUS="Failed..."
+    }
+    notify-send -a "k8x1d-emacs" "Update" "$STATUS"
+}
+
+Update()
+{
+    { # try
+	"$GUIX_EXTRA"/k8x1d-emacs/guix/bin/guix package --manifest=$K8X1D_EMACS_DIRECTORY/manifest.scm --profile="$K8X1D_EMACS_PROFILE/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE" &&
+	    STATUS="Finished"
+    } || { # catch
+	STATUS="Failed..."
+    }
+    notify-send -a "k8x1d-emacs" "Update" "$STATUS"
+}
+
+Launch()
+{
+    "$K8X1D_EMACS_PROFILE/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE/bin/emacs" -bg "#282828" --init-directory=$K8X1D_EMACS_DIRECTORY --debug-init || notify-send -a "k8x1d-emacs" "Launch" "Failed..."
+}
+
+
+############################################################
+# Process the input options. Add options as needed.        #
+############################################################
+# Get the options
+while getopts ":hiul:" option; do
+    case $option in
+	h) # display Help
+            Help
+            exit;;
+	i) # Install
+	    Install
+	    exit;;
+	u) # Update
+	    Update 
+	    exit;;
+	\?) # Invalid option
+            echo "Error: Invalid option"
+            exit;;
+    esac
+done
+
+# If no option, guess what is asked 
+if [ ! -d "$K8X1D_EMACS_PROFILE" ]; then
+    Install
+else
+    Launch 
+fi
