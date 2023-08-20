@@ -174,6 +174,16 @@
 
   )
 
+(use-package org-agenda
+  :bind
+  (:map org-agenda-mode-map
+   ("C-SPC" . org-agenda-show-and-scroll-up)))
+
+
+(use-package org-modern
+  :hook ((org-mode . org-modern-mode)
+	 (org-agenda-finalize . org-modern-agenda)))
+
 
 ;; (use-package org-modern
 ;;   :hook ((org-mode . org-modern-mode)
@@ -201,97 +211,93 @@
 ;;   (setq org-agenda-current-time-string "⭠ now ─────────────────────────────────────────────────")
 ;;   )
 
-;; Prettify bullets
-(use-package org-superstar
-  :hook
-  (org-mode . org-superstar-mode)
-  :config
-  ;; This is usually the default, but keep in mind it must be nil
-  (setq org-hide-leading-stars nil)
-  ;; This line is necessary.
-  (setq org-superstar-leading-bullet ?\s)
-  ;; If you use Org Indent you also need to add this, otherwise the
-  ;; above has no effect while Indent is enabled.
-  (setq org-indent-mode-turns-on-hiding-stars nil)
-  (setq org-superstar-special-todo-items nil)
+;; ;; Prettify bullets
+;; (use-package org-superstar
+;;   :hook
+;;   (org-mode . org-superstar-mode)
+;;   :config
+;;   ;; This is usually the default, but keep in mind it must be nil
+;;   (setq org-hide-leading-stars nil)
+;;   ;; This line is necessary.
+;;   (setq org-superstar-leading-bullet ?\s)
+;;   ;; If you use Org Indent you also need to add this, otherwise the
+;;   ;; above has no effect while Indent is enabled.
+;;   (setq org-indent-mode-turns-on-hiding-stars nil)
+;;   (setq org-superstar-special-todo-items nil)
 
-  (setq org-superstar-headline-bullets-list '("◉" "○" "●" "◈" "◇" "◆" "▣" "□" "■"))
-  (setq org-superstar-item-bullet-alist '((?* . ?•)
-					  (?+ . ?➤)
-					  (?- . ?•)))
-  )
+;;   (setq org-superstar-headline-bullets-list '("◉" "○" "●" "◈" "◇" "◆" "▣" "□" "■"))
+;;   (setq org-superstar-item-bullet-alist '((?* . ?•)
+;; 					  (?+ . ?➤)
+;; 					  (?- . ?•)))
+;;   )
 
-(use-package org-agenda
-  :bind
-  (:map org-agenda-mode-map
-   ("C-SPC" . org-agenda-show-and-scroll-up)))
-
-;; Prettify priorities
-(use-package org-fancy-priorities
-  :defer t
-  :hook
-  (org-mode . org-fancy-priorities-mode)
-  :config
-  (setq org-fancy-priorities-list '("[!]" "[*]" "[-]")))
+;; ;; Prettify priorities
+;; (use-package org-fancy-priorities
+;;   :defer t
+;;   :hook
+;;   (org-mode . org-fancy-priorities-mode)
+;;   :config
+;;   (setq org-fancy-priorities-list '("[!]" "[*]" "[-]")))
 
 
 
-;; Prettify tags 
-(use-package svg-tag-mode
-  :init
-  ;; Set faces
-  (defface svg-tag-todo '((t (:inherit org-todo  :height 0.5))) "Face for todo")
-  (defface svg-tag-wait '((t (:inherit +org-todo-onhold :height 0.5))) "Face for wait")
-  (defface svg-tag-kill '((t (:inherit +org-todo-cancel :height 0.5))) "Face for kill")
-  (defface svg-tag-done '((t (:inherit org-done  :height 0.5))) "Face for done")
+;; ;; Have some glitches difficult to adjust, quite heavy also
+;; ;; Prettify tags 
+;; (use-package svg-tag-mode
+;;   :init
+;;   ;; Set faces
+;;   (defface svg-tag-todo '((t (:inherit org-todo  :height 0.5))) "Face for todo")
+;;   (defface svg-tag-wait '((t (:inherit +org-todo-onhold :height 0.5))) "Face for wait")
+;;   (defface svg-tag-kill '((t (:inherit +org-todo-cancel :height 0.5))) "Face for kill")
+;;   (defface svg-tag-done '((t (:inherit org-done  :height 0.5))) "Face for done")
 
 
-  (defface svg-tag-proj '((t (:inherit +org-todo-project  :height 0.5))) "Face for proj")
-  (defface svg-tag-loop '((t (:inherit org-todo  :height 0.5))) "Face for loop")
-  (defface svg-tag-strt '((t (:inherit +org-todo-active  :height 0.5))) "Face for strt")
-  (defface svg-tag-hold '((t (:inherit +org-todo-onhold  :height 0.5))) "Face for hold")
-  (defface svg-tag-idea '((t (:inherit org-todo  :height 0.5))) "Face for idea")
-  ;; Org agenda tweak for showing svg
-  (defun org-agenda-show-svg ()
-    (let* ((case-fold-search nil)
-           (keywords (mapcar #'svg-tag--build-keywords svg-tag--active-tags))
-           (keyword (car keywords)))
-      (while keyword
-        (save-excursion
-          (while (re-search-forward (nth 0 keyword) nil t)
-            (overlay-put (make-overlay
-                          (match-beginning 0) (match-end 0))
-                         'display  (nth 3 (eval (nth 2 keyword)))) ))
-        (pop keywords)
-        (setq keyword (car keywords)))))
+;;   (defface svg-tag-proj '((t (:inherit +org-todo-project  :height 0.5))) "Face for proj")
+;;   (defface svg-tag-loop '((t (:inherit org-todo  :height 0.5))) "Face for loop")
+;;   (defface svg-tag-strt '((t (:inherit +org-todo-active  :height 0.5))) "Face for strt")
+;;   (defface svg-tag-hold '((t (:inherit +org-todo-onhold  :height 0.5))) "Face for hold")
+;;   (defface svg-tag-idea '((t (:inherit org-todo  :height 0.5))) "Face for idea")
+;;   ;; Org agenda tweak for showing svg
+;;   (defun org-agenda-show-svg ()
+;;     (let* ((case-fold-search nil)
+;;            (keywords (mapcar #'svg-tag--build-keywords svg-tag--active-tags))
+;;            (keyword (car keywords)))
+;;       (while keyword
+;;         (save-excursion
+;;           (while (re-search-forward (nth 0 keyword) nil t)
+;;             (overlay-put (make-overlay
+;;                           (match-beginning 0) (match-end 0))
+;;                          'display  (nth 3 (eval (nth 2 keyword)))) ))
+;;         (pop keywords)
+;;         (setq keyword (car keywords)))))
 
-  ;; fix font problem, see https://github.com/rougier/svg-tag-mode/issues/38;; Don't work for new tags
-  ;;(add-hook 'after-setting-font-hook (lambda () (setq svg-lib-style-default (svg-lib-style-compute-default))))
- ;; :hook ((org-mode . svg-tag-mode)
- ;;	 (org-agenda-mode . svg-tag-mode)
- ;;	 (org-agenda-finalize . org-agenda-show-svg))
-  :config
-  ;; fix font problem, see https://github.com/rougier/svg-tag-mode/issues/38
-  ;; (plist-put svg-lib-style-default :font-family "Iosevka Term")
-  ;; (plist-put svg-lib-style-default :font-size 14)
-  ;; (setq tree-sitter-hl-use-font-lock-keywords t)
-  (setq svg-tag-tags
-	'(
-	  ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'svg-tag-todo :inverse t))))
-	  ("WAIT" . ((lambda (tag) (svg-tag-make "WAIT" :face 'svg-tag-wait :inverse t))))
-	  ("KILL" . ((lambda (tag) (svg-tag-make "KILL" :face 'svg-tag-kill :inverse t))))
-	  ("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'svg-tag-done :inverse t))))
-	  ("PROJ" . ((lambda (tag) (svg-tag-make "PROJ" :face 'svg-tag-proj :inverse t))))
-	  ("LOOP" . ((lambda (tag) (svg-tag-make "LOOP" :face 'svg-tag-loop :inverse t))))
-	  ("STRT" . ((lambda (tag) (svg-tag-make "STRT" :face 'svg-tag-strt :inverse t))))
-	  ("HOLD" . ((lambda (tag) (svg-tag-make "HOLD" :face 'svg-tag-hold :inverse t))))
-	  ("IDEA" . ((lambda (tag) (svg-tag-make "IDEA" :face 'svg-tag-idea :inverse t))))
+;;   ;; fix font problem, see https://github.com/rougier/svg-tag-mode/issues/38;; Don't work for new tags
+;;   ;;(add-hook 'after-setting-font-hook (lambda () (setq svg-lib-style-default (svg-lib-style-compute-default))))
+;;  ;; :hook ((org-mode . svg-tag-mode)
+;;  ;;	 (org-agenda-mode . svg-tag-mode)
+;;  ;;	 (org-agenda-finalize . org-agenda-show-svg))
+;;   :config
+;;   ;; fix font problem, see https://github.com/rougier/svg-tag-mode/issues/38
+;;   ;; (plist-put svg-lib-style-default :font-family "Iosevka Term")
+;;   ;; (plist-put svg-lib-style-default :font-size 14)
+;;   ;; (setq tree-sitter-hl-use-font-lock-keywords t)
+;;   (setq svg-tag-tags
+;; 	'(
+;; 	  ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'svg-tag-todo :inverse t))))
+;; 	  ("WAIT" . ((lambda (tag) (svg-tag-make "WAIT" :face 'svg-tag-wait :inverse t))))
+;; 	  ("KILL" . ((lambda (tag) (svg-tag-make "KILL" :face 'svg-tag-kill :inverse t))))
+;; 	  ("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'svg-tag-done :inverse t))))
+;; 	  ("PROJ" . ((lambda (tag) (svg-tag-make "PROJ" :face 'svg-tag-proj :inverse t))))
+;; 	  ("LOOP" . ((lambda (tag) (svg-tag-make "LOOP" :face 'svg-tag-loop :inverse t))))
+;; 	  ("STRT" . ((lambda (tag) (svg-tag-make "STRT" :face 'svg-tag-strt :inverse t))))
+;; 	  ("HOLD" . ((lambda (tag) (svg-tag-make "HOLD" :face 'svg-tag-hold :inverse t))))
+;; 	  ("IDEA" . ((lambda (tag) (svg-tag-make "IDEA" :face 'svg-tag-idea :inverse t))))
 
-	  ;;(":.+:" . ((lambda (tag) (svg-tag-make tag))))
-	  ("#\\+[A-Z]+:" . ((lambda (tag) (svg-tag-make tag))))
-	  )
-	)
-  )
+;; 	  ;;(":.+:" . ((lambda (tag) (svg-tag-make tag))))
+;; 	  ("#\\+[A-Z]+:" . ((lambda (tag) (svg-tag-make tag))))
+;; 	  )
+;; 	)
+;;   )
 
 (use-package org-auto-tangle
   :hook (org-mode . org-auto-tangle-mode))
