@@ -52,7 +52,8 @@ Update()
 
 Launch()
 {
-    "$K8X1D_EMACS_PROFILE/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE/bin/emacs" -bg "#282828" --init-directory=$K8X1D_EMACS_DIRECTORY --debug-init || notify-send -a "k8x1d-emacs" "Launch" "Failed..."
+GUIX_PROFILE="$K8X1D_EMACS_PROFILE/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE" ; . "$GUIX_PROFILE"/etc/profile
+    "$K8X1D_EMACS_PROFILE/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE"/bin/emacs -bg "#282828" --init-directory=$K8X1D_EMACS_DIRECTORY --debug-init || notify-send -a "k8x1d-emacs" "Launch" "Failed..."
 }
 
 
