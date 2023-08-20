@@ -1,11 +1,10 @@
 ;;; early-init.el -*- lexical-binding: t; -*-
 ;; Inspirations:
 ;; - https://github.com/schmidthole/.emacs.d/blob/master/early-init.el
-
+(require 'cl-lib)
 ;;
 ;; Garbage collection
 ;;
-;;(setq gc-cons-threshold (* 50 1000 1000))
 
 ;; Minimize garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
@@ -13,9 +12,6 @@
 (add-hook 'emacs-startup-hook
           (lambda ()
             (setq gc-cons-threshold (expt 2 23))))
-
-
-
 
 (setq load-prefer-newer noninteractive)
 
