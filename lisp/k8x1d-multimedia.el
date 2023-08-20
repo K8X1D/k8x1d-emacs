@@ -46,11 +46,11 @@
 
 
 
-(use-package bluetooth
-  :general
-  (k8x1d/leader-keys
-    "ob" '(bluetooth-list-devices :which-key "Bluetooth"))
-  :defer t)
+;; (use-package bluetooth
+;;   :general
+;;   (k8x1d/leader-keys
+;;     "ob" '(bluetooth-list-devices :which-key "Bluetooth"))
+;;   :defer t)
 
 ;;(use-package mpv)
 
