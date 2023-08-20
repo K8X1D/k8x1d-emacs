@@ -879,29 +879,6 @@ the Friendly Manual in the doc/ directory is both detailed, and kept up to date.
    (license #f))
   )
 
-;; Doesn't seems to work; mention problem with eglot-jl file not findable
-;; (define-public emacs-eglot-jl 
-;;   (package
-;;    (name "emacs-eglot-jl")
-;;    (version "2.2.1")
-;;    (source (origin
-;; 	    (method url-fetch)
-;; 	    (uri (string-append "https://stable.melpa.org/packages/eglot-jl-"
-;; 				version ".tar"))
-;; 	    (sha256 (base32
-;; 		     "1kqkxpyx6jd5l1px8n8g5bcv594zhzb0v5an3500xnj4rpcnfxn3"))))   (build-system emacs-build-system)
-;; 		     (propagated-inputs (list emacs-eglot emacs-project emacs-cl-generic))
-;; 		     (home-page "https://github.com/non-Jedi/eglot-jl")
-;; 		     (synopsis "Julia support for eglot")
-;; 		     (description
-;; 		      "This package loads support for the Julia language server into eglot and
-;; package.el.  This provides IDE-like features for editing julia-mode buffers.
-;; After installing this package, to load support for the Julia language server,
-;; run eglot-jl-init.  After that, running the eglot function in a julia-mode
-;; buffer should work properly.")
-;; 		     (license #f))
-;;   )
-
 
 (define-public emacs-dashboard
   (package
@@ -925,11 +902,12 @@ org-agenda and more.")
   )
 
 ;; Set emacs version according to window system
-(define emacs-distribution "")
-(if (equal? (getenv "XDG_SESSION_TYPE") "x11")
-    (set! emacs-distribution "emacs-next-tree-sitter") ;; Emacs text editor `tree-sitter' support
-    (set! emacs-distribution "emacs-next-pgtk") ;; Emacs text editor with `pgtk' and `tree-sitter' support
-    )
+(define emacs-distribution 
+  (if (equal? (getenv "XDG_SESSION_TYPE") "x11")
+      "emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
+      "emacs-next-pgtk") ;; Emacs text editor with `pgtk' and `tree-sitter' support
+  )
+
 ;;(display emacs-distribution)
 
 ;; Don't build, org-noter is missing
@@ -1092,43 +1070,6 @@ iншi п’ють тебе, як воду пiсок.\" -- Андрій Кузь
   )
 
 
-;; (define-public emacs-lsp-mode
-;;   (package
-;;    (name "emacs-lsp-mode")
-;;    (version "20230809.1200")
-;;    (source (origin
-;; 	    (method git-fetch)
-;; 	    (uri (git-reference
-;; 		  (url "https://github.com/emacs-lsp/lsp-mode.git")
-;; 		  (commit "ee58d9eb66f85c2258b9745f721965f0d62071fb")))
-;; 	    (sha256 (base32
-;; 		     "1fcc66whiwbxwxvyk4mc785505icfq0j8azplq4iqmn3pkynga49"))))
-;;    (build-system emacs-build-system)
-;;    (propagated-inputs (list emacs-dash
-;; 			    emacs-f
-;; 			    emacs-ht
-;; 			    emacs-spinner
-;; 			    emacs-markdown-mode
-;; 			    emacs-lv
-;; 			    emacs-eldoc))
-;;    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-;; 			    "^dir$"
-;; 			    "^[^/]+.info$"
-;; 			    "^[^/]+.texi$"
-;; 			    "^[^/]+.texinfo$"
-;; 			    "^doc/dir$"
-;; 			    "^doc/[^/]+.info$"
-;; 			    "^doc/[^/]+.texi$"
-;; 			    "^doc/[^/]+.texinfo$"
-;; 			    "^clients/[^/]+.el$")
-;; 		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
-;; 			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
-;;    (home-page "https://github.com/emacs-lsp/lsp-mode")
-;;    (synopsis "LSP mode")
-;;    (description "Emacs client/library for the Language Server Protocol")
-;;    (license #f))
-;;   )
-
 (define-public emacs-lsp-mode
   (package
    (name "emacs-lsp-mode")
@@ -1152,40 +1093,6 @@ iншi п’ють тебе, як воду пiсок.\" -- Андрій Кузь
   )
 
 
-;; (define-public emacs-lsp-ui
-;;   (package
-;;    (name "emacs-lsp-ui")
-;;    (version "20230116.2024")
-;;    (source (origin
-;; 	    (method git-fetch)
-;; 	    (uri (git-reference
-;; 		  (url "https://github.com/emacs-lsp/lsp-ui.git")
-;; 		  (commit "9d28c2ca1e79614215ea678583435d5d1189e4bc")))
-;; 	    (sha256 (base32
-;; 		     "0kd76ckyl6jfmr93jw8bnzna8968mvmk7knxlndm3ljyxzdwbciq"))))
-;;    (build-system emacs-build-system)
-;;    (propagated-inputs (list emacs-dash emacs-lsp-mode emacs-markdown-mode))
-;;    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-;; 			    "^dir$"
-;; 			    "^[^/]+.info$"
-;; 			    "^[^/]+.texi$"
-;; 			    "^[^/]+.texinfo$"
-;; 			    "^doc/dir$"
-;; 			    "^doc/[^/]+.info$"
-;; 			    "^doc/[^/]+.texi$"
-;; 			    "^doc/[^/]+.texinfo$"
-;; 			    "^lsp-ui-doc.html$"
-;; 			    "^resources$")
-;; 		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
-;; 			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
-;;    (home-page "https://github.com/emacs-lsp/lsp-ui")
-;;    (synopsis "UI modules for lsp-mode")
-;;    (description
-;;     "lsp-ui contains a series of useful UI integrations for lsp-mode, like flycheck
-;; support and code lenses.")
-;;    (license #f))
-;;   )
-
 (define-public emacs-lsp-ui
   (package
    (name "emacs-lsp-ui")
@@ -1205,65 +1112,63 @@ support and code lenses.")
 		     (license #f))
   )
 
-
-
-
-;; (define-public emacs-lsp-julia
-;;   (package
-;;    (name "emacs-lsp-julia")
-;;    (version "20230414.2107")
-;;    (source (origin
-;; 	    (method git-fetch)
-;; 	    (uri (git-reference
-;; 		  (url "https://github.com/gdkrmr/lsp-julia.git")
-;; 		  (commit "c584f79c7fee6176bbb6120f4cb0f1001bcf8113")))
-;; 	    (sha256 (base32
-;; 		     "0p32qjj9r7p423vpm7zyy4zrxbsical22yw4m2sv9lmbny5r4pzf"))))
-;;    (build-system emacs-build-system)
-;;    (propagated-inputs (list emacs-lsp-mode emacs-julia-mode))
-;;    (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-;; 			    "^dir$"
-;; 			    "^[^/]+.info$"
-;; 			    "^[^/]+.texi$"
-;; 			    "^[^/]+.texinfo$"
-;; 			    "^doc/dir$"
-;; 			    "^doc/[^/]+.info$"
-;; 			    "^doc/[^/]+.texi$"
-;; 			    "^doc/[^/]+.texinfo$"
-;; 			    "^languageserver$")
-;; 		#:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
-;; 			    "^[^/]+-test.el$" "^[^/]+-tests.el$")))
-;;    (home-page "https://github.com/gdkrmr/lsp-julia")
-;;    (synopsis "Julia support for lsp-mode")
-;;    (description
-;;     "This version of lsp-julia requires julia 1.7 to run.  Manual installation:
-;; (require julia-mode) (push \"/path/to/lsp-julia\" load-path) (require lsp-julia)
-;; (require lsp-mode) ;; Configure lsp + julia (add-hook julia-mode-hook
-;; #'lsp-mode) (add-hook julia-mode-hook #'lsp)")
-;;    (license #f))
-;;   )
-
-
-(define-public emacs-lsp-julia
+(define-public emacs-consult-lsp
 (package
-  (name "emacs-lsp-julia")
-   (version "0.7.2")
+  (name "emacs-consult-lsp")
+   (version "1.1")
    (source (origin
              (method url-fetch)
              (uri (string-append
-                   "https://stable.melpa.org/packages/lsp-julia-" version
+                   "https://stable.melpa.org/packages/consult-lsp-" version
                    ".tar"))
              (sha256 (base32
-                      "0w80fhljilhivik9dvxp9b2q870sgns3qphlfmznxrkjp634nzf0"))))   (build-system emacs-build-system)
-   (propagated-inputs (list emacs-lsp-mode emacs-julia-mode))
-   (home-page "https://github.com/gdkrmr/lsp-julia")
-   (synopsis "Julia support for lsp-mode")
+                      "0b62rvlh0pdfpdc9azlsrdc2wsvyn9j6y6yn20w7i2af8m3kn8wc"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-lsp-mode emacs-consult emacs-f))
+   (home-page "https://github.com/gagbo/consult-lsp")
+   (synopsis "LSP-mode Consult integration")
    (description
-    "This version of lsp-julia requires julia 1.7 to run.  Manual installation:
-(require julia-mode) (push \"/path/to/lsp-julia\" load-path) (require lsp-julia)(require lsp-mode) ;; Configure lsp + julia (add-hook julia-mode-hook
-#'lsp-mode) (add-hook julia-mode-hook #'lsp)")
+    "This package provides LSP-mode related commands for consult The commands are
+autoloaded so you don't need to require anything to make them available.  Just
+use M-x and go! ;; Diagnostics M-x consult-lsp-diagnostics provides a view of
+all diagnostics in the current workspace (or all workspaces if passed a prefix
+argument).  You can use prefixes to filter diagnostics per severity, and
+previewing/selecting a candidate will go to it directly. ;; Symbols M-x
+consult-lsp-symbols provides a selection/narrowing command to search and go to
+any arbitrary symbol in the workspace (or all workspaces if passed a prefix
+argument).  You can use prefixes as well to filter candidates per type, and
+previewing/selecting a candidate will go to it. ;; File symbols M-x
+consult-lsp-file-symbols provides a selection/narrowing command to search and go
+to any arbitrary symbol in the selected buffer (like imenu) ;; Contributions
+Possible contributions for ameliorations include: - using a custom format for
+the propertized candidates This should be done with :type function custom
+variables probably. - checking the properties in LSP to see how
+diagnostic-sources should be used - checking the properties in LSP to see how
+symbol-sources should be used")
    (license #f))
 )
+
+
+(define-public emacs-lsp-julia
+  (package
+   (name "emacs-lsp-julia")
+   (version "0.7.2")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append
+		  "https://stable.melpa.org/packages/lsp-julia-" version
+		  ".tar"))
+	    (sha256 (base32
+		     "0w80fhljilhivik9dvxp9b2q870sgns3qphlfmznxrkjp634nzf0"))))   (build-system emacs-build-system)
+		     (propagated-inputs (list emacs-lsp-mode emacs-julia-mode))
+		     (home-page "https://github.com/gdkrmr/lsp-julia")
+		     (synopsis "Julia support for lsp-mode")
+		     (description
+		      "This version of lsp-julia requires julia 1.7 to run.  Manual installation:
+(require julia-mode) (push \"/path/to/lsp-julia\" load-path) (require lsp-julia)(require lsp-mode) ;; Configure lsp + julia (add-hook julia-mode-hook
+#'lsp-mode) (add-hook julia-mode-hook #'lsp)")
+		     (license #f))
+  )
 
 (define-public emacs-lsp-ltex
   (package
@@ -1306,45 +1211,6 @@ support and code lenses.")
 		     (description "Run language servers in containers")
 		     (license #f))
   )
-
-;; (define-public emacs-lsp-ltex
-;;   (package
-;;    (name "emacs-dap-mode")
-;;    (version "20230810.703")
-;;    (source (origin
-;; 	    (method git-fetch)
-;; 	    (uri (git-reference
-;; 		  (url "https://github.com/emacs-lsp/dap-mode.git")
-;; 		  (commit "de41d62fc4f94f61ffdf7713a043dca9c02297c8")))
-;; 	    (sha256 (base32
-;; 		     "0ksgpnprgdyz9mjgllzjg7x0ghgvyh44yisj8ml1lqagdla7bpm8"))))   (build-system emacs-build-system)
-;; 		     (propagated-inputs (list emacs-dash
-;; 					      emacs-lsp-mode
-;; 					      emacs-bui
-;; 					      emacs-f
-;; 					      emacs-s
-;; 					      emacs-lsp-treemacs
-;; 					      emacs-posframe
-;; 					      emacs-ht
-;; 					      emacs-lsp-docker))
-;; 		     (arguments '(#:include '("^[^/]+.el$" "^[^/]+.el.in$"
-;; 					      "^dir$"
-;; 					      "^[^/]+.info$"
-;; 					      "^[^/]+.texi$"
-;; 					      "^[^/]+.texinfo$"
-;; 					      "^doc/dir$"
-;; 					      "^doc/[^/]+.info$"
-;; 					      "^doc/[^/]+.texi$"
-;; 					      "^doc/[^/]+.texinfo$"
-;; 					      "^icons$")
-;; 				  #:exclude '("^.dir-locals.el$" "^test.el$" "^tests.el$"
-;; 					      "^[^/]+-test.el$" "^[^/]+-tests.el$")))
-;; 		     (home-page "https://github.com/emacs-lsp/dap-mode")
-;; 		     (synopsis "Debug Adapter Protocol mode")
-;; 		     (description "Debug Adapter Protocol client for Emacs.")
-;; 		     (license #f))
-;;   )
-
 
 (define-public emacs-lsp-scheme
   (package
@@ -1390,296 +1256,492 @@ defined in the buffer, as well as libraries imported by it.")
   )
 
 
-
-  ;;
-  ;; Manifest
-  ;;
-  (concatenate-manifests
-   (list
-    (specifications->manifest
-     (list 
-      emacs-distribution
-      ))
-    (specifications->manifest
-     (list
-      ;;"emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
-      "emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
-      "hicolor-icon-theme" ;; Freedesktop icon theme 
-      "git" ;; Distributed version control system
-      "nss-certs" ;; CA certificates from Mozilla
-      "coreutils" ;; Core GNU utilities (file, text, shell)
-      "findutils" ;; Operating on files matching given criteria
-
-
-      "emacs-guix" ;; Emacs interface for GNU Guix
-
-      "emacs-evil" ;; Extensible Vi layer for Emacs
-      "emacs-evil-collection" ;; Collection of Evil bindings for many major and minor modes
-      "emacs-undo-fu" ;; Simple, stable linear undo with redo for Emacs
-
-      ;;"emacs-ess" ;; Emacs mode for statistical analysis programs
-
-
-      ;;"emacs-julia-mode" ;; Major mode for Julia
-      ;;"emacs-julia-repl" ;; Minor mode for interacting with a Julia REPL ;; Replaced by julia-vterm since support org-babel via ob-julia-vterm
-      "emacs-no-littering" ;; Help keep `~/.emacs.d/' clean
-      "emacs-pdf-tools" ;; Emacs support library for PDF files
-
-      "emacs-vertico" ;; Vertical interactive completion
-      "emacs-orderless" ;; Emacs completion style that matches multiple regexps in any order
-      "emacs-embark" ;; Emacs mini-buffer actions rooted in keymaps
-      "emacs-marginalia" ;; Marginalia in the minibuffer completions
-      "emacs-corfu" ;; Completion overlay region function
-      "emacs-corfu-doc" ;; Documentation popup for Corfu
-      "emacs-kind-icon" ;; Completion kind icons in Emacs 
-      "emacs-svg-lib" ;; Emacs SVG library for creating tags, icons and bars 
-      "emacs-cape" ;; Completion at point extensions for Emacs
-
-      "emacs-company"
-      "emacs-company-posframe"
-
-      "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
-      "emacs-emprise" ;; Control MPRIS supported media players from Emacs
-      "emacs-marginalia-emprise" ;; Annotate Emprise with Marginalia
-      "emacs-which-key" ;; Display available key bindings in popup 
-      "emacs-general" ;; More convenient key definitions in emacs
-      "emacs-org-modern" ;; Modern Org Style
-      "emacs-svg-tag-mode" ;; Replace keywords with SVG tags 
-      "emacs-evil-org" ;; Evil keybindings for Org mode
-      ;;"emacs-nano-modeline" ;; Emacs minor mode controlling mode line
-      ;;"emacs-simple-modeline" ;; Simple mode-line configuration for Emacs
-      "emacs-telephone-line" ;; Implementation of Powerline for Emacs 
-
-      "emacs-f" ;; Emacs API for working with files and directories 
-      "emacs-s" ;; Emacs string manipulation library
-      "emacs-dash"
-
-      "emacs-mixed-pitch" ;; Mix variable- and fixed-pitch fonts in the same Emacs buffer
-
-      ;; FIXME: autolink don't work, see https://github.com/awth13/org-appear/issues/50
-      ;;"emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
-      "emacs-toc-org" ;; Table of Contents generator for Emacs Org mode
-
-      "emacs-mood-line" ;; Minimal mode-line for Emacs
-      "font-fira-code"
-      "font-fira-mono"
-      "font-fira-sans"
-      "font-iosevka-term" ;; Coders' typeface, built from code
-      "font-iosevka" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
-      "font-iosevka-aile" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
-      "font-hack" ;; Typeface designed for source code
-
-      "emacs-general" ;; More convenient key definitions in emacs
-
-      ;;"emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
-      "emacs-minions" ;; Minor-mode menu for the mode line
-      "emacs-spaceline-next" ;; Powerline theme from Spacemacs
-
-      "emacs-magit" ;; Emacs interface for the Git version control system
-      "emacs-magit-todos" ;; Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
-      "emacs-magit-org-todos-el" ;; Get todo.org into Emacs Magit status
-
-      "emacs-forge" ;; Access Git forges from Magit
-      ;;"emacs-dired-sidebar" ;; Sidebar for Emacs using Dired ;; problem with git versioned project, version too old
-      "emacs-dired-git-info" ;; Show git info in Emacs Dired
-      "emacs-solaire-mode" ;; Change background of file-visiting buffers in Emacs
-      "emacs-all-the-icons" ;; Collect icon fonts and propertize them within Emacs
-      "emacs-all-the-icons-ibuffer" ;; Display icons for all buffers in ibuffer
-      "emacs-all-the-icons-dired" ;; Show icons for each file in `dired-mode'
-      "emacs-all-the-icons-completion" ;; Add icons to completion candidates 
-
-      "emacs-org-auto-tangle" ;; Automatically tangle code blocks on save
-
-      "emacs-pass" ;; Major mode for `password-store.el'
-      "emacs-password-store" ;; Password store (pass) support for Emacs
-      "emacs-password-store-otp" ;; Interact with the `pass-otp' extension for `pass' from Emacs
-
-      "emacs-geiser" ;; Collection of Emacs modes for Scheme hacking 
-      "emacs-geiser-guile" ;; Guile Scheme support for Geiser
-
-      "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
-
-      "emacs-doom-themes" ;; Wide collection of color themes for Emacs
-      "emacs-gruvbox-theme" ;; Gruvbox is a retro groove color scheme ported from Vim
-      "emacs-zenburn-theme" ;; Low contrast color theme for Emacs
-      "emacs-dream-theme" ;; High-contrast Emacs theme
-      "emacs-solarized-theme" ;; Port of the Solarized theme for Emacs
-      "emacs-spacemacs-theme" ;; Light and dark theme for spacemacs that supports GUI and terminal  
-      "emacs-monokai-theme" ;; High contrast color theme for Emacs
-
-      "emacs-hide-mode-line" ;; Emacs plugin that hides the mode-line
-      ;;"emacs-emms-mode-line-cycle" ;; Display the EMMS mode line as a ticker
-      "emacs-powerline" ;; Mode-line plugin for Emacs
-
-      ;;"emacs-emms" ;; The Emacs Multimedia System ;; miss mpd-prev
-      "imagemagick" ;; Create, edit, compose, or convert bitmap images
-      ;;"python-flake8" ;; The modular source code checker: pep8, pyflakes and co
-      "emacs-mpv" ;; Control MPV for easy note taking
-      ;;"emacs-emms-mode-line-cycle" ;;  Display the EMMS mode line as a ticker
-
-      "python-lsp-server" ;; Python implementation of the Language Server Protocol
-
-
-      "emacs-org-roam" ;; Non-hierarchical note-taking with Org mode
-      "emacs-org-roam-ui" ;; Web User Interface for Org Roam
-      "emacs-websocket" ;;  Emacs WebSocket client and server 
-      "emacs-citar-org-roam" ;; Emacs package to provide tighter Citar and Org-Roam integration
-      "emacs-consult-org-roam" ;; Consult integration for Org Roam
-
-      "git"
-
-      "emacs-ibuffer-vc" ;; Group Ibuffer's list by revision control system indications
-
-      "emacs-sly" ;; Sylvester the Cat's Common Lisp IDE 
-
-      "emacs-dashboard" ;; Startup screen extracted from Spacemacs ;; version make shortcut don't work with compilation, see https://github.com/emacs-dashboard/emacs-dashboard/issues/97
-      "emacs-page-break-lines" ;; Display page breaks as tidy horizontal lines
-
-      "emacs-langtool" ;; Emacs interface to LanguageTool
-      "tree-sitter"
-
-      ;;"emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
-      "emacs-poly-r" ;; Polymodes for the R language
-      "emacs-polymode-markdown" ;; Polymode for Markdown mode
-
-      "emacs-org-superstar" ;; Prettify headings and plain lists in Org mode
-      "emacs-org-fancy-priorities" ;; Display org priorities as custom strings 
-      "emacs-org-pomodoro" ;; Pomodoro technique for org-mode 
-      ;;"mplayer" ;; Audio and video player
-      "mpv" ;; Audio and video player
-      "mpv-mpris" ;; MPRIS plugin for mpv
-
-      "emacs-nyxt" ;; Interact with Nyxt from Emacs
-
-      "emacs-pinentry" ;; GnuPG Pinentry server implementation
-      "pinentry-emacs" ;; GnuPG's interface to passphrase input
-
-      "emacs-auctex" ;; Integrated environment for TeX 
-      "emacs-org-edit-latex" ;;  Edit a LaTeX fragment just like editing a source block
-      "emacs-evil-tex" ;;  Evil oriented additions for editing LaTeX 
-
-      "emacs-elfeed" ;; Atom/RSS feed reader for Emacs
-
-      "zip" 
-
-      "emacs-mastodon"
-
-
-      "aspell" ;; Spell checker 
-      "aspell-dict-fr" ;; French dictionary for GNU Aspell 
-      "aspell-dict-en" ;; English dictionary for GNU Aspell  
-      "emacs-flyspell-correct" ;; Correcting words with flyspell via custom interfaces
-      "emacs-auto-dictionary-mode" ;; Automatic dictionary switcher for Emacs spell checking
-      "emacs-writegood-mode" ;; Polish up poor writing on the fly
-
-
-      "emacs-mpv" ;; Control MPV for easy note taking
-      "emacs-bluetooth" ;; Manage Bluetooth devices using Emacs
-      "emacs-mpdel" ;; Emacs user interface for Music Player Daemon
-      ;;"emacs-simple-mpc" ;; Simple Emacs frontend to mpc
-      "emacs-transmission" ;; Emacs interface to a Transmission session
-
-
-
-
-      ;; Docker support
-      "emacs-docker" ;; Manage docker from Emacs 
-      "emacs-dockerfile-mode" ;; Major mode for editing Dockerfile
-      ;; "emacs-docker-tramp" ;; TRAMP integration for docker containers ;; Obsolete...
-      "emacs-docker-compose-mode" ;; Major mode for editing `docker-compose' files
-
-
-      ;;
-      "emacs-csv-mode" ;; Major mode for editing comma/char separated values
-
-
-      ;; File manager
-      "emacs-dirvish" ;; Improved version of the Emacs package Dired 
-      "fd" ;; Simple, fast and user-friendly alternative to find
-      "imagemagick" ;; Create, edit, compose, or convert bitmap images
-      "poppler" ;; PDF rendering library
-      ;;"emacs-pdf-tools" ;; Emacs support library for PDF files
-      "ffmpegthumbnailer" ;; Create thumbnails from video files
-      "mediainfo" ;; Utility for reading media metadata
-      "tar" ;; Managing tar archives
-      "unzip" ;; Decompression and file extraction utility
-
-
-      "emacs-org-tree-slide" ;; Presentation tool for Org mode
-      "emacs-hide-lines" ;; Commands for hiding lines based on a regexp
-
-      "emacs-lua-mode" ;; Major mode for lua
-
-      "openjdk" ;; Java development kit
-      "java-slf4j-simple" ;; Simple implementation of simple logging facade for Java
-
-      ;; LSP
-      "ccls" ;; C/C++/Objective-C language server
-      ;;"texlive-digestif" ;;Editor plugin for LaTeX, ConTeXt etc.
-
-      ;; Eglot
-      "emacs-consult-eglot" ;; Consulting-read interface for eglot 
-
-
-      ;; Terminal
-      "emacs-eat" ;; Terminal emulator in Emacs
-      "emacs-vterm" ;; Emacs libvterm integration
-      "emacs-vterm-toggle" ;; Toggle between a vterm buffer and other buffers
-      "emacs-multi-vterm" ;; Manage multiple vterm buffers in Emacs
-
-      ;; Lsp-bridge dependencies
-      "python-epc" ;; Remote procedure call (RPC) stack for Emacs Lisp and Python
-      "python-orjson" ;; Python JSON library supporting dataclasses, datetimes, and numpy
-      "python-sexpdata" ;; S-expression parser for Python
-      "python-six" ;; Python 2 and 3 compatibility utilities
-      "python-paramiko" ;; SSHv2 protocol library
-      "emacs-yasnippet" ;; Yet another snippet extension for Emacs
-
-      "julia" ;; High-performance dynamic language for technical computing
-
-      ;; LSP-mode
-      ;;"emacs-lsp-mode" ;; Emacs client and library for the Language Server Protocol
-      ;;"emacs-lsp-ui" ;; User interface extensions for `lsp-mode'
-      ;; "emacs-dap-mode" ;; Emacs client/library for Debug Adapter Protocol
-
-      "emacs-alsamixer-el"
-      "alsa-utils" ;; Utilities for the Advanced Linux Sound Architecture (ALSA)
-
-      ))
-    (packages->manifest (list
-			 emacs-julia-vterm
-			 emacs-ob-julia-vterm
-			 emacs-julia-ts-mode
-			 emacs-r-vterm
-			 emacs-cl-generic
-			 ;;emacs-eglot-jl ;; manual set-up in test
-			 emacs-dired-sidebar
-			 emacs-ibuffer-sidebar
-			 emacs-ibuffer-project
-			 emacs-tabspaces
-			 emacs-use-package
-			 emacs-emms
-			 ;;python-tinytag ;; don't work
-			 emacs-doom-modeline
-			 ;;emacs-ess-view-data
-			 emacs-all-the-icons
-			 ;; emacs-auctex-latexmk ;; dont't work
-			 emacs-tab-bar-echo-area
-			 emacs-org-appear
-			 emacs-eglot-ltex
-			 ;; emacs-dashboard ;; do work well with emacs 29
-			 ;; emacs-org-pdftools ;; don't build
-			 ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
-			 emacs-empv
-			 emacs-r-ts-mode
-
-			 ;; emacs-forge
-
-			 emacs-lsp-mode
-			 emacs-lsp-ui
-			 emacs-lsp-julia
-			 emacs-lsp-ltex
-			 emacs-lsp-scheme
-
-			 ))
+(define-public emacs-flycheck 
+  (package
+   (name "emacs-flycheck")
+   (version "32")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append "https://stable.melpa.org/packages/flycheck-"
+				version ".tar"))
+	    (sha256 (base32
+		     "11nwdds4mhysmxmn2w31qz3599nkmxyzd5np31kzapgv0k9dpg6i"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-dash emacs-pkg-info emacs-let-alist
+			    emacs-seq))
+   (home-page "http://www.flycheck.org")
+   (synopsis "On-the-fly syntax checking")
+   (description
+    "On-the-fly syntax checking for GNU Emacs 24.  Flycheck is a modern on-the-fly
+syntax checking extension for GNU Emacs, intended as replacement for the older
+Flymake extension which is part of GNU Emacs.  Flycheck automatically checks
+buffers for errors while you type, and reports warnings and errors directly in
+the buffer and in an optional IDE-like error list.  It comes with a rich
+interface for custom syntax checkers and other extensions, and has already many
+3rd party extensions adding new features.  Please read the online manual at
+http://www.flycheck.org for more information.  You can open the manual directly
+from Emacs with `M-x flycheck-manual'. # Setup Flycheck works best on Unix
+systems.  It does not officially support Windows, but tries to maintain Windows
+compatibility and should generally work fine on Windows, too.  To enable
+Flycheck add the following to your init file: (add-hook after-init-hook
+#'global-flycheck-mode) Flycheck will then automatically check buffers in
+supported languages, as long as all necessary tools are present.  Use
+`flycheck-verify-setup to troubleshoot your Flycheck setup.")
+   (license #f))
+  )
+
+(define-public emacs-consult-flycheck 
+(package
+  (name "emacs-consult-flycheck")
+   (version "0.9")
+   (source (origin
+             (method url-fetch)
+             (uri (string-append
+                   "https://stable.melpa.org/packages/consult-flycheck-"
+                   version ".tar"))
+             (sha256 (base32
+                      "1h3v1brsrhbn34qm7g267j5dqxwwgfl0177a5z9y59p62faklml9"))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-consult emacs-flycheck))
+   (home-page "https://github.com/minad/consult")
+   (synopsis "Provides the command `consult-flycheck'")
+   (description
+    "This package provides the command `consult-flycheck'.  This is an extra package,
+since the consult.el package only depends on Emacs core components.")
+   (license #f))
+)
+
+
+(define-public emacs-pulseaudio-control 
+  (package
+   (name "emacs-pulseaudio-control")
+   (version "20230316.1819")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append
+		  "https://melpa.org/packages/pulseaudio-control-" version
+		  ".tar"))
+	    (sha256 (base32
+		     "1wqk6lvq12dpyl6bk67x2vj4zy9wfkrpr8kbwsvfqx9iqj4ixkik"))))
+   (build-system emacs-build-system)
+   (home-page "https://git.sr.ht/~flexibeast/pulseaudio-control")
+   (synopsis "Use `pactl' to manage PulseAudio volumes.")
+   (description
+    "`pulseaudio-control controls @code{PulseAudio} volumes from Emacs, via `pactl`.
+## Table of Contents - [Installation](#installation) - [Usage](#usage) -
+[Issues](#issues) - [License](#license) ## Installation Install
+[pulseaudio-control from MELPA](http://melpa.org/#/pulseaudio-control), or put
+`pulseaudio-control.el` in your load-path and do a `(require
+pulseaudio-control)'. ## Usage Initially, the `pulseaudio-control keymap is not
+bound to any prefix.  You can call the command
+`pulseaudio-control-default-keybindings to use the prefix `C-x / to access the
+`pulseaudio-control keymap globally; if you wish to use this prefix by default,
+add the line: (pulseaudio-control-default-keybindings) to your init file.  The
+default keybindings in the `pulseaudio-control keymap are: * `+` : Increase the
+volume of the currently-selected sink by `pulseaudio-control-volume-step
+(`pulseaudio-control-increase-sink-volume'). * `=` : Increase the volume of the
+currently-selected source by `pulseaudio-control-volume-step
+(`pulseaudio-control-increase-source-volume'). * `-` : Decrease the volume of
+the currently-selected sink by `pulseaudio-control-volume-step
+(`pulseaudio-control-decrease-sink-volume'). * `_` : Decrease the volume of the
+currently-selected source by `pulseaudio-control-volume-step
+(`pulseaudio-control-decrease-source-volume'). * `v` : Directly specify the
+volume of the currently-selected sink (`pulseaudio-control-set-sink-volume').
+The value can be: * a percentage, e.g. 10%'; * in decibels, e.g. @code{2dB';} *
+a linear factor, e.g. 0.9 or 1.1'. * `V` : Directly specify the volume of the
+currently-selected source (`pulseaudio-control-set-source-volume').  The value
+can be: * a percentage, e.g. 10%'; * in decibels, e.g. @code{2dB';} * a linear
+factor, e.g. 0.9 or 1.1'. * `m` : Toggle muting of the currently-selected sink
+(`pulseaudio-control-toggle-current-sink-mute'). * `M` : Toggle muting of the
+currently-selected source (`pulseaudio-control-toggle-current-source-mute'). *
+`x` : Toggle muting of a sink, specified by index
+(`pulseaudio-control-toggle-sink-mute-by-index'). * `X` : Toggle muting of a
+source, specified by index (`pulseaudio-control-toggle-source-mute-by-index'). *
+`e` : Toggle muting of a sink, specified by name
+(`pulseaudio-control-toggle-sink-mute-by-name'). * `E` : Toggle muting of a
+source, specified by name (`pulseaudio-control-toggle-source-mute-by-name'). *
+`i` : Select a sink to be the current sink, specified by index
+(`pulseaudio-control-select-sink-by-index'). * `I` : Select a source to be the
+current sink, specified by index (`pulseaudio-control-select-source-by-index').
+* `n` : Select a sink to be the current sink, specified by name
+(`pulseaudio-control-select-sink-by-name'). * `N` : Select a source to be the
+current source, specified by name (`pulseaudio-control-select-source-by-name').
+* `d` : Display volume of the currently-selected sink
+(`pulseaudio-control-display-volume'). * `]` : Toggle use of @@DEFAULT_SINK@@
+for volume operations (`pulseaudio-control-default-sink-mode'). * `[` : Toggle
+use of @@DEFAULT_SOURCE@@ for volume operations
+(`pulseaudio-control-default-source-mode').  Customisation options, including
+`pulseaudio-control-volume-step', are available via the `pulseaudio-control
+customize-group. ## Issues / bugs If you discover an issue or bug in
+`pulseaudio-control not already noted: * as a TODO item, or * in [the project's
+\"Issues\" section on
+@code{GitHub](https://github.com/flexibeast/pulseaudio-control/issues),} please
+create a new issue with as much detail as possible, including: * which version
+of Emacs you're running on which operating system, and * how you installed
+`pulseaudio-control'. ## License [GNU General Public License version
+3](http://www.gnu.org/licenses/gpl.html), or (at your option) any later version.")
+   (license #f))
+  )
+
+
+(define-public emacs-org-agenda-property 
+  (package
+   (name "emacs-org-agenda-property")
+   (version "1.3.1")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append
+		  "https://stable.melpa.org/packages/org-agenda-property-"
+		  version ".tar"))
+	    (sha256 (base32
+		     "0ppm19z2fkd45kb1vxy77jmwh9lvkc02dmzbjyji7inka54gvs83"))))
+   (build-system emacs-next-build-system)
+   (home-page "http://github.com/Bruce-Connor/org-agenda-property")
+   (synopsis "Display org properties in the agenda buffer.")
+   (description
+    "org-agenda-property is a package which displays the properties of an org item
+beside (or below) the item's title in the agenda buffer.  Customize the variable`org-agenda-property-list to add which properties you which to show. ;
+Instructions: INSTALLATION If you installed from Melpa, you shouldn't need to doanything else.  Just customize `org-agenda-property-list and call your agenda
+buffer (tipically `org-agenda-list') to see the magic.  If you installed
+manually, just make sure it's in your load-path and call        (require
+org-agenda-property) Variables  All variables can be edited by running
+	`org-agenda-property-customize (seriously, chech it out, they   are just a few
+:-)).  The documentations are mostly self       explanatory, I list here only the
+most important two. `org-agenda-property-list This should be a list of all
+properties you want displayed in the buffer.  Default is \"LOCATION\".
+	`org-agenda-property-position           This is where you want the properties to be
+displayed               (besides the title or below the title?).")
+   (license #f))
+  )
+
+(define-public emacs-org-gtd 
+  (package
+   (name "emacs-org-gtd")
+   (version "3.0.0")
+   (source (origin
+	    (method url-fetch)
+	    (uri (string-append "https://stable.melpa.org/packages/org-gtd-"
+				version ".tar"))
+	    (sha256 (base32
+		     "070y9vj204gxc8ni4mw16hcwc3gf16yqf5hf9q6jdjz70i123b9i"))))
+   (build-system emacs-next-build-system)
+   (propagated-inputs (list emacs-org-edna emacs-f emacs-org
+			    emacs-org-agenda-property emacs-transient))
+   (home-page "https://github.com/Trevoke/org-gtd.el")
+   (synopsis "An implementation of GTD.")
+   (description
+    "This package tries to replicate as closely as possible the GTD workflow.  This
+package assumes familiarity with GTD. This package provides a system that allows
+you to capture incoming things into an inbox, then process the inbox and
+categorize each item based on the GTD categories.  It leverages org-agenda to
+show today's items as well as the NEXT items.  It also has a simple project
+management system, which currently assumes all tasks in a project are
+sequential.  For a comprehensive instruction manual, see the documentation.
+Either the info file or in the doc/ directory of the repository.  Upgrade
+information is also available therein.")
+   (license #f))
+  )
+
+;;
+;; Manifest
+;;
+(concatenate-manifests
+ (list
+  (specifications->manifest
+   (list 
+    emacs-distribution
     ))
+  (specifications->manifest
+   (list
+    ;;"emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
+    "emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
+    "hicolor-icon-theme" ;; Freedesktop icon theme 
+    "git" ;; Distributed version control system
+    "nss-certs" ;; CA certificates from Mozilla
+    "coreutils" ;; Core GNU utilities (file, text, shell)
+    "findutils" ;; Operating on files matching given criteria
+
+
+    "emacs-guix" ;; Emacs interface for GNU Guix
+
+    "emacs-evil" ;; Extensible Vi layer for Emacs
+    "emacs-evil-collection" ;; Collection of Evil bindings for many major and minor modes
+    "emacs-undo-fu" ;; Simple, stable linear undo with redo for Emacs
+
+    ;;"emacs-ess" ;; Emacs mode for statistical analysis programs
+
+
+    ;;"emacs-julia-mode" ;; Major mode for Julia
+    ;;"emacs-julia-repl" ;; Minor mode for interacting with a Julia REPL ;; Replaced by julia-vterm since support org-babel via ob-julia-vterm
+    "emacs-no-littering" ;; Help keep `~/.emacs.d/' clean
+    "emacs-pdf-tools" ;; Emacs support library for PDF files
+
+    "emacs-vertico" ;; Vertical interactive completion
+    "emacs-orderless" ;; Emacs completion style that matches multiple regexps in any order
+    "emacs-embark" ;; Emacs mini-buffer actions rooted in keymaps
+    "emacs-marginalia" ;; Marginalia in the minibuffer completions
+    "emacs-corfu" ;; Completion overlay region function
+    "emacs-corfu-doc" ;; Documentation popup for Corfu
+    "emacs-kind-icon" ;; Completion kind icons in Emacs 
+    "emacs-svg-lib" ;; Emacs SVG library for creating tags, icons and bars 
+    "emacs-cape" ;; Completion at point extensions for Emacs
+
+    "emacs-company"
+    "emacs-company-posframe"
+
+    "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
+    "emacs-emprise" ;; Control MPRIS supported media players from Emacs
+    "emacs-marginalia-emprise" ;; Annotate Emprise with Marginalia
+    "emacs-which-key" ;; Display available key bindings in popup 
+    "emacs-general" ;; More convenient key definitions in emacs
+    "emacs-org-modern" ;; Modern Org Style
+    "emacs-svg-tag-mode" ;; Replace keywords with SVG tags 
+    "emacs-evil-org" ;; Evil keybindings for Org mode
+    ;;"emacs-nano-modeline" ;; Emacs minor mode controlling mode line
+    ;;"emacs-simple-modeline" ;; Simple mode-line configuration for Emacs
+    "emacs-telephone-line" ;; Implementation of Powerline for Emacs 
+
+    "emacs-f" ;; Emacs API for working with files and directories 
+    "emacs-s" ;; Emacs string manipulation library
+    "emacs-dash"
+
+    "emacs-mixed-pitch" ;; Mix variable- and fixed-pitch fonts in the same Emacs buffer
+
+    ;; FIXME: autolink don't work, see https://github.com/awth13/org-appear/issues/50
+    ;;"emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
+    "emacs-toc-org" ;; Table of Contents generator for Emacs Org mode
+
+    "emacs-mood-line" ;; Minimal mode-line for Emacs
+    "font-fira-code"
+    "font-fira-mono"
+    "font-fira-sans"
+    "font-iosevka-term" ;; Coders' typeface, built from code
+    "font-iosevka" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
+    "font-iosevka-aile" ;; Iosevka is a slender monospace sans-serif or slab-serif typeface
+    "font-hack" ;; Typeface designed for source code
+
+    "emacs-general" ;; More convenient key definitions in emacs
+
+    ;;"emacs-doom-modeline" ;; Fancy and fast mode-line inspired by minimalism design
+    "emacs-minions" ;; Minor-mode menu for the mode line
+    "emacs-spaceline-next" ;; Powerline theme from Spacemacs
+
+    "emacs-magit" ;; Emacs interface for the Git version control system
+    "emacs-magit-todos" ;; Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
+    "emacs-magit-org-todos-el" ;; Get todo.org into Emacs Magit status
+
+    "emacs-forge" ;; Access Git forges from Magit
+    ;;"emacs-dired-sidebar" ;; Sidebar for Emacs using Dired ;; problem with git versioned project, version too old
+    "emacs-dired-git-info" ;; Show git info in Emacs Dired
+    "emacs-solaire-mode" ;; Change background of file-visiting buffers in Emacs
+    "emacs-all-the-icons" ;; Collect icon fonts and propertize them within Emacs
+    "emacs-all-the-icons-ibuffer" ;; Display icons for all buffers in ibuffer
+    "emacs-all-the-icons-dired" ;; Show icons for each file in `dired-mode'
+    "emacs-all-the-icons-completion" ;; Add icons to completion candidates 
+
+    "emacs-org-auto-tangle" ;; Automatically tangle code blocks on save
+
+    "emacs-pass" ;; Major mode for `password-store.el'
+    "emacs-password-store" ;; Password store (pass) support for Emacs
+    "emacs-password-store-otp" ;; Interact with the `pass-otp' extension for `pass' from Emacs
+
+    "emacs-geiser" ;; Collection of Emacs modes for Scheme hacking 
+    "emacs-geiser-guile" ;; Guile Scheme support for Geiser
+
+    "emacs-citar" ;; Emacs package to quickly find and act on bibliographic entries
+
+    "emacs-doom-themes" ;; Wide collection of color themes for Emacs
+    "emacs-gruvbox-theme" ;; Gruvbox is a retro groove color scheme ported from Vim
+    "emacs-zenburn-theme" ;; Low contrast color theme for Emacs
+    "emacs-dream-theme" ;; High-contrast Emacs theme
+    "emacs-solarized-theme" ;; Port of the Solarized theme for Emacs
+    "emacs-spacemacs-theme" ;; Light and dark theme for spacemacs that supports GUI and terminal  
+    "emacs-monokai-theme" ;; High contrast color theme for Emacs
+
+    "emacs-hide-mode-line" ;; Emacs plugin that hides the mode-line
+    ;;"emacs-emms-mode-line-cycle" ;; Display the EMMS mode line as a ticker
+    "emacs-powerline" ;; Mode-line plugin for Emacs
+
+    ;;"emacs-emms" ;; The Emacs Multimedia System ;; miss mpd-prev
+    "imagemagick" ;; Create, edit, compose, or convert bitmap images
+    ;;"python-flake8" ;; The modular source code checker: pep8, pyflakes and co
+    "emacs-mpv" ;; Control MPV for easy note taking
+    ;;"emacs-emms-mode-line-cycle" ;;  Display the EMMS mode line as a ticker
+
+    "python-lsp-server" ;; Python implementation of the Language Server Protocol
+
+
+    "emacs-org-roam" ;; Non-hierarchical note-taking with Org mode
+    "emacs-org-roam-ui" ;; Web User Interface for Org Roam
+    "emacs-websocket" ;;  Emacs WebSocket client and server 
+    "emacs-citar-org-roam" ;; Emacs package to provide tighter Citar and Org-Roam integration
+    "emacs-consult-org-roam" ;; Consult integration for Org Roam
+
+    "git"
+
+    "emacs-ibuffer-vc" ;; Group Ibuffer's list by revision control system indications
+
+    "emacs-sly" ;; Sylvester the Cat's Common Lisp IDE 
+
+    "emacs-dashboard" ;; Startup screen extracted from Spacemacs ;; version make shortcut don't work with compilation, see https://github.com/emacs-dashboard/emacs-dashboard/issues/97
+    "emacs-page-break-lines" ;; Display page breaks as tidy horizontal lines
+
+    "emacs-langtool" ;; Emacs interface to LanguageTool
+    "tree-sitter"
+
+    ;;"emacs-straight-el" ;; Purely functional package manager for the Emacs hacker
+    "emacs-poly-r" ;; Polymodes for the R language
+    "emacs-polymode-markdown" ;; Polymode for Markdown mode
+
+    "emacs-org-superstar" ;; Prettify headings and plain lists in Org mode
+    "emacs-org-fancy-priorities" ;; Display org priorities as custom strings 
+    "emacs-org-pomodoro" ;; Pomodoro technique for org-mode 
+    ;;"mplayer" ;; Audio and video player
+    "mpv" ;; Audio and video player
+    "mpv-mpris" ;; MPRIS plugin for mpv
+
+    "emacs-nyxt" ;; Interact with Nyxt from Emacs
+
+    "emacs-pinentry" ;; GnuPG Pinentry server implementation
+    "pinentry-emacs" ;; GnuPG's interface to passphrase input
+
+    "emacs-auctex" ;; Integrated environment for TeX 
+    "emacs-org-edit-latex" ;;  Edit a LaTeX fragment just like editing a source block
+    "emacs-evil-tex" ;;  Evil oriented additions for editing LaTeX 
+
+    "emacs-elfeed" ;; Atom/RSS feed reader for Emacs
+
+    "zip" 
+
+    "emacs-mastodon"
+
+
+    "aspell" ;; Spell checker 
+    "aspell-dict-fr" ;; French dictionary for GNU Aspell 
+    "aspell-dict-en" ;; English dictionary for GNU Aspell  
+    "emacs-flyspell-correct" ;; Correcting words with flyspell via custom interfaces
+    "emacs-auto-dictionary-mode" ;; Automatic dictionary switcher for Emacs spell checking
+    "emacs-writegood-mode" ;; Polish up poor writing on the fly
+
+
+    "emacs-mpv" ;; Control MPV for easy note taking
+    "emacs-bluetooth" ;; Manage Bluetooth devices using Emacs
+    "emacs-mpdel" ;; Emacs user interface for Music Player Daemon
+    ;;"emacs-simple-mpc" ;; Simple Emacs frontend to mpc
+    "emacs-transmission" ;; Emacs interface to a Transmission session
+
+
+
+
+    ;; Docker support
+    "emacs-docker" ;; Manage docker from Emacs 
+    "emacs-dockerfile-mode" ;; Major mode for editing Dockerfile
+    ;; "emacs-docker-tramp" ;; TRAMP integration for docker containers ;; Obsolete...
+    "emacs-docker-compose-mode" ;; Major mode for editing `docker-compose' files
+
+
+    ;;
+    "emacs-csv-mode" ;; Major mode for editing comma/char separated values
+
+
+    ;; File manager
+    "emacs-dirvish" ;; Improved version of the Emacs package Dired 
+    "fd" ;; Simple, fast and user-friendly alternative to find
+    "imagemagick" ;; Create, edit, compose, or convert bitmap images
+    "poppler" ;; PDF rendering library
+    ;;"emacs-pdf-tools" ;; Emacs support library for PDF files
+    "ffmpegthumbnailer" ;; Create thumbnails from video files
+    "mediainfo" ;; Utility for reading media metadata
+    "tar" ;; Managing tar archives
+    "unzip" ;; Decompression and file extraction utility
+
+
+    "emacs-org-tree-slide" ;; Presentation tool for Org mode
+    "emacs-hide-lines" ;; Commands for hiding lines based on a regexp
+
+    "emacs-lua-mode" ;; Major mode for lua
+
+    "openjdk" ;; Java development kit
+    "java-slf4j-simple" ;; Simple implementation of simple logging facade for Java
+
+    ;; LSP
+    "ccls" ;; C/C++/Objective-C language server
+    ;;"texlive-digestif" ;;Editor plugin for LaTeX, ConTeXt etc.
+
+    ;; Eglot
+    "emacs-consult-eglot" ;; Consulting-read interface for eglot 
+
+
+    ;; Terminal
+    "emacs-eat" ;; Terminal emulator in Emacs
+    "emacs-vterm" ;; Emacs libvterm integration
+    "emacs-vterm-toggle" ;; Toggle between a vterm buffer and other buffers
+    "emacs-multi-vterm" ;; Manage multiple vterm buffers in Emacs
+
+    ;; Lsp-bridge dependencies
+    "python-epc" ;; Remote procedure call (RPC) stack for Emacs Lisp and Python
+    "python-orjson" ;; Python JSON library supporting dataclasses, datetimes, and numpy
+    "python-sexpdata" ;; S-expression parser for Python
+    "python-six" ;; Python 2 and 3 compatibility utilities
+    "python-paramiko" ;; SSHv2 protocol library
+    "emacs-yasnippet" ;; Yet another snippet extension for Emacs
+
+    "julia" ;; High-performance dynamic language for technical computing
+
+    ;; LSP-mode
+    "python-lsp-server" ;; Python implementation of the Language Server Protocol  
+    "python-pylint" ;; Advanced Python code static checker
+    ;;"emacs-lsp-mode" ;; Emacs client and library for the Language Server Protocol
+    ;;"emacs-lsp-ui" ;; User interface extensions for `lsp-mode'
+    ;; "emacs-dap-mode" ;; Emacs client/library for Debug Adapter Protocol
+
+    ;;"emacs-pulseaudio-control" ;; Control Pulseaudio from Emacs
+    "alsa-utils" ;; Utilities for the Advanced Linux Sound Architecture (ALSA)
+
+    "emacs-nix-mode" ;; Emacs major mode for editing Nix expressions
+
+    ;;"emacs-consult-lsp"
+
+    ))
+  (packages->manifest (list
+		       emacs-julia-vterm
+		       emacs-ob-julia-vterm
+		       emacs-julia-ts-mode
+		       emacs-r-vterm
+		       emacs-cl-generic
+		       ;;emacs-eglot-jl ;; manual set-up in test
+		       emacs-dired-sidebar
+		       emacs-ibuffer-sidebar
+		       emacs-ibuffer-project
+		       emacs-tabspaces
+		       emacs-use-package
+		       emacs-emms
+		       ;;python-tinytag ;; don't work
+		       emacs-doom-modeline
+		       ;;emacs-ess-view-data
+		       emacs-all-the-icons
+		       ;; emacs-auctex-latexmk ;; dont't work
+		       emacs-tab-bar-echo-area
+		       emacs-org-appear
+		       emacs-eglot-ltex
+		       ;; emacs-dashboard ;; do work well with emacs 29
+		       ;; emacs-org-pdftools ;; don't build
+		       ;; emacs-lsp-bridge ;; TODO: try to build, failed, seems to search py file in building process
+		       emacs-empv
+		       emacs-r-ts-mode
+
+		       ;; emacs-forge
+
+		       emacs-lsp-mode ;; necessary for lsp-ltex
+		       emacs-consult-lsp
+		       emacs-lsp-ui
+		       emacs-lsp-julia
+		       emacs-lsp-ltex
+		       emacs-lsp-scheme
+		       emacs-flycheck
+		       emacs-consult-flycheck
+		       ;; emacs-pulseaudio-control ;; don't work, similar problem to https://github.com/flexibeast/pulseaudio-control/issues/10
+		       emacs-org-gtd
+
+		       ))
+  ))
