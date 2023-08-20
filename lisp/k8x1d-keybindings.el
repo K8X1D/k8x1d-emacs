@@ -1,7 +1,7 @@
 
 
 ;; ESC Cancels All
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit) ;; esc break windowing, try alternative  
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit) ;; esc break windowing, try alternative
 ;;(global-set-key (kbd "<escape>") 'keyboard-quit)
 
 ;;

@@ -38,6 +38,7 @@
   :init
   (defun k8x1d/open-python-repl-at-bottom ()
     (interactive)
+    (require 'python-vterm)
     (evil-window-split)
     (evil-window-down 1)
     (evil-window-set-height 17)

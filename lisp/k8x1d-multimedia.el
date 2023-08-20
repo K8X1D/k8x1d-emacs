@@ -83,5 +83,14 @@
   )
   ;;:bind ("C-c o T" . transmission))
 
+;; (use-package pulseaudio-control
+;;   :hook (after-init . (lambda ()
+;; 			(require 'pulseaudio-control)))
+;;   :config
+;;   (pulseaudio-control-default-keybindings)
+;;   )
+
+
+
 
 (provide 'k8x1d-multimedia)

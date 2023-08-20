@@ -1,4 +1,8 @@
-;; -*- lexical-binding: t; -*-
+;;; package --- Summary
+
+;;; Commentary:
+
+;;; Code:
 
 (use-package emacs
   :config
@@ -10,16 +14,12 @@
 	(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
 	)
     (progn
-      ;; TMP fix for emacs daemon
-      ;;(set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
-      ;;(add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
+      (set-frame-parameter (selected-frame) 'alpha '(90 . 90)) ; For current frame
+      (add-to-list 'default-frame-alist '(alpha . (90 . 90))) ; For all new frames henceforth
       ))
-
-  ;;(set-frame-parameter nil 'alpha-background 80) ; For current frame
-  ;;(add-to-list 'default-frame-alist '(alpha-background . 80)) ; For all new frames henceforth
   )
 
 (provide 'k8x1d-frames)
 
-
+;;; k8x1d-frames.el ends here
 

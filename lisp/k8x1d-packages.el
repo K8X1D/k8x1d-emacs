@@ -20,7 +20,8 @@
 
 (use-package use-package
   :config
-  (setq use-package-always-defer t))
+  (setq use-package-always-defer t)
+  (setq use-package-enable-imenu-support t))
 
 
 

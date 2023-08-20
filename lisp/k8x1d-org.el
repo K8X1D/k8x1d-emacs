@@ -2,13 +2,14 @@
   :general
   (k8x1d/leader-keys
    "oa" '(org-agenda :which-key "Agenda")
-   "oc" '(org-clock-goto :which-key "Clock")
+   "fc" '(org-clock-goto :which-key "Clock")
    "X" '(org-capture :which-key "Capture")
    )
   (k8x1d/local-leader-keys
     :keymaps 'org-mode-map
     "p" '(org-priority :which-key "Priority")
     "it" '(org-insert-structure-template :which-key "Template")
+    "il" '(org-insert-link :which-key "Link")
     "f" '(org-footnote-action :which-key "Footnotes")
     )
   :bind
@@ -26,6 +27,8 @@
 
   ;; Prettify
   (setq org-pretty-entities t) ;;
+  (setq org-pretty-entities-include-sub-superscripts nil) ;; prettify don't work well with citar
+  (setq org-fontify-quote-and-verse-blocks t)
 
   (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
   (setq org-image-actual-width nil)
@@ -336,8 +339,9 @@
   :init
   (defun k8x1d/daily-thesis-timer ()
     (interactive)
+    (require 'org)
     (org-timer-set-timer "00:10:00")
-  )
+    )
   :config
   (setq org-clock-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
   (setq org-clock-clocked-in-display "frame-title")

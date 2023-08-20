@@ -2,6 +2,8 @@
 
 ;; Terminal
 (use-package vterm
+  :bind (:map minibuffer-local-map
+	      ("C-q" . vterm-send-next-key))
   :config
   ;; Tramp support
   (setq vterm-tramp-shells '(("ssh" "/bin/bash")))

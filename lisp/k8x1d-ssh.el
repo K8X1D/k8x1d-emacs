@@ -5,6 +5,7 @@
 	("Serenity"  . "kkaiser@206.12.92.226")
 	("Groudon" . "kkaiser@130.104.60.82")))
 
+
 (defun k8x1d/select-ssh-address ()
   (alist-get
    (completing-read "Choose: " k8x1d-ssh-addresses)
@@ -31,6 +32,9 @@
 ;;   )
 
 
+(use-package tramp
+  :config
+  (setq org-display-remote-inline-images 'cache))
 
 
 (provide 'k8x1d-ssh)

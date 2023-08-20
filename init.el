@@ -9,8 +9,7 @@
 ;; General config
 ;;
 (setq k8x1d-lsp-module "lsp-mode")
-;;(setq k8x1d-lsp-module "lsp-bridge")
-;;(setq k8x1d-lsp-module "eglot")
+(setq k8x1d-consult-integration t)
 
 
 

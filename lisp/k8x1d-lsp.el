@@ -1,5 +1,13 @@
+;;; package --- Summary
+
+
+
+;;; Commentary:
+
+;;; Code:
+
 ;;
-;; Eglot configuration 
+;; Eglot configuration
 ;;
 
 (use-package eglot
@@ -75,7 +83,7 @@
   :if (equal k8x1d-lsp-module "lsp-bridge")
   :hook (prog-mode . yas-minor-mode)
   :config
-  (yas-reload-all)) 
+  (yas-reload-all))
 
 (use-package lsp-bridge
   :if (equal k8x1d-lsp-module "lsp-bridge")
@@ -110,7 +118,7 @@
   (add-to-list 'lsp-bridge-single-lang-server-mode-list '(julia-ts-mode . "julials"))
   (setq lsp-bridge-default-mode-hooks (append lsp-bridge-default-mode-hooks '(julia-ts-mode)))
 
-  ;; Add support ltex 
+  ;; Add support ltex
   ;; FIXME: repair
 ;;; [LSP-Bridge] Message could not be parsed.
   (add-to-list 'lsp-bridge-single-lang-server-mode-list '(org-mode . "ltex-ls"))
@@ -126,6 +134,7 @@
 ;; Diagnostics
 ;;
 (use-package flymake
+  :if (equal k8x1d-lsp-module "eglot")
   :general
   (k8x1d/local-leader-keys
     :keymaps 'flymake-mode-map
@@ -137,6 +146,12 @@
     )
   )
 
+(use-package flycheck
+  :if (equal k8x1d-lsp-module "lsp-mode")
+  :hook (after-init . global-flycheck-mode))
+
+
+(use-package consult-flycheck)
 
 ;;
 ;; Lsp-mode
@@ -144,13 +159,14 @@
 
 (use-package lsp-mode
   :if (equal k8x1d-lsp-module "lsp-mode")
-  :init
+  ;;:init
   ;;(setq lsp-keymap-prefix "SPC m L")
   ;;(require 'lsp-scheme)
   :hook ((ess-r-mode . lsp-deferred)
 	 (python-ts-mode . lsp-deferred)
 	 (LaTeX-mode . lsp-deferred)
 	 (org-mode . lsp-deferred)
+	 (markdown-mode . lsp-deferred)
 	 (scheme-mode . lsp-deferred)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
@@ -158,9 +174,6 @@
   (setq lsp-headerline-breadcrumb-enable nil);; remove headline
   (setq lsp-modeline-diagnostics-enable nil) ;; superflous
 
-  ;;(setq lsp-enable-folding t)
-  (add-to-list 'load-path (expand-file-name "lib/lsp-mode" user-emacs-directory))
-  (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
   (add-to-list 'lsp-language-id-configuration '(python-ts-mode . "python"))
   (add-to-list 'lsp-language-id-configuration '(R-mode . "r"))
   (add-to-list 'lsp-language-id-configuration '(org-mode . "org"))
@@ -190,11 +203,32 @@
   (lsp-completion-mode . my/lsp-mode-setup-completion))
 
 
+(use-package consult-lsp
+  :if k8x1d-consult-integration
+  :after lsp-mode
+  :config
+  (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
+  )
 
 ;; optionally
+;; FIXME: lsp-ui-sideline doesn't work with flymake (need flycheck), evaluate...
 (use-package lsp-ui
   :if (equal k8x1d-lsp-module "lsp-mode")
-  :commands lsp-ui-mode)
+  :commands lsp-ui-mode
+  :config
+  ;; Peek feature
+  (setq lsp-ui-peek-enable t)
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+
+  ;; Sideline
+  ;; Cause some problems, see https://github.com/emacs-lsp/lsp-ui/issues/746, disbling for now
+  (setq lsp-ui-sideline-enable nil)
+  ;; (setq lsp-ui-sideline-show-hover t)
+  ;; (setq lsp-ui-sideline-show-diagnostics t)
+  ;; (setq lsp-ui-sideline-show-symbol t)
+  ;; (setq lsp-ui-sideline-show-code-actions nil)
+  )
 
 ;; optionally if you want to use debugger
 (use-package dap-mode
@@ -214,7 +248,7 @@
 			 (lsp-deferred)))
 	 )
   :config
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.8")
+  ;;(setq lsp-julia-default-environment "~/.julia/environments/v1.8")
   ;;(setq lsp-julia-package-dir nil)
   (setq lsp-julia-command "julia")
   (add-to-list 'lsp-language-id-configuration
@@ -223,11 +257,39 @@
   ;;  ;; AOT config
   ;; (setq lsp-julia-package-dir nil)
   ;; (setq lsp-julia-flags `("-J/home/k8x1d/.cache/emacs/languageserver.so"))
+
+  ;; Add support over TRAMP
+  ;; Adapted from https://github.com/gdkrmr/lsp-julia/issues/49
+  ;; Don't work for now, but is a step in the right direction
+  (defun lsp-julia--rls-command-remote ()
+    "The command to lauch the Julia Language Server."
+    `(,lsp-julia-command
+      ,@lsp-julia-flags
+      ,(concat "-e "
+               "'"
+               "import Pkg; Pkg.instantiate(); "
+               "using InteractiveUtils, Sockets, SymbolServer, LanguageServer; "
+               "Union{Int64, String}(x::String) = x; "
+               "server = LanguageServer.LanguageServerInstance("
+               "stdin, stdout, "
+               (lsp-julia--get-root-remote) ", "
+               (lsp-julia--get-depot-path) ", "
+               "nothing, "
+               (lsp-julia--symbol-server-store-path-to-jl-no-expand) "); "
+               "run(server);"
+               "'")))
+
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-tramp-connection 'lsp-julia--rls-command-remote)
+                     :major-modes '(julia-ts-mode julia-mode)
+                     :server-id 'julia-ls-remote
+                     :remote? t))
+
     )
 
 
 
-  ;; Strange error: 
+  ;; Strange error:
   ;; WARNING: Unsupported code language ID 'true', treating text as plaintext
   ;; FIXME: ltex don't ignore latex env
   ;; FIXME: ltex don't ignore org markup
@@ -266,4 +328,5 @@
 
 
 
-  (provide 'k8x1d-lsp)
+(provide 'k8x1d-lsp)
+;;; k8x1d-lsp.el ends here 

@@ -2,86 +2,73 @@
 ;; Sources:
 ;; https://occasionallycogent.com/custom_emacs_modeline/index.html
 
+;; (use-package doom-modeline
+;;   :hook (after-init . doom-modeline-mode)
+;;   ;; ((after-init . doom-modeline-mode)
+;;   ;; 	 (doom-modeline-mode . display-battery-mode)
+;;   ;; 	 (doom-modeline-mode . display-time-mode))
+
+;;   :config
+;;   ;; Add wanted information
+;;   (setq doom-modeline-minor-modes t) ;; for minions
+;;   (setq doom-modeline-enable-word-count t)
+;;   ;; Clean-up modeline
+;;   ;; (setq doom-modeline-icon nil) ;; remove all icons from modeline
+;;   (setq doom-modeline-buffer-state-icon nil)
+;;   (setq doom-modeline-major-mode-icon t)
+;;   (setq doom-modeline-major-mode-color-icon t)
+
+;;   (setq doom-modeline-workspace-name nil) ;; use tab instead
+;;   (setq doom-modeline-buffer-encoding nil)
+;;  ;; (setq doom-modeline-buffer-file-name-style 'file-name) ;; only the file name
+;;   (setq doom-modeline-buffer-file-name-style 'auto)
+
+;;   ;; Custom modal indicator for evil, Under test, see  k8x1d-evil.el.
+;;   (setq doom-modeline-modal-icon nil)
+
+;;   ;; Define your custom modeline
+;;   (doom-modeline-def-modeline 'k8x1d-modeline
+;;     ;; Left side
+;;     '(modals
+;;       buffer-info
+;;       vcs
+;;       buffer-position
+;;       selection-info
+;;       compilation)
+;;     ;; Right side
+;;     '(;;battery
+;;       ;;time
+;;       ;;process
+;;       misc-info
+;;       lsp
+;;       checker
+;;       major-mode
+;;       minor-modes
+;;       ))
+
+;;   ;; Set default mode-line
+;;   (add-hook 'doom-modeline-mode-hook
+;;  	    (lambda ()
+;;  	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)) )
+
+;;   ;; set particulat font for modeline
+;;  ;; (setq doom-modeline-height 1) ; optional
+;;   (if (facep 'mode-line-active)
+;;       (set-face-attribute 'mode-line-active nil :family "Iosevka Term" :height 120) ; For 29+
+;;     (set-face-attribute 'mode-line nil :family "Iosevka Term" :height 120))
+;;   (set-face-attribute 'mode-line-inactive nil :family "Iosevka Term" :height 120)
+
+;;   )
+
+
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
-  ;; ((after-init . doom-modeline-mode)
-  ;; 	 (doom-modeline-mode . display-battery-mode)
-  ;; 	 (doom-modeline-mode . display-time-mode))
-
   :config
-  ;; Add wanted information
-  (setq doom-modeline-minor-modes t) ;; for minions
-  (setq doom-modeline-enable-word-count t)
-  ;; Clean-up modeline
-  ;; (setq doom-modeline-icon nil) ;; remove all icons from modeline
-  (setq doom-modeline-buffer-state-icon nil)
-  (setq doom-modeline-major-mode-icon t)
-  (setq doom-modeline-major-mode-color-icon t)
-
-  (setq doom-modeline-workspace-name nil) ;; use tab instead
   (setq doom-modeline-buffer-encoding nil)
- ;; (setq doom-modeline-buffer-file-name-style 'file-name) ;; only the file name
-  (setq doom-modeline-buffer-file-name-style 'auto)
-
-  ;; Custom modal indicator for evil, Under test, see  k8x1d-evil.el.
-  (setq doom-modeline-modal-icon nil)
-
-  ;; Define your custom modeline
-  (doom-modeline-def-modeline 'k8x1d-modeline
-    ;; Left side
-    '(modals
-      buffer-info
-      vcs
-      buffer-position
-      selection-info
-      compilation)
-    ;; Right side
-    '(;;battery
-      ;;time
-      ;;process
-      misc-info
-      lsp
-      checker
-      major-mode
-      minor-modes
-      ))
-
-;;(doom-modeline-def-modeline 'main
-;;  '(bar workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count parrot selection-info)
-;;  '(compilation objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs checker time))
-
-
-
-  ;; Set default mode-line
-  (add-hook 'doom-modeline-mode-hook
- 	    (lambda ()
- 	      (doom-modeline-set-modeline 'k8x1d-modeline 'default)) )
-
-  ;; set particulat font for modeline
- ;; (setq doom-modeline-height 1) ; optional
-  (if (facep 'mode-line-active)
-      (set-face-attribute 'mode-line-active nil :family "Iosevka Term" :height 120) ; For 29+
-    (set-face-attribute 'mode-line nil :family "Iosevka Term" :height 120))
-  (set-face-attribute 'mode-line-inactive nil :family "Iosevka Term" :height 120)
-
+  (setq doom-modeline-buffer-state-icon nil)
   )
 
 
-;;(use-package telephone-line
-;;  :hook (after-init . telephone-line-mode)
-;;  :config
-;;  (setq telephone-line-lhs
-;;	'((evil   . (telephone-line-evil-tag-segment))
-;;	  (accent . (telephone-line-vc-segment
-;;		     telephone-line-erc-modified-channels-segment
-;;		     telephone-line-process-segment))
-;;	  (nil    . (telephone-line-minor-mode-segment
-;;		     telephone-line-buffer-segment))))
-;;  (setq telephone-line-rhs
-;;	'((nil    . (telephone-line-misc-info-segment))
-;;	  (accent . (telephone-line-major-mode-segment))
-;;	  (evil   . (telephone-line-airline-position-segment))))
-;;  )
 
 
 ;; Custom modeline
