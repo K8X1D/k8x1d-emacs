@@ -1,7 +1,13 @@
 #!/bin/sh
+# Inspiration:
+# - try/catch: https://stackoverflow.com/questions/22009364/is-there-a-try-catch-command-in-bash
 K8X1D_EMACS_PROFILES=$HOME/.k8x1d-emacs-profiles
 GUIX_EXTRA=$HOME/.guix-extra
 
-"$GUIX_EXTRA"/k8x1d-emacs/guix/bin/guix package --manifest=$HOME/.k8x1d-emacs.d/k8x1d-emacs.scm --profile="$K8X1D_EMACS_PROFILES/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE"
-
-notify-send -a "k8x1d-emacs" "Update" "Finished"
+{ # try
+    "$GUIX_EXTRA"/k8x1d-emacs/guix/bin/guix package --manifest=$HOME/.k8x1d-emacs.d/k8x1d-emacs.scm --profile="$K8X1D_EMACS_PROFILES/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE" &&
+	STATUS="Finished"
+} || { # catch
+	STATUS="Failed..."
+}
+notify-send -a "k8x1d-emacs" "Update" "$STATUS"
