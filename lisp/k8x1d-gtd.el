@@ -129,7 +129,7 @@
   :config
   (setq org-edna-use-inheritance t)
   (setq org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
-  ;;(setq org-gtd-areas-of-focus ("Home" "Health" "Family" "Career"))
+  (setq org-gtd-areas-of-focus '("Personnel" "Santé" "Famille" "Emploi" "Recherche" "Développement"))
   :general
   (k8x1d/leader-keys
     "d" '(:ignore t :which-key "GTD")
