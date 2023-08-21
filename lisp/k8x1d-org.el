@@ -353,7 +353,7 @@
   (defun k8x1d/daily-thesis-timer ()
     (interactive)
     (require 'org)
-    (org-timer-set-timer "00:10:00")
+    (org-timer-set-timer "00:15:00")
     )
   :config
   (setq org-clock-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
