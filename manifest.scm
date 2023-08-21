@@ -202,6 +202,7 @@
     "emacs-lsp-julia"
     "emacs-lsp-ltex"
     "emacs-lsp-mode"
+    "emacs-lsp-julia" ;; Julia support for lsp-mode
     "emacs-lsp-scheme"
     "emacs-lsp-ui"
     "emacs-lua-mode" ;; Major mode for lua

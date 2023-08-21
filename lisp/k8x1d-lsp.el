@@ -248,7 +248,7 @@
 			 (lsp-deferred)))
 	 )
   :config
-  ;;(setq lsp-julia-default-environment "~/.julia/environments/v1.8")
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.8")
   ;;(setq lsp-julia-package-dir nil)
   (setq lsp-julia-command "julia")
   (add-to-list 'lsp-language-id-configuration
