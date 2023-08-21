@@ -24,3 +24,7 @@ session.*
 url
 lsp-bridge
 scheme-lsp-server
+lsp-julia
+eshell
+custom.el
+.lsp-session-v1
