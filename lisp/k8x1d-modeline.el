@@ -75,6 +75,7 @@
   :config
   (setq doom-modeline-buffer-encoding nil)
   (setq doom-modeline-buffer-state-icon nil)
+  (setq doom-modeline-workspace-name nil) ;; use tab instead
   )
 
 
