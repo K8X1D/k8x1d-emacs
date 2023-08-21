@@ -3,7 +3,6 @@
   (k8x1d/leader-keys
    "oa" '(org-agenda :which-key "Agenda")
    "fc" '(org-clock-goto :which-key "Clock")
-   "X" '(org-capture :which-key "Capture")
    )
   (k8x1d/local-leader-keys
     :keymaps 'org-mode-map
@@ -11,7 +10,15 @@
     "it" '(org-insert-structure-template :which-key "Template")
     "il" '(org-insert-link :which-key "Link")
     "f" '(org-footnote-action :which-key "Footnotes")
-    )
+     "t" '(org-todo :which-key "Todos")
+     "c" '(:ignore t :which-key "Clock")
+     "ci" '(org-clock-in :which-key "In")
+     "co" '(org-clock-out :which-key "Out")
+     "d" '(:ignore t :which-key "Date")
+     "dd" '(org-deadline :which-key "Deadline")
+     "ds" '(org-schedule :which-key "Scheduled")
+     "d." '(org-time-stamp :which-key "Timestamp")
+     )
   :bind
   (("C-c l" . org-store-link)
    :map org-mode-map

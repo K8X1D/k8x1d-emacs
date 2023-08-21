@@ -102,21 +102,6 @@
 ;; New version
 ;;
 
-(use-package org
-  :general
-   (k8x1d/local-leader-keys
-     :keymaps 'org-mode-map
-     "t" '(org-todo :which-key "Todos")
-     "c" '(:ignore t :which-key "Clock")
-     "ci" '(org-clock-in :which-key "In")
-     "co" '(org-clock-out :which-key "Out")
-     "d" '(:ignore t :which-key "Date")
-     "dd" '(org-deadline :which-key "Deadline")
-     "ds" '(org-schedule :which-key "Scheduled")
-     "d." '(org-time-stamp :which-key "Timestamp")
-     ))
-
-
 (use-package org-gtd
   :init
   (setq org-gtd-update-ack "3.0.0")
