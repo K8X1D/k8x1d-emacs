@@ -1,3 +1,12 @@
+;;; package --- Summary
+
+
+
+;;; Commentary:
+
+;;; Code:
+
+
 (use-package latex
   :init
   ;; TODO: fuse function
@@ -109,6 +118,6 @@
 
 
 
-
  	
 (provide 'k8x1d-latex)
+;;; k8x1d-latex.el ends here
