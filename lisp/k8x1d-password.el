@@ -1,3 +1,11 @@
+;;; package --- Summary
+
+
+
+;;; Commentary:
+
+;;; Code:
+
 
 
 
@@ -29,11 +37,8 @@
   )
   ;;:bind ("C-c o p" . +pass/consult))
 
-(use-package password-store
-  :defer t)
-
-(use-package password-store-otp
-  :defer t)
-
+(use-package password-store)
+(use-package password-store-otp)
 
 (provide 'k8x1d-password)
+;;; k8x1d-password.el ends here
