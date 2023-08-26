@@ -1,6 +1,7 @@
 ;;
 ;; Modules
 ;;
+
 (use-modules (guix packages)
 	     (guix git-download)
 
@@ -16,7 +17,6 @@
 	     (gnu packages crates-io)
 
 	     (guix download)
-	     (guix licenses)
 	     (guix status)
 
 	     ((guix build emacs-build-system)
@@ -48,10 +48,14 @@
 	     (ice-9 popen)
 	     (gnu packages guile-xyz)
 
-
-
-
-
+	     (emacs packages melpa)
+	     (gnu packages gtk)
+	     (gnu packages glib)
+	     (gnu packages image)
+	     (gnu packages pdf)
+	     (gnu packages emacs)
+	     (gnu packages compression)
+	     (gnu packages emacs-xyz)
 
 	     ((guix licenses) #:prefix license:))
 
@@ -362,6 +366,11 @@ timestamps and durations (used similarly to serde_bytes)")
     (description "Helpful macros for working with enums and strings")
     (license license:expat)))
 
+
+
+
+
+
 (define-public rust-titlecase-2
   (package
     (name "rust-titlecase")
@@ -632,14 +641,14 @@ Protocol")
 (define-public rust-strum-macros-0.25
   (package
     (name "rust-strum-macros")
-    (version "0.25.2")
+    (version "0.24.1")
     (source (origin
               (method url-fetch)
               (uri (crate-uri "strum-macros" version))
               (file-name (string-append name "-" version ".tar.gz"))
               (sha256
                (base32
-                "0na0xjb1yznc9gw6sn994wsfp3lvy4zfwczmkgvgzl6kk2sh73dd"))))
+                "12wig3cx2l9hj50jb4ly1p9pgfnj9w2zj00qq0b47ycg1vhbvbjg"))))
     (build-system cargo-build-system)
     (arguments
      `(#:cargo-inputs (("rust-heck" ,rust-heck-0.4)
@@ -1571,6 +1580,91 @@ Unicode Standard Annex #29 rules.")
       "emacs-next-pgtk") ;; Emacs text editor with `pgtk' and `tree-sitter' support
   )
 
+
+(define-public emacs-pdf-tools
+  (package
+    (name "emacs-pdf-tools")
+    (version "20230611.239")
+    ;; (version "1.1.0")
+    ;; (source
+    ;;  (origin
+    ;;    (method git-fetch)
+    ;;    (uri (git-reference
+    ;;          (url "https://github.com/vedang/pdf-tools")
+    ;;          (commit (string-append "v" version))))
+    ;;    (file-name (git-file-name name version))
+    ;;    (sha256
+    ;;     (base32 "1v861fpzck3ky21m4g42h6a6y0cbhc4sjzpzqx0zxd7sfi7rn768"))))
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/vedang/pdf-tools.git")
+               (commit
+                 "c69e7656a4678fe25afbd29f3503dd19ee7f9896")))
+        (sha256
+          (base32
+            "02l1mwil0r8zgg3377i6zy8cz6kl48hncgyl8x6aigxrrqzsxvza"))))
+    (build-system gnu-build-system)
+    (arguments
+     `(#:tests? #f                      ; there are no tests
+       #:modules ((guix build gnu-build-system)
+                  ((guix build emacs-build-system) #:prefix emacs:)
+                  (guix build utils)
+                  (guix build emacs-utils))
+       #:imported-modules (,@%gnu-build-system-modules
+                           (guix build emacs-build-system)
+                           (guix build emacs-utils))
+       #:phases
+       (modify-phases %standard-phases
+         ;; Build server side using 'gnu-build-system'.
+         (add-after 'unpack 'enter-server-dir
+           (lambda _ (chdir "server")))
+         (add-after 'enter-server-dir 'autogen
+           (lambda _
+             (invoke "bash" "autogen.sh")))
+         ;; Build emacs side using 'emacs-build-system'.
+         (add-after 'compress-documentation 'enter-lisp-dir
+           (lambda _ (chdir "../lisp")))
+         (add-after 'enter-lisp-dir 'emacs-patch-variables
+           (lambda* (#:key outputs #:allow-other-keys)
+             (for-each make-file-writable (find-files "."))
+
+             ;; Set path to epdfinfo program.
+             (emacs-substitute-variables "pdf-info.el"
+               ("pdf-info-epdfinfo-program"
+                (string-append (assoc-ref outputs "out")
+                               "/bin/epdfinfo")))
+             ;; Set 'pdf-tools-handle-upgrades' to nil to avoid "auto
+             ;; upgrading" that pdf-tools tries to perform.
+             (emacs-substitute-variables "pdf-tools.el"
+               ("pdf-tools-handle-upgrades" '()))))
+         (add-after 'emacs-patch-variables 'emacs-expand-load-path
+           (assoc-ref emacs:%standard-phases 'expand-load-path))
+         (add-after 'emacs-expand-load-path 'emacs-add-install-to-native-load-path
+           (assoc-ref emacs:%standard-phases 'add-install-to-native-load-path))
+         (add-after 'emacs-add-install-to-native-load-path 'emacs-install
+           (assoc-ref emacs:%standard-phases 'install))
+         (add-after 'emacs-install 'emacs-build
+           (assoc-ref emacs:%standard-phases 'build))
+         (add-after 'emacs-install 'emacs-make-autoloads
+           (assoc-ref emacs:%standard-phases 'make-autoloads)))))
+    (native-inputs
+     (list autoconf automake emacs-minimal pkg-config))
+    (inputs
+     (list cairo glib libpng poppler zlib))
+    (propagated-inputs
+     (list emacs-tablist))
+    (home-page "https://github.com/vedang/pdf-tools")
+    (synopsis "Emacs support library for PDF files")
+    (description
+     "PDF Tools is, among other things, a replacement of DocView for PDF
+files.  The key difference is that pages are not pre-rendered by
+e.g. ghostscript and stored in the file-system, but rather created on-demand
+and stored in memory.")
+    (license license:gpl3+)))
+
+
 ;;
 ;; Manifest
 ;;
@@ -1644,7 +1738,8 @@ Unicode Standard Annex #29 rules.")
     "emacs-julia-vterm"
     "emacs-kind-icon" ;; Completion kind icons in Emacs 
     "emacs-langtool" ;; Emacs interface to LanguageTool
-    "emacs-lsp-julia"
+    "emacs-lsp-julia" ;; Julia support for lsp-mode
+    "emacs-lsp-latex" ;; LSP-mode client for LaTeX, on texlab
     "emacs-lsp-ltex"
     "emacs-lsp-mode"
     "emacs-lsp-julia" ;; Julia support for lsp-mode
@@ -1694,7 +1789,7 @@ Unicode Standard Annex #29 rules.")
     "emacs-pass" ;; Major mode for `password-store.el'
     "emacs-password-store" ;; Password store (pass) support for Emacs
     "emacs-password-store-otp" ;; Interact with the `pass-otp' extension for `pass' from Emacs
-    "emacs-pdf-tools" ;; Emacs support library for PDF files
+    ;; "emacs-pdf-tools" ;; Emacs support library for PDF files
     "emacs-pinentry" ;; GnuPG Pinentry server implementation
     "emacs-poly-r" ;; Polymodes for the R language
     "emacs-powerline" ;; Mode-line plugin for Emacs
@@ -1746,13 +1841,15 @@ Unicode Standard Annex #29 rules.")
     "poppler" ;; PDF rendering library
     "python-epc" ;; Remote procedure call (RPC) stack for Emacs Lisp and Python
     "python-lsp-server" ;; Python implementation of the Language Server Protocol
-    "python-lsp-server" ;; Python implementation of the Language Server Protocol  
     "python-orjson" ;; Python JSON library supporting dataclasses, datetimes, and numpy
     "python-paramiko" ;; SSHv2 protocol library
     "python-pylint" ;; Advanced Python code static checker
     "python-sexpdata" ;; S-expression parser for Python
     "python-six" ;; Python 2 and 3 compatibility utilities
     "sqls" ;; SQL language server written in Go
+    ;; "texlive-scripts" ;; TeX Live infrastructure programs 
+    ;; "texlive-luatex" ;; Extended version of pdfTeX using Lua
+    ;; "texlive-digestif" ;; Editor plugin for LaTeX, ConTeXt etc.
     "tar" ;; Managing tar archives
     "tree-sitter"
     "unzip" ;; Decompression and file extraction utility
@@ -1797,7 +1894,6 @@ Unicode Standard Annex #29 rules.")
     ;;"emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
     ;;"emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
     ;;"emacs-org-appear" ;; Make invisible parts of Org fragments appear visible
-    ;;"emacs-pdf-tools" ;; Emacs support library for PDF files
     ;;"emacs-pulseaudio-control" ;; Control Pulseaudio from Emacs
     ;;"emacs-simple-modeline" ;; Simple mode-line configuration for Emacs
     ;;"emacs-simple-mpc" ;; Simple Emacs frontend to mpc
@@ -1812,5 +1908,10 @@ Unicode Standard Annex #29 rules.")
 
 		       ;; FIXME: collide with emacs-guix through emacs-dash
 		       ;;emacs-eglot-ltex
+
+		   ;;    emacs-pdf-tools-alt ;; don't work
+		       ;;emacs-pdf-tools-alt2 ;; don't work
+		       ;;emacs-pdf-tools-alt3
+		       emacs-pdf-tools
 		       ))
   ))

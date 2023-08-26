@@ -159,12 +159,11 @@
 
 (use-package lsp-mode
   :if (equal k8x1d-lsp-module "lsp-mode")
-  ;;:init
-  ;;(setq lsp-keymap-prefix "SPC m L")
+  :init
+  (setq lsp-keymap-prefix "C-c L")
   ;;(require 'lsp-scheme)
   :hook ((ess-r-mode . lsp-deferred)
 	 (python-ts-mode . lsp-deferred)
-	 (LaTeX-mode . lsp-deferred)
 	 (org-mode . lsp-deferred)
 	 (sql-mode . lsp-deferred)
 	 (markdown-mode . lsp-deferred)
@@ -289,6 +288,11 @@
     )
 
 
+(use-package lsp-latex
+  :hook ((tex-mode . lsp-deferred)
+	 (LaTeX-mode . lsp-deferred)
+	 (yatex-mode . lsp-deferred)
+	 (bibtex-mode . lsp-deferred)))
 
   ;; Strange error:
   ;; WARNING: Unsupported code language ID 'true', treating text as plaintext
@@ -296,9 +300,9 @@
   ;; FIXME: ltex don't ignore org markup
   (use-package lsp-ltex
     :if (equal k8x1d-lsp-module "lsp-mode")
-    :hook (text-mode . (lambda ()
-			 (require 'lsp-ltex)
-			 (lsp-deferred)))  
+     :hook (text-mode . (lambda ()
+     			 (require 'lsp-ltex)
+     			 (lsp-deferred)))  
     :init
     ;;(setq lsp-ltex-version "15.2.0")
     (setq lsp-ltex-version "16.0.0")

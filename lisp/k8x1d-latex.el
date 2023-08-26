@@ -20,8 +20,6 @@
    "i" '(:ignore t :which-key "Insert")
    "ie" '(LaTeX-environment :which-key "Environment")
     )
-  :hook ((LaTeX-mode . visual-line-mode)
-	 )
   :bind
   (:map LaTeX-mode-map
 	(("C-<return>" . k8x1d/insert-latex-item-below)
@@ -33,6 +31,7 @@
 
   (setq LaTeX-indent-level 4)
   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))))
+  ;; (setq TeX-view-program-selection '((output-pdf "Zathura"))))
 
 (use-package reftex
   :hook
@@ -87,6 +86,9 @@
    )
   :hook
    (LaTeX-mode . LaTeX-math-mode)
+   (LaTeX-mode . corfu-mode)
+   (LaTeX-mode . visual-line-mode)
+   (LaTeX-mode . display-line-numbers-mode)
   ;;(add-hook 'LaTeX-mode-hook 'eglot-ensure)
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
