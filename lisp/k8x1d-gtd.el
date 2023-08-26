@@ -102,9 +102,29 @@
 ;; New version
 ;;
 
+(use-package org
+  :config
+  (setq org-todo-keywords
+	'((sequence
+	   "TODO(t)"  ; Task (not ready yet, not blocked
+	   "NEXT(n)"  ; Task ready to be done
+	   "WAIT(w)"  ; Task blocked or delegated
+	   "|"
+	   "DONE(d)"  ; Task successfully completed
+	   "CNCL(c)"  ; Task cancelled
+	  )))
+  )
+
+
 (use-package org-gtd
   :init
   (setq org-gtd-update-ack "3.0.0")
+  ;; Temporary fix for 
+  (defun k8x1d/org-gtd-engage ()
+    (interactive)
+    (require 'org-gtd)
+    (org-gtd-engage)
+    )
   :custom
   (org-gtd-directory (concat org-directory "/gtd"))
   :hook ((org-mode . (lambda ()
@@ -114,12 +134,12 @@
   :config
   (setq org-edna-use-inheritance t)
   (setq org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
-  (setq org-gtd-areas-of-focus '("Personnel" "Santé" "Famille" "Emploi" "Recherche" "Développement"))
+  (setq org-gtd-areas-of-focus '("Personnel" "Santé" "Famille" "Emploi" "Recherche" "Développement" "Implication" "Social"))
   :general
   (k8x1d/leader-keys
     "d" '(:ignore t :which-key "GTD")
     "d c" '(org-gtd-capture :which-key "Capture")
-    "d e" '(org-gtd-engage :which-key "Engage")
+    "d e" '(k8x1d/org-gtd-engage :which-key "Engage")
     "d p" '(org-gtd-process-inbox :which-key "Process Inbox")
     "d a" '(org-gtd-archive-completed-items :which-key "Archive completed items")
     )
