@@ -1,4 +1,10 @@
+;;; package --- Summary
 
+
+
+;;; Commentary:
+
+;;; Code:
 
 ;;(use-package julia-mode
 ;;  :defer t)
@@ -50,3 +56,4 @@
 
 
 (provide 'k8x1d-julia)
+;;; k8x1d-julia.el ends here
