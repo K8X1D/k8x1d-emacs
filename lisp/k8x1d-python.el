@@ -30,10 +30,12 @@
   )
 
 (use-package python-ts-mode
+  :straight nil
   :config
   (setq python-indent-offset 4))
 
 (use-package python-vterm
+  :straight nil
   :load-path "~/.k8x1d-emacs.d/lisp/python-vterm.el"
   :init
   (defun k8x1d/open-python-repl-at-bottom ()

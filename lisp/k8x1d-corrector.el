@@ -4,7 +4,7 @@
 
 ;; Replaced by ltex
 ;; (use-package langtool
-;;   :bind 
+;;   :bind
 ;;   (("C-c h w" . 'langtool-check)
 ;;    ("C-c h W" . 'langtool-check-done)
 ;;    ("C-c h l" . 'langtool-switch-default-language)
@@ -56,5 +56,8 @@
    ("C-c e r" . writegood-reading-ease))
   :hook (text-mode . writegood-mode))
 
+(use-package format-all
+  :hook ((prog-mode . format-all-ensure-formatter)
+	 (prog-mode . format-all-mode)))
 
 (provide 'k8x1d-corrector)

@@ -5,6 +5,7 @@
 
 ;; General configurations
 (use-package dired
+  :straight nil
   :general
   (k8x1d/leader-keys
     "od" '(dired-jump :which-key "Directory")

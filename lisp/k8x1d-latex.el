@@ -8,6 +8,7 @@
 
 
 (use-package latex
+  :straight nil
   :init
   ;; TODO: fuse function
   (defun k8x1d/insert-latex-item-below ()
@@ -25,9 +26,9 @@
   :general
   (k8x1d/local-leader-keys
     :keymaps 'LaTeX-mode-map
-   "m" '(TeX-command-master :which-key "Command Master")
-   "i" '(:ignore t :which-key "Insert")
-   "ie" '(LaTeX-environment :which-key "Environment")
+    "m" '(TeX-command-master :which-key "Command Master")
+    "i" '(:ignore t :which-key "Insert")
+    "ie" '(LaTeX-environment :which-key "Environment")
     )
   :bind
   (:map LaTeX-mode-map
@@ -37,10 +38,13 @@
   :config
   (require 'bind-key)
   (unbind-key "C-<return>" LaTeX-mode-map)
-
   (setq LaTeX-indent-level 4)
-  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))))
-  ;; (setq TeX-view-program-selection '((output-pdf "Zathura"))))
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+  (setq TeX-tree-roots '(".git" ".dir-locals.el" ".auctex-auto"))
+  )
+
+
+;; (setq TeX-view-program-selection '((output-pdf "Zathura"))))
 
 (use-package reftex
   :hook
@@ -54,11 +58,11 @@
 (use-package org-edit-latex
   :hook (org . org-edit-latex-mode)
   :config
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((latex . t))))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((latex . t))))
 
-(use-package evil-tex 
+(use-package evil-tex
   :after evil
   :hook (LaTeX-mode . evil-tex-mode)
   :config
@@ -94,10 +98,10 @@
    `(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold :height 0.8))))
    )
   :hook
-   (LaTeX-mode . LaTeX-math-mode)
-   (LaTeX-mode . corfu-mode)
-   (LaTeX-mode . visual-line-mode)
-   (LaTeX-mode . display-line-numbers-mode)
+  (LaTeX-mode . LaTeX-math-mode)
+  (LaTeX-mode . corfu-mode)
+  (LaTeX-mode . visual-line-mode)
+  (LaTeX-mode . display-line-numbers-mode)
   ;;(add-hook 'LaTeX-mode-hook 'eglot-ensure)
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
@@ -118,6 +122,6 @@
 
 
 
- 	
+
 (provide 'k8x1d-latex)
 ;;; k8x1d-latex.el ends here

@@ -1,5 +1,5 @@
 (use-package tab-bar
-  :after project
+  :hook (emacs-startup . tab-bar-mode)
   :config
   (setq tab-bar-show nil)
   (setq tab-bar-new-tab-choice "*scratch*")
@@ -8,24 +8,55 @@
   )
 
 (use-package tabspaces
+  :init
+  ;; Included Buffers
+  (defun k8x1d/tabspace-setup ()
+    "Set up tabspace at startup."
+    ;; Add *Messages* and *startup* to Tab \`Home\'
+    (tabspaces-mode 1)
+    (progn
+      (tab-bar-rename-tab "Home")
+      (when (get-buffer "*Messages*")
+	(set-frame-parameter nil
+			     'buffer-list
+			     (cons (get-buffer "*Messages*")
+				   (frame-parameter nil 'buffer-list))))
+      (when (get-buffer "*startup*")
+	(set-frame-parameter nil
+			     'buffer-list
+			     (cons (get-buffer "*startup*")
+				   (frame-parameter nil 'buffer-list))))))
   :general
   (k8x1d/leader-keys
-   "TAB" '(:keymap tabspaces-command-map
-		  :which-key "Workspaces")
+    "TAB" '(:keymap tabspaces-command-map
+		    :which-key "Workspaces")
     )
-  :hook (after-init . tabspaces-mode) 
-  :commands (tabspaces-switch-or-create-workspace
-             tabspaces-open-or-create-project-and-workspace)
-  ;;:bind (:map project-prefix-map
-  ;;       ("p" . tabspaces-open-or-create-project-and-workspace))
-  :custom
-  (tabspaces-use-filtered-buffers-as-default t)
-  (tabspaces-default-tab "Default")
-  (tabspaces-remove-to-default t)
-  (tabspaces-include-buffers '("*scratch*"))
-  ;;;; sessions
-  ;;(tabspaces-session t)
-  ;;(tabspaces-session-auto-restore t)
+  :hook ((after-init . tabspaces-mode)
+	 (after-init . k8x1d/tabspace-setup))
+  :config
+  (setq tabspaces-use-filtered-buffers-as-default t)
+  (setq tabspaces-default-tab "Default")
+  (setq tabspaces-remove-to-default t)
+  (setq tabspaces-include-buffers '("*scratch*"))
+  ;; Filter Buffers for Consult-Buffer
+  (with-eval-after-load 'consult
+    ;; hide full buffer list (still available with "b" prefix)
+    (consult-customize consult--source-buffer :hidden t :default nil)
+    ;; set consult-workspace buffer list
+    (defvar consult--source-workspace
+      (list :name     "Workspace Buffers"
+	    :narrow   ?w
+	    :history  'buffer-name-history
+	    :category 'buffer
+	    :state    #'consult--buffer-state
+	    :default  t
+	    :items    (lambda () (consult--buffer-query
+				  :predicate #'tabspaces--local-buffer-p
+				  :sort 'visibility
+				  :as #'buffer-name)))
+
+      "Set workspace buffer list for consult-buffer.")
+    (add-to-list 'consult-buffer-sources 'consult--source-workspace))
   )
 
 (use-package tab-bar-echo-area

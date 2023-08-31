@@ -1,21 +1,28 @@
+;;; package --- Summary
+
+
+
+;;; Commentary:
+
+;;; Code:
+
+
 ;;;; Treesitter support
 ;; Not complete enough...
 ;;(use-package r-ts-mode
 ;;  :mode "\\.R$")
 
-(use-package ess
-  :defer t
-  )
+(use-package ess)
 
 ;; TODO: update package
 ;; TODO: rewrite package for auto-update
 ;; TODO: move package to project on gitlab
 (use-package R-vterm
-  :defer t
-  ;;:straight (:type git :host gitlab :repo "K8X1D/r-vterm") ;; integrated trought guix
+  ;; :straight nil
+  :straight (:type git :host gitlab :repo "K8X1D/r-vterm") ;; integrated trought guix
   :init
   (defun k8x1d/open-R-repl-at-bottom ()
-     (interactive)
+    (interactive)
     (evil-window-split)
     (evil-window-down 1)
     (evil-window-set-height 17)
@@ -46,7 +53,7 @@
     "f" '(R-vterm-send-include-buffer-file :which-key "Send file")
     "r" '(R-vterm-send-region-or-current-line :which-key "Send region")
     )
-  :bind 
+  :bind
   (("C-c o r r" . R-vterm-repl)
    :map R-vterm-mode-map
    ("C-c i" . R-vterm-send-include-buffer-file))
@@ -59,3 +66,4 @@
   )
 
 (provide 'k8x1d-R)
+;;; k8x1d-R.el ends here

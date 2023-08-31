@@ -1,4 +1,8 @@
-;; -*- lexical-binding: t; -*-
+;;; package --- Summary
+
+;;; Commentary:
+
+;;; Code:
 
 (use-package emacs
   :hook (
@@ -20,6 +24,10 @@
 	browse-url-generic-program "firefox")
   ;; native compil log level
   (setq warning-minimum-level :error)
+
+  ;; Scrolling
+  ;;(setq scroll-step 1)
+  (setq scroll-conservatively 10000)
   )
 
 (use-package which-key
@@ -28,6 +36,8 @@
 
 ;; Per buffer exposition
 (use-package solaire-mode
-  :hook (after-init . solaire-global-mode))
+  :hook (after-init . solaire-global-mode)
+  )
 
 (provide 'k8x1d-ui)
+;;; k8x1d-ui.el ends here

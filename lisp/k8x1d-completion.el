@@ -87,9 +87,9 @@
   :if (equal (equal k8x1d-lsp-module "lsp-bridge") nil)
   :hook ((prog-mode . corfu-mode)
           (shell-mode . corfu-mode)
-          (eshell-mode . corfu-mode)
-	  (corfu-mode . corfu-history-mode)
-	  (corfu-mode . corfu-popupinfo-mode))
+          (eshell-mode . corfu-mode))
+	  ;;(corfu-mode . corfu-history-mode)
+	  ;;(corfu-mode . corfu-popupinfo-mode)
   :config
   ;; TAB cycle if there are only few candidates
   (setq completion-cycle-threshold 3)
@@ -99,9 +99,9 @@
   (setq corfu-auto t
 	corfu-auto-delay 0
 	corfu-auto-prefix 0)
-  (setq corfu-popupinfo-hide nil
-	corfu-popupinfo-direction '(force-right)
-	corfu-popupinfo-delay  nil)
+  ;; (setq corfu-popupinfo-hide nil
+	;; corfu-popupinfo-direction '(force-right)
+	;; corfu-popupinfo-delay  nil)
   (setq corfu-preview-current t)    
   (setq corfu-separator ?\s)          ;; Orderless field separator
   )

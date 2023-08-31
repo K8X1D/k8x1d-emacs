@@ -97,7 +97,7 @@ Containing LEFT, and RIGHT aligned respectively."
 	      right)))
   :config
   (setq-default
-  ;; (setq
+   ;; (setq
    mode-line-format
    '((:eval
       (simple-mode-line-render
@@ -109,7 +109,7 @@ Containing LEFT, and RIGHT aligned respectively."
 	       (vc-mode vc-mode)
 	       " [%l:%c]"
 	       ))
-	       ;;
+       ;;
        ;; Right.
        (quote (
 	       " "
@@ -120,11 +120,9 @@ Containing LEFT, and RIGHT aligned respectively."
   )
 
 (use-package minions-mode
-  :hook (after-init . minions-mode)
-  ;; :hook (doom-modeline-mode . minions-mode)
-  ;; :hook (telephone-line-mode . minions-mode)
+  :straight (:host github :repo "tarsius/minions")
+  :hook (doom-modeline-mode . minions-mode)
   :init
-  ;;(setq minions-mode-line-lighter "minor-modes")
   (setq minions-mode-line-lighter "...")
   )
 

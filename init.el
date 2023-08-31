@@ -1,4 +1,8 @@
-;; -*- lexical-binding: t; -*-
+ ;;; package --- Summary
+
+ ;;; Commentary:
+
+ ;;; Code:
 
 ;;
 ;; Utilities
@@ -74,7 +78,7 @@
 
 ;; cleanup and reset after startup
 (add-hook 'emacs-startup-hook
-    (lambda () (setq gc-cons-threshold 16777216 gc-cons-percentage 0.1)))
+	  (lambda () (setq gc-cons-threshold 16777216 gc-cons-percentage 0.1)))
 
 (setq gc-cons-threshold (* 2 1000 1000))
 

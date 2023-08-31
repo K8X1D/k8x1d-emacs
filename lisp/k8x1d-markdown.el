@@ -2,6 +2,7 @@
 
 
 (use-package markdown
+  :straight nil
   :general
   (k8x1d/local-leader-keys
     :keymaps 'markdown-mode-map

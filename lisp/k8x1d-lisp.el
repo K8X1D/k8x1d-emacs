@@ -2,6 +2,7 @@
 
 
 (use-package lisp-mode
+  :straight nil
   :config
   ;; Clean binding
   ;;(define-key lisp-mode-map (kbd "C-c <tab>") nil)
@@ -11,7 +12,7 @@
   )
 
 (use-package geiser-mode
-  :defer t
+  :straight nil
   :general
   (k8x1d/local-leader-keys
     :keymaps 'geiser-mode-map

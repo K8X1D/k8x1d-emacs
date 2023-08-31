@@ -10,24 +10,24 @@
 (use-package org
   :general
   (k8x1d/leader-keys
-   "oa" '(org-agenda :which-key "Agenda")
-   "fc" '(org-clock-goto :which-key "Clock")
-   )
+    "oa" '(org-agenda :which-key "Agenda")
+    "fc" '(org-clock-goto :which-key "Clock")
+    )
   (k8x1d/local-leader-keys
     :keymaps 'org-mode-map
     "p" '(org-priority :which-key "Priority")
     "it" '(org-insert-structure-template :which-key "Template")
     "il" '(org-insert-link :which-key "Link")
     "f" '(org-footnote-action :which-key "Footnotes")
-     "t" '(org-todo :which-key "Todos")
-     "c" '(:ignore t :which-key "Clock")
-     "ci" '(org-clock-in :which-key "In")
-     "co" '(org-clock-out :which-key "Out")
-     "d" '(:ignore t :which-key "Date")
-     "dd" '(org-deadline :which-key "Deadline")
-     "ds" '(org-schedule :which-key "Scheduled")
-     "d." '(org-time-stamp :which-key "Timestamp")
-     )
+    "t" '(org-todo :which-key "Todos")
+    "c" '(:ignore t :which-key "Clock")
+    "ci" '(org-clock-in :which-key "In")
+    "co" '(org-clock-out :which-key "Out")
+    "d" '(:ignore t :which-key "Date")
+    "dd" '(org-deadline :which-key "Deadline")
+    "ds" '(org-schedule :which-key "Scheduled")
+    "d." '(org-time-stamp :which-key "Timestamp")
+    )
   :bind
   (("C-c l" . org-store-link)
    :map org-mode-map
@@ -169,7 +169,7 @@
    org-agenda-span 10
    org-agenda-start-on-weekday nil
    org-agenda-start-day "-3d")
-  ;; Optimize startup 
+  ;; Optimize startup
   (setq org-agenda-inhibit-startup t)
 
   ;; Babel
@@ -191,9 +191,10 @@
   )
 
 (use-package org-agenda
+  :straight nil
   :bind
   (:map org-agenda-mode-map
-   ("C-SPC" . org-agenda-show-and-scroll-up)))
+	("C-SPC" . org-agenda-show-and-scroll-up)))
 
 
 (use-package org-modern
@@ -261,7 +262,7 @@
 
 
 ;; ;; Have some glitches difficult to adjust, quite heavy also
-;; ;; Prettify tags 
+;; ;; Prettify tags
 ;; (use-package svg-tag-mode
 ;;   :init
 ;;   ;; Set faces
@@ -373,7 +374,7 @@
   )
 
 ;; Inspirations:
-;; - https://github.com/japhir/ArchConfigs/blob/master/myinit.org#play-bell-sound-when-task-is-marked-as-done 
+;; - https://github.com/japhir/ArchConfigs/blob/master/myinit.org#play-bell-sound-when-task-is-marked-as-done
 ;; Clumsy, try native org function
 (use-package org-pomodoro
   :after org
@@ -406,25 +407,25 @@
   (defun k8x1d/org-pomodoro-custom-time (min)
     "Set pomodoro with custom time pomodoro-time"
     (interactive "nSet pomodoro (total) length (in min): ")
-        (progn
-	  ;; keep original values
-	  (setq org-pomodoro-length-initial-value org-pomodoro-length)
-	  (setq org-pomodoro-short-break-length-initial-value org-pomodoro-short-break-length)
-	  (setq org-pomodoro-long-break-initial-value org-pomodoro-long-break-length)
-	  ;; Set new values
-	  ;;(setq org-pomodoro-length (floor (* min 0.9)))
-	  ;;(setq org-pomodoro-short-break-length (ceiling (* min 0.1)))
-	  ;;(setq org-pomodoro-long-break-length (floor (* min 0.5)))
-	  (setq org-pomodoro-short-break-length (/ min (/ org-pomodoro-length-initial-value org-pomodoro-short-break-length-initial-value)))
-	  (setq org-pomodoro-length (- (* org-pomodoro-short-break-length (/ org-pomodoro-length-initial-value org-pomodoro-short-break-length-initial-value)) org-pomodoro-short-break-length))
-	  (setq org-pomodoro-long-break-length (/ org-pomodoro-length 2))
-	  ;; Start pomodoro
-          (org-pomodoro)
-	  ;; Set back original values
-	  (setq org-pomodoro-length org-pomodoro-length-initial-value)
-	  (setq org-pomodoro-short-break-length org-pomodoro-short-break-length-initial-value)
-	  (setq org-pomodoro-long-break-length org-pomodoro-long-break-initial-value)
-	  ))
+    (progn
+      ;; keep original values
+      (setq org-pomodoro-length-initial-value org-pomodoro-length)
+      (setq org-pomodoro-short-break-length-initial-value org-pomodoro-short-break-length)
+      (setq org-pomodoro-long-break-initial-value org-pomodoro-long-break-length)
+      ;; Set new values
+      ;;(setq org-pomodoro-length (floor (* min 0.9)))
+      ;;(setq org-pomodoro-short-break-length (ceiling (* min 0.1)))
+      ;;(setq org-pomodoro-long-break-length (floor (* min 0.5)))
+      (setq org-pomodoro-short-break-length (/ min (/ org-pomodoro-length-initial-value org-pomodoro-short-break-length-initial-value)))
+      (setq org-pomodoro-length (- (* org-pomodoro-short-break-length (/ org-pomodoro-length-initial-value org-pomodoro-short-break-length-initial-value)) org-pomodoro-short-break-length))
+      (setq org-pomodoro-long-break-length (/ org-pomodoro-length 2))
+      ;; Start pomodoro
+      (org-pomodoro)
+      ;; Set back original values
+      (setq org-pomodoro-length org-pomodoro-length-initial-value)
+      (setq org-pomodoro-short-break-length org-pomodoro-short-break-length-initial-value)
+      (setq org-pomodoro-long-break-length org-pomodoro-long-break-initial-value)
+      ))
   )
 
 ;; (use-package org-pdftools

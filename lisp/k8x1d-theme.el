@@ -17,16 +17,18 @@
    (defvar k8x1d/actual-theme k8x1d/doom-dark-theme)
 
    (defun k8x1d/adjust-theme ()
-     (if (equal k8x1d/actual-theme k8x1d/doom-dark-theme) 
+     (if (equal k8x1d/actual-theme k8x1d/doom-dark-theme)
 	 (custom-set-faces
-	  ;;`(hl-line ((t (:background "#28003d"))))
 	  `(hl-line ((t (:background "#28003d"))))
+	  `(tab-bar-echo-area-tab ((t (:background ,(doom-color 'magenta) :foreground ,(doom-color 'base0)))))
+	  `(tab-bar-echo-area-tab-inactive ((t (:foreground ,(doom-color 'magenta)))))
+	  ;; `(tab-bar-echo-area-tab-ungrouped ((t (:foreground ,(doom-color 'base0)))))
+	  `(solaire-default-face ((t (:background ,(doom-color 'base0)))))
 	  `(org-block ((t (:background "#28003d"))))
 	  `(org-inline-src-block ((t (:background "#28003d"))))
 	  `(org-block-begin-line ((t (:background "#28003d"))))
 	  `(org-block-end-line ((t (:background "#28003d")))))
        (custom-set-faces
-	;;`(hl-line ((t (:background "#28003d"))))
 	`(hl-line ((t (:background ,(doom-color 'region)))))
 	`(org-block ((t (:background ,(doom-color 'base1)))))
 	`(org-inline-src-block ((t (:background ,(doom-color 'base1)))))

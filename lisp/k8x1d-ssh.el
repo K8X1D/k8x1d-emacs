@@ -33,6 +33,7 @@
 
 
 (use-package tramp
+  :straight nil
   :config
   (setq org-display-remote-inline-images 'cache))
 

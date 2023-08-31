@@ -150,6 +150,16 @@
   :if (equal k8x1d-lsp-module "lsp-mode")
   :hook (after-init . global-flycheck-mode))
 
+(use-package sideline
+  :hook (flycheck-mode . sideline-mode)
+  :init
+  (setq sideline-backends-right '(sideline-flycheck sideline-lsp)))
+
+(use-package sideline-lsp
+  :hook (lsp-mode . sideline-mode))
+
+(use-package sideline-flycheck
+  :hook (flycheck-mode . sideline-flycheck-setup))
 
 (use-package consult-flycheck)
 
@@ -214,6 +224,11 @@
 ;; FIXME: lsp-ui-sideline doesn't work with flymake (need flycheck), evaluate...
 (use-package lsp-ui
   :if (equal k8x1d-lsp-module "lsp-mode")
+  :init
+  ;; Sideline
+  ;; Cause some problems, see https://github.com/emacs-lsp/lsp-ui/issues/746, disbling for now
+  ;; Replaced by sideline
+  (setq lsp-ui-sideline-enable nil)
   :commands lsp-ui-mode
   :config
   ;; Peek feature
@@ -221,9 +236,6 @@
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 
-  ;; Sideline
-  ;; Cause some problems, see https://github.com/emacs-lsp/lsp-ui/issues/746, disbling for now
-  (setq lsp-ui-sideline-enable nil)
   ;; (setq lsp-ui-sideline-show-hover t)
   ;; (setq lsp-ui-sideline-show-diagnostics t)
   ;; (setq lsp-ui-sideline-show-symbol t)
@@ -237,55 +249,7 @@
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 
-(use-package lsp-julia
-  :load-path "~/.k8x1d-emacs.d/lsp-julia" ;; guix version is read-only...
-  :if (equal k8x1d-lsp-module "lsp-mode")
-  :hook ((julia-ts-mode . (lambda ()
-			    (require 'lsp-julia)
-			    (lsp-deferred)))
-	 (julia-mode . (lambda ()
-			 (require 'lsp-julia)
-			 (lsp-deferred)))
-	 )
-  :config
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.8")
-  ;;(setq lsp-julia-package-dir nil)
-  (setq lsp-julia-command "julia")
-  (add-to-list 'lsp-language-id-configuration
-	       '(julia-ts-mode . "julia"))
 
-  ;;  ;; AOT config
-  ;; (setq lsp-julia-package-dir nil)
-  ;; (setq lsp-julia-flags `("-J/home/k8x1d/.cache/emacs/languageserver.so"))
-
-  ;; Add support over TRAMP
-  ;; Adapted from https://github.com/gdkrmr/lsp-julia/issues/49
-  ;; Don't work for now, but is a step in the right direction
-  (defun lsp-julia--rls-command-remote ()
-    "The command to lauch the Julia Language Server."
-    `(,lsp-julia-command
-      ,@lsp-julia-flags
-      ,(concat "-e "
-               "'"
-               "import Pkg; Pkg.instantiate(); "
-               "using InteractiveUtils, Sockets, SymbolServer, LanguageServer; "
-               "Union{Int64, String}(x::String) = x; "
-               "server = LanguageServer.LanguageServerInstance("
-               "stdin, stdout, "
-               (lsp-julia--get-root-remote) ", "
-               (lsp-julia--get-depot-path) ", "
-               "nothing, "
-               (lsp-julia--symbol-server-store-path-to-jl-no-expand) "); "
-               "run(server);"
-               "'")))
-
-  (lsp-register-client
-    (make-lsp-client :new-connection (lsp-tramp-connection 'lsp-julia--rls-command-remote)
-                     :major-modes '(julia-ts-mode julia-mode)
-                     :server-id 'julia-ls-remote
-                     :remote? t))
-
-    )
 
 
 (use-package lsp-latex
