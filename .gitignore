@@ -10,13 +10,11 @@ org-roam.db
 projects
 recentf
 .cache
-emms
 straight
 tabsession.el
 tree-sitter
 k8x1d
 .org-id-locations
-ltex-ls-16.0.0
 network-security.data
 tramp
 viper
@@ -28,3 +26,4 @@ lsp-julia
 eshell
 custom.el
 .lsp-session-v1
+.dap-breakpoints
