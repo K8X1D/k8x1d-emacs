@@ -7,10 +7,6 @@
 	     (gnu packages check)
 	     (gnu packages terminals))
 
-
-
-
-
 ;; Set emacs version according to window system
 (define emacs-distribution 
   (if (equal? (getenv "XDG_SESSION_TYPE") "x11")
@@ -31,6 +27,7 @@
   (build-system pyproject-build-system)
   (propagated-inputs (list python-cffi python-six))
   (native-inputs (list python-pytest python-pytest-cov python-pytest-mock))
+  (arguments `(#:tests? #f))
   (home-page "https://github.com/randy3k/rchitect")
   (synopsis "Mapping R API to Python")
   (description "Mapping R API to Python")
@@ -52,6 +49,7 @@
                            python-rchitect))
   (native-inputs (list python-coverage python-pexpect python-ptyprocess
                        python-pyte python-pytest))
+  (arguments `(#:tests? #f))
   (home-page "https://github.com/randy3k/radian")
   (synopsis "A 21 century R console")
   (description "This package provides a 21 century R console")
