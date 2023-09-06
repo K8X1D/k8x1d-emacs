@@ -46,7 +46,7 @@
   (setq org-pretty-entities-include-sub-superscripts nil) ;; prettify don't work well with citar
   (setq org-fontify-quote-and-verse-blocks t)
 
-  (setq org-cite-global-bibliography '("~/Zotero/k8x1d.bib"))
+  (setq org-cite-global-bibliography k8x1d-default-bibliography)
   (setq org-image-actual-width nil)
 
   ;; TODO: repair problem adding bullet for DONE

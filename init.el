@@ -17,7 +17,7 @@
 (setq week-aims-path "~/org/objectifs_hebdomadaires.txt")
 (setq user-full-name "Kevin Kaiser"
       user-mail-address "k8x1d@proton.me")
-
+(setq k8x1d-default-bibliography '("~/Zotero/k8x1d.bib"))
 ;;
 ;; Module to load
 ;;

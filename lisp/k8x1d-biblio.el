@@ -15,16 +15,16 @@
 	 ("C-c b o f" . citar-open)
 	 ("C-c b o n" . citar-open-note)
 	 (:map minibuffer-local-map
-	 ("M-b" . citar-insert-preset))
+	       ("M-b" . citar-insert-preset))
 	 (:map org-mode-map
-	 ("C-c b" . org-cite-insert))
+	       ("C-c b" . org-cite-insert))
 	 )
   :config
   ;; Org cite configuration to use citar
   (setq org-cite-insert-processor 'citar)
   (setq org-cite-follow-processor 'citar)
   (setq org-cite-activate-processor 'citar)
-  (setq citar-bibliography org-cite-global-bibliography)
+  (setq citar-bibliography k8x1d-default-bibliography)
   (setq citar-at-point-function 'embark-act)
   ;; Icons support
   (setq citar-symbols

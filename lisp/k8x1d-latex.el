@@ -53,6 +53,8 @@
   :config
   (setq reftex-toc-split-windows-horizontally t)
   (setq reftex-toc-max-level 3)
+  (setq reftex-plug-into-AUCTeX t)
+  (setq reftex-default-bibliography k8x1d-default-bibliography)
   (setq reftex-toc-split-windows-fraction 0.2))
 
 (use-package org-edit-latex
