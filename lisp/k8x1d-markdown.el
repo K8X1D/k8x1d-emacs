@@ -1,3 +1,10 @@
+;;; package --- Summary
+
+
+
+;;; Commentary:
+
+;;; Code:
 
 
 
@@ -22,6 +29,13 @@
     "ih4" '(markdown-insert-header-atx-4 :which-key "Header")
     "ih5" '(markdown-insert-header-atx-5 :which-key "Header")
     "ih6" '(markdown-insert-header-atx-6 :which-key "Header")
+    :config
+    (setq markdown-command "pandoc")
     ))
 
+;; Broken
+;; (use-package markdown-preview-mode
+;; :hook (markdown-mode . markdown-preview-mode))
+
 (provide 'k8x1d-markdown)
+;;; k8x1d-markdown.el ends here

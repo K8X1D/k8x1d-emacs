@@ -59,6 +59,16 @@
   :hook ((julia-mode . julia-formatter-mode)
 	 (julia-ts-mode . julia-formatter-mode)))
 
+;; Babel support
+(use-package ob-julia-vterm
+  :init
+  (with-eval-after-load 'org
+    (add-to-list 'org-babel-load-languages '(julia-vterm . t))
+    (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+    (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
+    (defalias 'org-babel-variable-assignments:julia 'org-babel-variable-assignments:julia-vterm))
+  )
+
 ;;(use-package flycheck-julia
 ;;  :if (equal k8x1d-lsp-module "lsp-mode")
 ;;  :hook (julia-mode . flycheck-julia-setup))
@@ -75,7 +85,6 @@
 
 
 (use-package lsp-julia
-  :ensure t
   ;;:load-path "~/.k8x1d-emacs.d/manual/lsp-julia" ;; guix version is read-only...
   :if (equal k8x1d-lsp-module "lsp-mode")
   :hook ((julia-ts-mode . (lambda ()

@@ -9,10 +9,10 @@
 
 ;; Set emacs version according to window system
 (define emacs-distribution 
-  (if (equal? (getenv "XDG_SESSION_TYPE") "x11")
+  (if (equal? (getenv "XDG_SESSION_TYPE") "wayland")
+      "emacs-next-pgtk" ;; Emacs text editor with `pgtk' and `tree-sitter' support
       "emacs-next-tree-sitter" ;; Emacs text editor `tree-sitter' support
-      "emacs-next-pgtk") ;; Emacs text editor with `pgtk' and `tree-sitter' support
-  )
+  ))
 
 (define-public python-rchitect
 (package
@@ -98,6 +98,7 @@
     "mpv" ;; Audio and video player
     "mpv-mpris" ;; MPRIS plugin for mpv
     "nss-certs" ;; CA certificates from Mozilla
+    "pandoc" ;; Conversion between markup formats
     "openjdk" ;; Java development kit
     "pinentry-emacs" ;; GnuPG's interface to passphrase input
     "pkg-config"
@@ -110,6 +111,8 @@
     "python-pylint" ;; Advanced Python code static checker
     "python-sexpdata" ;; S-expression parser for Python
     "python-six" ;; Python 2 and 3 compatibility utilities
+    "cmake" ;; Cross-platform build system
+    "libvterm" ;; VT220/xterm/ECMA-48 terminal emulator library
     "r" ;; Environment for statistical computing and graphics
     "r-languageserver" ;; Language Server for R
     "r-styler" ;; Non-invasive pretty printing of R code
@@ -120,6 +123,9 @@
     "tree-sitter"
     "unzip" ;; Decompression and file extraction utility
     "zip" 
+    "markdown" ;; Text-to-HTML conversion tool
+    "texlive-bin" ;; TeX Live, a package of the TeX typesetting system
+    "texlive-dvipng" ;; DVI to PNG/GIF converter 
     ))
   (packages->manifest (list
 		       python-radian

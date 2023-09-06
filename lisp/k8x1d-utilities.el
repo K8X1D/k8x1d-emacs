@@ -16,7 +16,7 @@
     (if (and (eq window-system 'pgtk) (>= emacs-major-version 29))
 	(set-frame-parameter (selected-frame) 'alpha-background value)
       (set-frame-parameter (selected-frame) 'alpha value)))
-  ;; Define time-mesurement require function 
+  ;; Define time-mesurement require function
   (require 'benchmark)
   (defun timed-require (feat)
     (if (featurep feat)
@@ -25,7 +25,6 @@
 	       (benchmark-elapse (load-library (symbol-name feat))))))
 
   )
-
 
 ;; Prefer system wide notification manager
 ;;;; Notification management
@@ -41,13 +40,10 @@
 ;;		     (push app-name hide)
 ;;		     (ednc-format-notification notification))))
 ;;	       (ednc-notifications) ""))
-;;  (nconc global-mode-string '((:eval (stack-notifications))))  ; or list 
+;;  (nconc global-mode-string '((:eval (stack-notifications))))  ; or list
 ;;  (add-hook 'ednc-notification-presentation-functions
 ;;  	    (lambda (&rest _) (force-mode-line-update t)))
 ;;  )
 
 
 (provide 'k8x1d-utilities)
-
-
-

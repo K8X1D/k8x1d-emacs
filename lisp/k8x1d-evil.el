@@ -16,7 +16,7 @@
   ;;   "wL" '(evil-window-move-far-right :which-key "Move Right")
   ;;   )
   (k8x1d/leader-keys
-   "w" '(:keymap evil-window-map
+    "w" '(:keymap evil-window-map
 		  :which-key "Window"))
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
@@ -28,7 +28,7 @@
   (setq evil-insert-state-tag "INSERT")
   (setq evil-visual-state-tag "VISUAL")
   (setq evil-emacs-state-tag "EMACS")
-  (setq evil-operator-state-tag "OPERATOR") 
+  (setq evil-operator-state-tag "OPERATOR")
   (setq evil-replace-state-tag "REPLACE")
   (setq evil-echo-state nil))
 
@@ -52,5 +52,10 @@
   (require 'evil-org-agenda)
   (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
   (evil-org-agenda-set-keys))
+
+(use-package evil-markdown-mode
+  :straight (:host github :repo "Somelauw/evil-markdown")
+  :hook (markdown-mode . evil-markdown-mode))
+
 
 (provide 'k8x1d-evil)

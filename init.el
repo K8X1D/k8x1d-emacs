@@ -15,6 +15,8 @@
 (setq k8x1d-lsp-module "lsp-mode")
 (setq k8x1d-consult-integration t)
 (setq week-aims-path "~/org/objectifs_hebdomadaires.txt")
+(setq user-full-name "Kevin Kaiser"
+      user-mail-address "k8x1d@proton.me")
 
 ;;
 ;; Module to load
@@ -64,6 +66,7 @@
 (timed-require 'k8x1d-docker)
 ;; (timed-require 'k8x1d-repl)
 (timed-require 'k8x1d-ssh)
+(timed-require 'k8x1d-template)
 
 ;; Other
 (timed-require 'k8x1d-terminal)

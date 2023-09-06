@@ -29,17 +29,25 @@
   ;; Main typeface
   (set-face-attribute 'default nil
 		      :font "Iosevka Term"
-		      :height 120)
+		      ;; :font "DejaVu Sans Mono"
+		      :height 120
+		      )
   ;; Set the fixed pitch face
   (set-face-attribute 'fixed-pitch nil
 		      :font "Iosevka Term"
 		      :weight 'light
-		      :height 1.0)
+		      ;; :font "DejaVu Sans Mono"
+		      ;; :weight 'normal
+		      :height 1.0
+		      )
   ;; Set the variable pitch face
   (set-face-attribute 'variable-pitch nil
 		      :font "Iosevka Aile"
+		      :weight 'light
+		      ;; :font "DejaVu Sans"
+		      ;; :weight 'normal
 		      :height 1.0
-		      :weight 'light)
+		      )
   )
 
 (use-package mixed-pitch

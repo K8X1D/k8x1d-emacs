@@ -189,8 +189,8 @@
   (add-to-list 'lsp-language-id-configuration '(org-mode . "org"))
   (add-to-list 'lsp-language-id-configuration '(org-journal-mode . "org"))
 
-;; Guile scheme support
-;; Use shopify-cli / theme-check-language-server for Shopify's liquid syntax
+  ;; Guile scheme support
+  ;; Use shopify-cli / theme-check-language-server for Shopify's liquid syntax
   ;;(add-to-list 'lsp-language-id-configuration '(scheme-mode . "guile-scheme"))
 
   ;; (lsp-register-client
@@ -258,36 +258,37 @@
 	 (yatex-mode . lsp-deferred)
 	 (bibtex-mode . lsp-deferred)))
 
-  ;; Strange error:
-  ;; WARNING: Unsupported code language ID 'true', treating text as plaintext
-  ;; FIXME: ltex don't ignore latex env
-  ;; FIXME: ltex don't ignore org markup
-  (use-package lsp-ltex
-    :if (equal k8x1d-lsp-module "lsp-mode")
-     :hook (text-mode . (lambda ()
-     			 (require 'lsp-ltex)
-     			 (lsp-deferred)))  
-    :init
-    ;;(setq lsp-ltex-version "15.2.0")
-    (setq lsp-ltex-version "16.0.0")
-    :config
-    ;;(setq lsp-ltex-ls-path "~/.cache/emacs/ltex-ls-15.2.0")
-    (setq lsp-ltex-languagetool-http-server-uri "http://localhost:8081/")
-    (setq lsp-ltex-language "auto")
-    (setq lsp-ltex-enabled t)
+;; Strange error:
+;; WARNING: Unsupported code language ID 'true', treating text as plaintext
+;; FIXME: ltex don't ignore latex env
+;; FIXME: ltex don't ignore org markup
+(use-package lsp-ltex
+  :if (equal k8x1d-lsp-module "lsp-mode")
+  :hook (text-mode . (lambda ()
+     		       (require 'lsp-ltex)
+     		       (lsp-deferred)))
+  :init
+  ;;(setq lsp-ltex-version "15.2.0")
+  (setq lsp-ltex-version "16.0.0")
+  :config
+  ;;(setq lsp-ltex-ls-path "~/.cache/emacs/ltex-ls-15.2.0")
+  ;; (setq lsp-ltex-languagetool-http-server-uri "http://localhost:8081/")
+  (setq lsp-ltex-languagetool-http-server-uri "http://localhost:8081")
+  (setq lsp-ltex-language "auto")
+  (setq lsp-ltex-enabled t)
 
-    ;; Litterate programming support
-    ;; in test
-    ;; (defalias 'org-babel-execute:ess-r 'org-babel-execute:R)
-    ;; (defalias 'org-babel-variable-assignments:ess-r 'org-babel-variable-assignments:R)
-    )
+  ;; Litterate programming support
+  ;; in test
+  ;; (defalias 'org-babel-execute:ess-r 'org-babel-execute:R)
+  ;; (defalias 'org-babel-variable-assignments:ess-r 'org-babel-variable-assignments:R)
+  )
 
 
-  (use-package lsp-scheme
-    :if (equal k8x1d-lsp-module "lsp-mode")
-    :hook (scheme-mode . lsp-scheme-guile)
-    )
+(use-package lsp-scheme
+  :if (equal k8x1d-lsp-module "lsp-mode")
+  :hook (scheme-mode . lsp-scheme-guile)
+  )
 
 
 (provide 'k8x1d-lsp)
-;;; k8x1d-lsp.el ends here 
+;;; k8x1d-lsp.el ends here

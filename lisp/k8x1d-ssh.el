@@ -3,8 +3,8 @@
 (setq k8x1d-ssh-addresses
       '(("Mariadb"  . "kkaiser@206.12.89.239")
 	("Serenity"  . "kkaiser@206.12.92.226")
+	("Shelly"  . "k8x1d@67.68.116.59")
 	("Groudon" . "kkaiser@130.104.60.82")))
-
 
 (defun k8x1d/select-ssh-address ()
   (alist-get
