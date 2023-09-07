@@ -12,7 +12,11 @@
 ;;(use-package r-ts-mode
 ;;  :mode "\\.R$")
 
-(use-package ess)
+(use-package ess
+  :config
+  (setq ess-use-flymake nil)
+  (setq ess-use-company nil)
+  )
 
 ;; TODO: update package
 ;; TODO: rewrite package for auto-update

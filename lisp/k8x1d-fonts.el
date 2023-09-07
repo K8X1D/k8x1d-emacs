@@ -50,7 +50,19 @@
 		      )
   )
 
+
+(use-package fontset
+  :straight (:type built-in) ;; only include this if you use straight
+  :config
+  ;; Use symbola for proper unicode
+  (when (member "Symbola" (font-family-list))
+    (set-fontset-font
+     t 'symbol "Symbola" nil)))
+
+
+
 (use-package mixed-pitch
+  :if (equal k8x1d-lsp-module "eglot")
   :hook
   (text-mode . mixed-pitch-mode))
 

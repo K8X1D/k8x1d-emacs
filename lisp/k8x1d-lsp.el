@@ -148,7 +148,9 @@
 
 (use-package flycheck
   :if (equal k8x1d-lsp-module "lsp-mode")
-  :hook (after-init . global-flycheck-mode))
+  :hook (after-init . global-flycheck-mode)
+  :config
+  )
 
 (use-package sideline
   :hook (flycheck-mode . sideline-mode)

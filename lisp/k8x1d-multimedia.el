@@ -1,3 +1,13 @@
+;;; package --- Summary
+
+;;; Commentary:"
+
+;;; Code:"
+
+
+
+
+
 ;; Inspirations:
 ;; - https://emacs.stackexchange.com/questions/64532/emms-and-mpd-configuration
 
@@ -77,24 +87,22 @@
   )
 
 (use-package transmission
+  :init
+  (defun k8x1d/herd-transmission (command)
+    "Interact with user service."
+    (interactive "sCommand: ")
+    (async-shell-command (concat "herd" " " command " " "transmission")))
   :general
   (k8x1d/leader-keys
-    "oT" '(transmission :which-key "Transmission"))
+    "oT" '(transmission :which-key "Transmission")
+    "s" '(:ignore t :which-key "Guix System")
+    "sh" '(:ignore t :which-key "Shepherd")
+    "sht" '(k8x1d/herd-transmission :which-key "Transmission"))
   )
-;;:bind ("C-c o T" . transmission))
-
-;; (use-package pulseaudio-control
-;;   :hook (after-init . (lambda ()
-;; 			(require 'pulseaudio-control)))
-;;   :config
-;;   (pulseaudio-control-default-keybindings)
-;;   )
 
 
 ;; TODO: implement emprise
 
-;;(use-package emprise)
-
-
 
 (provide 'k8x1d-multimedia)
+;;; k8x1d-multimedia.el ends here

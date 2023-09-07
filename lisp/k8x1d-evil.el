@@ -30,7 +30,8 @@
   (setq evil-emacs-state-tag "EMACS")
   (setq evil-operator-state-tag "OPERATOR")
   (setq evil-replace-state-tag "REPLACE")
-  (setq evil-echo-state nil))
+  ;; (setq evil-echo-state nil)
+  )
 
 ;; Extend evil support
 (use-package evil-collection

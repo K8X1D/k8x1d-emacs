@@ -5,7 +5,7 @@
 
 ;; General configurations
 (use-package dired
-  :straight nil
+  :straight (:type built-in) ;; only include this if you use straight
   :general
   (k8x1d/leader-keys
     "od" '(dired-jump :which-key "Directory")

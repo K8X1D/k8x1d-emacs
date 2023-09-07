@@ -91,24 +91,13 @@
 
 
 ;;
-;; Old
+;; Set theme
 ;;
-;; ;; Minimize garbage collection during startup
-;; (setq gc-cons-threshold most-positive-fixnum)
-
-;; ;; Lower threshold back to 8 MiB (default is 800kB)
-;; (add-hook 'emacs-startup-hook
-;;           (lambda ()
-;;             (setq gc-cons-threshold (expt 2 23))))
 
 
 
-;;
-;; In test
-;;
-;;(defun pinentry-emacs (desc prompt ok error)
-;;  (let ((str (read-passwd (concat (replace-regexp-in-string "%22" "\"" (replace-regexp-in-string "%0A" "\n" desc)) prompt ": "))))
-;;    str))
-;;(pinentry-start)
+
+
+
 
  ;;; init.el ends here

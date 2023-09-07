@@ -8,6 +8,7 @@
 
 
 (use-package org
+  :straight (:type built-in) ;; only include this if you use straight
   :general
   (k8x1d/leader-keys
     "oa" '(org-agenda :which-key "Agenda")
