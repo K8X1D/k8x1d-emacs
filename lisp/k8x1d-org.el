@@ -428,7 +428,7 @@
     (org-clock-goto)
     (if (y-or-n-p "Start a new pomodoro?")
         (progn
-          (k8x1d/org-pomodoro-custom-time))))
+          (x1d/org-pomodoro-custom-time))))
 
   (defun k8x1d/org-pomodoro-custom-time (min)
     "Set pomodoro with custom time pomodoro-time"
