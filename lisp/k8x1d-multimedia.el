@@ -54,19 +54,12 @@
 
   )
 
-
-
-;; (use-package bluetooth
-;;   :general
-;;   (k8x1d/leader-keys
-;;     "ob" '(bluetooth-list-devices :which-key "Bluetooth"))
-;;   :defer t)
-
-;;(use-package mpv)
+(use-package bluetooth
+  :general
+  (k8x1d/leader-keys
+    "ob" '(bluetooth-list-devices :which-key "Bluetooth")))
 
 (use-package mpdel
-  ;;:init
-  ;;(setq mpdel-prefix-key (kbd "C-c m"))
   :general
   (k8x1d/leader-keys
     "om" '(mpdel-core-map :which-key "Music Player"))
@@ -82,7 +75,7 @@
   (setq empv-youtube-use-tabulated-results t)
   ;; Mpv options
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
-  (add-to-list 'empv-mpv-args "--script=$GUIX_EXTRA_PROFILES/k8x1d-emacs/k8x1d-emacs/lib/mpris.so")
+  (add-to-list 'empv-mpv-args "--script=$K8X1D_EMACS_PROFILE/$XDG_SESSION_TYPE/$XDG_SESSION_TYPE/lib/mpris.so")
   (add-to-list 'empv-mpv-args "--sub-auto=all")
   )
 
