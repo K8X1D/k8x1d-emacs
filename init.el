@@ -1,23 +1,27 @@
- ;;; package --- Summary
+;;; package --- Summary
 
- ;;; Commentary:
+;;; Commentary:
 
- ;;; Code:
+;;; Code:
 
 ;;
 ;; Utilities
 ;;
+
 (require 'k8x1d-utilities)
 
 ;;
 ;; General config
 ;;
-(setq k8x1d-lsp-module "lsp-mode")
-(setq k8x1d-consult-integration t)
-(setq week-aims-path "~/org/objectifs_hebdomadaires.txt")
+(defvar k8x1d-lsp-module "lsp-mode")
+(defvar k8x1d-consult-integration t)
+(defvar week-aims-path "~/org/objectifs_hebdomadaires.txt")
+
+;; ID
 (setq user-full-name "Kevin Kaiser"
       user-mail-address "k8x1d@proton.me")
-(setq k8x1d-default-bibliography '("~/Zotero/k8x1d.bib"))
+(defvar k8x1d-default-bibliography '("~/Zotero/k8x1d.bib"))
+
 ;;
 ;; Module to load
 ;;
@@ -106,3 +110,5 @@
 ;;  (let ((str (read-passwd (concat (replace-regexp-in-string "%22" "\"" (replace-regexp-in-string "%0A" "\n" desc)) prompt ": "))))
 ;;    str))
 ;;(pinentry-start)
+
+ ;;; init.el ends here
