@@ -57,6 +57,7 @@
 ;; Set user paths
 (setq user-emacs-directory (expand-file-name "~/.k8x1d-emacs.d"))
 (setq user-emacs-cache-directory (expand-file-name "~/.cache/emacs"))
+(setq custom-theme-directory (concat user-emacs-directory "/themes"))
 
 ;; setup the user's custom settings file
 (setq custom-file (expand-file-name "custom.el" user-emacs-cache-directory))
