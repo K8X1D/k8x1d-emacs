@@ -11,7 +11,7 @@
  '(homoglyph ((t (:foreground "#4560E6"))))
  '(minibuffer-prompt ((t (:foreground "#F2DA61" :background "#141414"))))
  '(highlight ((t (:background "#504945"))))
- '(region ((t (:extend t :background "#474648"))))
+ '(region ((t (:inverse-video t))))
  '(shadow ((t (:foreground "#a89984"))))
  '(secondary-selection ((t (:extend t :background "#2c2c34"))))
  '(trailing-whitespace ((t (:background "#474648"))))
