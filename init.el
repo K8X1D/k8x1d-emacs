@@ -94,7 +94,12 @@
 ;; Set theme
 ;;
 
-
+(load-theme 'k8x1d-dark t)
+;; (load-theme 'lambda-dark t)
+;; (load-theme k8x1d/actual-theme t)
+;; (k8x1d/adjust-theme)
+;;(doom-modeline-mode 1)
+;;(lambda-line-mode 1)
 
 
 
