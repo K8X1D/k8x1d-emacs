@@ -130,40 +130,19 @@
 
   )
 
-;;
-;; Diagnostics
-;;
-(use-package flymake
-  :if (equal k8x1d-lsp-module "eglot")
-  :general
-  (k8x1d/local-leader-keys
-    :keymaps 'flymake-mode-map
-    "D" '(:ignore t :which-key "Diagnostic")
-    "Db" '(flymake-show-buffer-diagnostics :which-key "List")
-    "Dn" '(flymake-goto-next-error :which-key "Next")
-    "Dp" '(flymake-goto-prev-error :which-key "Previous")
-    "Ds" '(consult-flymake :which-key "Search")
-    )
-  )
+;; (use-package sideline
+;;   :init
+;;   (setq sideline-backends-right '(sideline-flycheck)))
 
-(use-package flycheck
-  :if (equal k8x1d-lsp-module "lsp-mode")
-  :hook (after-init . global-flycheck-mode)
-  :config
-  )
+;; (use-package sideline-lsp
+;;   :hook (lsp-mode . sideline-mode)
+;;   :config
+;;   (setq sideline-backends-right '(sideline-lsp))
+;;   )
 
-(use-package sideline
-  :hook (flycheck-mode . sideline-mode)
-  :init
-  (setq sideline-backends-right '(sideline-flycheck sideline-lsp)))
+;; (use-package sideline-flycheck
+;;   :hook (flycheck-mode . sideline-flycheck-setup))
 
-(use-package sideline-lsp
-  :hook (lsp-mode . sideline-mode))
-
-(use-package sideline-flycheck
-  :hook (flycheck-mode . sideline-flycheck-setup))
-
-(use-package consult-flycheck)
 
 ;;
 ;; Lsp-mode
@@ -171,9 +150,11 @@
 
 (use-package lsp-mode
   :if (equal k8x1d-lsp-module "lsp-mode")
-  :init
-  (setq lsp-keymap-prefix "C-c L")
-  ;;(require 'lsp-scheme)
+  :general
+  (k8x1d/local-leader-keys
+    "L" '(:keymap lsp-command-map
+		  :which-key "LSP")
+    )
   :hook ((ess-r-mode . lsp-deferred)
 	 (python-ts-mode . lsp-deferred)
 	 (org-mode . lsp-deferred)
@@ -241,7 +222,7 @@
   ;; (setq lsp-ui-sideline-show-hover t)
   ;; (setq lsp-ui-sideline-show-diagnostics t)
   ;; (setq lsp-ui-sideline-show-symbol t)
-  ;; (setq lsp-ui-sideline-show-code-actions nil)
+  ;;(setq lsp-ui-sideline-show-code-actions nil)
   )
 
 ;; optionally if you want to use debugger
