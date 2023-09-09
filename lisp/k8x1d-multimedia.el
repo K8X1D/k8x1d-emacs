@@ -79,21 +79,6 @@
   (add-to-list 'empv-mpv-args "--sub-auto=all")
   )
 
-(use-package transmission
-  :init
-  (defun k8x1d/herd-transmission (command)
-    "Interact with user service."
-    (interactive "sCommand: ")
-    (async-shell-command (concat "herd" " " command " " "transmission")))
-  :general
-  (k8x1d/leader-keys
-    "oT" '(transmission :which-key "Transmission")
-    "s" '(:ignore t :which-key "Guix System")
-    "sh" '(:ignore t :which-key "Shepherd")
-    "sht" '(k8x1d/herd-transmission :which-key "Transmission"))
-  )
-
-
 ;; TODO: implement emprise
 
 
