@@ -8,6 +8,7 @@
  '(fixed-pitch ((t (:family "Iosevka Term" :foundry "UKWN" :width normal :height 1.0 :weight light :slant normal))))
  '(variable-pitch ((t (:family "Iosevka Aile" :foundry "UKWN" :width normal :height 1.0 :weight light :slant normal))))
  '(escape-glyph ((t (:foreground "#85CCC6"))))
+ '(vertical-border ((t (:foreground "#ebdbb2" :background "#ebdbb2"))))
  '(homoglyph ((t (:foreground "#4560E6"))))
  '(minibuffer-prompt ((t (:foreground "#F2DA61" :background "#141414"))))
  '(highlight ((t (:background "#504945"))))
@@ -45,19 +46,27 @@
  '(button ((t (:inherit (link)))))
  '(link ((t (:underline (:color foreground-color :style line :position nil) :foreground "#F5F2F0" :background "#1A1919"))))
  '(link-visited ((default (:inherit (link))) (((class color) (background light)) (:foreground "magenta4")) (((class color) (background dark)) (:foreground "violet"))))
- '(fringe ((t (:weight light :background "#141414"))))
+ '(fringe ((t (:weight light :background "#282828"))))
  '(header-line ((default (:inherit (mode-line))) (((type tty)) (:underline (:color foreground-color :style line :position nil) :inverse-video nil)) (((class color grayscale) (background light)) (:box nil :foreground "grey20" :background "grey90")) (((class color grayscale) (background dark)) (:box nil :foreground "grey90" :background "grey20")) (((class mono) (background light)) (:underline (:color foreground-color :style line :position nil) :box nil :inverse-video nil :foreground "black" :background "white")) (((class mono) (background dark)) (:underline (:color foreground-color :style line :position nil) :box nil :inverse-video nil :foreground "white" :background "black"))))
  '(tooltip ((t (:foreground "#212228" :background "#474648"))))
- '(mode-line ((t (:box (:line-width (1 . 1) :color "#212228" :style nil) :foreground "#EBE9E7" :background "#37373E"))))
+ '(mode-line ((t (:box (:line-width (1 . 1) :color "#ebdbb2" :style nil) :foreground "#282828" :background "#ebdbb2"))))
+ ;; '(mode-line ((t (:foreground "#282828" :background "#ebdbb2"))))
  '(mode-line-buffer-id ((t (:weight bold))))
  '(mode-line-emphasis ((t (:weight bold))))
  '(mode-line-highlight ((((supports :box t) (class color) (min-colors 88)) (:box (:line-width (2 . 2) :color "grey40" :style released-button))) (t (:inherit (highlight)))))
- '(mode-line-inactive ((t (:box (:line-width (1 . 1) :color "#212228" :style nil) :foreground "#A3A3A3" :background "#1A1919"))))
+ ;; '(mode-line-inactive ((t (:box (:line-width (1 . 1) :color "#212228" :style nil) :foreground "#A3A3A3" :background "#1A1919"))))
+ '(mode-line-inactive ((t (:box (:line-width (1 . 1) :color "#ebdbb2" :style nil) :foreground "#A3A3A3" :background "#1A1919"))))
  '(isearch ((t (:weight bold :foreground "#212228" :background "#4560E6"))))
  '(isearch-fail ((t (:background "#CF6752"))))
  '(lazy-highlight ((t (:foreground "#EBE9E7" :background "#F4BF4F"))))
  '(match ((t (:foreground "#1A1919" :background "#4560E6"))))
+ '(orderless-match-face-0 ((t (:weight bold))))
  '(next-error ((t (:inherit (region)))))
  '(query-replace ((t (:background "#F4BF4F")))))
+
+
+
+
+
 
 (provide-theme 'k8x1d-dark)
