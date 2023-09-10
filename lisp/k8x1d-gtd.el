@@ -112,14 +112,14 @@
 	   "|"
 	   "DONE(d)"  ; Task successfully completed
 	   "CNCL(c)"  ; Task cancelled
-	  )))
+	   )))
   )
 
 
 (use-package org-gtd
   :init
   (setq org-gtd-update-ack "3.0.0")
-  ;; Temporary fix for 
+  ;; Temporary fix for
   (defun k8x1d/org-gtd-engage ()
     (interactive)
     (require 'org-gtd)
@@ -145,17 +145,17 @@
     )
   :bind
   (:map org-gtd-clarify-map
-   ("C-c c" . org-gtd-organize)
-  ))
+	("C-c c" . org-gtd-organize)
+	))
 
 
 ;;
 ;; Initial buffer containing week objectivs
 ;;
 (require 'f)
-(if (boundp 'week-aims-path)  
+(if (boundp 'week-aims-path)
     (when (file-exists-p week-aims-path)
-	(setq startup-text (f-read-text week-aims-path)))
+      (setq startup-text (f-read-text week-aims-path)))
   (setq startup-text "Aucun objectif n'a été fixé pour la semaine...")
   )
 (defun k8x1d/get-startup-buffer-create ()

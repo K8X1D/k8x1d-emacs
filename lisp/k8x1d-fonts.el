@@ -59,10 +59,7 @@
     (set-fontset-font
      t 'symbol "Symbola" nil)))
 
-
-
 (use-package mixed-pitch
-  :if (equal k8x1d-lsp-module "eglot")
   :hook
   (text-mode . mixed-pitch-mode))
 
