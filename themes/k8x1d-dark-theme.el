@@ -58,15 +58,14 @@
  '(mode-line-inactive ((t (:box (:line-width (1 . 1) :color "#ebdbb2" :style nil) :foreground "#A3A3A3" :background "#1A1919"))))
  '(isearch ((t (:weight bold :foreground "#212228" :background "#4560E6"))))
  '(isearch-fail ((t (:background "#CF6752"))))
+ '(ansi-color-blue ((t (:foreground "#458588"))))
+ '(ansi-color-red ((t (:foreground "#cc241d"))))
+ '(ansi-color-green ((t (:foreground "#98971a"))))
+ '(ansi-color-yellow ((t (:foreground "#d79921"))))
  '(lazy-highlight ((t (:foreground "#EBE9E7" :background "#F4BF4F"))))
  '(match ((t (:foreground "#1A1919" :background "#4560E6"))))
  '(orderless-match-face-0 ((t (:weight bold))))
  '(next-error ((t (:inherit (region)))))
  '(query-replace ((t (:background "#F4BF4F")))))
-
-
-
-
-
 
 (provide-theme 'k8x1d-dark)
