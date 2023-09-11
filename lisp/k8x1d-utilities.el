@@ -1,4 +1,9 @@
-;; -*- lexical-binding: t; -*-
+;;; package --- Summary
+
+;;; Commentary:
+
+
+;;; Code:
 
 (use-package emacs
   :config
@@ -45,5 +50,5 @@
 ;;  	    (lambda (&rest _) (force-mode-line-update t)))
 ;;  )
 
-
 (provide 'k8x1d-utilities)
+;;; k8x1d-utilities.el ends here
