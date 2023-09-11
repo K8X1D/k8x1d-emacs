@@ -27,3 +27,4 @@ eshell
 custom.el
 .lsp-session-v1
 .dap-breakpoints
+lsp-ltex
