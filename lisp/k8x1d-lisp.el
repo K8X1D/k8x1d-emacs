@@ -27,5 +27,9 @@
 (use-package geiser-guile)
 
 
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
+
 
 (provide 'k8x1d-lisp)
+;;; k8x1d-lisp.el ends here
