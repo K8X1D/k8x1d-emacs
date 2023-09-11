@@ -27,7 +27,7 @@
   )
 
 (use-package use-package
-  :straight nil
+  :straight (:type built-in) ;; only include this if you use straight
   :config
   (setq use-package-always-defer t)
   (setq use-package-enable-imenu-support t))
