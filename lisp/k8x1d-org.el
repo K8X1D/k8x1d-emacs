@@ -227,6 +227,7 @@
 
   ;; Bullets cutomization
   (setq org-modern-checkbox '((88 . "") (45 . "") (32 . "")))
+  (setq org-modern-list '((43 . "◦") (45 . "-") (42 . "•")))
   )
 
 
