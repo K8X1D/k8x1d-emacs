@@ -104,7 +104,8 @@
   (LaTeX-mode . corfu-mode)
   (LaTeX-mode . visual-line-mode)
   (LaTeX-mode . display-line-numbers-mode)
-  ;;(add-hook 'LaTeX-mode-hook 'eglot-ensure)
+  ;; TODO: copy org-appear config for evil
+  (LaTeX-mode . prettify-symbols-mode)
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   )
