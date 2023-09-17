@@ -4,6 +4,9 @@
 
 ;;; Code:
 
+(setq k8x1d-theme-variant "dark")
+
+
 (use-package doom-themes
   :general
   (k8x1d/leader-keys
