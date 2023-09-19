@@ -6,75 +6,6 @@
 
 ;;; Code:
 
-;;
-;; Eglot configuration
-;;
-
-(use-package eglot
-  :if (equal k8x1d-lsp-module "eglot")
-  :init
-  (setq eglot-connect-timeout 90) ;; prevent eglot timeout
-  :general
-  ;; Set to local instead
-  ;; (k8x1d/leader-keys
-  ;;   "l" '(:ignore t :which-key "LSP")
-  ;;   "la" '(eglot-code-actions :which-key "Action")
-  ;;   "lc" '(eglot-show-workspace-configuration :which-key "Show config")
-  ;;   "lf" '(:ignore t :which-key "Format")
-  ;;   "lfr" '(eglot-format :which-key "Region")
-  ;;   "lff" '(eglot-format-buffer :which-key "File")
-  ;;   "ld" '(eglot-shutdown :which-key "Disconnect")
-  ;;   "lD" '(eglot-shutdown-all :which-key "Disconnect all"))
-  (k8x1d/local-leader-keys
-    :keymaps 'eglot-mode-map
-    "L" '(:ignore t :which-key "LSP")
-    "La" '(eglot-code-actions :which-key "Action")
-    "Lc" '(eglot-show-workspace-configuration :which-key "Show config")
-    "K" '(eldoc :which-key "Documentation")
-    "Lf" '(:ignore t :which-key "Format")
-    "Lfr" '(eglot-format :which-key "Region")
-    "Lff" '(eglot-format-buffer :which-key "File")
-    "Ld" '(eglot-shutdown :which-key "Disconnect")
-    "LD" '(eglot-shutdown-all :which-key "Disconnect all"))
-  :hook
-  ((ess-r-mode . eglot-ensure)
-   (r-ts-mode . eglot-ensure)
-   (julia-mode . eglot-ensure)
-   (julia-ts-mode . eglot-ensure)
-   (python-mode . eglot-ensure)
-   (python-ts-mode . eglot-ensure)
-   (lua-mode . eglot-ensure)
-   (scheme-mode . eglot-ensure)
-   (LaTeX-mode . eglot-ensure)
-   ;; (text-mode . eglot-ensure) ;; ltex-ls is not working properly...
-   )
-  :config
-  ;; eldoc
-  ;;(setq eldoc-idle-delay nil)
-
-  ;; Extra language support
-  (add-to-list 'eglot-server-programs '(r-ts-mode . ("R" "--slave" "-e" "languageserver::run()")))
-  (add-to-list 'eglot-server-programs '(ess-r-mode . ("R" "--slave" "-e" "languageserver::run()")))
-  (add-to-list 'eglot-server-programs '(julia-ts-mode . ("julia" "--project=~/.julia/packages/LanguageServer/0vsx2/src" "-e" "using LanguageServer; runserver()")))
-  (add-to-list 'eglot-server-programs '(lua-mode . ("lua-language-server")))
-  (add-to-list 'eglot-server-programs '(scheme-mode . ("guile-lsp-server")))
-  (add-to-list 'eglot-server-programs '(LaTeX-mode . ("texlab")))
-  ;; FIXME: ltex don't start properly
-  ;; FIXME: ltex don't ignore latex env
-  ;; FIXME: ltex don't ignore org markup
-  ;; (add-to-list 'eglot-server-programs '(text-mode . ("ltex-ls")))
-  )
-
-;; (use-package eglot-ltex
-;;   :if (equal k8x1d-lsp-module "eglot")
-;;   :hook (text-mode . (lambda ()
-;;                        (require 'eglot-ltex)
-;;                        (eglot-ensure)))
-;;   :init
-;;  ;; (setq eglot-languagetool-server-path "/home/k8x1d/.nix-profile/") ;; don't work properly, slow to start if it start
-;;  (setq eglot-languagetool-server-path "/home/k8x1d/.cache/emacs/ltex-ls-15.2.0/")
-;;   )
-
 
 ;;
 ;; LSP-bridge configuration
@@ -157,15 +88,14 @@
     )
   :hook ((ess-r-mode . lsp-deferred)
 	 (python-ts-mode . lsp-deferred)
-	 (org-mode . lsp-deferred)
 	 (sql-mode . lsp-deferred)
-	 (markdown-mode . lsp-deferred)
-	 ;;(scheme-mode . lsp-deferred)
+	 (scheme-mode . lsp-deferred)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :config
   (setq lsp-headerline-breadcrumb-enable nil);; remove headline
   (setq lsp-modeline-diagnostics-enable nil) ;; superflous
+  (setq lsp-modeline-code-actions-enable nil) ;; superflous
 
   (add-to-list 'lsp-language-id-configuration '(python-ts-mode . "python"))
   (add-to-list 'lsp-language-id-configuration '(R-mode . "r"))
@@ -235,35 +165,23 @@
 
 
 
-(use-package lsp-latex
-  :hook ((tex-mode . lsp-deferred)
-	 (LaTeX-mode . lsp-deferred)
-	 (yatex-mode . lsp-deferred)
-	 (bibtex-mode . lsp-deferred)))
+;;(use-package lsp-latex
+;;  :hook ((tex-mode . lsp-deferred)
+;;	 (LaTeX-mode . lsp-deferred)
+;;	 (yatex-mode . lsp-deferred)
+;;	 (bibtex-mode . lsp-deferred)))
 
 ;; Strange error:
 ;; WARNING: Unsupported code language ID 'true', treating text as plaintext
-;; FIXME: ltex don't ignore latex env
-;; FIXME: ltex don't ignore org markup
 (use-package lsp-ltex
   :if (equal k8x1d-lsp-module "lsp-mode")
-  :hook (text-mode . (lambda ()
-     		       (require 'lsp-ltex)
-     		       (lsp-deferred)))
+  ;; :hook (text-mode . (lambda ()
+  ;;    		       (require 'lsp-ltex)
+  ;;    		       (lsp-deferred)))
   :init
-  ;;(setq lsp-ltex-version "15.2.0")
   (setq lsp-ltex-version "16.0.0")
   :config
-  ;;(setq lsp-ltex-ls-path "~/.cache/emacs/ltex-ls-15.2.0")
-  ;; (setq lsp-ltex-languagetool-http-server-uri "http://localhost:8081/")
   (setq lsp-ltex-languagetool-http-server-uri "http://localhost:8081")
-  (setq lsp-ltex-language "auto")
-  (setq lsp-ltex-enabled t)
-
-  ;; Litterate programming support
-  ;; in test
-  ;; (defalias 'org-babel-execute:ess-r 'org-babel-execute:R)
-  ;; (defalias 'org-babel-variable-assignments:ess-r 'org-babel-variable-assignments:R)
   )
 
 

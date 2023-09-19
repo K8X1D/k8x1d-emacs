@@ -4,8 +4,6 @@
 (use-package lisp-mode
   :straight nil
   :config
-  ;; Clean binding
-  ;;(define-key lisp-mode-map (kbd "C-c <tab>") nil)
   (require 'bind-key)
   (unbind-key "[TAB]" lisp-mode-map)
   (unbind-key "C-c TAB" lisp-mode-map)
@@ -25,7 +23,6 @@
   (unbind-key "C-c TAB" geiser-mode-map))
 
 (use-package geiser-guile)
-
 
 (use-package envrc
   :hook (after-init . envrc-global-mode))

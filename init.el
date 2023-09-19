@@ -42,8 +42,7 @@
 (timed-require 'k8x1d-icons)
 ;; (timed-require 'k8x1d-dashboard) appear superflous
 (timed-require 'k8x1d-modeline)
-(timed-require 'k8x1d-theme)
-;; ok
+;; (timed-require 'k8x1d-theme)
 
 ;; Project management
 (timed-require 'k8x1d-project)
@@ -61,6 +60,8 @@
 ;; Programation support
 (timed-require 'k8x1d-treesitter)
 (timed-require 'k8x1d-lsp)
+(if (equal k8x1d-lsp-module "eglot")
+    (timed-require 'k8x1d-eglot))
 (timed-require 'k8x1d-checker)
 (timed-require 'k8x1d-julia)
 (timed-require 'k8x1d-lua)
@@ -95,12 +96,39 @@
 ;; Set theme
 ;;
 
-(load-theme 'k8x1d-dark t)
+
+(setq k8x1d-theme-variant "dark")
+
+
+(defun k8x1d/switch-theme ()
+  (interactive)
+  (if (equal k8x1d-theme-variant "dark")
+      (setq k8x1d-theme-variant "light")
+    (setq k8x1d-theme-variant "dark")
+    )
+  (disable-theme 'k8x1d)
+  (load-theme 'k8x1d t))
+
+(define-key global-map (kbd "<f5>") 'k8x1d/switch-theme)
+(load-theme 'k8x1d t)
 ;; (load-theme 'lambda-dark t)
 ;; (load-theme k8x1d/actual-theme t)
 ;; (k8x1d/adjust-theme)
 ;;(doom-modeline-mode 1)
 ;;(lambda-line-mode 1)
+
+;; Compilation at the bottom
+;; https://stackoverflow.com/questions/9725015/how-do-i-make-the-compilation-window-in-emacs-to-always-be-a-certain-size
+;; (defun my-compilation-hook ()
+;;   (when (not (get-buffer-window "*compilation*"))
+;;     (save-selected-window
+;;       (save-excursion
+;;         (let* ((w (split-window-vertically))
+;;                (h (window-height w)))
+;;           (select-window w)
+;;           (switch-to-buffer "*compilation*")
+;;           (shrink-window (- h compilation-window-height)))))))
+;; (add-hook 'compilation-mode-hook 'my-compilation-hook)
 
 
 

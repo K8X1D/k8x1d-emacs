@@ -75,13 +75,11 @@
 
 
 ;;;; LSP
-;; FIXME: startup time of (eglot-jl-init) is too high
-;; TODO: compare manual setup via eglot
-;;(use-package eglot-jl
-;;  :defer t
-;;  :hook ((julia-ts-mode . eglot-jl-init)
-;;	 (julia-ts-mode . eglot-ensure))
-;;  )
+(use-package eglot-jl
+  :if (equal k8x1d-lsp-module "eglot")
+  :hook ((julia-ts-mode . eglot-jl-init)
+	 (julia-ts-mode . eglot-ensure))
+  )
 
 
 (use-package lsp-julia

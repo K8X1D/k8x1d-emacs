@@ -12,9 +12,14 @@
 
 
 ;; Add icons to completion
-(use-package all-the-icons-completion
+;; (use-package all-the-icons-completion
+;; :hook
+;; (vertico-mode . all-the-icons-completion-mode))
+(use-package nerd-icons-completion
   :hook
-  (vertico-mode . all-the-icons-completion-mode))
+  (vertico-mode . nerd-icons-completion-mode)
+  :config
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
 
 ;; Add icons to corfu

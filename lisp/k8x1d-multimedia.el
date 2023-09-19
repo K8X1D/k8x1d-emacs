@@ -82,5 +82,21 @@
 ;; TODO: implement emprise
 
 
+;; Image manipulation
+(use-package blimp
+  :init
+  ;; Prompts for amount of degrees to rotate then applies the rotation
+  (defun my/blimp-rotate()
+    (interactive)
+    (blimp-interface-execute "rotate"))
+  :hook (image-mode-hook . blimp-mode)
+  :config
+  (define-key eimp-mode (kbd "C-c C-R") 'my/blimp-rotate)
+  )
+
+
+
+
+
 (provide 'k8x1d-multimedia)
 ;;; k8x1d-multimedia.el ends here

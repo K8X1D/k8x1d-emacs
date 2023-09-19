@@ -226,7 +226,7 @@
   (setq org-agenda-current-time-string "⭠ now ─────────────────────────────────────────────────")
 
   ;; Bullets cutomization
-  (setq org-modern-checkbox '((88 . "") (45 . "") (32 . "")))
+  (setq org-modern-checkbox '((88 . "") (45 . "") (32 . "")))
   (setq org-modern-list '((43 . "◦") (45 . "-") (42 . "•")))
   )
 
@@ -364,7 +364,7 @@
 (use-package org
   :straight (:type built-in) ;; only include this if you use straight
   :init
-  (defun k8x1d/daily-thesis-timer ()
+  (defun k8x1d/daily-blitz-timer ()
     (interactive)
     (require 'org)
     (org-timer-set-timer "00:15:00")

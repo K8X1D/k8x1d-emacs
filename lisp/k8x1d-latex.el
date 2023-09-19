@@ -40,11 +40,11 @@
   (unbind-key "C-<return>" LaTeX-mode-map)
   (setq LaTeX-indent-level 4)
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+  ;; (setq TeX-view-program-selection '((output-pdf "Zathura")))
   (setq TeX-tree-roots '(".git" ".dir-locals.el" ".auctex-auto"))
   )
 
 
-;; (setq TeX-view-program-selection '((output-pdf "Zathura"))))
 
 (use-package reftex
   :hook
