@@ -35,8 +35,11 @@
     (setq-default mode-line-format (list "%_"))
     (setq mode-line-format (list "%_"))))
 
-;; Custom modeline
-;; Inspired by https://emacs.stackexchange.com/questions/5529/how-to-right-align-some-items-in-the-modeline
+
+
+;; ;; Custom modeline
+;; ;; Inspired by https://emacs.stackexchange.com/questions/5529/how-to-right-align-some-items-in-the-modeline
+(use-package breadcrumb)
 (use-package emacs
   :init
   (defun simple-mode-line-render (left right)
@@ -51,7 +54,6 @@ Containing LEFT, and RIGHT aligned respectively."
 	      right)))
   :config
   (setq-default
-   ;; (setq
    mode-line-format
    '((:eval
       (simple-mode-line-render
@@ -59,7 +61,7 @@ Containing LEFT, and RIGHT aligned respectively."
        (quote ("%e "
 	       evil-mode-line-tag
 	       " "
-	       mode-line-buffer-identification
+	       (:eval (breadcrumb-project-crumbs))
 	       (vc-mode vc-mode)
 	       " [%l:%c]"
 	       ))
@@ -69,9 +71,7 @@ Containing LEFT, and RIGHT aligned respectively."
 	       " "
 	       mode-line-frame-identification
 	       mode-line-misc-info
-	       "["
-	       flycheck-mode-line
-	       " ]"
+	       (:eval (flycheck-custom-mode-line-status))
 	       mode-line-modes
 	       ))))))
   )

@@ -16,6 +16,17 @@
   :config
   (setq ess-use-flymake nil)
   (setq ess-use-company nil)
+  (setq mode-line-process nil)
+  (defun my-inferior-ess-init ()
+    "Workaround for https://github.com/emacs-ess/ESS/issues/1193"
+    (add-hook 'comint-preoutput-filter-functions #'xterm-color-filter -90 t)
+    (setq-local ansi-color-for-comint-mode nil))
+  (add-hook 'inferior-ess-mode-hook #'my-inferior-ess-init)
+
+  (defun my-inferior-ess-init2 ()
+    "Workaround for https://github.com/emacs-ess/ESS/issues/1159"
+    (setq-local mode-line-process nil))
+  (add-hook 'ess-mode-hook #'my-inferior-ess-init2)
   )
 
 ;; TODO: update package
