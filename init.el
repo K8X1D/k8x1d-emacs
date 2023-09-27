@@ -4,134 +4,54 @@
 
 ;;; Code:
 
-;;
+
+(defvar default-bibliography '("~/Zotero/k8x1d.bib"))
+(defvar org-directory "~/org")
+
+(require 'packages-module)
+
+;; Managements
+(require 'buffer-module)
+(require 'workspace-module)
+
+;; UI
+(require 'ui-module)
+(require 'evil-module)
+(require 'completion-module)
+(require 'modeline-module)
+(require 'fonts-module)
+(require 'icons-module)
+
 ;; Utilities
-;;
+(require 'org-module)
+(require 'password-module)
+(require 'terminal-module)
+(require 'system-module)
+(require 'ssh-module)
+(require 'pdf-module)
+(require 'multimedia-module)
 
-(require 'k8x1d-utilities)
+;; Programming support
+(require 'lsp-module)
+(require 'checker-module)
+(require 'formatter-module)
+(require 'version-control-module)
 
-;;
-;; General config
-;;
-(defvar k8x1d-lsp-module "lsp-mode")
-(defvar k8x1d-consult-integration t)
-(defvar week-aims-path "~/org/objectifs_hebdomadaires.txt")
+;; Writting support
+(require 'corrector-module)
+(require 'bibliography-module)
+(require 'notes-taking-module)
 
-;; ID
-(setq user-full-name "Kevin Kaiser"
-      user-mail-address "k8x1d@proton.me")
-(defvar k8x1d-default-bibliography '("~/Zotero/k8x1d.bib"))
+;; Support modules
+(require 'latex-module)
+(require 'python-module)
+(require 'julia-module)
+(require 'qml-module)
+(require 'scheme-module)
 
-;;
-;; Module to load
-;;
+;; Doom look
+(require 'doom-module)
+;;(require 'dashboard-module)
 
-(timed-require 'k8x1d-profile)
-(timed-require 'k8x1d-packages)
-(timed-require 'k8x1d-keybindings)
-(timed-require 'k8x1d-evil)
-(timed-require 'k8x1d-completion)
-(timed-require 'k8x1d-file-explorer)
-(timed-require 'k8x1d-buffers)
-(timed-require 'k8x1d-frames)
-(timed-require 'k8x1d-clean)
-(timed-require 'k8x1d-ui)
-
-;; Gui
-(timed-require 'k8x1d-fonts)
-(timed-require 'k8x1d-icons)
-;; (timed-require 'k8x1d-dashboard) appear superflous
-(timed-require 'k8x1d-modeline)
-;; (timed-require 'k8x1d-theme)
-
-;; Project management
-(timed-require 'k8x1d-project)
-(timed-require 'k8x1d-workspaces)
-(timed-require 'k8x1d-gtd)
-(timed-require 'k8x1d-vc)
-
-;; Writing support
-(timed-require 'k8x1d-org)
-(timed-require 'k8x1d-biblio)
-(timed-require 'k8x1d-corrector)
-(timed-require 'k8x1d-notes-taking)
-(timed-require 'k8x1d-markdown)
-
-;; Programation support
-(timed-require 'k8x1d-treesitter)
-(timed-require 'k8x1d-lsp)
-(if (equal k8x1d-lsp-module "eglot")
-    (timed-require 'k8x1d-eglot))
-(timed-require 'k8x1d-checker)
-(timed-require 'k8x1d-julia)
-(timed-require 'k8x1d-lua)
-(timed-require 'k8x1d-python)
-(timed-require 'k8x1d-R)
-(timed-require 'k8x1d-lisp)
-(timed-require 'k8x1d-latex)
-(timed-require 'k8x1d-docker)
-;; (timed-require 'k8x1d-repl)
-(timed-require 'k8x1d-ssh)
-(timed-require 'k8x1d-template)
-
-;; Other
-(timed-require 'k8x1d-terminal)
-(timed-require 'k8x1d-multimedia)
-(timed-require 'k8x1d-news)
-(timed-require 'k8x1d-password)
-(timed-require 'k8x1d-presentation)
-(timed-require 'k8x1d-system)
-(timed-require 'k8x1d-pdf)
-
-
-
-;; cleanup and reset after startup
-(add-hook 'emacs-startup-hook
-	  (lambda () (setq gc-cons-threshold 16777216 gc-cons-percentage 0.1)))
-
-(setq gc-cons-threshold (* 2 1000 1000))
-
-
-;;
-;; Set theme
-;;
-
-
-(setq k8x1d-theme-variant "dark")
-
-
-(defun k8x1d/switch-theme ()
-  (interactive)
-  (if (equal k8x1d-theme-variant "dark")
-      (setq k8x1d-theme-variant "light")
-    (setq k8x1d-theme-variant "dark")
-    )
-  (disable-theme 'k8x1d)
-  (load-theme 'k8x1d t))
-
-(define-key global-map (kbd "<f5>") 'k8x1d/switch-theme)
-(load-theme 'k8x1d t)
-;; (load-theme 'lambda-dark t)
-;; (load-theme k8x1d/actual-theme t)
-;; (k8x1d/adjust-theme)
-;;(doom-modeline-mode 1)
-;;(lambda-line-mode 1)
-
-;; Compilation at the bottom
-;; https://stackoverflow.com/questions/9725015/how-do-i-make-the-compilation-window-in-emacs-to-always-be-a-certain-size
-;; (defun my-compilation-hook ()
-;;   (when (not (get-buffer-window "*compilation*"))
-;;     (save-selected-window
-;;       (save-excursion
-;;         (let* ((w (split-window-vertically))
-;;                (h (window-height w)))
-;;           (select-window w)
-;;           (switch-to-buffer "*compilation*")
-;;           (shrink-window (- h compilation-window-height)))))))
-;; (add-hook 'compilation-mode-hook 'my-compilation-hook)
-
-
-
-
-
- ;;; init.el ends here
+(print "loading init.el done")
+;;; init.el ends here
