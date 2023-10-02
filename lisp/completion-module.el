@@ -66,7 +66,7 @@
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
   :bind (:map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
+              ("M-A" . marginalia-cycle))
 
   ;; The :init section is always executed.
   :init
@@ -228,12 +228,12 @@
   ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
   ;;;; 5. No project support
   ;; (setq consult-project-function nil)
-)
+  )
 
 
 ;; To reduce
-
 (use-package corfu
+  :if (not (equal lsp-framework "lsp-bridge"))
   ;; Optional customizations
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
@@ -258,6 +258,8 @@
   :init
   (global-corfu-mode)
   :hook (corfu-mode . corfu-popupinfo-mode)
+  :bind (:map corfu-map
+	      ("M-h" . corfu-popupinfo-documentation))
   )
 
 ;; A few more useful configurations...

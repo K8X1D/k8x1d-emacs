@@ -14,10 +14,6 @@
 	 (after-init . (lambda () (blink-cursor-mode 0))) ;; stop cursor from blicking
 	 ;; Programming ui
 	 (prog-mode . hl-line-mode) ;; Highlight whole line
-	 (prog-mode . display-line-numbers-mode) ;; Show line number for programming mode
-	 (display-line-numbers-mode .  (lambda()
-					 (setq display-line-numbers 'relative)
-					 ))
 	 )
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -35,6 +31,13 @@
   ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ;; ESC Cancels All
   )
 
+;; Line number
+(use-package display-line-numbers
+  :ensure nil
+  :hook (prog-mode . display-line-numbers-mode) ;; Show line number for programming mode
+  :config
+  (setq display-line-numbers 'relative)
+  )
 
 ;; Theme
 (use-package modus-themes

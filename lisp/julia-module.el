@@ -26,9 +26,9 @@
 
 ;; Formater
 (use-package julia-formatter
- :init (require 'julia-formatter)
- :hook (julia-mode . julia-formatter-mode)
- :vc (:fetcher "codeberg"  :repo "FelipeLema/julia-formatter.el"))
+  :init (require 'julia-formatter)
+  :hook (julia-mode . julia-formatter-mode)
+  :vc (:fetcher "codeberg"  :repo "FelipeLema/julia-formatter.el"))
 
 ;; Babel support
 (use-package ob-julia-vterm
@@ -42,6 +42,7 @@
 
 ;; LSP
 (use-package eglot-jl
+  :if (equal lsp-framework "eglot")
   :init (setq eglot-connect-timeout 180) ;; prevent eglot timeout
   :hook ((julia-mode . eglot-jl-init)
 	 (julia-mode . eglot-ensure))

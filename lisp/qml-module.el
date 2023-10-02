@@ -10,6 +10,7 @@
 
 
 ;; (use-package eglot
+;; :if (equal lsp-framework "eglot")
 ;;   :config
 ;;   (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif"))))
 

@@ -22,7 +22,18 @@
   ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
   ;; (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+  (doom-themes-org-config)
+
+  ;; Customizations
+  ;; Must be used *after* the theme is loaded
+  (custom-set-faces
+   ;; `(org-block-begin-line ((t (:inverse-video t))))
+   ;; `(org-block-end-line ((t (:inverse-video t))))
+   `(org-inline-src-block ((t (:background "purple4"))))
+   ;; `(org-block-begin-line ((t (:foreground ,(doom-color 'black) :background ,(doom-color 'white)))))
+   ;; `(org-block-end-line ((t (:foreground ,(doom-color 'black) :background ,(doom-color 'white)))))
+   )
+  )
 
 ;; Modeline
 (use-package doom-modeline

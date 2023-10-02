@@ -38,6 +38,11 @@
 (use-package org
   :bind ("C-c c" . org-capture)
   :config
+  (setq org-refile-use-outline-path t
+	org-outline-path-complete-in-steps nil)
+  (setq org-refile-use-cache t)
+  (setq org-refile-targets
+	'(("~/org/notes.org" :maxlevel . 5)))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-todo-keywords
 	'((sequence "TODO" "NEXT" "WAIT" "|" "DONE" "CNCL")))
@@ -136,16 +141,25 @@
 ;; Org-babel
 (use-package org
   :config
+  (add-to-list 'org-src-lang-modes '("python" . python))
+  (add-to-list 'org-src-lang-modes '("r" . ess-r))
+  (add-to-list 'org-src-lang-modes '("r" . R))
+  (add-to-list 'org-src-lang-modes '("r" . r))
+  (add-to-list 'org-src-lang-modes '("R" . ess-r))
+  (add-to-list 'org-src-lang-modes '("R" . R))
+  (add-to-list 'org-src-lang-modes '("R" . r))
+  (add-to-list 'org-src-lang-modes '("ess-r" . ess-r))
+  (add-to-list 'org-src-lang-modes '("ess-r" . R))
+  (add-to-list 'org-src-lang-modes '("ess-r" . r))
   (setq org-confirm-babel-evaluate nil)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((sql . t)
      (shell . t)
-     (julia . t)
+     ;; (julia . t)
      (scheme . t)
      (R . t)
      (python . t)))
-
   )
 
 (provide 'org-module)

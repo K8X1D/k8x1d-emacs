@@ -81,7 +81,6 @@
   (LaTeX-mode . visual-line-mode)
   (LaTeX-mode . display-line-numbers-mode)
   (LaTeX-mode . prettify-symbols-mode)
-  (LaTeX-mode . eglot-ensure)
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   :config
@@ -94,7 +93,10 @@
   (setq TeX-tree-roots '(".git" ".dir-locals.el" ".auctex-auto"))
   )
 
+;; LsP
 (use-package eglot
+  :if (equal lsp-framework "eglot")
+  :hook ((LaTeX-mode . eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif"))))
 
