@@ -10,6 +10,7 @@
    (org-mode . citar-capf-setup))
   :bind (("C-c b i c" . citar-insert-citation)
 	 ("C-c b i r" . citar-insert-reference)
+	 ("C-c b i b" . citar-insert-bibtex)
 	 ("C-c b o f" . citar-open)
 	 ("C-c b o n" . citar-open-note)
 	 (:map minibuffer-local-map

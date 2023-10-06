@@ -11,6 +11,8 @@
 
 
 (use-package forge
+  :init
+  (setq forge-add-default-bindings nil)
   :after magit
   ;; :bind
   ;; (("gli" '(forge-list-issues :which-key "Issues")

@@ -21,7 +21,10 @@
   :bind ("C-c o a" . org-agenda)
   :config
   ;; org-agenda
-  (setq org-agenda-files '("~/org/notes.org"
+  (setq org-agenda-files '("~/org/inbox.org"
+			   "~/org/projects.org"
+			   "~/org/notes.org"
+			   "~/org/habits.org"
 			   "~/org/gtd/"))
   ;; take the whole buffer
   (setq org-agenda-window-setup 'current-window)
@@ -34,6 +37,16 @@
   (setq org-agenda-inhibit-startup t)
   )
 
+;; Evil support
+(use-package evil-org
+  :after org
+  :hook ((org-mode . evil-org-mode)
+	 (org-agenda-mode . evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+  (evil-org-agenda-set-keys))
+
 ;; Org gtd
 (use-package org
   :bind ("C-c c" . org-capture)
@@ -42,12 +55,15 @@
 	org-outline-path-complete-in-steps nil)
   (setq org-refile-use-cache t)
   (setq org-refile-targets
-	'(("~/org/notes.org" :maxlevel . 5)))
+	'(("~/org/inbox.org" :maxlevel . 5)
+	  ("~/org/projects.org" :maxlevel . 5)
+	  ("~/org/notes.org" :maxlevel . 5)
+	  ))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-todo-keywords
 	'((sequence "TODO" "NEXT" "WAIT" "|" "DONE" "CNCL")))
   (setq org-capture-templates
-	'(("t" "Todo" entry (file+headline "~/org/notes.org" "Tasks")
+	'(("t" "Todo" entry (file+headline "~/org/inbox.org" "Tasks")
 	   "* TODO %?\n  %i\n")
 	  ("n" "Notes" entry (file+headline "~/org/notes.org"  "Notes")
 	   "* %U %?\n")))
@@ -156,7 +172,7 @@
    'org-babel-load-languages
    '((sql . t)
      (shell . t)
-     ;; (julia . t)
+     (julia . t)
      (scheme . t)
      (R . t)
      (python . t)))

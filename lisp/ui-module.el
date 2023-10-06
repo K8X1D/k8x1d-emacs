@@ -41,6 +41,7 @@
 
 ;; Theme
 (use-package modus-themes
+  :if (not (equal theme-framework "doom"))
   :ensure nil
   :custom
   (modus-themes-org-blocks 'tinted-background)
@@ -79,7 +80,6 @@
 ;; Show keybindings
 (use-package which-key
   :hook (after-init . which-key-mode))
-
 
 
 (use-package rainbow-mode

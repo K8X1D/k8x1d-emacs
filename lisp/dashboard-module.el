@@ -18,7 +18,7 @@
   :config
   ;; Banner
   (setq dashboard-startup-banner (concat user-emacs-directory "/banners/k8x1d-avatar_dark.png"))
-  (setq dashboard-banner-logo-title "Welcome to K8X1d Emacs Dashboard!")
+  (setq dashboard-banner-logo-title "Welcome to K8X1D Emacs Dashboard!")
   ;; Icons
   (setq dashboard-display-icons-p t) ;; display icons on both GUI and terminal
   (setq dashboard-icon-type 'nerd-icons) ;; use `nerd-icons' package

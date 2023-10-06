@@ -160,24 +160,12 @@
     ;; Markdown
     "markdown" ;; Text-to-HTML conversion tool
 
-    ;; Julia
-    "julia" ;; High-performance dynamic language for technical computing
-
-
-    ;; Python
-    "python-lsp-server" ;; Python implementation of the Language Server Protocol
-    "bpython" ;; Fancy interface to the Python interpreter
-
+    ;; ???
+    "djvulibre" ;; Implementation of DjVu, the document format 
 
     "qtlanguageserver" ;;  Implementation of the Language Server Protocol for Qt
 
-    ;; LSP Bridge depedencies
-    "python" ;; High-level, dynamically-typed programming language
-    "python-epc" ;; Remote procedure call (RPC) stack for Emacs Lisp and Python
-    "python-orjson" ;; Python JSON library supporting dataclasses, datetimes, and numpy
-    "python-sexpdata" ;; S-expression parser for Python
-    "python-six" ;; Python 2 and 3 compatibility utilities
-    "python-paramiko"  ;; SSHv2 protocol library
+
     ))
   (packages->manifest (list
 		       python-radian

@@ -6,12 +6,12 @@
 
 
 (use-package doom-themes
+  :if (equal theme-framework "doom")
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
-  (modus-themes--disable-themes)
   (load-theme 'doom-palenight t)
 
   ;; Enable flashing mode-line on errors
@@ -29,7 +29,7 @@
   (custom-set-faces
    ;; `(org-block-begin-line ((t (:inverse-video t))))
    ;; `(org-block-end-line ((t (:inverse-video t))))
-   `(org-inline-src-block ((t (:background "purple4"))))
+   `(org-block ((t (:background "#45034d"))))
    ;; `(org-block-begin-line ((t (:foreground ,(doom-color 'black) :background ,(doom-color 'white)))))
    ;; `(org-block-end-line ((t (:foreground ,(doom-color 'black) :background ,(doom-color 'white)))))
    )
@@ -37,7 +37,7 @@
 
 ;; Modeline
 (use-package doom-modeline
-  :init
+  :if (equal theme-framework "doom")
   :hook ((after-init . doom-modeline-mode)
 	 (doom-modeline-mode . (lambda ()
 				 (doom-modeline-set-modeline 'custom-modeline 'default))))

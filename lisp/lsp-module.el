@@ -22,10 +22,19 @@
 
 
   ;; Extra language support
-  ;; (add-to-list 'eglot-server-programs '(ess-r-mode . ("R" "--slave" "-e" "languageserver::run()")))
   ;; (add-to-list 'eglot-server-programs '(lua-mode . ("lua-language-server")))
   ;; (add-to-list 'eglot-server-programs '(scheme-mode . ("guile-lsp-server")))
   )
+
+;; Documentation
+(use-package eldoc
+  :if (equal lsp-framework "eglot")
+  :config
+  (setq eldoc-echo-area-prefer-doc-buffer t)
+  (setq eldoc-echo-area-use-multiline-p nil)
+  )
+
+
 
 (use-package consult-eglot
   :if (equal lsp-framework "eglot")
@@ -33,31 +42,32 @@
 
 
 ;;; LSP bridge
-
-(use-package markdown-mode)
-(use-package yasnippet
-  :hook (prog-mode . yas-minor-mode)
-  :config
-  (yas-reload-all)
-  )
-(use-package yasnippet-snippets)
 (use-package lsp-bridge
-  :ensure nil
-  :bind
-  (("K" . lsp-bridge-popup-documentation)
-  (:map acm-mode-map
-	      ("M-j" . acm-select-next)
-	      ("M-k" . acm-select-prev)
-	      ("M-h" . acm-doc-toggle)
-	      ))
   :if (equal lsp-framework "lsp-bridge")
+  :ensure nil
+  :bind (:map evil-normal-state-map
+	      ("K" . lsp-bridge-popup-documentation)
+	      :map acm-mode-map
+	      ("C-j" . acm-select-next)
+	      ("M-j" . acm-select-next)
+	      ("C-k" . acm-select-prev)
+	      ("M-k" . acm-select-prev)
+	      ("C-h" . acm-doc-toggle)
+	      ("M-h" . acm-doc-toggle)
+	      )
   ;; :vc (:fetcher "github"  :repo "manateelazycat/lsp-bridge")
   :load-path "external/lsp-bridge"
-  :hook (after-init . global-lsp-bridge-mode)
+  :hook ((prog-mode . lsp-bridge-mode)
+	 (org-mode. lsp-bridge-mode))
   :config
   (setq lsp-bridge-enable-hover-diagnostic t) ;; diagnostics
   (setq lsp-bridge-enable-org-babel t) ;; Org-babel support
-  (setq lsp-bridge-enable-auto-format-code t) ;; Formatting
+  ;; (setq lsp-bridge-enable-auto-format-code t) ;; Formatting, testing auto-format instead
+
+  (setq acm-enable-doc-markdown-render nil)
+  (setq acm-enable-search-file-words nil) ;; Do not clutter completion options with words
+  ;; (setq lsp-bridge-enable-search-words nil) ;; kiss
+  ;; (add-to-list 'lsp-bridge-search-words-prohibit-file-extensions "org")
 
   ;; Default lsp server
   (setq lsp-bridge-tex-lsp-server "digestif")
@@ -81,6 +91,12 @@
   (setq lsp-bridge-default-mode-hooks (append lsp-bridge-default-mode-hooks '(LaTeX-mode-hook)))
   (setq lsp-bridge-default-mode-hooks (append lsp-bridge-default-mode-hooks '(scheme-mode-mode)))
   (setq lsp-bridge-default-mode-hooks (append lsp-bridge-default-mode-hooks '(org-mode)))
+
+
+  (require 'bind-key)
+  ;; (unbind-key "C-k" global-map) ;; Clean keys for lsp-bridge in latex
+  (unbind-key "C-k" evil-insert-state-map) ;; Clean keys for lsp-bridge in latex
+
   )
 
 

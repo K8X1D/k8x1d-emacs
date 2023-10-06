@@ -38,7 +38,7 @@ Containing LEFT, and RIGHT aligned respectively."
 	       " "
 	       mode-line-frame-identification
 	       mode-line-misc-info
-	       (:eval flymake-mode-line-counter-format)
+	       ;; (:eval flymake-mode-line-counter-format)
 	       mode-line-modes
 	       ))))))
   )
@@ -60,7 +60,7 @@ Containing LEFT, and RIGHT aligned respectively."
    (geiser-repl-mode . hide-mode-line-mode)
    (inferior-python-mode . hide-mode-line-mode)
    (julia-vterm-repl-mode . hide-mode-line-mode)
-   (special-mode . hide-mode-line-mode)
+   ;; (special-mode . hide-mode-line-mode)
    (pdf-view-mode . hide-mode-line-mode))
   )
 
