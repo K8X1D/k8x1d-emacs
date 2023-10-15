@@ -7,11 +7,13 @@
 
 (defvar default-bibliography '("~/Zotero/k8x1d.bib"))
 (defvar org-directory "~/org")
-(defvar lsp-framework "eglot")
+(defvar lsp-framework "lsp-mode")
 ;; (defvar lsp-framework "lsp-bridge")
 (defvar theme-framework "doom")
 
 (require 'packages-module)
+
+
 
 ;; Doom look
 (require 'doom-module)
@@ -29,7 +31,8 @@
 (require 'modeline-module)
 (require 'fonts-module)
 (require 'icons-module)
-(require 'dashboard-module)
+;; (require 'dashboard-module)
+(require 'dashboard-module-alt)
 
 ;; Utilities
 (require 'org-module)
@@ -39,6 +42,7 @@
 (require 'ssh-module)
 (require 'pdf-module)
 (require 'multimedia-module)
+(require 'gtd-module)
 
 ;; Programming support
 (require 'lsp-module)
@@ -60,8 +64,11 @@
 (require 'julia-module)
 (require 'qml-module)
 (require 'scheme-module)
+(require 'lua-module)
 (require 'markdown-module)
 
+
+(require 'keybindings-module)
 
 (print "loading init.el done")
 ;;; init.el ends here

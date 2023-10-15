@@ -7,6 +7,7 @@
 
 (use-package doom-themes
   :if (equal theme-framework "doom")
+  :defer nil
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -27,11 +28,11 @@
   ;; Customizations
   ;; Must be used *after* the theme is loaded
   (custom-set-faces
-   ;; `(org-block-begin-line ((t (:inverse-video t))))
-   ;; `(org-block-end-line ((t (:inverse-video t))))
-   `(org-block ((t (:background "#45034d"))))
-   ;; `(org-block-begin-line ((t (:foreground ,(doom-color 'black) :background ,(doom-color 'white)))))
-   ;; `(org-block-end-line ((t (:foreground ,(doom-color 'black) :background ,(doom-color 'white)))))
+   ;; `(org-block ((t (:background "#45034d"))))
+   `(org-block-begin-line ((t (:foreground ,(doom-color 'green)))))
+   `(org-block-end-line ((t (:foreground ,(doom-color 'green)))))
+   `(org-modern-bracket-line ((t (:foreground ,(doom-color 'green)))))
+   `(treemacs-hl-line-face ((t (:background ,(doom-color 'base4)))))
    )
   )
 

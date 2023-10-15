@@ -14,14 +14,11 @@
   :hook ((after-init . evil-mode)
 	 (with-editor-mode . evil-insert-state)
 	 (org-capture-mode . evil-insert-state))
-  :config
   )
 
 
 (use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+  :hook (evil-mode . evil-collection-init))
 
 (use-package evil-goggles
   :hook (evil-mode . evil-goggles-mode)

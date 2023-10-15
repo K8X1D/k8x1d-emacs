@@ -100,6 +100,19 @@
   :config
   (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif"))))
 
+;; Strange error:
+;; WARNING: Unsupported code language ID 'true', treating text as plaintext
+(use-package lsp-ltex
+  :if (equal lsp-framework "lsp-mode")
+  :hook (text-mode . (lambda ()
+     		       (require 'lsp-ltex)
+     		       (lsp-deferred)))
+  :init
+  (setq lsp-ltex-version "16.0.0")
+  :config
+  (setq lsp-ltex-languagetool-http-server-uri "http://localhost:8081")
+  )
+
 
 (provide 'latex-module)
 ;;; latex-module.el ends here

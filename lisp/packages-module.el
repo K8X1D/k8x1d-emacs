@@ -6,6 +6,10 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+	     '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
+
+
 
 ;; (customize-set-variable 'package-archive-priorities
 ;;                         '(("gnu"    . 99)   ; prefer GNU packages
@@ -26,6 +30,7 @@
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
   (setq use-package-enable-imenu-support t)
+  (setq use-package-always-defer t)
   )
 
 (unless (package-installed-p 'vc-use-package)

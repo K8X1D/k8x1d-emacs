@@ -47,6 +47,57 @@
   :hook ((julia-mode . eglot-jl-init)
 	 (julia-mode . eglot-ensure))
   )
+(use-package lsp-julia
+  ;;:load-path "~/.k8x1d-emacs.d/manual/lsp-julia" ;; guix version is read-only...
+  :if (equal lsp-framework "lsp-mode")
+  :hook ((julia-ts-mode . (lambda ()
+			    (require 'lsp-julia)
+			    (lsp-deferred)))
+	 (julia-mode . (lambda ()
+			 (require 'lsp-julia)
+			 (lsp-deferred)))
+	 )
+  :config
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.8")
+  ;;(setq lsp-julia-package-dir nil)
+  (setq lsp-julia-command "julia")
+  (add-to-list 'lsp-language-id-configuration
+	       '(julia-ts-mode . "julia"))
+  ;;  ;; AOT config
+  ;; (setq lsp-julia-package-dir nil)
+  ;; (setq lsp-julia-flags `("-J/home/k8x1d/.cache/emacs/languageserver.so"))
+
+  ;; Add support over TRAMP
+  ;; Adapted from https://github.com/gdkrmr/lsp-julia/issues/49
+  ;; Don't work for now, but is a step in the right direction
+  (defun lsp-julia--rls-command-remote ()
+    "The command to lauch the Julia Language Server."
+    `(,lsp-julia-command
+      ,@lsp-julia-flags
+      ,(concat "-e "
+               "'"
+               "import Pkg; Pkg.instantiate(); "
+               "using InteractiveUtils, Sockets, SymbolServer, LanguageServer; "
+               "Union{Int64, String}(x::String) = x; "
+               "server = LanguageServer.LanguageServerInstance("
+               "stdin, stdout, "
+               (lsp-julia--get-root-remote) ", "
+               (lsp-julia--get-depot-path) ", "
+               "nothing, "
+               (lsp-julia--symbol-server-store-path-to-jl-no-expand) "); "
+               "run(server);"
+               "'")))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-tramp-connection 'lsp-julia--rls-command-remote)
+                    :major-modes '(julia-ts-mode julia-mode)
+                    :server-id 'julia-ls-remote
+                    :remote? t))
+  )
+
+
+
+
 
 (provide 'julia-module)
 ;;; julia-module.el ends here

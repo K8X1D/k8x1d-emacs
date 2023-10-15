@@ -4,7 +4,9 @@
 
 ;;; Code:
 
-;; LSP
+;;;
+;;; Eglot
+;;;
 (use-package eglot
   :if (equal lsp-framework "eglot")
   :bind
@@ -24,6 +26,16 @@
   ;; Extra language support
   ;; (add-to-list 'eglot-server-programs '(lua-mode . ("lua-language-server")))
   ;; (add-to-list 'eglot-server-programs '(scheme-mode . ("guile-lsp-server")))
+
+  ;; Stop spamming echo-area
+  ;; from https://emacs.stackexchange.com/questions/78417/how-to-stop-eglot-from-spamming-echo-area-in-emacs-27
+  (defun stop-spamming-pls-2 (orig-fun &rest args)
+    "Stop eglot from spamming the echo area"
+    (if (not (string-equal (nth 1 args) "$/progress"))
+	(apply orig-fun args)
+      )
+    )
+  (advice-add 'eglot-handle-notification :around #'stop-spamming-pls-2)
   )
 
 ;; Documentation
@@ -41,7 +53,9 @@
   )
 
 
+;;;
 ;;; LSP bridge
+;;;
 (use-package lsp-bridge
   :if (equal lsp-framework "lsp-bridge")
   :ensure nil
@@ -99,7 +113,63 @@
 
   )
 
+;;
+;; Lsp-mode
+;;
+(use-package lsp-mode
+  :if (equal lsp-framework "lsp-mode")
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred)
+  :config
+  (setq lsp-headerline-breadcrumb-enable nil);; remove headline
+  (setq lsp-modeline-diagnostics-enable nil) ;; superflous
+  (setq lsp-modeline-code-actions-enable nil) ;; superflous
 
+  (add-to-list 'lsp-language-id-configuration '(python-ts-mode . "python"))
+  (add-to-list 'lsp-language-id-configuration '(R-mode . "r"))
+  (add-to-list 'lsp-language-id-configuration '(org-mode . "org"))
+  (add-to-list 'lsp-language-id-configuration '(org-journal-mode . "org"))
+  )
+
+;; Corfu support
+(use-package lsp-mode
+  :if (equal lsp-framework "lsp-mode")
+  :custom
+  (lsp-completion-provider :none) ;; we use Corfu!
+  :init
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+	  '(orderless))) ;; Configure orderless
+  :hook
+  (lsp-completion-mode . my/lsp-mode-setup-completion))
+
+
+(use-package consult-lsp
+  :if (equal lsp-framework "lsp-mode")
+  :after lsp-mode
+  :config
+  (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
+  )
+
+(use-package lsp-ui
+  :if (equal lsp-framework "lsp-mode")
+  :init
+  ;; Sideline
+  ;; Cause some problems, see https://github.com/emacs-lsp/lsp-ui/issues/746, disbling for now
+  ;; Replaced by sideline
+  (setq lsp-ui-sideline-enable nil)
+  :commands lsp-ui-mode
+  :config
+  ;; Peek feature
+  (setq lsp-ui-peek-enable t)
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  )
+
+;; Debugger
+(use-package dap-mode
+  :if (equal lsp-framework "lsp-mode")
+  )
 
 (provide 'lsp-module)
 ;;; lsp-module.el ends here

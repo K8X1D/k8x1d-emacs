@@ -43,6 +43,9 @@
   :hook (python-mode . eglot-ensure)
   )
 
+(use-package lsp-mode
+  :if (equal lsp-framework "lsp-mode")
+  :hook (python-mode . lsp-deferred))
 
 (provide 'python-module)
 ;;; python-module.el ends here

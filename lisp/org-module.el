@@ -25,7 +25,7 @@
 			   "~/org/projects.org"
 			   "~/org/notes.org"
 			   "~/org/habits.org"
-			   "~/org/gtd/"))
+			   ))
   ;; take the whole buffer
   (setq org-agenda-window-setup 'current-window)
   ;; Show 10 day (3 before, 7 after)
@@ -35,6 +35,9 @@
    org-agenda-start-day "-3d")
   ;; Optimize startup
   (setq org-agenda-inhibit-startup t)
+  ;; Clean-up
+  (setq org-agenda-skip-deadline-if-done t)
+  (setq org-agenda-skip-scheduled-if-done t)
   )
 
 ;; Evil support
@@ -145,7 +148,17 @@
 	'(("TODO" :background "#ff5370" :foreground "#1c1f2b")
 	  ("NEXT" :background "#c3e88d" :foreground "#1c1f2b")
 	  ("WAIT" :background "#ffcb6b" :foreground "#1c1f2b")))
+
+  ;; org block
+  (setq org-modern-block-name t)
+  (setq org-modern-block-fringe t)
   )
+
+;; Better indentation support
+(use-package org-modern-indent
+  :vc (:fetcher "github"  :repo "jdtsmith/org-modern-indent")
+  :hook (org-modern-mode . org-modern-indent-mode))
+
 
 ;; Habit
 (use-package org
@@ -157,6 +170,7 @@
 ;; Org-babel
 (use-package org
   :config
+  (setq org-babel-python-command "python3")
   (add-to-list 'org-src-lang-modes '("python" . python))
   (add-to-list 'org-src-lang-modes '("r" . ess-r))
   (add-to-list 'org-src-lang-modes '("r" . R))

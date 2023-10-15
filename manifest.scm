@@ -164,6 +164,7 @@
     "djvulibre" ;; Implementation of DjVu, the document format 
 
     "qtlanguageserver" ;;  Implementation of the Language Server Protocol for Qt
+    "clang" ;; C language family frontend for LLVM
 
 
     ))

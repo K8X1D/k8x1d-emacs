@@ -46,5 +46,9 @@
   :hook (ess-r-mode . eglot-ensure)
   )
 
+(use-package lsp-mode
+  :if (equal lsp-framework "lsp-mode")
+  :hook (ess-r-mode . lsp-deferred))
+
 (provide 'r-module)
 ;;; r-module.el ends here

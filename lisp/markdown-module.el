@@ -13,7 +13,8 @@
 
 ;; Preview
 (use-package markdown-preview-mode
-  :hook (markdown-mode . markdown-preview-mode))
+  :bind (:map markdown-mode-map
+	      ("C-c C-c p" . markdown-preview-open-browser)))
 
 ;; Checker
 (use-package flymake-markdownlint

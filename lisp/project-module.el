@@ -1,5 +1,4 @@
 ;;; package --- Summary
-
 ;;; Commentary:
 
 ;;; Code:
@@ -7,6 +6,7 @@
   :config
   ;; Expand project root identification, see https://blog.jmthornton.net/p/emacs-project-override
   (setq project-vc-extra-root-markers '(".project.el" ".projectile" ))
+  (add-to-list 'project-switch-commands '(eat-project-other-window "Terminal")) ;; add terminal to option list when switching project
 
   ;; Prettify compilation buffer
   ;; See https://www.reddit.com/r/emacs/comments/kbwkca/compile_buffer_show_weird_symbols/

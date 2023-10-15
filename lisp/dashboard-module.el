@@ -39,12 +39,14 @@
   (setq dashboard-items '(
 			  ;; (recents  . 5)
 			  ;; (bookmarks . 5)
-			  ;;			  (projects . 5)
+			  ;; (projects . 1)
 			  (agenda . 10)
 			  ))
   (setq dashboard-week-agenda t)
   (setq dashboard-agenda-sort-strategy '(time-up))
   (setq dashboard-center-content t)
+
+  ;; Custom items
 
   ;; Navigator configuration
   (setq dashboard-set-navigator t)
