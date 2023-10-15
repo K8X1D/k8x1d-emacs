@@ -13,7 +13,8 @@
 
 (require 'packages-module)
 
-
+;; Utilities
+(require 'utilities-module)
 
 ;; Doom look
 (require 'doom-module)

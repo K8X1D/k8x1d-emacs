@@ -25,16 +25,19 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+(unless (package-installed-p 'vc-use-package)
+  (package-vc-install "https://github.com/slotThe/vc-use-package"))
+
 (use-package use-package
+  :init
+  (require 'vc-use-package)
   :config
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
   (setq use-package-enable-imenu-support t)
-  (setq use-package-always-defer t)
+  ;; (setq use-package-always-defer t) ;; too strict, do per package
   )
 
-(unless (package-installed-p 'vc-use-package)
-  (package-vc-install "https://github.com/slotThe/vc-use-package"))
 
 (provide 'packages-module)
 ;;; packages-module.el ends here

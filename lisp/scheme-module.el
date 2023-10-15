@@ -19,6 +19,7 @@
   :hook (scheme-mode-hook . flymake-guile))
 
 (use-package flycheck-guile
+  :hook (scheme-mode . (lambda () (require 'flycheck-guile)))
   :if (equal lsp-framework "lsp-mode"))
 
 (provide 'scheme-module)

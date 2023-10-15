@@ -56,6 +56,7 @@ Containing LEFT, and RIGHT aligned respectively."
    (inferior-ess-r-mode . hide-mode-line-mode)
    (org-capture-mode . hide-mode-line-mode)
    (eat-mode . hide-mode-line-mode)
+   (treemacs-mode . hide-mode-line-mode)
    ;; (dashboard-mode . hide-mode-line-mode)
    (compilation-mode . hide-mode-line-mode)
    (geiser-repl-mode . hide-mode-line-mode)

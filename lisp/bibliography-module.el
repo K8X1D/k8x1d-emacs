@@ -5,6 +5,7 @@
 ;;; Code:
 
 (use-package citar
+  :defer t
   :hook
   ((LaTeX-mode . citar-capf-setup)
    (org-mode . citar-capf-setup))
@@ -30,6 +31,7 @@
   )
 
 (use-package citar-embark
+  :defer t
   :after citar embark
   :no-require
   :config (citar-embark-mode))

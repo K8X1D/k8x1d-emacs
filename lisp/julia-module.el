@@ -95,9 +95,5 @@
                     :remote? t))
   )
 
-
-
-
-
 (provide 'julia-module)
 ;;; julia-module.el ends here

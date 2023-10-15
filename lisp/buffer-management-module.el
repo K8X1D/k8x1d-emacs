@@ -6,15 +6,18 @@
 
 ;; Buffer management
 (use-package ibuffer
+  :defer t
   :bind ("C-x C-b" . ibuffer)
   )
 
 ;; Icons support
 (use-package nerd-icons-ibuffer
+  :defer t
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 ;; Buffer grouping
 (use-package ibuffer-project
+  :defer t
   :config
   (add-hook
    'ibuffer-hook

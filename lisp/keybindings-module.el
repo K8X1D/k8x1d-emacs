@@ -38,15 +38,13 @@
     "qq" '(save-buffers-kill-terminal :which-key "Emacs")
     )
 
-
-
   ;; Buffers
   (k8x1d/leader-keys
     "b"  '(:ignore t :which-key "Buffers")
     "bn" '(next-buffer :which-key "Next")
     "bp"  '(previous-buffer :which-key "Previous")
     "bs"  '(consult-buffer :which-key "Search")
-    "bk"  '(kill-buffer :which-key "Kill")
+    "bk"  '(k8x1d/kill-buffer-and-window :which-key "Kill")
     "bl"  '(ibuffer :which-key "List")
     )
 
@@ -80,6 +78,7 @@
     "po" '(:ignore t :which-key "Open")
     ;; "pt" '(multi-vterm-project :which-key "Terminal")
     "pt" '(eat-project-other-window :which-key "Terminal")
+    "pm" '(minimap-mode :which-key "Minimap")
     "pe" '(treemacs :which-key "File explorer")
     )
 
@@ -129,7 +128,6 @@
     "g"  '(:ignore t :which-key "Git")
     "gg" '(magit :which-key "Status")
     )
-
   )
 
 (provide 'keybindings-module)
