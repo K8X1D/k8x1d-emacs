@@ -6,6 +6,7 @@
 
 ;; Note-tacking
 (use-package org-roam
+  
   :custom
   (org-roam-directory (file-truename (concat org-directory "/roam/")))
   :bind (("C-c n l" . org-roam-buffer-toggle)
@@ -25,9 +26,11 @@
 
 ;; UI
 (use-package websocket
+  
   :after org-roam)
 
 (use-package org-roam-ui
+  
   :after org-roam ;; or :after org
   ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
   ;;         a hookable mode anymore, you're advised to pick something yourself
@@ -42,6 +45,7 @@
 
 ;; Consult integration
 (use-package consult-org-roam
+  
   :after org-roam
   :init
   (require 'consult-org-roam)
@@ -69,6 +73,7 @@
 
 ;; Citar integration
 (use-package citar-org-roam
+  
   :after (citar org-roam)
   :config (citar-org-roam-mode))
 

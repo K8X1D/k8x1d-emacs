@@ -33,6 +33,7 @@
 
 ;; Line number
 (use-package display-line-numbers
+  
   :ensure nil
   :hook (prog-mode . display-line-numbers-mode) ;; Show line number for programming mode
   :config
@@ -41,7 +42,8 @@
 
 ;; Theme
 (use-package modus-themes
-  :if (not (equal theme-framework "doom"))
+  
+  :if (equal theme-framework "modus")
   :ensure nil
   :custom
   (modus-themes-org-blocks 'tinted-background)
@@ -73,17 +75,28 @@
 
 ;; Highlights "TODOs"
 (use-package hl-todo
+  
   :hook
   (after-init . global-hl-todo-mode)
   )
 
 ;; Show keybindings
 (use-package which-key
+  
   :hook (after-init . which-key-mode))
 
 
 (use-package rainbow-mode
+  
   :hook (prog-mode . rainbow-mode))
+
+;; Window divider
+(use-package emacs
+  :hook (after-init . window-divider-mode)
+  :config
+  (setq window-divider-default-right-width 1)
+  (setq window-divider-default-places 'right-only)
+  )
 
 
 

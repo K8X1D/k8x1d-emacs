@@ -6,7 +6,8 @@
 
 
 
-(use-package qml-mode)
+(use-package qml-mode
+  )
 
 
 ;; (use-package eglot

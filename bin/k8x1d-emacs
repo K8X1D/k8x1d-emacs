@@ -22,6 +22,7 @@ Help()
     echo "i     Install k8x1d-emacs."
     echo "h     Print this Help."
     echo "u     Update k8x1d-emacs."
+    echo "d     Daemonize k8x1d-emacs."
     echo
 }
 
@@ -57,11 +58,18 @@ GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFI
 }
 
 
+Daemonize()
+{
+GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFILE/etc/profile"
+    "$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacs" --init-directory="$PROJECT_DIRECTORY" --debug-init --daemon || notify-send -a "$PROJECT_NAME" "Launch" "Failed..."
+}
+
+
 ############################################################
 # Process the input options. Add options as needed.        #
 ############################################################
 # Get the options
-while getopts ":hiul:" option; do
+while getopts ":hiudl:" option; do
     case $option in
 	h) # display Help
             Help
@@ -71,6 +79,9 @@ while getopts ":hiul:" option; do
 	    exit;;
 	u) # Update
 	    Update 
+	    exit;;
+	d) # Daemon
+	    Daemonize 
 	    exit;;
 	\?) # Invalid option
             echo "Error: Invalid option"

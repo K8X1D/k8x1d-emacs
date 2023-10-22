@@ -3,8 +3,6 @@
 ;;; Commentary:
 
 ;;; Code:
-
-
 (defun k8x1d/kill-buffer-and-window ()
   (interactive)
   (kill-buffer)

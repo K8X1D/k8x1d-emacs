@@ -6,6 +6,7 @@
 
 ;; Syntax highlight
 (use-package ess
+  
   :config
   (setq ess-use-company nil)
   (setq mode-line-process nil)
@@ -17,6 +18,7 @@
 
 ;; REPL
 (use-package R-vterm
+  
   :vc (:fetcher "gitlab"  :repo "K8X1D/r-vterm")
   :init
   (defun k8x1d/open-R-repl-at-bottom ()
@@ -42,11 +44,13 @@
 
 ;; LSP
 (use-package eglot
+  
   :if (equal lsp-framework "eglot")
   :hook (ess-r-mode . eglot-ensure)
   )
 
 (use-package lsp-mode
+  
   :if (equal lsp-framework "lsp-mode")
   :hook (ess-r-mode . lsp-deferred))
 

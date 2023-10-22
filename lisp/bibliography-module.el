@@ -5,7 +5,6 @@
 ;;; Code:
 
 (use-package citar
-  :defer t
   :hook
   ((LaTeX-mode . citar-capf-setup)
    (org-mode . citar-capf-setup))
@@ -16,8 +15,8 @@
 	 ("C-c b o n" . citar-open-note)
 	 (:map minibuffer-local-map
 	       ("M-b" . citar-insert-preset))
-	 (:map org-mode-map
-	       ("C-c b" . org-cite-insert))
+	 ;; (:map org-mod
+	 ;;       ("C-c b" . org-cite-insert))
 	 )
   :config
   ;; Org cite configuration to use citar
@@ -31,7 +30,7 @@
   )
 
 (use-package citar-embark
-  :defer t
+  
   :after citar embark
   :no-require
   :config (citar-embark-mode))

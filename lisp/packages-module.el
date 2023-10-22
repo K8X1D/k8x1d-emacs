@@ -35,7 +35,9 @@
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
   (setq use-package-enable-imenu-support t)
-  ;; (setq use-package-always-defer t) ;; too strict, do per package
+  ;; Fast start OR no delay 
+  (setq use-package-always-defer (not (daemonp)))
+  (setq use-package-always-demand (daemonp)) ;; 
   )
 
 

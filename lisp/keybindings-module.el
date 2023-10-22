@@ -57,11 +57,13 @@
     "og"  '(guix :which-key "Guix")
     "ot"  '(vterm-toggle-cd :which-key "Terminal")
     "oT"  '(transmission :which-key "Transmission")
-    "od"  '(dashboard-refresh-buffer :which-key "Dashboard")
+    "oD"  '(dashboard-open :which-key "Dashboard")
+    "od"  '(dirvish :which-key "Dirvish")
     "or"  '(:ignore t :which-key "REPL")
     "orr"  '(R-vterm-repl t :which-key "R")
     "orj"  '(julia-vterm-repl t :which-key "Julia")
     "orp"  '(python-vterm-repl t :which-key "Python")
+    "oc" '(org-clock-goto :which-key "Clocked Task")
     )
 
   ;; Lsp
@@ -79,7 +81,8 @@
     ;; "pt" '(multi-vterm-project :which-key "Terminal")
     "pt" '(eat-project-other-window :which-key "Terminal")
     "pm" '(minimap-mode :which-key "Minimap")
-    "pe" '(treemacs :which-key "File explorer")
+    ;; "pe" '(treemacs :which-key "File explorer")
+    "pe" '(dirvish-side :which-key "File explorer")
     )
 
   ;; Workspace
@@ -128,7 +131,69 @@
     "g"  '(:ignore t :which-key "Git")
     "gg" '(magit :which-key "Status")
     )
+
+  ;; Org
+  (k8x1d/local-leader-keys
+    :keymaps 'flymake-mode-map
+    "D" '(:ignore t :which-key "Diagnostic")
+    "Db" '(flymake-show-buffer-diagnostics :which-key "List")
+    "Dn" '(flymake-goto-next-error :which-key "Next")
+    "Dp" '(flymake-goto-prev-error :which-key "Previous")
+    "Ds" '(consult-flymake :which-key "Search")
+    )
+
+  ;; Org
+  (k8x1d/local-leader-keys
+   :keymaps 'org-mode-map
+   "i" '(:ignore t :which-key "Insert")
+   "if" '(org-footnote-new :which-key "Footnote")
+   "il" '(org-insert-link :which-key "Link")
+   "it" '(org-insert-structure-template :which-key "Template")
+   "ic" '(org-cite-insert :which-key "Citation")
+   "id" '(:ignore t :which-key "Date")
+   "idd" '(org-deadline :which-key "Deadline")
+   "ids" '(org-schedule t :which-key "Schedule")
+   "id." '(org-time-stamp t :which-key "Timestamp")
+   "ip" '(org-set-property :which-key "Property")
+   "t" '(org-todo :which-key "Todo")
+   "o" '(org-open-at-point :which-key "Open")
+   "e" '(org-export-dispatch :which-key "Export")
+   "c" '(:ignore t  :which-key "Clock")
+   "ci" '(org-clock-in :which-key "In")
+   "co" '(org-clock-out :which-key "Out")
+   )
+
+  ;; Latex
+  (k8x1d/local-leader-keys
+   :keymaps 'LaTeX-mode-map
+   "m" '(TeX-command-master :which-key "Master")
+   "c" '(TeX-clean :which-key "Clean")
+   "v" '(TeX-view :which-key "View")
+   "s" '(:ignore t :which-key "Set")
+   "sm" '(TeX-master-file-ask :which-key "Master file")
+   )
+
+
+  ;; Scheme
+  (k8x1d/local-leader-keys
+   :keymaps 'scheme-mode-map
+   "'" '(geiser-repl-switch :which-key "REPL")
+   "b" '(geiser-eval-buffer :which-key "Eval buffer")
+   )
+
+  ;; Bibliography
+  (k8x1d/leader-keys
+    "b"  '(:ignore t :which-key "Bibliography")
+    "bf"  '(citar-open-files :which-key "File")
+    "bn"  '(citar-open-note :which-key "Note")
+    "bc"  '(citar-create-note :which-key "Create note")
+    )
+
   )
+
+
+
+
 
 (provide 'keybindings-module)
 ;;; keybindings-module.el ends here

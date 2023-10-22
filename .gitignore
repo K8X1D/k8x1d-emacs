@@ -30,3 +30,6 @@ custom.el
 .dap-breakpoints
 lsp-ltex
 external
+.cache
+elfeed
+emms

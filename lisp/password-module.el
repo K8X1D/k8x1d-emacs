@@ -6,6 +6,7 @@
 
 ;; Pass interation
 (use-package pass
+  
   :bind
   (("M-g p" . +pass/consult )
    ("C-c o p" . pass))

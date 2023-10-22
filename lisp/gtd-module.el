@@ -1,4 +1,3 @@
-
 ;;; package --- Summary
 
 ;;; Commentary:
@@ -7,14 +6,14 @@
 
 (use-package org-gtd
   :init
-  (require 'org-gtd)
   (setq org-gtd-update-ack "3.0.0")
+  (require 'org-gtd)
   :after org
   :custom
   (org-gtd-directory "~/org/gtd")
   (org-edna-use-inheritance t)
   (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
-  (org-gtd-areas-of-focus '("Administratif" "Implications" "Recherches" "Developpements" "Entretien"))
+  (org-gtd-areas-of-focus '("Administratif" "Implications" "Recherches" "Developpements" "Entretien" "Emplois"))
   :config
   (org-edna-mode)
   :bind

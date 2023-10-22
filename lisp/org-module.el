@@ -7,17 +7,31 @@
 
 ;; Org
 (use-package org
+  
   :bind
   ("C-c l" . org-store-link)
   :hook
   ((org-mode . org-indent-mode)
    (org-mode . visual-line-mode))
-  ;; :config
+  :config
   ;; (setq org-directory "~/org")
+
+  ;; Export options
+  (require 'ox-md nil t) ;; md
+  (require 'ox-odt nil t) ;; odt
+  )
+
+
+;; Export
+(use-package ox-gfm
+  :after org
+  :config
+  (require 'ox-gfm nil t) ;; better md
   )
 
 ;; Org agenda
 (use-package org
+  
   :bind ("C-c o a" . org-agenda)
   :config
   ;; org-agenda
@@ -42,6 +56,7 @@
 
 ;; Evil support
 (use-package evil-org
+  
   :after org
   :hook ((org-mode . evil-org-mode)
 	 (org-agenda-mode . evil-org-mode))
@@ -52,6 +67,7 @@
 
 ;; Org gtd
 (use-package org
+  
   :bind ("C-c c" . org-capture)
   :config
   (setq org-refile-use-outline-path t
@@ -75,6 +91,7 @@
 
 ;; Org-appear
 (use-package org-appear
+  
   :init
   (add-hook 'org-mode-hook (lambda ()
 			     (add-hook 'evil-insert-state-entry-hook
@@ -102,6 +119,7 @@
 
 ;; Org esthetics
 (use-package org-modern
+  
   :hook ((org-mode . org-modern-mode)
 	 (org-agenda-finalize . org-modern-agenda))
   :config
@@ -131,8 +149,8 @@
   (setq org-modern-checkbox '((88 . "󰄲")
 			      (45 . "󱋬")
 			      (32 . "󰄮")))
-  (setq org-modern-list '((43 . "◦")
-			  (45 . "-")
+  (setq org-modern-list '((43 . "▶")
+			  (45 . "◦")
 			  (42 . "•")))
   ;; (setq org-modern-priority
   ;; '((?A . ,(propertize "!!!" 'font-lock-face '(:foreground "#ff5370" )))
@@ -156,12 +174,14 @@
 
 ;; Better indentation support
 (use-package org-modern-indent
+  
   :vc (:fetcher "github"  :repo "jdtsmith/org-modern-indent")
   :hook (org-modern-mode . org-modern-indent-mode))
 
 
 ;; Habit
 (use-package org
+  
   :config
   (require 'org-habit)
   )
@@ -169,6 +189,7 @@
 
 ;; Org-babel
 (use-package org
+  
   :config
   (setq org-babel-python-command "python3")
   (add-to-list 'org-src-lang-modes '("python" . python))

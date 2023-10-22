@@ -9,7 +9,9 @@
 (defvar org-directory "~/org")
 (defvar lsp-framework "lsp-mode")
 ;; (defvar lsp-framework "lsp-bridge")
+;; (defvar theme-framework "modus")
 (defvar theme-framework "doom")
+(defvar file-explorer "dirvish")
 
 (require 'packages-module)
 
@@ -32,8 +34,7 @@
 (require 'modeline-module)
 (require 'fonts-module)
 (require 'icons-module)
-;; (require 'dashboard-module)
-(require 'dashboard-module-alt)
+(require 'dashboard-module)
 
 ;; Utilities
 (require 'org-module)
@@ -44,6 +45,7 @@
 (require 'pdf-module)
 (require 'multimedia-module)
 (require 'gtd-module)
+(require 'server-module)
 
 ;; Programming support
 (require 'lsp-module)
@@ -57,6 +59,7 @@
 (require 'corrector-module)
 (require 'bibliography-module)
 (require 'notes-taking-module)
+(require 'presentation-module)
 
 ;; Support modules
 (require 'latex-module)
@@ -67,6 +70,7 @@
 (require 'scheme-module)
 (require 'lua-module)
 (require 'markdown-module)
+(require 'news-module)
 
 
 (require 'keybindings-module)

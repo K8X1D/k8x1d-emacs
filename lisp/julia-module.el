@@ -6,10 +6,12 @@
 
 ;; Julia
 ;; Syntax highlight
-(use-package julia-mode)
+(use-package julia-mode
+  )
 
 ;; REPL
 (use-package julia-vterm
+  
   :init
   (defun k8x1d/open-julia-repl-at-bottom ()
     (interactive)
@@ -26,12 +28,14 @@
 
 ;; Formater
 (use-package julia-formatter
+  
   :init (require 'julia-formatter)
   :hook (julia-mode . julia-formatter-mode)
   :vc (:fetcher "codeberg"  :repo "FelipeLema/julia-formatter.el"))
 
 ;; Babel support
 (use-package ob-julia-vterm
+  
   :init
   (with-eval-after-load 'org
     (add-to-list 'org-babel-load-languages '(julia-vterm . t))
@@ -42,13 +46,14 @@
 
 ;; LSP
 (use-package eglot-jl
+  
   :if (equal lsp-framework "eglot")
   :init (setq eglot-connect-timeout 180) ;; prevent eglot timeout
   :hook ((julia-mode . eglot-jl-init)
 	 (julia-mode . eglot-ensure))
   )
 (use-package lsp-julia
-  ;;:load-path "~/.k8x1d-emacs.d/manual/lsp-julia" ;; guix version is read-only...
+  
   :if (equal lsp-framework "lsp-mode")
   :hook ((julia-ts-mode . (lambda ()
 			    (require 'lsp-julia)
@@ -94,6 +99,13 @@
                     :server-id 'julia-ls-remote
                     :remote? t))
   )
+
+;; Checker
+;; Don't work anymore
+;; (use-package flycheck-julia
+;;   :hook ((julia-mode . flycheck-julia-setup)
+;; 	 (julia-mode . flycheck-mode))
+;;   )
 
 (provide 'julia-module)
 ;;; julia-module.el ends here

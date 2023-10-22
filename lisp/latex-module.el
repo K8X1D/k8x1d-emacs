@@ -15,23 +15,17 @@
   (setq reftex-default-bibliography default-bibliography)
   (setq reftex-toc-split-windows-fraction 0.2))
 
-(use-package org-edit-latex
-  :hook (org . org-edit-latex-mode)
-  :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((latex . t))))
 
 (use-package evil-tex
   :after evil
   :hook (LaTeX-mode . evil-tex-mode)
   :config
   (require 'bind-key)
-  (unbind-key "M-n" evil-tex-mode-map) ;; Clean keys for lsp-bridge in latex
+  (unbind-key "m-n" evil-tex-mode-map) ;; clean keys for lsp-bridge in latex
   )
 
-
-(use-package auctex
+(use-package tex
+  :ensure auctex
   :init
   ;; TODO: fuse function
   (defun k8x1d/insert-latex-item-below ()
@@ -84,7 +78,6 @@
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   :config
-
   (require 'bind-key)
   (unbind-key "C-<return>" LaTeX-mode-map)
   (setq LaTeX-indent-level 4)
@@ -93,25 +86,21 @@
   (setq TeX-tree-roots '(".git" ".dir-locals.el" ".auctex-auto"))
   )
 
+;; Org support
+(use-package org-edit-latex
+  :hook (org . org-edit-latex-mode)
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((latex . t))))
+
 ;; LsP
 (use-package eglot
+  
   :if (equal lsp-framework "eglot")
   :hook ((LaTeX-mode . eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif"))))
-
-;; Strange error:
-;; WARNING: Unsupported code language ID 'true', treating text as plaintext
-(use-package lsp-ltex
-  :if (equal lsp-framework "lsp-mode")
-  :hook (text-mode . (lambda ()
-     		       (require 'lsp-ltex)
-     		       (lsp-deferred)))
-  :init
-  (setq lsp-ltex-version "16.0.0")
-  :config
-  (setq lsp-ltex-languagetool-http-server-uri "http://localhost:8081")
-  )
 
 
 (provide 'latex-module)

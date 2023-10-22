@@ -6,7 +6,6 @@
 
 
 ;; Modeline
-(use-package breadcrumb)
 (use-package emacs
   :init
   (defun simple-mode-line-render (left right)
@@ -44,12 +43,14 @@ Containing LEFT, and RIGHT aligned respectively."
   )
 
 (use-package minions
+  
   :hook (after-init . minions-mode)
   :init
   (setq minions-mode-line-lighter "...")
   )
 
 (use-package hide-mode-line
+  
   :hook
   ((vterm-mode . hide-mode-line-mode)
    (dired-sidebar-mode . hide-mode-line-mode)

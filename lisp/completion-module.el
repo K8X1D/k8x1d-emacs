@@ -7,6 +7,7 @@
 
 ;; Enable vertico
 (use-package vertico
+  
   :hook
   (after-init . vertico-mode)
   :bind  (:map vertico-map
@@ -31,8 +32,8 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :init
-  (savehist-mode))
+  
+  :hook (after-init . savehist-mode))
 
 ;; A few more useful configurations...
 (use-package emacs
@@ -64,21 +65,13 @@
 
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
-  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
-  ;; available in the *Completions* buffer, add it to the
-  ;; `completion-list-mode-map'.
+  
   :bind (:map minibuffer-local-map
               ("M-A" . marginalia-cycle))
-
-  ;; The :init section is always executed.
-  :init
-
-  ;; Marginalia must be activated in the :init section of use-package such that
-  ;; the mode gets enabled right away. Note that this forces loading the
-  ;; package.
-  (marginalia-mode))
+  :hook (after-init . marginalia-mode))
 
 (use-package embark
+  
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
    ("C-;" . embark-dwim)        ;; good alternative: M-.
@@ -145,17 +138,20 @@ targets."
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
+  
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
 
 
 (use-package orderless
+  
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package consult
+  
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
@@ -276,6 +272,7 @@ targets."
 
 ;; To reduce
 (use-package corfu
+  
   :if (not (equal lsp-framework "lsp-bridge"))
   ;; Optional customizations
   :custom
@@ -295,17 +292,23 @@ targets."
   ;;        (shell-mode . corfu-mode)
   ;;        (eshell-mode . corfu-mode))
 
-  ;; Recommended: Enable Corfu globally.
-  ;; This is recommended since Dabbrev can be used globally (M-/).
-  ;; See also `global-corfu-modes'.
-  :init
-  (global-corfu-mode)
-  :hook (corfu-mode . corfu-popupinfo-mode)
+  :hook ((after-init . global-corfu-mode)
+	 (corfu-mode . corfu-popupinfo-mode))
   :bind (:map corfu-map
 	      ("C-h" . corfu-popupinfo-documentation))
   :config
   (setq corfu-popupinfo-delay nil)
   )
+
+;; Terminal support
+(use-package corfu-terminal
+  :if (display-graphic-p)
+  :init 
+  (corfu-terminal-mode +1))
+
+
+
+
 
 ;; A few more useful configurations...
 (use-package emacs
@@ -333,6 +336,7 @@ targets."
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
+  
   :init
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
@@ -344,6 +348,7 @@ targets."
 
 ;; Completion at point
 (use-package cape
+  
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
   :bind (("C-c p p" . completion-at-point) ;; capf

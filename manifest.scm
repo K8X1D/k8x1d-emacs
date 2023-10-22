@@ -106,27 +106,27 @@
 )
 
 (define-public python-radian
-(package
-  (name "python-radian")
-  (version "0.6.7")
-  (source (origin
-            (method url-fetch)
-            (uri (pypi-uri "radian" version))
-            (sha256
-             (base32
-              "0d2i8dqdjlf3i10q7rhrcflpmrj1xfji8rnh1skm0zhyb33f2zr9"))))
-  (build-system pyproject-build-system)
-  (propagated-inputs (list python-prompt-toolkit python-pygments
-                           python-rchitect))
-  (native-inputs (list python-coverage python-pexpect python-ptyprocess
-                       python-pyte python-pytest))
-  (arguments `(#:tests? #f))
-  (home-page "https://github.com/randy3k/radian")
-  (synopsis "A 21 century R console")
-  (description "This package provides a 21 century R console")
-  (license #f))
+  (package
+   (name "python-radian")
+   (version "0.6.7")
+   (source (origin
+	    (method url-fetch)
+	    (uri (pypi-uri "radian" version))
+	    (sha256
+	     (base32
+	      "0d2i8dqdjlf3i10q7rhrcflpmrj1xfji8rnh1skm0zhyb33f2zr9"))))
+   (build-system pyproject-build-system)
+   (propagated-inputs (list python-prompt-toolkit python-pygments
+			    python-rchitect))
+   (native-inputs (list python-coverage python-pexpect python-ptyprocess
+			python-pyte python-pytest))
+   (arguments `(#:tests? #f))
+   (home-page "https://github.com/randy3k/radian")
+   (synopsis "A 21 century R console")
+   (description "This package provides a 21 century R console")
+   (license #f))
 
-)
+  )
 
 
 ;;
@@ -165,6 +165,9 @@
 
     "qtlanguageserver" ;;  Implementation of the Language Server Protocol for Qt
     "clang" ;; C language family frontend for LLVM
+
+    ;; Emms
+    "mid3v2"
 
 
     ))

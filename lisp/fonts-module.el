@@ -7,23 +7,11 @@
 ;; Fonts
 (use-package emacs
   :config
-  ;; Main typeface
-  (set-face-attribute 'default nil
-		      :font "Iosevka Term Nerd Font"
-		      :height 120
-		      )
-  ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil
-		      :font "Iosevka Term Nerd Font"
-		      :weight 'light
-		      :height 1.0
-		      )
-  ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil
-		      :font "Iosevka Nerd Font"
-		      :weight 'light
-		      :height 1.0
-		      )
+  (custom-set-faces
+   '(default ((t (:inherit nil :height 120 :family "Iosevka Term Nerd Font"))))
+   '(fixed-pitch ((t (:inherit nil :height 1.0 :family "Iosevka Term Nerd Font"))))
+   '(variable-pitch ((t (:inherit nil :height 1.0 :family "Iosevka Nerd Font"))))
+   )
   )
 
 (provide 'fonts-module)

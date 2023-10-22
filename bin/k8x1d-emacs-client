@@ -1,0 +1,19 @@
+#!/bin/sh
+# See https://www.redhat.com/sysadmin/arguments-options-bash-scripts
+# Adapted from https://guix.gnu.org/cookbook/en/html_node/Reproducible-profiles.html
+############################################################
+#  Variables                                               #
+############################################################
+GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
+GUIX_EXTRA="$HOME/.guix-extra"
+PROJECT_NAME="k8x1d-emacs"
+PROJECT_DIRECTORY="$HOME/.k8x1d-emacs.d"
+# EMACS="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacs" --init-directory="$PROJECT_DIRECTORY" --debug-init
+EMACSCLIENT="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacsclient"
+CLIENT="$EMACSCLIENT -nc"
+
+############################################################
+# Commands                                                 #
+############################################################
+GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFILE/etc/profile"
+$CLIENT

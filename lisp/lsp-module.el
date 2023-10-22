@@ -8,6 +8,7 @@
 ;;; Eglot
 ;;;
 (use-package eglot
+  
   :if (equal lsp-framework "eglot")
   :bind
   (("C-c L a" . eglot-code-actions)
@@ -40,6 +41,7 @@
 
 ;; Documentation
 (use-package eldoc
+  
   :if (equal lsp-framework "eglot")
   :config
   (setq eldoc-echo-area-prefer-doc-buffer t)
@@ -49,6 +51,7 @@
 
 
 (use-package consult-eglot
+  
   :if (equal lsp-framework "eglot")
   )
 
@@ -57,6 +60,7 @@
 ;;; LSP bridge
 ;;;
 (use-package lsp-bridge
+  
   :if (equal lsp-framework "lsp-bridge")
   :ensure nil
   :bind (:map evil-normal-state-map
@@ -117,11 +121,12 @@
 ;; Lsp-mode
 ;;
 (use-package lsp-mode
+  
   :if (equal lsp-framework "lsp-mode")
   :hook ((lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :config
-  (setq lsp-headerline-breadcrumb-enable nil);; remove headline
+  (setq lsp-headerline-breadcrumb-enable nil) ;; remove headline
   (setq lsp-modeline-diagnostics-enable nil) ;; superflous
   (setq lsp-modeline-code-actions-enable nil) ;; superflous
 
@@ -133,6 +138,7 @@
 
 ;; Corfu support
 (use-package lsp-mode
+  
   :if (equal lsp-framework "lsp-mode")
   :custom
   (lsp-completion-provider :none) ;; we use Corfu!
@@ -145,6 +151,7 @@
 
 
 (use-package consult-lsp
+  
   :if (equal lsp-framework "lsp-mode")
   :after lsp-mode
   :config
@@ -152,6 +159,7 @@
   )
 
 (use-package lsp-ui
+  
   :if (equal lsp-framework "lsp-mode")
   :init
   ;; Sideline
@@ -168,8 +176,12 @@
 
 ;; Debugger
 (use-package dap-mode
+  
   :if (equal lsp-framework "lsp-mode")
+  :hook ((prog-mode . dap-mode)
+	 (dap-mode . dap-ui-mode))
   )
+
 
 (provide 'lsp-module)
 ;;; lsp-module.el ends here
