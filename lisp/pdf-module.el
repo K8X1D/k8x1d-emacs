@@ -56,6 +56,9 @@
 ;;   (with-eval-after-load 'pdf-annot
 ;;     (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note)))
 
+(use-package nov
+  :mode "\\.epub\\'"
+  )
 
 
 
