@@ -1,3 +1,9 @@
+;;; package --- Summary "-*- lexical-binding: t -*-"
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Minimize garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
 ;; Lower threshold back to 8 MiB (default is 800kB)
