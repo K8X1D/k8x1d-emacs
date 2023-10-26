@@ -22,10 +22,22 @@
 
 ;; High performance eshell
 (use-package eat
+  :after evil-collection
+  :init
+  (defun eat-project-vertical ()
+    (interactive)
+    (evil-window-split)
+    (evil-window-down 1)
+    (evil-window-set-height 16)
+    (eat-project))
   :hook ((eshell-load . eat-eshell-mode)
 	 (eshell-load . eat-eshell-visual-command-mode))
-  :bind ("C-c o e" . eat)
+  :bind (("C-c o e" . eat))
+  :config
+  ;; Evil compatibility
+  (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
   )
+
 
 (provide 'terminal-module)
 ;;; terminal-module.el ends here
