@@ -27,6 +27,7 @@
   ;; Scrolling
   ;;(setq scroll-step 1)
   (setq scroll-conservatively 10000)
+  (setq inhibit-compacting-font-caches t)
   ;; Keybindings
   ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ;; ESC Cancels All
   )
