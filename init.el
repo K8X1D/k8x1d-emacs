@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; package --- Summary "-*- lexical-binding: t -*-"
 
 ;;; Commentary:
 
@@ -74,6 +74,7 @@
 
 
 (require 'keybindings-module)
+
 
 (print "loading init.el done")
 ;;; init.el ends here
