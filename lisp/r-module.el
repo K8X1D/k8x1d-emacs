@@ -18,9 +18,9 @@
 
 ;; REPL
 (use-package R-vterm
-  
   :vc (:fetcher "gitlab"  :repo "K8X1D/r-vterm")
   :init
+  (setq R-vterm-repl-program "radian") ;; Use radian instead of R
   (defun k8x1d/open-R-repl-at-bottom ()
     (interactive)
     (evil-window-split)
@@ -36,8 +36,6 @@
    ("C-c i" . R-vterm-send-include-buffer-file))
   :config
   (setq vterm-kill-buffer-on-exit nil)
-  ;; Use radian instead of R
-  (setq R-vterm-repl-program "radian")
   (require 'bind-key)
   (unbind-key "C-c TAB" R-vterm-mode-map)
   )
