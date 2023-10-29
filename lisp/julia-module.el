@@ -11,10 +11,10 @@
 
 ;; REPL
 (use-package julia-vterm
-  
   :init
   (defun k8x1d/open-julia-repl-at-bottom ()
     (interactive)
+    (require 'julia-vterm)
     (evil-window-split)
     (evil-window-down 1)
     (evil-window-set-height 17)
@@ -53,7 +53,6 @@
 	 (julia-mode . eglot-ensure))
   )
 (use-package lsp-julia
-  
   :if (equal lsp-framework "lsp-mode")
   :hook ((julia-ts-mode . (lambda ()
 			    (require 'lsp-julia)
@@ -75,29 +74,29 @@
   ;; Add support over TRAMP
   ;; Adapted from https://github.com/gdkrmr/lsp-julia/issues/49
   ;; Don't work for now, but is a step in the right direction
-  (defun lsp-julia--rls-command-remote ()
-    "The command to lauch the Julia Language Server."
-    `(,lsp-julia-command
-      ,@lsp-julia-flags
-      ,(concat "-e "
-               "'"
-               "import Pkg; Pkg.instantiate(); "
-               "using InteractiveUtils, Sockets, SymbolServer, LanguageServer; "
-               "Union{Int64, String}(x::String) = x; "
-               "server = LanguageServer.LanguageServerInstance("
-               "stdin, stdout, "
-               (lsp-julia--get-root-remote) ", "
-               (lsp-julia--get-depot-path) ", "
-               "nothing, "
-               (lsp-julia--symbol-server-store-path-to-jl-no-expand) "); "
-               "run(server);"
-               "'")))
+  ;; (defun lsp-julia--rls-command-remote ()
+  ;;   "The command to lauch the Julia Language Server."
+  ;;   `(,lsp-julia-command
+  ;;     ,@lsp-julia-flags
+  ;;     ,(concat "-e "
+  ;;              "'"
+  ;;              "import Pkg; Pkg.instantiate(); "
+  ;;              "using InteractiveUtils, Sockets, SymbolServer, LanguageServer; "
+  ;;              "Union{Int64, String}(x::String) = x; "
+  ;;              "server = LanguageServer.LanguageServerInstance("
+  ;;              "stdin, stdout, "
+  ;;              (lsp-julia--get-root-remote) ", "
+  ;;              (lsp-julia--get-depot-path) ", "
+  ;;              "nothing, "
+  ;;              (lsp-julia--symbol-server-store-path-to-jl-no-expand) "); "
+  ;;              "run(server);"
+  ;;              "'")))
 
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-tramp-connection 'lsp-julia--rls-command-remote)
-                    :major-modes '(julia-ts-mode julia-mode)
-                    :server-id 'julia-ls-remote
-                    :remote? t))
+  ;; (lsp-register-client
+  ;;  (make-lsp-client :new-connection (lsp-tramp-connection 'lsp-julia--rls-command-remote)
+  ;;                   :major-modes '(julia-ts-mode julia-mode)
+  ;;                   :server-id 'julia-ls-remote
+  ;;                   :remote? t))
   )
 
 ;; Checker
@@ -106,6 +105,24 @@
 ;;   :hook ((julia-mode . flycheck-julia-setup)
 ;; 	 (julia-mode . flycheck-mode))
 ;;   )
+
+
+;; Treesitter support
+(use-package julia-ts-mode
+  :mode "\\.jl$")
+
+(use-package lsp-julia
+  :after lsp-mode
+  :if (equal lsp-framework "lsp-mode")
+  :config
+  (add-to-list 'lsp-language-id-configuration '(julia-ts-mode . "julia"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection 'lsp-julia--rls-command)
+		    :major-modes '(julia-mode ess-julia-mode julia-ts-mode)
+		    :server-id 'julia-ls
+		    :multi-root t))
+  )
+
 
 (provide 'julia-module)
 ;;; julia-module.el ends here
