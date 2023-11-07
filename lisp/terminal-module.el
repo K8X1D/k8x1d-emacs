@@ -24,6 +24,13 @@
 (use-package eat
   :after evil-collection
   :init
+  (defun eat-vertical ()
+    (interactive)
+    (evil-window-split)
+    (evil-window-down 1)
+    (evil-window-set-height 16)
+    (eat))
+
   (defun eat-project-vertical ()
     (interactive)
     (evil-window-split)
@@ -35,6 +42,7 @@
   :bind (("C-c o e" . eat))
   :config
   ;; Evil compatibility
+  (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
   (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
   )
 

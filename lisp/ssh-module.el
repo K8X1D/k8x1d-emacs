@@ -1,11 +1,10 @@
-;;; package --- Summary
-
+;;; package --- Summary -*- lexical-binding: t -*-
 ;;; Commentary:
 
 ;;; Code:
 
 
-(setq k8x1d-ssh-addresses
+(defvar k8x1d-ssh-addresses
       '(("Mariadb"  . "kkaiser@206.12.89.239")
 	("Serenity_kkaiser"  . "kkaiser@206.12.92.226")
 	("Shelly"  . "k8x1d@67.68.116.59")
@@ -13,7 +12,7 @@
 	("Groudon" . "kkaiser@130.104.60.82")))
 
 
-;; Tramp 
+;; Tramp
 (use-package tramp
   :config
   ;; Enable full-featured Dirvish over TRAMP on certain connections
@@ -42,10 +41,6 @@
   (setq tramp-verbose 0)
   (setq tramp-chunksize 2000)
   (setq tramp-use-ssh-controlmaster-options nil))
-
-
-
-
 
 (defun k8x1d/select-ssh-address ()
   (alist-get

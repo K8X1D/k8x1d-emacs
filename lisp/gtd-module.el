@@ -13,7 +13,7 @@
   (org-gtd-directory "~/org/gtd")
   (org-edna-use-inheritance t)
   (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
-  (org-gtd-areas-of-focus '("Administratif" "Implications" "Recherches" "Developpements" "Entretien" "Emplois"))
+  (org-gtd-areas-of-focus '("Administratif" "Implications" "Recherches" "Developpements" "Entretien" "Emplois" "Social"))
   :config
   (org-edna-mode)
   :bind

@@ -65,10 +65,10 @@
    `(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold :height 0.8))))
    )
   :bind
-  (:map LaTeX-mode-map
-	(("C-<return>" . k8x1d/insert-latex-item-below)
-	 ("C-S-<return>" . k8x1d/insert-latex-item-above))
-	)
+  ;; (:map LaTeX-mode-map
+  ;; 	(("C-<return>" . k8x1d/insert-latex-item-below)
+  ;; 	 ("C-S-<return>" . k8x1d/insert-latex-item-above))
+  ;; 	)
   :hook
   (LaTeX-mode . LaTeX-math-mode)
   (LaTeX-mode . corfu-mode)
@@ -78,8 +78,8 @@
   ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   :config
-  (require 'bind-key)
-  (unbind-key "C-<return>" LaTeX-mode-map)
+  ;; (require 'bind-key)
+  ;; (unbind-key "C-<return>" LaTeX-mode-map)
   (setq LaTeX-indent-level 4)
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   ;; (setq TeX-view-program-selection '((output-pdf "Zathura")))
@@ -96,12 +96,21 @@
 
 ;; LsP
 (use-package eglot
-  
   :if (equal lsp-framework "eglot")
   :hook ((LaTeX-mode . eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif"))))
 
+
+;; Checker
+(use-package flycheck 
+  :if (equal lsp-framework "lsp-mode")
+  :hook (LaTeX-mode . flycheck-mode)
+  ;; :config
+  ;; repair Illegal verbosity problem
+  ;; (setq tex-chktex-program "~/.k8x1d-emacs.d/bin/chktex")
+  ;; (setq flycheck-tex-chktex-executable "~/.k8x1d-emacs.d/bin/chktex")
+  )
 
 (provide 'latex-module)
 ;;; latex-module.el ends here

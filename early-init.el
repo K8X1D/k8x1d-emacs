@@ -29,7 +29,7 @@
 
 ;; Initial frame parameters
 (setq frame-inhibit-implied-resize t)
-;; (add-to-list 'default-frame-alist '(background-color . "#282828"))
+(add-to-list 'default-frame-alist '(background-color . "#282828"))
 ;; (add-to-list 'default-frame-alist '(foreground-color . "#ebdbb2"))
 (setq frame-resize-pixelwise t) ;; take alle the available space for window
 (set-frame-parameter nil 'alpha-background 80) ; For current frame

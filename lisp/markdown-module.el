@@ -9,7 +9,10 @@
   :vc (:fetcher "github"  :repo "Somelauw/evil-markdown"))
 
 ;; Syntax highlight
-(use-package markdown-mode)
+(use-package markdown-mode
+  :config
+  (setq markdown-command "pandoc")
+  )
 
 ;; Preview
 (use-package markdown-preview-mode

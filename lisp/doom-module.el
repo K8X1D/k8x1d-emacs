@@ -7,7 +7,10 @@
 
 (use-package doom-themes
   :if (equal theme-framework "doom")
-  :hook (after-init . (lambda () (load-theme 'doom-palenight t))) 
+  :hook (after-init . (lambda ()
+			(load-theme 'doom-palenight t)
+			(solaire-global-mode +1)
+			))
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -30,7 +33,7 @@
    `(org-block-begin-line ((t (:foreground ,(doom-color 'green)))))
    `(org-block-end-line ((t (:foreground ,(doom-color 'green)))))
    `(org-modern-bracket-line ((t (:foreground ,(doom-color 'green)))))
-   `(treemacs-hl-line-face ((t (:background ,(doom-color 'base4)))))
+   ;; `(treemacs-hl-line-face ((t (:background ,(doom-color 'base4)))))
    `(window-divider ((t (:foreground ,(doom-color 'blue)))))
    `(corfu-current ((t (:foreground ,(doom-color 'green) :weight bold))))
    `(corfu-default ((t (:foreground ,(doom-color 'blue)))))
@@ -43,16 +46,6 @@
   )
 
 ;; Modeline
-(use-package doom-modeline-now-playing
-  :demand t
-  :if (equal theme-framework "doom")
-  :config
-  ;; (doom-modeline-now-playing-timer)
-  (setq doom-modeline-now-playing t)
-  (setq doom-modeline-now-playing-max-length 20)
-  (setq doom-modeline-now-playing-format "{{artist}} - {{title}}")
-  )
-
 (use-package doom-modeline
   :if (equal theme-framework "doom")
   :hook ((after-init . doom-modeline-mode)
@@ -63,7 +56,9 @@
   (setq doom-modeline-minor-modes t)
   (setq doom-modeline-buffer-encoding nil)
   (setq doom-modeline-buffer-state-icon nil)
+  (setq doom-modeline-lsp nil)
   ;; (setq doom-modeline-major-mode-icon nil)
+  ;; (setq doom-modeline-vcs-max-length 3)
   (setq doom-modeline-major-mode-icon nil)
   (setq doom-modeline-bar-width 1)
   (setq doom-modeline-buffer-file-name-style 'file-name)
@@ -74,15 +69,24 @@
     ;; '(time battery compilation objed-state misc-info grip irc mu4e gnus github debug repl checker lsp minor-modes input-method indent-info buffer-encoding process major-mode))
     ;; '(modals workspace-name matches follow buffer-info checker vcs remote-host word-count parrot selection-info)
     ;; '(compilation objed-state misc-info grip irc mu4e gnus github debug repl input-method indent-info buffer-encoding process time battery))
-    '(modals workspace-name buffer-info vcs)
-    '(now-playing compilation checker lsp major-mode minor-modes))
+    '(modals workspace-name buffer-info vcs checker)
+    '(compilation lsp major-mode minor-modes))
   )
 
-;; Remove tab-bar
-(use-package tab-bar
+
+;; Buffer differientate color
+(use-package solaire-mode
   :if (equal theme-framework "doom")
   :config
-  (setq tab-bar-show 'never)
+  ;; (setq solaire-mode-themes-to-face-swap 'doom-palenight)
+  ;; Customization
+  (custom-set-faces
+   ;; `(org-block ((t (:background "#45034d"))))
+   ;; `(solaire-default-face ((t (:background ,(doom-color 'base0)))))
+   ;; `(solaire-default-face ((t (:background "gray2"))))
+   ;; `(solaire-default-face ((t (:background "gray6"))))
+   `(solaire-default-face ((t (:background "gray11"))))
+   )
   )
 
 (provide 'doom-module)

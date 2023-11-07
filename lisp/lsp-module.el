@@ -8,7 +8,6 @@
 ;;; Eglot
 ;;;
 (use-package eglot
-  
   :if (equal lsp-framework "eglot")
   :bind
   (("C-c L a" . eglot-code-actions)
@@ -41,17 +40,18 @@
 
 ;; Documentation
 (use-package eldoc
-  
-  :if (equal lsp-framework "eglot")
+  :after evil
+  :hook (after-init . global-eldoc-mode)
+  :init
+  :bind (:map evil-normal-state-map
+	      ("K" . eldoc)
+	      )
   :config
   (setq eldoc-echo-area-prefer-doc-buffer t)
   (setq eldoc-echo-area-use-multiline-p nil)
   )
 
-
-
 (use-package consult-eglot
-  
   :if (equal lsp-framework "eglot")
   )
 
@@ -60,7 +60,6 @@
 ;;; LSP bridge
 ;;;
 (use-package lsp-bridge
-  
   :if (equal lsp-framework "lsp-bridge")
   :ensure nil
   :bind (:map evil-normal-state-map
@@ -121,14 +120,15 @@
 ;; Lsp-mode
 ;;
 (use-package lsp-mode
-  
   :if (equal lsp-framework "lsp-mode")
-  :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :hook ((prog-mode . lsp-deferred)
+	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :config
   (setq lsp-headerline-breadcrumb-enable nil) ;; remove headline
   (setq lsp-modeline-diagnostics-enable nil) ;; superflous
   (setq lsp-modeline-code-actions-enable nil) ;; superflous
+  (setq lsp-eldoc-render-all t)
 
   (add-to-list 'lsp-language-id-configuration '(python-ts-mode . "python"))
   (add-to-list 'lsp-language-id-configuration '(R-mode . "r"))
@@ -138,7 +138,6 @@
 
 ;; Corfu support
 (use-package lsp-mode
-  
   :if (equal lsp-framework "lsp-mode")
   :custom
   (lsp-completion-provider :none) ;; we use Corfu!
@@ -149,9 +148,7 @@
   :hook
   (lsp-completion-mode . my/lsp-mode-setup-completion))
 
-
 (use-package consult-lsp
-  
   :if (equal lsp-framework "lsp-mode")
   :after lsp-mode
   :config
@@ -159,7 +156,6 @@
   )
 
 (use-package lsp-ui
-  
   :if (equal lsp-framework "lsp-mode")
   :init
   ;; Sideline
@@ -168,7 +164,7 @@
   (setq lsp-ui-sideline-enable nil)
   :commands lsp-ui-mode
   :config
-  ;; Peek feature
+  ;; Peek features
   (setq lsp-ui-peek-enable t)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
@@ -176,7 +172,6 @@
 
 ;; Debugger
 (use-package dap-mode
-  
   :if (equal lsp-framework "lsp-mode")
   :hook ((prog-mode . dap-mode)
 	 (dap-mode . dap-ui-mode))

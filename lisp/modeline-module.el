@@ -4,7 +4,6 @@
 
 ;;; Code:
 
-
 ;; Modeline
 (use-package emacs
   :init
@@ -27,7 +26,8 @@ Containing LEFT, and RIGHT aligned respectively."
        (quote ("%e "
 	       evil-mode-line-tag
 	       " "
-	       (:eval (breadcrumb-project-crumbs))
+	       "%b"
+	       " "
 	       (vc-mode vc-mode)
 	       " [%l:%c]"
 	       ))
@@ -35,29 +35,32 @@ Containing LEFT, and RIGHT aligned respectively."
        ;; Right.
        (quote (
 	       " "
+	       buffer-name
 	       mode-line-frame-identification
 	       mode-line-misc-info
-	       ;; (:eval flymake-mode-line-counter-format)
+	       mode-line
+	       " "
+	       flycheck-mode-line
+	       " "
 	       mode-line-modes
 	       ))))))
   )
 
+;; Minor mode grouping
 (use-package minions
-  
   :hook (after-init . minions-mode)
   :init
   (setq minions-mode-line-lighter "...")
   )
 
 (use-package hide-mode-line
-  
   :hook
   ((vterm-mode . hide-mode-line-mode)
    (dired-sidebar-mode . hide-mode-line-mode)
    (inferior-ess-r-mode . hide-mode-line-mode)
    (org-capture-mode . hide-mode-line-mode)
    (eat-mode . hide-mode-line-mode)
-   (treemacs-mode . hide-mode-line-mode)
+   ;; (treemacs-mode . hide-mode-line-mode)
    ;; (dashboard-mode . hide-mode-line-mode)
    (compilation-mode . hide-mode-line-mode)
    (geiser-repl-mode . hide-mode-line-mode)

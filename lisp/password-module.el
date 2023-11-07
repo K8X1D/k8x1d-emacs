@@ -6,9 +6,8 @@
 
 ;; Pass interation
 (use-package pass
-  
   :bind
-  (("M-g p" . +pass/consult )
+  (("M-g p" . +pass/consult)
    ("C-c o p" . pass))
   :config
   ;; From https://github.com/doomemacs/doomemacs/blob/master/modules/tools/pass/autoload/consult.el

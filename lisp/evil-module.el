@@ -1,4 +1,5 @@
-;;; package --- Summary
+;;; package --- Summary "-*- lexical-binding: t -*-"
+
 
 ;;; Commentary:
 
@@ -7,6 +8,7 @@
 ;; Evil
 (use-package evil
   :init
+  (setq evil-want-C-u-scroll t)
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-redo)
@@ -22,6 +24,8 @@
   (add-to-list 'evil-insert-state-modes 'vterm-mode)
   (add-to-list 'evil-insert-state-modes 'with-editor-mode)
   (add-to-list 'evil-insert-state-modes 'org-capture-mode)
+  ;; TODO: find magit commit buffer mode
+  ;; (add-to-list 'evil-insert-state-modes 'magit-mode)
   )
 
 (use-package evil-goggles
@@ -73,6 +77,7 @@ play well with `evil-mc'."
     "Override of the default mode line string for `evil-mc-mode'.")
 
   )
+
 
 ;; Evil motion and text objects
 (use-package evil-args

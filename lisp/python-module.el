@@ -6,7 +6,6 @@
 
 ;; Syntax highlight
 (use-package python
-  
   :config
   (setq python-indent-offset 4)
   (setq python-indent-guess-indent-offset-verbose nil)
@@ -41,27 +40,18 @@
 
 ;; LSP
 (use-package eglot
-  
   :if (equal lsp-framework "eglot")
   :hook (python-mode . eglot-ensure)
   )
 
-(use-package lsp-mode
-  
-  :if (equal lsp-framework "lsp-mode")
-  :hook (python-mode . lsp-deferred))
-
-
 ;; Checker
 (use-package flycheck
-  
   :if (equal lsp-framework "lsp-mode")
   :hook (python-mode . flycheck-mode)
   :config
   (setq flycheck-python-pylint-executable "pylint")
   (setq flycheck-python-pycompile-executable "python3")
   )
-
 
 ;; Conda support
 (use-package conda
@@ -91,7 +81,6 @@
   ;; ;; Activate on focus in
   ;; (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv)
   )
-
 
 
 (provide 'python-module)

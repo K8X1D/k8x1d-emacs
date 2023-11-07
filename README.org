@@ -27,3 +27,15 @@
 Currently, [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]] is backend for lsp support. The main reason is that [[https://github.com/joaotavora/eglot][eglot]] and [[https://github.com/manateelazycat/lsp-bridge][lsp-bridge]] doesn't offer the necessary features to support Ltex corretor. Eglot doesn't allow multiserver support, hence latex writing has only access to completion or corrector, not both while Lsp-bridge doesn't support (yet) ltex.
 
 But, those two additional framework are accessible via the ~lsp-framework~ variable ("lsp-bridge"or "eglot").
+
+*** Treesitter
+Built-in packages:
+- treesit.el
+Helper packages:
+- [[https://github.com/renzmann/treesit-auto][treesit-auto]] (for auto installation of treesitter grammar)
+*** Project management
+Built-in packages:
+- [[https://github.com/emacs-mirror/emacs/blob/master/lisp/progmodes/project.el][project.el]]
+- [[https://github.com/emacs-mirror/emacs/blob/master/lisp/tab-bar.el][tab-bar.el]]
+Addtional packages:
+- [[https://github.com/mclear-tools/tabspaces][tabspaces]] (create isolated workspaces)

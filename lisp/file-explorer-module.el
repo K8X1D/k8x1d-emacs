@@ -23,7 +23,6 @@
 ;; Improved version of the Emacs inbuilt package Dired
 
 (use-package dirvish
-  :if (equal file-explorer "dirvish")
   :hook ((after-init . dirvish-override-dired-mode)
 	 (dirvish-override-dired-mode . dirvish-peek-mode)) ;; Preview files in minibuffer
   :custom

@@ -4,9 +4,16 @@
 
 ;;; Code:
 
-
+;;
+;; Dired
+;;
 (use-package dired-sidebar
-  
+  :general
+  (k8x1d/leader-keys
+    "p" '(:keymap project-prefix-map
+		  :which-key "Project")
+    "pe" '(dired-sidebar-toggle-sidebar :which-key "File explorer"))
+  :if (equal file-explorer "dired")
   :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
   :commands (dired-sidebar-toggle-sidebar)
   :init
@@ -35,8 +42,17 @@
 ;; (setq ibuffer-sidebar-use-custom-font t)
 ;; (setq ibuffer-sidebar-face `(:family "Helvetica" :height 140)))
 
+;;
+;; Treemacs
+;;
+
 (use-package treemacs
-  
+  :general
+  (k8x1d/leader-keys
+    "p" '(:keymap project-prefix-map
+		  :which-key "Project")
+    "pe" '(treemacs :which-key "File explorer"))
+  :if (equal file-explorer "treemacs")
   :config
   ;; (treemacs-follow-mode t)
   ;; (treemacs-git-mode 'deferred)
@@ -50,34 +66,46 @@
 
 ;; Evil support
 (use-package treemacs-evil
-  
+  :if (equal file-explorer "treemacs")
   :after (treemacs evil))
 
 ;; Magit support
 (use-package treemacs-magit
-  
+  :if (equal file-explorer "treemacs")
   :after (treemacs magit))
 
 ;; Icons support
 (use-package treemacs-nerd-icons
-  
+  :if (equal file-explorer "treemacs")
   :hook (treemacs-mode . (lambda () (require 'treemacs-nerd-icons)))
   :config
   (treemacs-load-theme "nerd-icons"))
 
 ;; Tab-bar support
 (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
-  
+  :if (equal file-explorer "treemacs")
   :after (treemacs)
   :config (treemacs-set-scope-type 'Tabs))
 
 ;; LSP-mode support
 (use-package lsp-treemacs
-  
-  :if (equal lsp-framework "lsp-mode")
+  :if (and (equal lsp-framework "lsp-mode") (equal file-explorer "treemacs"))
   :after treemacs
   :config
   (lsp-treemacs-sync-mode))
+
+
+;;
+;; Dirvish
+;;
+(use-package dirvish
+  :general
+  (k8x1d/leader-keys
+    "p" '(:keymap project-prefix-map
+		  :which-key "Project")
+    "pe" '(dirvish-side :which-key "File explorer"))
+  :if (equal file-explorer "dired")
+  )
 
 
 ;;

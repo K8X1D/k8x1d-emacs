@@ -8,12 +8,13 @@
 (defvar default-bibliography '("~/Zotero/k8x1d.bib"))
 (defvar org-directory "~/org")
 (defvar lsp-framework "lsp-mode")
-;; (defvar lsp-framework "lsp-bridge")
+(defvar file-explorer "dirvish")
 ;; (defvar theme-framework "modus")
 (defvar theme-framework "doom")
 (defvar file-explorer "dirvish")
 
 (require 'packages-module)
+(require 'keybindings-module)
 
 ;; Utilities
 (require 'utilities-module)
@@ -23,8 +24,7 @@
 
 ;; Managements
 (require 'buffer-management-module)
-(require 'workspace-module)
-(require 'project-module)
+(require 'project-management-module)
 (require 'file-explorer-module)
 
 ;; UI
@@ -54,6 +54,7 @@
 (require 'version-control-module)
 (require 'sidebar-module)
 (require 'snippets-module)
+(require 'treesitter-module)
 
 ;; Writting support
 (require 'corrector-module)
@@ -63,7 +64,7 @@
 
 ;; Support modules
 (require 'latex-module)
-(require 'python-module)
+;; (require 'python-module)
 (require 'r-module)
 (require 'julia-module)
 (require 'qml-module)
@@ -73,7 +74,6 @@
 (require 'news-module)
 
 
-(require 'keybindings-module)
 
 
 (print "loading init.el done")

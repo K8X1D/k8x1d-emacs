@@ -29,6 +29,20 @@
   (with-eval-after-load 'compile
     (fancy-compilation-mode)))
 
+;; Bookmark per project
+(use-package bookmark-in-project
+  :commands (bookmark-in-project-jump
+             bookmark-in-project-jump-next
+             bookmark-in-project-jump-previous
+             bookmark-in-project-delete-all)
+
+  ;; Example key bindings.
+  :bind (("M-n" . bookmark-in-project-jump-next)
+         ("M-p" . bookmark-in-project-jump-previous)
+         ("M-*" . bookmark-in-project-toggle)
+         ("M-o" . bookmark-in-project-jump)))
+
+
 
 ;;
 ;; Window configuration
@@ -59,8 +73,9 @@
   (tabspaces-initialize-project-with-todo t)
   (tabspaces-todo-file-name "project-todo.org")
   ;; sessions
-  (tabspaces-session t)
-  (tabspaces-session-auto-restore t))
+  ;; (tabspaces-session t)
+  ;; (tabspaces-session-auto-restore t)
+  )
   
 (provide 'project-management-module)
 ;;; project-management-module.el ends here

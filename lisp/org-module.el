@@ -22,11 +22,10 @@
   )
 
 
-;; Export
+;; Export to github md
 (use-package ox-gfm
   :after org
-  :config
-  (require 'ox-gfm nil t) ;; better md
+  :hook (org-mode . (lambda ()  (require 'ox-gfm nil t))) 
   )
 
 ;; Org agenda

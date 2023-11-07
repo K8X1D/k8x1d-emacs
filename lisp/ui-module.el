@@ -34,7 +34,6 @@
 
 ;; Line number
 (use-package display-line-numbers
-  
   :ensure nil
   :hook (prog-mode . display-line-numbers-mode) ;; Show line number for programming mode
   :config
@@ -43,7 +42,6 @@
 
 ;; Theme
 (use-package modus-themes
-  
   :if (equal theme-framework "modus")
   :ensure nil
   :custom
@@ -76,19 +74,16 @@
 
 ;; Highlights "TODOs"
 (use-package hl-todo
-  
   :hook
   (after-init . global-hl-todo-mode)
   )
 
 ;; Show keybindings
 (use-package which-key
-  
   :hook (after-init . which-key-mode))
 
 
 (use-package rainbow-mode
-  
   :hook (prog-mode . rainbow-mode))
 
 ;; Window divider
@@ -99,6 +94,11 @@
   (setq window-divider-default-places 'right-only)
   )
 
+;; Differentiate color for buffer
+(use-package solaire-mode
+  :if (equal theme-framework "modus")
+  ;; :hook (after-init . solaire-global-mode)
+  )
 
 
 (provide 'ui-module)
