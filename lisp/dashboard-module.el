@@ -31,7 +31,7 @@
 						 :height 1.2
 						 :v-adjust 0.0
 						 :face 'dashboard-heading))
-    (insert "    SPC p p"))
+    (insert "    SPC TAB o"))
   (defun dashboard-insert-open-agenda (list-size)
     (dashboard-insert-heading "Open Agenda"
 			      nil
@@ -78,8 +78,8 @@
   (setq dashboard-icon-type 'nerd-icons) ;; use `nerd-icons' package
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-)
-  
+  )
+
 
 (use-package page-break-lines
   :hook
