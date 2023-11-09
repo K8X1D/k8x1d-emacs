@@ -72,7 +72,6 @@
 	      ("C-h" . acm-doc-toggle)
 	      ("M-h" . acm-doc-toggle)
 	      )
-  ;; :vc (:fetcher "github"  :repo "manateelazycat/lsp-bridge")
   :load-path "external/lsp-bridge"
   :hook ((prog-mode . lsp-bridge-mode)
 	 (org-mode. lsp-bridge-mode))
