@@ -130,17 +130,6 @@
     "dr"  '(org-gtd-review-area-of-focus :which-key "Review Area")
     )
 
-  ;; GTD
-  (k8x1d/leader-keys
-    "g"  '(:ignore t :which-key "Git")
-    "gg" '(magit :which-key "Status")
-    "gl" '(:ignore t :which-key "List")
-    "gli" '(forge-list-issues :which-key "Issue")
-    "glt" '(magit-todos-list :which-key "Todo")
-    "gc" '(:ignore t :which-key "Create")
-    "gci" '(forge-create-issue :which-key "Issue")
-    "gcp" '(forge-create-post :which-key "Post")
-    )
 
   ;; Notes
   (k8x1d/leader-keys

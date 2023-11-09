@@ -5,26 +5,34 @@
 ;;; Code:
 
 (use-package magit
+  :general 
+  (k8x1d/leader-keys
+    "g"  '(:ignore t :which-key "Git")
+    "gg" '(magit :which-key "Status")
+    "gl" '(:ignore t :which-key "List")
+    "glt" '(magit-todos-list :which-key "Todo")
+    )
   :config
   (setq magit-define-global-key-bindings t)
   )
 
-
 (use-package forge
+  :general 
+  (k8x1d/leader-keys
+    "gli" '(forge-list-issues :which-key "Issue")
+    "gc" '(:ignore t :which-key "Create")
+    "gci" '(forge-create-issue :which-key "Issue")
+    "gcp" '(forge-create-post :which-key "Post")
+    "ga" '(forge-add-repository :which-key "Add repository")
+    )
   :init
   (setq forge-add-default-bindings nil)
   :after magit
-  ;; :bind
-  ;; (("gli" '(forge-list-issues :which-key "Issues")
-  ;; "gc" '(:ignore t :which-key "Create")
-  ;; "gci" '(forge-create-issue :which-key "Issues")
-  ;; ))
-  ;; :bind ("C-x g i c" ("Create" . )
-  ;; 	 "C-x g i l" ("List" . forge-list-issues))
   :config
-  (setq auth-sources '("~/.authinfo.gpg")))
+  (setq auth-sources '("~/.authinfo.gpg"))
+  )
 
-(use-package orgit-forge)
+;; (use-package orgit-forge)
 
 (use-package magit-todos
   :after magit
