@@ -14,6 +14,7 @@
 (defvar file-explorer "dirvish")
 
 (require 'packages-module)
+(require 'byte-compile-module)
 (require 'keybindings-module)
 
 ;; Utilities
