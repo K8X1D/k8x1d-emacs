@@ -24,6 +24,7 @@
     "gci" '(forge-create-issue :which-key "Issue")
     "gcp" '(forge-create-post :which-key "Post")
     "ga" '(forge-add-repository :which-key "Add repository")
+    "gp" '(forge-pull :which-key "Pull topics")
     )
   :init
   (setq forge-add-default-bindings nil)
