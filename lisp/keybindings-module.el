@@ -212,7 +212,7 @@
     )
 
 
-  ;; Scheme
+  ;; Julia
   (k8x1d/local-leader-keys
     :keymaps 'julia-vterm-mode-map
     "'" '(k8x1d/open-julia-repl-at-bottom :which-key "REPL")

@@ -19,6 +19,7 @@
 ;; Extended evil support
 (use-package evil-collection
   :hook (evil-mode . evil-collection-init)
+  :bind ([remap magit-jump-to-tracked] . evil-tab-next)
   :config
   (add-to-list 'evil-insert-state-modes 'eat-mode)
   (add-to-list 'evil-insert-state-modes 'vterm-mode)
@@ -100,9 +101,6 @@ play well with `evil-mc'."
   ;; :config
   ;; (evilem-default-keybindings "SPC e")
   )
-
-(use-package evil-surround
-  :hook (evil-mode . global-evil-surround-mode))
 
 (provide 'evil-module)
 ;;; evil-module.el ends here

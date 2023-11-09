@@ -3,6 +3,7 @@
 	     (guix build-system python)
 	     (guix build-system pyproject)
 	     (gnu packages python)
+	     (gnu packages aspell)
 	     (gnu packages python-xyz)
 	     (gnu packages libffi)
 	     (gnu packages compression)
@@ -155,6 +156,7 @@
 
     ;; Utilities
     "fd" ;; Simple, fast and user-friendly alternative to find
+    "ispell" ;; Interactive spell-checking tool for Unix
 
 
     ;; Markdown
@@ -165,9 +167,6 @@
 
     "qtlanguageserver" ;;  Implementation of the Language Server Protocol for Qt
     "clang" ;; C language family frontend for LLVM
-
-    ;; Emms
-    "mid3v2"
 
 
     ))

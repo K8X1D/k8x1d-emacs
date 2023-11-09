@@ -6,7 +6,8 @@
 
 ;; Evil support
 (use-package evil-markdown
-  :vc (:fetcher "github"  :repo "Somelauw/evil-markdown"))
+  :vc (:url "https://github.com/Somelauw/evil-markdown"
+	    :branch "main"))
 
 ;; Syntax highlight
 (use-package markdown-mode

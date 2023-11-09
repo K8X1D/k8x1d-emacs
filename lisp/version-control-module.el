@@ -5,14 +5,12 @@
 ;;; Code:
 
 (use-package magit
-  
   :config
   (setq magit-define-global-key-bindings t)
   )
 
 
 (use-package forge
-  
   :init
   (setq forge-add-default-bindings nil)
   :after magit
@@ -26,12 +24,9 @@
   :config
   (setq auth-sources '("~/.authinfo.gpg")))
 
-(use-package orgit-forge
-  
-  )
+(use-package orgit-forge)
 
 (use-package magit-todos
-  
   :after magit
   ;; :general
   ;; (k8x1d/leader-keys
@@ -41,7 +36,6 @@
   )
 
 (use-package magit-org-todos
-  
   :after magit
   ;; :general
   ;; (k8x1d/leader-keys

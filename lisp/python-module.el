@@ -14,7 +14,8 @@
 
 ;; REPL
 (use-package python-vterm
-  :vc (:fetcher "gitlab"  :repo "K8X1D/python-vterm")
+  :vc (:url "https://gitlab.com/K8X1D/python-vterm"
+	    :branch "main")
   :init
   (defun k8x1d/open-python-repl-at-bottom ()
     (interactive)

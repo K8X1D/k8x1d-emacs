@@ -5,6 +5,12 @@
 ;;; Code:
 
 (use-package pdf-tools
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'pdf-annot-minor-mode-map
+    "a" '(:ignore t :which-key "Annotate")
+    "ah" '(pdf-annot-add-highlight-markup-annotation :which-key "Highlight")
+    )
   :init
   (pdf-loader-install)
   ;; :hook (pdf-view-mode . pdf-view-midnight-minor-mode)

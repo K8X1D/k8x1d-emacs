@@ -25,12 +25,7 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-(unless (package-installed-p 'vc-use-package)
-  (package-vc-install "https://github.com/slotThe/vc-use-package"))
-
 (use-package use-package
-  :init
-  (require 'vc-use-package)
   :config
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
@@ -39,7 +34,6 @@
   (setq use-package-always-defer (not (daemonp)))
   (setq use-package-always-demand (daemonp)) ;; 
   )
-
 
 (provide 'packages-module)
 ;;; packages-module.el ends here

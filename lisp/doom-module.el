@@ -70,7 +70,7 @@
     ;; '(modals workspace-name matches follow buffer-info checker vcs remote-host word-count parrot selection-info)
     ;; '(compilation objed-state misc-info grip irc mu4e gnus github debug repl input-method indent-info buffer-encoding process time battery))
     '(modals workspace-name buffer-info vcs checker)
-    '(compilation lsp major-mode minor-modes))
+    '(battery compilation lsp major-mode minor-modes))
   )
 
 

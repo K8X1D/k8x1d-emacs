@@ -18,7 +18,8 @@
 
 ;; REPL
 (use-package R-vterm
-  :vc (:fetcher "gitlab"  :repo "K8X1D/r-vterm")
+  :vc (:url "https://gitlab.com/K8X1D/r-vterm"
+	    :branch "main")
   :init
   (setq R-vterm-repl-program "radian") ;; Use radian instead of R
   (defun k8x1d/open-R-repl-at-bottom ()
@@ -34,6 +35,14 @@
   (("C-c o r r" . R-vterm-repl)
    :map R-vterm-mode-map
    ("C-c i" . R-vterm-send-include-buffer-file))
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'R-vterm-mode-map
+    "'" '(k8x1d/open-R-repl-at-bottom :which-key "REPL")
+    "b" '(R-vterm-send-buffer :which-key "Send buffer")
+    "RET" '(R-vterm-send-region-or-current-line :which-key "Eval buffer")
+    "f" '(R-vterm-send-include-buffer-file :which-key "Eval file")
+    )
   :config
   (setq vterm-kill-buffer-on-exit nil)
   (require 'bind-key)

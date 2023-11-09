@@ -3,11 +3,10 @@
 ;;; Commentary:
 
 ;;; Code:
-
 (use-package eglot-ltex
-  
   :if (equal lsp-framework "eglot")
-  :vc (:fetcher "github"  :repo "emacs-languagetool/eglot-ltex")
+  :vc (:url "https://github.com/emacs-languagetool/eglot-ltex"
+	    :branch "main")
   :hook ((org-mode . (lambda ()
 		       (require 'eglot-ltex)
 		       (eglot-ensure)))

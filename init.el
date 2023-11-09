@@ -70,6 +70,7 @@
 (require 'qml-module)
 (require 'scheme-module)
 (require 'lua-module)
+(require 'nix-module)
 (require 'markdown-module)
 (require 'news-module)
 

@@ -28,10 +28,10 @@
 
 ;; Formater
 (use-package julia-formatter
-  
   :init (require 'julia-formatter)
   :hook (julia-mode . julia-formatter-mode)
-  :vc (:fetcher "codeberg"  :repo "FelipeLema/julia-formatter.el"))
+  :vc (:url "https://codeberg.com/FelipeLema/julia-formatter.el"
+	    :branch "main"))
 
 ;; Babel support
 (use-package ob-julia-vterm

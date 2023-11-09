@@ -7,7 +7,6 @@
 
 ;; Org
 (use-package org
-  
   :bind
   ("C-c l" . org-store-link)
   :hook
@@ -55,18 +54,18 @@
 
 ;; Evil support
 (use-package evil-org
-  
   :after org
+  :bind ([remap org-agenda-show-tags] . evil-tab-next)
   :hook ((org-mode . evil-org-mode)
 	 (org-agenda-mode . evil-org-mode))
   :config
   (require 'evil-org-agenda)
   (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
-  (evil-org-agenda-set-keys))
+  (evil-org-agenda-set-keys)
+  )
 
 ;; Org gtd
 (use-package org
-  
   :bind ("C-c c" . org-capture)
   :config
   (setq org-refile-use-outline-path t
@@ -85,6 +84,8 @@
 	   "* TODO %?\n  %i\n")
 	  ("n" "Notes" entry (file+headline "~/org/notes.org"  "Notes")
 	   "* %U %?\n")))
+  (setq org-enforce-todo-dependencies t)
+  (setq org-enforce-todo-checkbox-dependencies t)
   )
 
 
@@ -118,7 +119,6 @@
 
 ;; Org esthetics
 (use-package org-modern
-  
   :hook ((org-mode . org-modern-mode)
 	 (org-agenda-finalize . org-modern-agenda))
   :config
@@ -169,18 +169,18 @@
   ;; org block
   (setq org-modern-block-name t)
   (setq org-modern-block-fringe t)
+
   )
 
 ;; Better indentation support
 (use-package org-modern-indent
-  
-  :vc (:fetcher "github"  :repo "jdtsmith/org-modern-indent")
+  :vc (:url "https://github.com/jdtsmith/org-modern-indent"
+	    :branch "main")
   :hook (org-modern-mode . org-modern-indent-mode))
 
 
 ;; Habit
 (use-package org
-  
   :config
   (require 'org-habit)
   )
@@ -188,7 +188,6 @@
 
 ;; Org-babel
 (use-package org
-  
   :config
   (setq org-babel-python-command "python3")
   (add-to-list 'org-src-lang-modes '("python" . python))
