@@ -10,8 +10,6 @@
 (use-package dired-sidebar
   :general
   (k8x1d/leader-keys
-    "p" '(:keymap project-prefix-map
-		  :which-key "Project")
     "pe" '(dired-sidebar-toggle-sidebar :which-key "File explorer"))
   :if (equal file-explorer "dired")
   :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
@@ -49,8 +47,6 @@
 (use-package treemacs
   :general
   (k8x1d/leader-keys
-    "p" '(:keymap project-prefix-map
-		  :which-key "Project")
     "pe" '(treemacs :which-key "File explorer"))
   :if (equal file-explorer "treemacs")
   :config
@@ -101,10 +97,8 @@
 (use-package dirvish
   :general
   (k8x1d/leader-keys
-    "p" '(:keymap project-prefix-map
-		  :which-key "Project")
     "pe" '(dirvish-side :which-key "File explorer"))
-  :if (equal file-explorer "dired")
+  :if (equal file-explorer "dirvish")
   )
 
 

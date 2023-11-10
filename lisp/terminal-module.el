@@ -22,6 +22,12 @@
 
 ;; High performance eshell
 (use-package eat
+  :general
+  ;; Project
+  (k8x1d/leader-keys
+    "pt" '(eat-project-vertical :which-key "Terminal")
+    "ot"  '(eat-vertical :which-key "Terminal")
+    )
   :after evil-collection
   :init
   (defun eat-vertical ()
@@ -39,7 +45,6 @@
     (eat-project))
   :hook ((eshell-load . eat-eshell-mode)
 	 (eshell-load . eat-eshell-visual-command-mode))
-  :bind (("C-c o e" . eat))
   :config
   ;; Evil compatibility
   (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)

@@ -78,7 +78,7 @@
 	  ))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-todo-keywords
-	'((sequence "TODO" "NEXT" "WAIT" "|" "DONE" "CNCL")))
+	'((sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)")))
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+headline "~/org/inbox.org" "Tasks")
 	   "* TODO %?\n  %i\n")

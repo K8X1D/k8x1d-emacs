@@ -55,7 +55,7 @@
     "oa" '(org-agenda :which-key "Agenda")
     "op"  '(pass :which-key "Pass")
     "og"  '(guix :which-key "Guix")
-    "ot"  '(eat-vertical :which-key "Terminal")
+    ;; "ot"  '(eat-vertical :which-key "Terminal")
     "oT"  '(transmission :which-key "Transmission")
     "oB"  '(bluetooth-list-devices :which-key "Bluetooth")
     "ob"  '(citar-open :which-key "Bibliography")
@@ -80,7 +80,7 @@
     "pb" '(consult-project-buffer :which-key "Switch to buffer")
     "po" '(:ignore t :which-key "Open")
     ;; "pt" '(multi-vterm-project :which-key "Terminal")
-    "pt" '(eat-project-vertical :which-key "Terminal")
+    ;; "pt" '(eat-project-vertical :which-key "Terminal")
     "pm" '(minimap-mode :which-key "Minimap")
     )
 
