@@ -62,10 +62,12 @@
 (require 'bibliography-module)
 (require 'notes-taking-module)
 (require 'presentation-module)
+(require 'csv-module)
+(require 'notebook-module)
 
 ;; Support modules
 (require 'latex-module)
-;; (require 'python-module)
+(require 'python-module)
 (require 'r-module)
 (require 'julia-module)
 (require 'qml-module)

@@ -28,7 +28,8 @@
 (use-package use-package
   :config
   (require 'use-package-ensure)
-  (setq use-package-always-ensure t)
+;;  (setq use-package-always-ensure nil)
+   (setq use-package-always-ensure t)
   (setq use-package-enable-imenu-support t)
   ;; Fast start OR no delay 
   (setq use-package-always-defer (not (daemonp)))

@@ -23,7 +23,6 @@
 ;; High performance eshell
 (use-package eat
   :general
-  ;; Project
   (k8x1d/leader-keys
     "pt" '(eat-project-vertical :which-key "Terminal")
     "ot"  '(eat-vertical :which-key "Terminal")

@@ -6,25 +6,20 @@
 
 ;; Snippet provider
 (use-package yasnippet
-  
   :hook (prog-mode . yas-minor-mode)
   :config
   (yas-reload-all)
   )
 
 ;; Collection of snippets
-(use-package yasnippet-snippets
-  )
-
+(use-package yasnippet-snippets)
 
 ;; Consult support
 (use-package consult-yasnippet
-  
   :bind ("M-g s" . consult-yasnippet))
 
 ;; Capf support
 (use-package yasnippet-capf
-  
   :after cape
   :config
   (add-to-list 'completion-at-point-functions #'yasnippet-capf))

@@ -8,7 +8,18 @@
   :init
   (setq org-gtd-update-ack "3.0.0")
   (require 'org-gtd)
-  :after org
+  :general
+  (k8x1d/leader-keys
+    "d"  '(:ignore t
+		   :package org-gtd
+		   :which-key "GTD")
+    "dc" '(org-gtd-capture :which-key "Capture")
+    "de" '(org-gtd-engage :which-key "Engage")
+    "dp"  '(org-gtd-process-inbox :which-key "Process")
+    "dn"  '(org-gtd-show-all-next :which-key "Show next")
+    "da"  '(org-gtd-archive-completed-items :which-key "Archive completed")
+    "dr"  '(org-gtd-review-area-of-focus :which-key "Review Area")
+    )
   :custom
   (org-gtd-directory "~/org/gtd")
   (org-edna-use-inheritance t)

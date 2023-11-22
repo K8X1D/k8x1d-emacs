@@ -52,4 +52,14 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-cache-directory))
 (load custom-file 'noerror)
 
+;; Set fonts
+(custom-set-faces
+ '(default ((t (:inherit nil :height 120 :family "Iosevka Term Nerd Font"))))
+ '(fixed-pitch ((t (:inherit nil :height 1.0 :family "Iosevka Term Nerd Font"))))
+ '(variable-pitch ((t (:inherit nil :height 1.0 :family "Iosevka Nerd Font"))))
+ )
+
+;; Simplify and uniformize proomting
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (print "loading early-init.el done")

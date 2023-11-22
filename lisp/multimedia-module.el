@@ -6,12 +6,23 @@
 
 ;; Music
 (use-package mpdel
+  :general
+  (k8x1d/leader-keys
+    "om" '(:keymap mpdel-core-map
+		   :package mpdel
+		   :which-key "Music player")
+    )
   :init
   (setq mpdel-prefix-key (kbd "C-c o m"))
   :hook (after-init . mpdel-mode))
 
 ;; Video
 (use-package empv
+  :general
+  (k8x1d/leader-keys
+    "ov" '(:keymap empv-map
+		   :which-key "Video player")
+    )
   :config
   (bind-key "C-c o v" empv-map)
   (setq empv-invidious-instance "https://invidious.flokinet.to/api/v1")
@@ -25,7 +36,7 @@
 ;; In test
 ;; Inspiration
 ;; - https://lucidmanager.org/productivity/configure-emms/
- ;; Emacs Multimedia System configuration
+;; Emacs Multimedia System configuration
 (use-package emms
   :init
   (require 'emms-setup)
@@ -46,6 +57,7 @@
   :config
   (setq emms-info-functions '(emms-info-tinytag))
   (setq emms-browser-covers 'emms-browser-cache-thumbnail-async)
+  (setq emms-mode-line-format " %s ")
   )
 
 (provide 'multimedia-module)

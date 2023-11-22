@@ -25,11 +25,21 @@
     (python-vterm-repl)
     (evil-insert-state)
     )
-  :hook ((python-mode . python-vterm-mode))
-  :bind
-  (("C-c o r p" . python-vterm-repl)
-   :map python-vterm-mode-map
-   ("C-c i" . python-vterm-send-include-buffer-file))
+  :general
+  (k8x1d/leader-keys
+    "o"  '(:ignore t :which-key "Open")
+    "or"  '(:ignore t :which-key "REPL")
+    "orp"  '(k8x1d/open-python-repl-at-bottom t :which-key "Python")
+    )
+  (k8x1d/local-leader-keys
+    :keymaps 'python-vterm-mode-map
+    "'" '(k8x1d/open-python-repl-at-bottom :which-key "REPL")
+    "b" '(python-vterm-send-buffer :which-key "Send buffer")
+    "RET" '(python-vterm-send-region-or-current-line :which-key "Eval buffer")
+    "f" '(python-vterm-send-include-buffer-file :which-key "Eval file")
+    )
+  :hook ((python-mode . python-vterm-mode)
+	 (python-ts-mode . python-vterm-mode))
   :config
   (setq vterm-kill-buffer-on-exit nil)
   ;; Use radian instead of R
@@ -43,6 +53,14 @@
 (use-package eglot
   :if (equal lsp-framework "eglot")
   :hook (python-mode . eglot-ensure)
+  )
+
+(use-package lsp-mode
+  :if (equal lsp-framework "lsp-mode")
+  :hook ((python-mode . lsp-deferred)
+	 (python-ts-mode . lsp-deferred))
+  :config
+  (add-to-list 'lsp-language-id-configuration '(python-ts-mode . "python"))
   )
 
 ;; Checker
@@ -66,13 +84,12 @@
 	       'append)
   )
 
-
 ;; Env support
-(use-package pyvenv
-  )
+(use-package pyvenv)
 (use-package auto-virtualenv
-  
+  :after pyvenv
   :hook ((python-mode . auto-virtualenv-set-virtualenv)
+	 (python-ts-mode . auto-virtualenv-set-virtualenv)
 	 (window-configuration-change . auto-virtualenv-set-virtualenv)
 	 (focus-in . auto-virtualenv-set-virtualenv))
   ;; :config
@@ -82,7 +99,6 @@
   ;; ;; Activate on focus in
   ;; (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv)
   )
-
 
 (provide 'python-module)
 ;;; python-module.el ends here

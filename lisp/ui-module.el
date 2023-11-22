@@ -16,7 +16,6 @@
 	 (prog-mode . hl-line-mode) ;; Highlight whole line
 	 )
   :config
-  (defalias 'yes-or-no-p 'y-or-n-p)
   (setq vc-follow-symlinks t)
   ;; Defaults browser
   (setq browse-url-browser-function 'browse-url-generic
@@ -82,9 +81,13 @@
 (use-package which-key
   :hook (after-init . which-key-mode))
 
-
 (use-package rainbow-mode
   :hook (prog-mode . rainbow-mode))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+
 
 ;; Window divider
 (use-package emacs
@@ -99,7 +102,6 @@
   :if (equal theme-framework "modus")
   ;; :hook (after-init . solaire-global-mode)
   )
-
 
 (provide 'ui-module)
 ;;; ui-module.el ends here

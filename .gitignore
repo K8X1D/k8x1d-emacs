@@ -1,6 +1,7 @@
 auto-save-list
 eln-cache
 elpa
+elpa-old
 tmp
 todo.org
 transient
@@ -33,3 +34,6 @@ external
 .cache
 elfeed
 emms
+.config
+nix-buffer
+nov-places

@@ -6,18 +6,15 @@
 
 ;; Buffer management
 (use-package ibuffer
-  
   :bind ("C-x C-b" . ibuffer)
   )
 
 ;; Icons support
 (use-package nerd-icons-ibuffer
-  
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 ;; Buffer grouping
 (use-package ibuffer-project
-  
   :hook (ibuffer .  (lambda ()
 		      (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
 		      (unless (eq ibuffer-sorting-mode 'project-file-relative)

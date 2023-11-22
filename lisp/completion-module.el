@@ -32,7 +32,6 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  
   :hook (after-init . savehist-mode))
 
 ;; A few more useful configurations...
@@ -71,7 +70,6 @@
   :hook (after-init . marginalia-mode))
 
 (use-package embark
-  
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
    ("C-;" . embark-dwim)        ;; good alternative: M-.
@@ -284,11 +282,11 @@ targets."
   (setq corfu-popupinfo-delay nil)
   )
 
-;; Terminal support
-(use-package corfu-terminal
-  :if (display-graphic-p)
-  :init 
-  (corfu-terminal-mode +1))
+;;;; Terminal support
+;;(use-package corfu-terminal
+;;  :if (display-graphic-p)
+;;  :init 
+;;  (corfu-terminal-mode +1))
 
 
 

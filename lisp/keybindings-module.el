@@ -60,10 +60,6 @@
     "oB"  '(bluetooth-list-devices :which-key "Bluetooth")
     "ob"  '(citar-open :which-key "Bibliography")
     "oD"  '(dashboard-open :which-key "Dashboard")
-    "or"  '(:ignore t :which-key "REPL")
-    "orr"  '(k8x1d/open-R-repl-at-bottom t :which-key "R")
-    "orj"  '(k8x1d/open-julia-repl-at-bottom t :which-key "Julia")
-    "orp"  '(k8x1d/open-python-repl-at-bottom t :which-key "Python")
     "oc" '(org-clock-goto :which-key "Clocked Task")
     )
 
@@ -108,29 +104,6 @@
 		  :which-key "Window")
     )
 
-  ;; Multimedia
-  (k8x1d/leader-keys
-    "v" '(:keymap empv-map
-		  :which-key "Video player")
-    "M" '(:keymap mpdel-core-map
-		  :package mpdel
-		  :which-key "Music player")
-    )
-
-  ;; GTD
-  (k8x1d/leader-keys
-    "d"  '(:ignore t
-		   :package org-gtd
-		   :which-key "GTD")
-    "dc" '(org-gtd-capture :which-key "Capture")
-    "de" '(org-gtd-engage :which-key "Engage")
-    "dp"  '(org-gtd-process-inbox :which-key "Process")
-    "dn"  '(org-gtd-show-all-next :which-key "Show next")
-    "da"  '(org-gtd-archive-completed-items :which-key "Archive completed")
-    "dr"  '(org-gtd-review-area-of-focus :which-key "Review Area")
-    )
-
-
   ;; Notes
   (k8x1d/leader-keys
     "n"  '(:ignore t :which-key "Notes")
@@ -163,7 +136,7 @@
     "idd" '(org-deadline :which-key "Deadline")
     "ids" '(org-schedule t :which-key "Schedule")
     "id." '(org-time-stamp t :which-key "Timestamp")
-    "ip" '(org-set-property :which-key "Property")
+    "ip" '(org-property-action :which-key "Property")
     "t" '(org-todo :which-key "Todo")
     "o" '(org-open-at-point :which-key "Open")
     "e" '(org-export-dispatch :which-key "Export")
@@ -199,19 +172,6 @@
     "'" '(geiser-repl-switch :which-key "REPL")
     "b" '(geiser-eval-buffer :which-key "Eval buffer")
     )
-
-
-  ;; Julia
-  (k8x1d/local-leader-keys
-    :keymaps 'julia-vterm-mode-map
-    "'" '(k8x1d/open-julia-repl-at-bottom :which-key "REPL")
-    "b" '(julia-vterm-send-buffer :which-key "Send buffer")
-    "RET" '(julia-vterm-send-region-or-current-line :which-key "Eval buffer")
-    "f" '(julia-vterm-send-include-buffer-file :which-key "Eval file")
-    )
-
-
-
 
   )
 

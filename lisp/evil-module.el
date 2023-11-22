@@ -25,6 +25,7 @@
   (add-to-list 'evil-insert-state-modes 'vterm-mode)
   (add-to-list 'evil-insert-state-modes 'with-editor-mode)
   (add-to-list 'evil-insert-state-modes 'org-capture-mode)
+
   ;; TODO: find magit commit buffer mode
   ;; (add-to-list 'evil-insert-state-modes 'magit-mode)
   )
@@ -101,6 +102,7 @@ play well with `evil-mc'."
   ;; :config
   ;; (evilem-default-keybindings "SPC e")
   )
+
 
 (provide 'evil-module)
 ;;; evil-module.el ends here

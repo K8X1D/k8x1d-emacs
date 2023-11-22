@@ -31,11 +31,12 @@
     (evil-insert-state)
     )
   :hook ((ess-r-mode . R-vterm-mode))
-  :bind
-  (("C-c o r r" . R-vterm-repl)
-   :map R-vterm-mode-map
-   ("C-c i" . R-vterm-send-include-buffer-file))
   :general
+  (k8x1d/leader-keys
+    "o"  '(:ignore t :which-key "Open")
+    "or"  '(:ignore t :which-key "REPL")
+    "orr"  '(k8x1d/open-R-repl-at-bottom t :which-key "R")
+    )
   (k8x1d/local-leader-keys
     :keymaps 'R-vterm-mode-map
     "'" '(k8x1d/open-R-repl-at-bottom :which-key "REPL")
@@ -51,15 +52,16 @@
 
 ;; LSP
 (use-package eglot
-  
   :if (equal lsp-framework "eglot")
   :hook (ess-r-mode . eglot-ensure)
   )
 
 (use-package lsp-mode
-  
   :if (equal lsp-framework "lsp-mode")
-  :hook (ess-r-mode . lsp-deferred))
+  :hook (ess-r-mode . lsp-deferred)
+  :config
+  (add-to-list 'lsp-language-id-configuration '(R-mode . "r"))
+  )
 
 (provide 'r-module)
 ;;; r-module.el ends here

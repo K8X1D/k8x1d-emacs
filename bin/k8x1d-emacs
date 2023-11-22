@@ -17,11 +17,12 @@ Help()
     # Display Help
     echo "Add description of the script functions here."
     echo
-    echo "Syntax: scriptTemplate [-i|h|u]"
+    echo "Syntax: scriptTemplate [-i|h|u|s|d]"
     echo "options:"
     echo "i     Install k8x1d-emacs."
     echo "h     Print this Help."
     echo "u     Update k8x1d-emacs."
+    echo "s     Search k8x1d-emacs."
     echo "d     Daemonize k8x1d-emacs."
     echo
 }
@@ -57,6 +58,10 @@ GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFI
     "$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacs" --init-directory="$PROJECT_DIRECTORY" --debug-init || notify-send -a "$PROJECT_NAME" "Launch" "Failed..."
 }
 
+Search()
+{
+    "$GUIX_EXTRA"/$PROJECT_NAME/guix/bin/guix search $@
+}
 
 Daemonize()
 {
@@ -69,7 +74,7 @@ GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFI
 # Process the input options. Add options as needed.        #
 ############################################################
 # Get the options
-while getopts ":hiudl:" option; do
+while getopts ":hiusdl:" option; do
     case $option in
 	h) # display Help
             Help
@@ -79,6 +84,9 @@ while getopts ":hiudl:" option; do
 	    exit;;
 	u) # Update
 	    Update 
+	    exit;;
+	s) # Search
+	    Search 
 	    exit;;
 	d) # Daemon
 	    Daemonize 

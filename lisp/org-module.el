@@ -29,7 +29,6 @@
 
 ;; Org agenda
 (use-package org
-  
   :bind ("C-c o a" . org-agenda)
   :config
   ;; org-agenda
@@ -119,6 +118,7 @@
 
 ;; Org esthetics
 (use-package org-modern
+  :after doom-themes
   :hook ((org-mode . org-modern-mode)
 	 (org-agenda-finalize . org-modern-agenda))
   :config
@@ -159,12 +159,20 @@
         `((?A . ,(propertize "󰯬" 'face '(:foreground "#c3e88d")))
           (?B . ,(propertize "󰯯" 'face '(:foreground "#ffcb6b")))
           (?C . ,(propertize "󰯲" 'face '(:foreground "#ff5370")))))
+  ;; Don't work
+  ;; `((?A . ,(propertize "󰯬" 'face '(:foreground ,(doom-color 'green))))
+  ;; (?B . ,(propertize "󰯯" 'face '(:foreground ,(doom-color 'yellow))))
+  ;; (?C . ,(propertize "󰯲" 'face '(:foreground ,(doom-color 'red))))))
 
   ;; Faces adjustment
   (setq org-modern-todo-faces
 	'(("TODO" :background "#ff5370" :foreground "#1c1f2b")
 	  ("NEXT" :background "#c3e88d" :foreground "#1c1f2b")
 	  ("WAIT" :background "#ffcb6b" :foreground "#1c1f2b")))
+  ;; Don't work
+  ;; '(("TODO" :background ,(doom-color 'red) :foreground "#1c1f2b")
+  ;; ("NEXT" :background ,(doom-color 'green) :foreground "#1c1f2b")
+  ;; ("WAIT" :background ,(doom-color 'yellow) :foreground "#1c1f2b")))
 
   ;; org block
   (setq org-modern-block-name t)
@@ -183,32 +191,6 @@
 (use-package org
   :config
   (require 'org-habit)
-  )
-
-
-;; Org-babel
-(use-package org
-  :config
-  (setq org-babel-python-command "python3")
-  (add-to-list 'org-src-lang-modes '("python" . python))
-  (add-to-list 'org-src-lang-modes '("r" . ess-r))
-  (add-to-list 'org-src-lang-modes '("r" . R))
-  (add-to-list 'org-src-lang-modes '("r" . r))
-  (add-to-list 'org-src-lang-modes '("R" . ess-r))
-  (add-to-list 'org-src-lang-modes '("R" . R))
-  (add-to-list 'org-src-lang-modes '("R" . r))
-  (add-to-list 'org-src-lang-modes '("ess-r" . ess-r))
-  (add-to-list 'org-src-lang-modes '("ess-r" . R))
-  (add-to-list 'org-src-lang-modes '("ess-r" . r))
-  (setq org-confirm-babel-evaluate nil)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((sql . t)
-     (shell . t)
-     (julia . t)
-     (scheme . t)
-     (R . t)
-     (python . t)))
   )
 
 (provide 'org-module)

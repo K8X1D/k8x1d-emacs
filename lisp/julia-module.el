@@ -21,17 +21,29 @@
     (julia-vterm-repl)
     (evil-insert-state)
     )
-  :bind ("C-c o r j" . k8x1d/open-julia-repl-at-bottom)
+  :general
+  (k8x1d/leader-keys
+    "o"  '(:ignore t :which-key "Open")
+    "or"  '(:ignore t :which-key "REPL")
+    "orj"  '(k8x1d/open-julia-repl-at-bottom t :which-key "Julia")
+    )
+  (k8x1d/local-leader-keys
+    :keymaps 'julia-vterm-mode-map
+    "'" '(k8x1d/open-julia-repl-at-bottom :which-key "REPL")
+    "b" '(julia-vterm-send-buffer :which-key "Send buffer")
+    "RET" '(julia-vterm-send-region-or-current-line :which-key "Eval buffer")
+    "f" '(julia-vterm-send-include-buffer-file :which-key "Eval file")
+    )
   :hook (julia-mode . julia-vterm-mode)
   :config
   (setq vterm-kill-buffer-on-exit nil))
 
-;; Formater
-(use-package julia-formatter
-  :init (require 'julia-formatter)
-  :hook (julia-mode . julia-formatter-mode)
-  :vc (:url "https://codeberg.com/FelipeLema/julia-formatter.el"
-	    :branch "main"))
+;; ;; Formater
+;; (use-package julia-formatter
+;;   :init (require 'julia-formatter)
+;;   :hook (julia-mode . julia-formatter-mode)
+;;   :vc (:url "https://codeberg.com/FelipeLema/julia-formatter.el"
+;; 	    :branch "main"))
 
 ;; Babel support
 (use-package ob-julia-vterm
@@ -114,6 +126,8 @@
 (use-package lsp-julia
   :after lsp-mode
   :if (equal lsp-framework "lsp-mode")
+  :hook ((julia-mode . lsp-deferred)
+	 (julia-ts-mode . lsp-deferred))
   :config
   (add-to-list 'lsp-language-id-configuration '(julia-ts-mode . "julia"))
   (lsp-register-client

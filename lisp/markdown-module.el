@@ -5,9 +5,9 @@
 ;;; Code:
 
 ;; Evil support
-(use-package evil-markdown
-  :vc (:url "https://github.com/Somelauw/evil-markdown"
-	    :branch "main"))
+;; (use-package evil-markdown
+;;   :vc (:url "https://github.com/Somelauw/evil-markdown"
+;; 	    :branch "main"))
 
 ;; Syntax highlight
 (use-package markdown-mode
@@ -17,6 +17,17 @@
 
 ;; Preview
 (use-package markdown-preview-mode
+  :init
+
+  (defun k8x1d/markdown-preview ()
+    (mardown-preview-mode 1)
+    (markdown-preview-cleanup)
+    )
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'markdown-mode-map
+    "p" '(markdown-preview-mode :which-key "Preview")
+    )
   :bind (:map markdown-mode-map
 	      ("C-c C-c p" . markdown-preview-open-browser)))
 

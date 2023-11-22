@@ -120,8 +120,7 @@
 ;;
 (use-package lsp-mode
   :if (equal lsp-framework "lsp-mode")
-  :hook ((prog-mode . lsp-deferred)
-	 (lsp-mode . lsp-enable-which-key-integration))
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :config
   (setq lsp-headerline-breadcrumb-enable nil) ;; remove headline
@@ -129,8 +128,6 @@
   (setq lsp-modeline-code-actions-enable nil) ;; superflous
   (setq lsp-eldoc-render-all t)
 
-  (add-to-list 'lsp-language-id-configuration '(python-ts-mode . "python"))
-  (add-to-list 'lsp-language-id-configuration '(R-mode . "r"))
   (add-to-list 'lsp-language-id-configuration '(org-mode . "org"))
   (add-to-list 'lsp-language-id-configuration '(org-journal-mode . "org"))
   )
