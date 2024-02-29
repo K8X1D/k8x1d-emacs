@@ -15,4 +15,14 @@
   )
 
 
+;; Buffer navigation
+(use-package imenu
+  :config
+  (setq org-imenu-depth 3)
+  (setq imenu-auto-rescan t) 
+  (setq imenu-max-items 50) 
+  )
+
+
+
 (provide 'buffer-module)

@@ -16,9 +16,8 @@
 
 ;; Icons support for corfu
 (use-package nerd-icons-corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
-
+  :after corfu
+  :init
   ;; Optionally:
   (setq nerd-icons-corfu-mapping
 	'((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
@@ -26,6 +25,7 @@
           ;; ...
           (t :style "cod" :icon "code" :face font-lock-warning-face)))
   ;; Remember to add an entry for `t', the library uses that as default.
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
   )
 
 ;; Add icon to mini-buffer

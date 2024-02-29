@@ -24,6 +24,7 @@
     ;; Evil compatibility
     (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
     (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
+    (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
     )
 
 (provide 'terminal-module)

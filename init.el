@@ -1,16 +1,29 @@
 (require 'packages-module)
 (require 'evil-module)
-(require 'tree-sitter-module)
+
 (require 'buffer-module)
+(require 'workspaces-module)
+
 (require 'theme-module)
 (require 'modeline-module)
-(require 'version-control-module)
+
 (require 'completion-module)
 (require 'icons-module)
 (require 'highlight-module)
-(provide 'version-control-module)
+
 (require 'keybindings-module)
-(require 'terminal-module)
+
 (require 'prog-module)
+(require 'tree-sitter-module)
+(provide 'version-control-module)
 (require 'julia-module)
+(require 'python-module)
+(require 'r-module)
+
+(require 'terminal-module)
+(require 'password-module)
 (require 'pdf-module)
+
+(require 'org-gui-module)
+(require 'org-writing-module)
+(require 'org-agenda-module)
