@@ -1,0 +1,10 @@
+GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
+GUIX_EXTRA="$HOME/.guix-extra"
+PROJECT_NAME="emacs-guix"
+PROJECT_DIRECTORY="$XDG_CONFIG_HOME/emacs-test"
+
+"$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacs" --init-directory="$PROJECT_DIRECTORY" --daemon
+
+# Local Variables:
+# mode: bash-ts
+# End:
