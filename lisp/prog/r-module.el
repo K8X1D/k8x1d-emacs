@@ -31,14 +31,12 @@
     )
 
 ;; Notebook support (via org-babel)
-  (use-package emacs
+  (use-package org
     :config
-    (with-eval-after-load 'org
       (add-to-list 'org-babel-load-languages '(R . t))
       (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
-      (defalias 'org-babel-execute:{R} 'org-babel-execute:R)
-      (defalias 'org-babel-variable-assignments:{R} 'org-babel-variable-assignments:R)
-      ))
+      )
+
 
 ;; Curtom export to R markdown
   (use-package ox-gfm

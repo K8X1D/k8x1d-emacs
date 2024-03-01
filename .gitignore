@@ -6,3 +6,6 @@ elpa/
 history
 transient/
 tree-sitter/
+tramp
+projects
+org-roam.db

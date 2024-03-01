@@ -26,7 +26,7 @@
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 0)       ; Give some breathing room
+(set-fringe-mode 5)       ; Give some breathing room
 (menu-bar-mode -1)            ; Disable the menu bar
 
 
@@ -57,11 +57,5 @@
    kept-old-versions 2
    version-control t)       ; use versioned backups
 
-
-
-;; Fonts
-(custom-set-faces
- '(default ((t (:inherit nil :height 120 :family "Iosevka Nerd Font"))))
- '(fixed-pitch ((t (:inherit nil :height 1.0 :family "Iosevka Nerd Font"))))
- '(variable-pitch ((t (:inherit nil :height 1.0 :family "Arimo Nerd Font" :weight light))))
- )
+;; Compilations info
+(setq byte-compile-warnings nil) ;; hide warnings

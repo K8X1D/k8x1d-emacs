@@ -24,7 +24,7 @@
 
 ;; Completion order
 (use-package orderless
-  :config
+  :init
   ;; (setq completion-styles '(orderless basic))
   ;; (setq completion-category-overrides '((file (styles basic partial-completion)))))
   (setq completion-styles '(orderless basic)

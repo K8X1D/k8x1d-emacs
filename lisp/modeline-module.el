@@ -1,15 +1,23 @@
 
 ;; Modeline definition
 (use-package emacs
+  :init
+  (defun get-workspace-name ()
+    (let* ((explicit-name (alist-get 'explicit-name (tab-bar--current-tab)))
+	   (tab-name (alist-get 'name (tab-bar--current-tab))))
+      (if explicit-name tab-name ""))
+    )
   :after evil
   :config
   (setq evil-mode-line-format '(after . mode-line-front-space))
+  (setq evil-mc-mode-line-prefix "󰗧")
   (setq-default mode-line-format
 		'(
 		  ;; Left module
 		  " "
 		  mode-line-front-space
 		  evil-mode-line-tag 
+		  (:eval (get-workspace-name))
 		  ;;(:propertize
 		  ;; ("" mode-line-mule-info mode-line-client mode-line-modified
 		  ;;  mode-line-remote)

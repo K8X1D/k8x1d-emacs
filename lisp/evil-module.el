@@ -116,6 +116,26 @@
 	([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
   )
 
+;; Org support
+(use-package evil-org
+  :after org
+  :bind ([remap org-agenda-show-tags] . evil-tab-next)
+  :hook ((org-mode . evil-org-mode)
+         (org-agenda-mode . evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+  (evil-org-agenda-set-keys)
+  )
+
+;; Latex support
+(use-package evil-tex
+  :after evil
+  :hook (LaTeX-mode . evil-tex-mode)
+  :config
+  (require 'bind-key)
+  (unbind-key "m-n" evil-tex-mode-map) ;; clean keys for lsp-bridge in latex
+  )
 
 
 (provide 'evil-module)

@@ -23,8 +23,7 @@
     :config
     ;; Evil compatibility
     (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
-    (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
-    (evil-collection-define-key 'normal 'eat-semi-char-mode-map "p" 'eat-yank)
+  (define-key eat-semi-char-mode-map (kbd "<delete>")  #'eat-self-input)
     )
 
 (provide 'terminal-module)

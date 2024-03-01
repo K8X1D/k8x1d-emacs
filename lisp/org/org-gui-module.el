@@ -8,8 +8,13 @@
 (use-package org-modern
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda))
+  :custom
+  (org-modern-hide-stars nil)		; adds extra indentation
+  (org-modern-table nil)
+  (org-modern-block-name '("" . "")) ; or other chars; so top bracket is drawn promptly
+
   :config
-  (setq org-modern-table t)
+  ;; (setq org-modern-table t)
 
   ;; Edit settings
   (setq org-fold-catch-invisible-edits 'show-and-error)
@@ -36,7 +41,6 @@
                           (45 . "◦")
                           (42 . "•")))
   (setq org-modern-star '("◉" "●" "○"))
-  (setq org-modern-hide-stars 'leading)
 
   ;; org block
   (setq org-modern-block-name t)
@@ -47,7 +51,10 @@
 (use-package org-modern-indent
   :vc (:url "https://github.com/jdtsmith/org-modern-indent"
             :branch "main")
-  :hook (org-modern-mode . org-modern-indent-mode))
+  :hook (org-modern-mode . org-modern-indent-mode)
+  :config
+(setq org-src-preserve-indentation nil)
+  )
 
 ;; Hide/Show markup
 (use-package org-appear

@@ -1,7 +1,7 @@
 
 
 (use-package doom-themes
-  :hook (after-init . (lambda () (load-theme 'doom-one t)))
+  :hook (after-init . (lambda () (load-theme 'doom-palenight t)))
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
