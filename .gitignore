@@ -9,3 +9,4 @@ tree-sitter/
 tramp
 projects
 org-roam.db
+forge-database.sqlite
