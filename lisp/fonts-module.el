@@ -1,4 +1,3 @@
-
 ;; Fonts
 (custom-set-faces
  '(default ((t (:inherit nil :height 120 :family "Iosevka Nerd Font"))))
@@ -15,11 +14,5 @@
 	  ("NEXT" :background ,(doom-color 'green) :foreground "#1c1f2b" :family "Iosevka Nerd Font")
 	  ("WAIT" :background ,(doom-color 'yellow) :foreground "#1c1f2b" :family "Iosevka Nerd Font")))
   )
-
-
-;; Mixed font
-  (use-package mixed-pitch
-    :hook ((text-mode . mixed-pitch-mode)
-           (markdown-mode . mixed-pitch-mode)))
 
 (provide 'fonts-module)
