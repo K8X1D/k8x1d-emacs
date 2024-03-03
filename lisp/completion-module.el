@@ -157,25 +157,47 @@
   :if (package-installed-p 'hl-todo)
   :after hl-todo)
 
-;; Completion preview
-(use-package corfu
-  ;; :custom
-  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  ;; (corfu-auto t)                 ;; Enable auto completion
-  ;; (corfu-separator ?\s)          ;; Orderless field separator
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-  :hook (after-init . global-corfu-mode)
+;;;; Completion preview (pop-up)
+;;(use-package corfu
+;;  ;; :custom
+;;  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+;;  ;; (corfu-auto t)                 ;; Enable auto completion
+;;  ;; (corfu-separator ?\s)          ;; Orderless field separator
+;;  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+;;  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+;;  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+;;  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+;;  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+;;  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+;;  :hook (after-init . global-corfu-mode)
+;;  :config
+;;  ;; TAB cycle if there are only few candidates
+;;  (setq completion-cycle-threshold 3)
+;;  ;; Enable indentation+completion using the TAB key.
+;;  (setq tab-always-indent 'complete)
+;;  )
+;;
+;;;; Completion preview (as-you-type)
+;;(use-package corfu-candidate-overlay
+;;  :after corfu
+;;  :hook (corfu-mode . corfu-candidate-overlay-mode)
+;;  :config
+;;  ;; bind Ctrl + TAB to trigger the completion popup of corfu
+;;  (global-set-key (kbd "C-<tab>") 'completion-at-point)
+;;  ;; bind Ctrl + Shift + Tab to trigger completion of the first candidate
+;;  ;; (keybing <iso-lefttab> may not work for your keyboard model)
+;;  (global-set-key (kbd "C-<iso-lefttab>") 'corfu-candidate-overlay-complete-at-point))
+
+;; Compeletion as-you-type
+(use-package completion-preview
+  :bind (:map completion-preview-active-mode-map
+	      ("C-j" . completion-preview-prev-candidate)
+	      ("C-k" . completion-preview-next-candidate))
+  :hook ((text-mode prog-mode) . completion-preview-mode)
   :config
-  ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 3)
-  ;; Enable indentation+completion using the TAB key.
-  (setq tab-always-indent 'complete)
-  )
+  (unbind-key "C-k" evil-insert-state-map)
+  ;; (keymap-unset evil-insert-state-map (kbd "C-k"))
+  (setq completion-preview-minimum-symbol-length 1))
 
 ;; Use Dabbrev with Corfu!
 (use-package dabbrev
