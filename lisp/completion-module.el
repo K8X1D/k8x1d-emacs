@@ -197,7 +197,12 @@
   :config
   (unbind-key "C-k" evil-insert-state-map)
   ;; (keymap-unset evil-insert-state-map (kbd "C-k"))
-  (setq completion-preview-minimum-symbol-length 1))
+  (setq completion-preview-minimum-symbol-length 1)
+  ;; Customize faces
+  (custom-set-faces
+   `(completion-preview ((t (:foreground ,(doom-color 'magenta) :weight bold))))
+   )
+  )
 
 ;; Use Dabbrev with Corfu!
 (use-package dabbrev

@@ -59,9 +59,12 @@
 (require 'bibliography-module)
 (require 'multimedia-module)
 (require 'guix-module)
+(require 'bluetooth-module)
+(require 'gnupg-module)
 
 (require 'text-module)
 (require 'markdown-module)
+(require 'csv-module)
 
 (require 'org-gui-module)
 (require 'org-writing-module)

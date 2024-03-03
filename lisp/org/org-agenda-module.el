@@ -161,13 +161,16 @@
           ))
   )
 
-;; 
-(use-package origami
-  :bind
-  (:map org-agenda-mode-map
-        ([remap org-agenda-goto] . origami-toggle-node))
-  :hook (org-super-agenda-mode . origami-mode)
-  )
+;; FIXME: break launch in daemon mode
+;; .config/emacs-test/lisp/org/org-gui-module.el: Warning: ‘defadvice’ is an obsolete macro (as of 30.1); use ‘advice-add’ or ‘define-advice’  ■  Error (use-package): origami/:catch: Invalid face box: :line-width, 1, :color, unspecified
+;;
+;;(use-package origami
+;;  :after org
+;;  :bind
+;;  (:map org-agenda-mode-map
+;;	([remap org-agenda-goto] . origami-toggle-node))
+;;  :hook (org-super-agenda-mode . origami-mode)
+;;  )
 
 ;; Clock
 (use-package org
