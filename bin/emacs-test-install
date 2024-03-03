@@ -1,0 +1,15 @@
+# -*- mode: bash-ts; -*-
+GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
+GUIX_EXTRA="$HOME/.guix-extra"
+PROJECT_NAME="emacs-test"
+PROJECT_DIRECTORY="$XDG_CONFIG_HOME/emacs-test"
+
+mkdir -p "$GUIX_EXTRA/$PROJECT_NAME"
+mkdir -p "$GUIX_EXTRA_PROFILES/$PROJECT_NAME"
+{
+    guix pull --channels="$PROJECT_DIRECTORY/channels.scm" --profile="$GUIX_EXTRA/$PROJECT_NAME/guix"
+    "$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest="$PROJECT_DIRECTORY/manifest.scm" --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME"
+    STATUS="Finished"
+} || { # catch
+    STATUS="Failed..."
+}
