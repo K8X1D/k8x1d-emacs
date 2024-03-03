@@ -1,4 +1,3 @@
-
 ;; Version control management
 (use-package magit
   :bind ("C-c g" . magit-status))
@@ -10,6 +9,7 @@
 ;; List todo in magit buffer
 (use-package magit-todos
   :after magit
-  :config (magit-todos-mode 1))
+  :hook (magit-mode . magit-todos-mode)
+  )
 
 (provide 'version-control-module)
