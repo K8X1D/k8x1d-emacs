@@ -59,3 +59,6 @@
 
 ;; Compilations info
 (setq byte-compile-warnings nil) ;; hide warnings
+
+;; Simplify and uniformize prompting
+(defalias 'yes-or-no-p 'y-or-n-p)
