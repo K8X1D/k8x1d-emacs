@@ -33,6 +33,7 @@
 (require 'completion-module)
 (require 'icons-module)
 (require 'highlight-module)
+(require 'workspaces-management-module)
 
 (require 'keybindings-module)
 
@@ -41,10 +42,14 @@
 (require 'sidebar-module)
 (require 'checker-module)
 (require 'snippets-module)
-(provide 'version-control-module)
+(require 'version-control-module)
+(require 'environment-management-module)
+(provide 'compilation-module)
+
 (require 'julia-module)
 (require 'python-module)
 (require 'r-module)
+(require 'scheme-module)
 
 (require 'terminal-module)
 (require 'password-module)
@@ -52,6 +57,11 @@
 (require 'remote-module)
 (require 'notes-module)
 (require 'bibliography-module)
+(require 'multimedia-module)
+(require 'guix-module)
+
+(require 'text-module)
+(require 'markdown-module)
 
 (require 'org-gui-module)
 (require 'org-writing-module)
