@@ -3,7 +3,9 @@
     :bind (:map csv-mode-map
                 ("<tab>" . csv-tab-command))
     :hook (
-           (csv-mode . csv-highlight)
+	   (csv-mode . (lambda () (csv-highlight ?\,)))
+	   (csv-mode . (lambda () (csv-highlight ?\;)))
+	   (csv-mode . (lambda () (csv-highlight ?\11)))
            (csv-mode . csv-align-mode)
            ;; (csv-mode . (lambda () (interactive) (toggle-truncate-lines nil)))
            )
@@ -17,7 +19,7 @@
     (defun csv-highlight (&optional separator)
       (interactive (list (when current-prefix-arg (read-char "Separator: "))))
       (font-lock-mode 1)
-      (let* ((separator (or separator ?\,))
+      (let* ((separator (or separator ?\11))
              (n (count-matches (string separator) (point-at-bol) (point-at-eol)))
              (colors (loop for i from 0 to 1.0 by (/ 2.0 n)
                            collect (apply #'color-rgb-to-hex 

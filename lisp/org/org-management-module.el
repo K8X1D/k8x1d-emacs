@@ -1,7 +1,6 @@
-
-
 ;; General
 (use-package org
+  :bind ("C-c l" . org-store-link)
   :config
   (setq org-enforce-todo-dependencies t)
   (setq org-enforce-todo-checkbox-dependencies t)

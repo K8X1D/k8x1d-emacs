@@ -49,8 +49,8 @@
 
 ;; Better indentation for org-modern
 (use-package org-modern-indent
-  :vc (:url "https://github.com/jdtsmith/org-modern-indent"
-            :branch "main")
+  ;; :vc (:url "https://github.com/jdtsmith/org-modern-indent"
+            ;; :branch "main")
   :hook (org-modern-mode . org-modern-indent-mode)
   :config
 (setq org-src-preserve-indentation nil)

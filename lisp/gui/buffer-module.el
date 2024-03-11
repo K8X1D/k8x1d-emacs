@@ -24,6 +24,9 @@
   (setq use-package-enable-imenu-support t) 
   )
 
+;; Buffer update
+(use-package emacs
+  :hook (after-init . global-auto-revert-mode))
 
 
 (provide 'buffer-module)

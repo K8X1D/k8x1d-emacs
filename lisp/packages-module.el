@@ -1,7 +1,7 @@
 
 ;; Set-up for use-package
 (require 'use-package-ensure)
-(setq use-package-always-ensure t) ;; always install
+(setq use-package-always-ensure nil)
 ;; Daemon set-up
 (if (daemonp)
     (setq use-package-always-demand t)

@@ -19,12 +19,18 @@
         "~/Nextcloud/facil/Org/Inbox.org"
         "~/Nextcloud/facil/Org/Habits.org"))
 
+
+(setq k8x1d/completion "native")
+
+(require 'tools-module)
+
 (require 'packages-module)
 (require 'evil-module)
 
 (require 'buffer-module)
 (require 'workspaces-module)
 (require 'file-browser-module)
+(require 'scrolling-module)
 
 (require 'fonts-module)
 (require 'theme-module)
@@ -39,12 +45,13 @@
 
 (require 'prog-module)
 (require 'tree-sitter-module)
+(require 'lsp-module)
 (require 'sidebar-module)
 (require 'checker-module)
 (require 'snippets-module)
 (require 'version-control-module)
 (require 'environment-management-module)
-(provide 'compilation-module)
+(require 'compilation-module)
 
 (require 'julia-module)
 (require 'python-module)
@@ -61,6 +68,7 @@
 (require 'guix-module)
 (require 'bluetooth-module)
 (require 'gnupg-module)
+(require 'torrents-module)
 
 (require 'text-module)
 (require 'markdown-module)

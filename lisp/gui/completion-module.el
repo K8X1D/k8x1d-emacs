@@ -28,11 +28,10 @@
   ;; (setq completion-styles '(orderless basic))
   ;; (setq completion-category-overrides '((file (styles basic partial-completion)))))
   (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion))))
-)
-
-
+	completion-category-defaults nil
+	completion-category-overrides '((file (styles partial-completion))))
+  :custom-face  (orderless-match-face-0 ((t (:foreground ,(doom-color 'green) :background ,(doom-color 'bg) :weight bold))))
+  )
 
 (use-package marginalia
   :config
@@ -154,42 +153,49 @@
 
 ;; hl-todo integration
 (use-package consult-todo
-  :if (package-installed-p 'hl-todo)
   :after hl-todo)
 
-;;;; Completion preview (pop-up)
-;;(use-package corfu
-;;  ;; :custom
-;;  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-;;  ;; (corfu-auto t)                 ;; Enable auto completion
-;;  ;; (corfu-separator ?\s)          ;; Orderless field separator
-;;  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-;;  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-;;  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-;;  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-;;  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-;;  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-;;  :hook (after-init . global-corfu-mode)
-;;  :config
-;;  ;; TAB cycle if there are only few candidates
-;;  (setq completion-cycle-threshold 3)
-;;  ;; Enable indentation+completion using the TAB key.
-;;  (setq tab-always-indent 'complete)
-;;  )
-;;
-;;;; Completion preview (as-you-type)
-;;(use-package corfu-candidate-overlay
-;;  :after corfu
-;;  :hook (corfu-mode . corfu-candidate-overlay-mode)
-;;  :config
-;;  ;; bind Ctrl + TAB to trigger the completion popup of corfu
-;;  (global-set-key (kbd "C-<tab>") 'completion-at-point)
-;;  ;; bind Ctrl + Shift + Tab to trigger completion of the first candidate
-;;  ;; (keybing <iso-lefttab> may not work for your keyboard model)
-;;  (global-set-key (kbd "C-<iso-lefttab>") 'corfu-candidate-overlay-complete-at-point))
+;; Completion preview (pop-up)
+(use-package corfu
+  :if (string= k8x1d/completion "corfu")
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  ;; (corfu-auto t)                 ;; Enable auto completion
+  ;; (corfu-separator ?\s)          ;; Orderless field separator
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+  ;; :hook ((prog-mode text-mode) . global-corfu-mode)
+  :hook (after-init . global-corfu-mode)
+  :config
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
+  ;; Enable indentation+completion using the TAB key.
+  (setq tab-always-indent 'complete)
+  )
+
+;; Completion preview (as-you-type)
+(use-package corfu-candidate-overlay
+  :if (string= k8x1d/completion "corfu")
+  :defer 5
+  :after corfu
+  :hook (corfu-mode . corfu-candidate-overlay-mode)
+  :custom-face  (corfu-candidate-overlay-face ((t (:foreground ,(doom-color 'magenta) :weight bold))))
+  :config
+  ;; bind Ctrl + TAB to trigger the completion popup of corfu
+  ;; (global-set-key (kbd "<backtab>") 'completion-at-point)
+  ;; bind Ctrl + Shift + Tab to trigger completion of the first candidate
+  ;; (keybing <iso-lefttab> may not work for your keyboard model)
+  (global-set-key (kbd "<backtab>") 'corfu-candidate-overlay-complete-at-point)
+  )
 
 ;; Compeletion as-you-type
 (use-package completion-preview
+  :if (string= k8x1d/completion "native")
+  :load-path "test"
   :bind (:map completion-preview-active-mode-map
 	      ("C-j" . completion-preview-prev-candidate)
 	      ("C-k" . completion-preview-next-candidate))
@@ -197,11 +203,8 @@
   :config
   (unbind-key "C-k" evil-insert-state-map)
   ;; (keymap-unset evil-insert-state-map (kbd "C-k"))
-  (setq completion-preview-minimum-symbol-length 1)
-  ;; Customize faces
-  (custom-set-faces
-   `(completion-preview ((t (:foreground ,(doom-color 'magenta) :weight bold))))
-   )
+  (setq completion-preview-minimum-symbol-length 2)
+  :custom-face  (completion-preview ((t (:foreground ,(doom-color 'magenta) :weight bold))))
   )
 
 ;; Use Dabbrev with Corfu!
@@ -254,7 +257,6 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
 )
-
 
 
 (provide 'completion-module)

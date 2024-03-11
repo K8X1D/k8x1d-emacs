@@ -35,9 +35,10 @@
 		  (:eval (anzu--update-mode-line))
 		  ;; Right modules
 		  mode-line-format-right-align
-		  minions-mode-line-modes
 		  mode-line-misc-info 
-		  (vc-mode vc-mode)
+		  minions-mode-line-modes
+		  (eglot--managed-mode ("[" eglot--mode-line-format "]"))
+		  (vc-mode ("[" vc-mode " ]")) 
 		  )
 		)
   )
@@ -47,6 +48,7 @@
   :hook (after-init . minions-mode)
   :init
   (setq minions-mode-line-lighter "...")
+  (setq minions-mode-line-delimiters '("[" . "]"))
   )
 
 

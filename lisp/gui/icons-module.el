@@ -16,6 +16,7 @@
 
 ;; Icons support for corfu
 (use-package nerd-icons-corfu
+  :if (string= k8x1d/completion "corfu")
   :after corfu
   :init
   ;; Optionally:

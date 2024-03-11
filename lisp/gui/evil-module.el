@@ -101,7 +101,7 @@
 ;; Nerd Commenter emulation 
 (use-package evil-nerd-commenter
   :bind ([remap comment-line] . evilnc-comment-or-uncomment-lines)
-  :hook (evil-mode . evilnc-default-hotkeys))
+  )
 
 ;; Evil integration for anzu
 (use-package evil-anzu

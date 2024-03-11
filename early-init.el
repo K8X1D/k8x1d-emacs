@@ -38,6 +38,11 @@
 (setq user-emacs-cache-directory (concat user-emacs-directory ".cache"))
 (setq custom-theme-directory (concat user-emacs-directory "themes"))
 
+;; Add guix package
+;;(add-to-list 'load-path "/home/k8x1d/guix-extra-profiles/emacs-test/emacs-test/share/emacs/site-lisp")
+;;(guix-emacs-autoload-packages)
+
+
 
 ;; Setup the user's custom settings file
 (setq custom-file (expand-file-name "custom.el" user-emacs-cache-directory))
@@ -51,7 +56,7 @@
 (setq
    backup-by-copying t      ; don't clobber symlinks
    backup-directory-alist
-    '(("." . "~/.config/emacs-test/.cache/backup/"))    ; don't litter my fs tree
+    '(("." . "~/.config/k8x1d-emacs/.cache/backup/"))    ; don't litter my fs tree
    delete-old-versions t
    kept-new-versions 6
    kept-old-versions 2
@@ -62,3 +67,9 @@
 
 ;; Simplify and uniformize prompting
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Stop enabling package
+;; (setq package-enable-at-startup nil)
+
+(require 'doom-themes)
+(load-theme 'doom-palenight t)

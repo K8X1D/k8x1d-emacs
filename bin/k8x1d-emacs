@@ -1,0 +1,115 @@
+# -*- mode: bash-ts; -*-
+#!/bin/sh
+# See https://www.redhat.com/sysadmin/arguments-options-bash-scripts
+# Adapted from https://guix.gnu.org/cookbook/en/html_node/Reproducible-profiles.html
+############################################################
+#  Variables                                               #
+############################################################
+GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
+GUIX_EXTRA="$HOME/.guix-extra"
+PROJECT_NAME="k8x1d-emacs"
+PROJECT_DIRECTORY="$XDG_CONFIG_HOME/$PROJECT_NAME"
+
+############################################################
+# Commands                                                 #
+############################################################
+Help()
+{
+    # Display Help
+    echo "Add description of the script functions here."
+    echo
+    echo "Syntax: scriptTemplate [-i|h|u|s|d]"
+    echo "options:"
+    echo "i     Install k8x1d-emacs."
+    echo "h     Print this Help."
+    echo "u     Update k8x1d-emacs."
+    echo "s     Search k8x1d-emacs."
+    echo "d     Daemonize k8x1d-emacs."
+    echo "c     Launch k8x1d-emacs client."
+    echo
+}
+
+Install()
+{
+    { # try
+	mkdir -p "$GUIX_EXTRA/$PROJECT_NAME"
+	mkdir -p "$GUIX_EXTRA_PROFILES/$PROJECT_NAME"
+	guix pull --channels="$PROJECT_DIRECTORY/channels.scm" --profile="$GUIX_EXTRA/$PROJECT_NAME/guix" &&
+	    "$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest="$PROJECT_DIRECTORY/manifest.scm" --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" &&
+	    STATUS="Finished"
+    } || { # catch
+	STATUS="Failed..."
+    }
+    notify-send -a "$PROJECT_NAME" "Update" "$STATUS"
+}
+
+Update()
+{
+    { # try
+	"$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest="$PROJECT_DIRECTORY/manifest.scm" --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" &&
+	    STATUS="Finished"
+    } || { # catch
+	STATUS="Failed..."
+    }
+    notify-send -a "$PROJECT_NAME" "Update" "$STATUS"
+}
+
+Launch()
+{
+GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFILE/etc/profile"
+    "$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacs" --init-directory="$PROJECT_DIRECTORY" --debug-init || notify-send -a "$PROJECT_NAME" "Launch" "Failed..."
+}
+
+Search()
+{
+    "$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" search $@
+}
+
+Daemonize()
+{
+GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFILE/etc/profile"
+    "$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacs" --init-directory="$PROJECT_DIRECTORY" --debug-init --daemon || notify-send -a "$PROJECT_NAME" "Launch" "Failed..."
+}
+
+Client()
+{
+GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFILE/etc/profile"
+    "$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacsclient" "-c" || notify-send -a "$PROJECT_NAME" "Client" "Failed..."
+}
+
+#####
+# Process the input options. Add options as needed.        #
+############################################################
+# Get the options
+while getopts ":hiusdcl:" option; do
+    case $option in
+	h) # display Help
+            Help
+            exit;;
+	i) # Install
+	    Install
+	    exit;;
+	u) # Update
+	    Update 
+	    exit;;
+	s) # Search
+	    Search 
+	    exit;;
+	d) # Daemon
+	    Daemonize 
+	    exit;;
+	c) # Client
+	    Client 
+	    exit;;
+	\?) # Invalid option
+            echo "Error: Invalid option"
+            exit;;
+    esac
+done
+
+# If no option, guess what is asked 
+if [ ! -d "$GUIX_EXTRA_PROFILES/$PROJECT_NAME" ]; then
+    Install
+else
+    Launch 
+fi

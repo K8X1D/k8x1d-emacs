@@ -1,5 +1,4 @@
 (list
-
 (channel
  (name 'guix)
  (url "https://git.savannah.gnu.org/git/guix.git")
@@ -21,5 +20,4 @@
    "72ca4ef5b572fea10a4589c37264fa35d4564783"
    (openpgp-fingerprint
     "261C A284 3452 FB01 F6DF  6CF4 F9B7 864F 2AB4 6F18"))))
-
 )

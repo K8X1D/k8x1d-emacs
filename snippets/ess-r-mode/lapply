@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: lapply
-# key: lapply
+# key: lapply(
 # contributor: k8x1d 
 # --
 lapply(X = ${1:list}, FUN = ${2:function})
