@@ -67,8 +67,15 @@ Search()
 
 Daemonize()
 {
-GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFILE/etc/profile"
-    "$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacs" --init-directory="$PROJECT_DIRECTORY" --debug-init --daemon || notify-send -a "$PROJECT_NAME" "Launch" "Failed..."
+    GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFILE/etc/profile"
+    { # try
+	"$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacs" --init-directory="$PROJECT_DIRECTORY" --debug-init --daemon
+	STATUS="Finished"
+
+    } || { # catch
+	STATUS="Failed..."
+    }
+    notify-send -a "$PROJECT_NAME" "Daemonize" "$STATUS"
 }
 
 Client()
