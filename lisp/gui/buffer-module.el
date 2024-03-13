@@ -29,4 +29,8 @@
   :hook (after-init . global-auto-revert-mode))
 
 
+;; prevent minibuffer lock
+(setq enable-recursive-minibuffers t)
+
+
 (provide 'buffer-module)
