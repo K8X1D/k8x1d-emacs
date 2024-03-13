@@ -25,8 +25,10 @@
       ("Serenity_kkaiser"  . "kkaiser@206.12.92.226")
       ("Shelly"  . "k8x1d@67.68.116.59")
       ("Serenity_ubuntu"  . "ubuntu@206.12.92.226")
+      ("Mariadb-Hive-1" . "kkaiser@198.168.185.123")
+      ("Mariadb-Hive-2" . "kkaiser@198.168.186.137")
+      ("Mariadb-Hive-3" . "kkaiser@198.168.187.221")
       ("Groudon" . "kkaiser@130.104.60.82")))
-  :config
   (defun k8x1d/select-ssh-address ()
     (alist-get
      (completing-read "Choose: " k8x1d-ssh-addresses)
