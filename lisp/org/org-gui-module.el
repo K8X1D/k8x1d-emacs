@@ -129,4 +129,26 @@
   )
 
 
+;; TODO: adjust sequence, not loaded when launched in daemon-mode
+(use-package org-modern
+  :custom-face (org-modern-done ((t (:family "Iosevka Nerd Font"))))
+  :config
+  (setq org-modern-todo-faces
+	`(("TODO" :background ,(doom-color 'red) :foreground ,(doom-color 'bg) :family "Iosevka Nerd Font")
+	  ("NEXT" :background ,(doom-color 'green) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")
+	  ("WAIT" :background ,(doom-color 'yellow) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")))
+  (setq org-modern-priority-faces
+	`((?A :background ,(doom-color 'green)
+	      :foreground ,(doom-color 'bg)
+	      :family "Iosevka Nerd Font")
+	  (?B :background ,(doom-color 'orange)
+	      :foreground ,(doom-color 'bg)
+	      :family "Iosevka Nerd Font")
+	  (?C :background ,(doom-color 'red)
+	      :foreground ,(doom-color 'bg)
+	      :family "Iosevka Nerd Font")))
+  )
+
+
+
 (provide 'org-gui-module)

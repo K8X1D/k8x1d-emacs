@@ -8,5 +8,9 @@
 	'((sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)")))
 )
 
+(use-package org
+  :config
+  (setq org-clock-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
+  )
 
 (provide 'org-management-module)

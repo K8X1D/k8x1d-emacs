@@ -52,6 +52,7 @@
 (require 'version-control-module)
 (require 'environment-management-module)
 (require 'compilation-module)
+(require 'notebook-module)
 
 (require 'julia-module)
 (require 'python-module)
@@ -66,6 +67,7 @@
 (require 'bibliography-module)
 (require 'multimedia-module)
 (require 'guix-module)
+(require 'process-management-module)
 (require 'bluetooth-module)
 (require 'gnupg-module)
 (require 'torrents-module)
@@ -78,3 +80,4 @@
 (require 'org-writing-module)
 (require 'org-agenda-module)
 (require 'org-management-module)
+

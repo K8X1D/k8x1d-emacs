@@ -11,6 +11,7 @@
 	     (gnu packages emacs-xyz)
 	     (gnu packages shellutils)
 	     (gnu packages python-xyz)
+	     (gnu packages pdf)
 	     (gnu packages rust-apps)
 	     (gnu packages shellutils)
 	     (emacs packages melpa))
@@ -178,4 +179,6 @@
   python-lsp-server
   fd
   ripgrep
+  alsa-utils
+  poppler
   ))
