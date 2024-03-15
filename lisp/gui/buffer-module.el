@@ -26,8 +26,10 @@
 
 ;; Buffer update
 (use-package emacs
-  :hook (after-init . global-auto-revert-mode))
-
+  :hook (after-init . global-auto-revert-mode)
+  :config
+  (setq auto-revert-remote-files t)
+  )
 
 ;; prevent minibuffer lock
 (setq enable-recursive-minibuffers t)
