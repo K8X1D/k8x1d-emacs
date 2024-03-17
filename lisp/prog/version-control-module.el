@@ -12,4 +12,9 @@
   :hook (magit-mode . magit-todos-mode)
   )
 
+;; Evil compatibility
+(use-package magit
+  :hook (with-editor-mode . evil-insert-state))
+
+
 (provide 'version-control-module)
