@@ -10,3 +10,7 @@ tramp
 projects
 org-roam.db
 forge-database.sqlite
+elpy
+lsp-bridge
+.org-id-locations
+backend-0.2.4.1
