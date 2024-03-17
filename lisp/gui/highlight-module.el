@@ -7,7 +7,7 @@
 
 ;; Highlight todo
 (use-package hl-todo
-  :hook (prog-mode . hl-todo-mode))
+  :hook ((latex-mode prog-mode) . hl-todo-mode))
 
 ;; Highlight colors
 (use-package rainbow-mode
