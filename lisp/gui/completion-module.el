@@ -194,8 +194,9 @@
 
 ;; Compeletion as-you-type
 (use-package completion-preview
-  :if (string= k8x1d/completion "native")
-  :load-path "test"
+  :if (and (string= k8x1d/completion "native")
+	   (not (string= k8x1d/lsp-backend "lsp-bridge")))
+  :load-path "lisp/test"
   :bind (:map completion-preview-active-mode-map
 	      ("C-j" . completion-preview-prev-candidate)
 	      ("C-k" . completion-preview-next-candidate))

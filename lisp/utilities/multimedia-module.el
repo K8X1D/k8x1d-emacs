@@ -14,8 +14,10 @@
 
 ;; Video
 (use-package empv
+  :bind-keymap ("C-c o v" . empv-map)
+  ;; :init
+  ;; (bind-key "C-c o v" empv-map)
   :config
-  (bind-key "C-c o v" empv-map)
   (setq empv-invidious-instance "https://invidious.flokinet.to/api/v1")
   (setq empv-youtube-use-tabulated-results t)
   ;; Mpv options

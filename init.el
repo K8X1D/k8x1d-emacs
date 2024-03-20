@@ -19,8 +19,11 @@
         "~/Nextcloud/facil/Org/Inbox.org"
         "~/Nextcloud/facil/Org/Habits.org"))
 
-
-(setq k8x1d/completion "native")
+(defvar k8x1d/lsp-backend "eglot")
+;; (defvar k8x1d/lsp-backend "lsp-bridge")
+(defvar k8x1d/ide "minimal")
+(defvar k8x1d/terminal "vterm")
+(defvar k8x1d/completion "native")
 
 (require 'tools-module)
 
@@ -40,6 +43,7 @@
 (require 'icons-module)
 (require 'highlight-module)
 (require 'workspaces-management-module)
+(require 'documentation-module)
 
 (require 'keybindings-module)
 
@@ -71,10 +75,12 @@
 (require 'bluetooth-module)
 (require 'gnupg-module)
 (require 'torrents-module)
+(require 'k8x1d-emacs-management-module)
 
 (require 'text-module)
 (require 'markdown-module)
 (require 'csv-module)
+(require 'latex-module)
 
 (require 'org-gui-module)
 (require 'org-writing-module)

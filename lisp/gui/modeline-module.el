@@ -38,7 +38,9 @@
 		  mode-line-misc-info 
 		  minions-mode-line-modes
 		  (eglot--managed-mode ("[" eglot--mode-line-format "]"))
+		  (lsp-bridge-mode ("[" lsp-bridge--mode-line-format "]"))
 		  (vc-mode ("[" vc-mode " ]")) 
+		  ;; (vc-mode ("[" (:eval (string-trim vc-mode)) "]")) 
 		  )
 		)
   )

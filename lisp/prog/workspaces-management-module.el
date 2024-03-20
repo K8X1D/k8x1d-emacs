@@ -8,11 +8,10 @@
     (tabspaces-default-tab "default")
     (tabspaces-remove-to-default t)
     (tabspaces-include-buffers '("*scratch*"))
-    (tabspaces-initialize-project-with-todo t)
+    (tabspaces-initialize-project-with-todo nil)
     (tabspaces-todo-file-name "todo.org")
     (tabspaces-session nil)
     )
-
 
 ;; Consult integration
 (use-package tabspaces

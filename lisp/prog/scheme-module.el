@@ -1,5 +1,8 @@
 ;; Syntax highlight + REPL
-(use-package geiser-guile)
+(use-package geiser-guile
+  :bind (:map scheme-mode-map
+	      ("C-c '" . geiser))
+  )
 
 
 ;; Notebook support (via org-babel)

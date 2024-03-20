@@ -6,8 +6,8 @@
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-redo)
   (setq evil-echo-state nil)
-  :hook (after-init . evil-mode))
-
+  :hook (after-init . evil-mode)
+  )
 ;; Evil extended support
 (use-package evil-collection
   :hook (evil-mode . evil-collection-init))
@@ -126,15 +126,6 @@
   (require 'evil-org-agenda)
   (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
   (evil-org-agenda-set-keys)
-  )
-
-;; Latex support
-(use-package evil-tex
-  :after evil
-  :hook (LaTeX-mode . evil-tex-mode)
-  :config
-  (require 'bind-key)
-  (unbind-key "m-n" evil-tex-mode-map) ;; clean keys for lsp-bridge in latex
   )
 
 

@@ -14,7 +14,8 @@
 
 ;; Evil compatibility
 (use-package magit
-  :hook (with-editor-mode . evil-insert-state))
-
+  :config
+  :hook (git-commit-mode . evil-insert-state)
+  )
 
 (provide 'version-control-module)

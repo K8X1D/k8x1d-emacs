@@ -9,6 +9,7 @@ GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
 GUIX_EXTRA="$HOME/.guix-extra"
 PROJECT_NAME="k8x1d-emacs"
 PROJECT_DIRECTORY="$XDG_CONFIG_HOME/$PROJECT_NAME"
+GUIX_LOCPATH="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/lib/locale"
 
 ############################################################
 # Commands                                                 #

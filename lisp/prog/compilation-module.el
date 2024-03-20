@@ -11,6 +11,7 @@
 (use-package fancy-compilation
   :commands (fancy-compilation-mode)
   :config
+  (setq fancy-compilation-override-colors nil)
   (with-eval-after-load 'compile
     (fancy-compilation-mode)))
 

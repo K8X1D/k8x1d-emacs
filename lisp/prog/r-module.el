@@ -18,9 +18,10 @@
     )
 
 ;; LSP
-  (use-package ess
-    :hook (ess-r-mode . eglot-ensure)
-    )
+(use-package ess
+  :if (string= k8x1d/lsp-backend "eglot")
+  :hook (ess-r-mode . eglot-ensure)
+  )
 
 ;; Data viewer
   (use-package ess-view-data

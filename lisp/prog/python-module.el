@@ -18,12 +18,19 @@
  ;;	      )
   )
 
+;; IDE
+(use-package elpy
+  :if (string= k8x1d/ide "full") 
+  :hook (python-ts-mode . elpy-mode))
+
 ;; LSP
 (use-package eglot
+  :if (string= k8x1d/lsp-backend "eglot")
   :hook (python-ts-mode . eglot-ensure))
 
 ;; Documentation
 (use-package eldoc
+  :if (not (string=  k8x1d/lsp-backend "lsp-bridge"))
   :hook (python-ts-mode . eldoc-mode))
 
 ;; Venv compatibility

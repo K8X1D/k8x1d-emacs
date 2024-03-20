@@ -15,6 +15,10 @@
   (setq tramp-verbose 0)
   (setq tramp-chunksize 2000)
   (setq tramp-use-ssh-controlmaster-options nil)
+
+
+  ;; allow .dir-locals
+  (setq enable-remote-dir-locals t)
   )
 
 ;; Predefined connections
@@ -43,7 +47,13 @@
     (interactive (list (concat "ssh" " " (k8x1d/select-ssh-address))))
     (eat vm)
     )
-  )
+  :config
+  ;; Remote variable
+  ;; For eat, following https://codeberg.org/akib/emacs-eat/issues/144
+  (setq tramp-terminal-type "xterm-256color")
+  (add-to-list 'tramp-remote-process-environment '"TERMINFO=")
+  (add-to-list 'tramp-remote-process-environment '"xterm-256color")
+ )
 
 ;; Docker interaction (inspiration: https://www.emacswiki.org/emacs/TrampAndDocker)
 (use-package tramp
