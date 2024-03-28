@@ -13,7 +13,7 @@
     ;; (interactive)
     ;; (dired-sidebar-toggle-sidebar)
     ;; (ibuffer-sidebar-toggle-sidebar))
-  :hook (dired-sidebar-mode . visual-line-mode)
+  ;; :hook (dired-sidebar-mode . visual-line-mode)
     :config
     (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
     (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
