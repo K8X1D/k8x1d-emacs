@@ -3,6 +3,8 @@
 	     (guix download)
 	     (guix build-system emacs)
 	     ((guix licenses) #:prefix license:)
+	     (guix)
+	     (guix gexp)
 	     (gnu packages)
 	     (gnu packages commencement)
 	     (gnu packages emacs)
@@ -118,6 +120,35 @@
    (propagated-inputs
     (list emacs-vertico emacs-posframe))
    ))
+
+
+;;;; TODO  
+(define-public %patch-eldoc-box-transparency
+  (local-file "patches/eldoc-box-transparency.patch" #:recursive? #t))
+
+(define-public emacs-eldoc-box-patched
+  (package
+   (inherit emacs-eldoc-box)
+    (version "20231115.519")
+    (source
+     (origin
+      (method git-fetch)
+      (uri (git-reference
+	    (url "https://github.com/casouri/eldoc-box.git")
+	    (commit
+	     "c36f31074b09930e8425963f39d5508da6d2c32d")))
+      (sha256
+       (base32
+	"0vglh3sp9x6z537jngh5jh9j3szbfadryzlwhmrlq7asiinnjq01"))
+     (patches (list %patch-eldoc-box-transparency))))
+    (build-system melpa-build-system)
+    (home-page
+      "https://github.com/casouri/eldoc-box")
+    (synopsis "Display documentation in childframe")
+    (description
+      "Documentation at https://melpa.org/#/eldoc-box")
+    (license #f)))
+
 
 ;; Emacs defintion
 (define-public emacs-next-minimal
@@ -771,7 +802,8 @@ shell integration.")
   texlive-digestif
 
   emacs-which-key-posframe
-  emacs-eldoc-box
+  ;; emacs-eldoc-box
+  emacs-eldoc-box-patched
   emacs-vertico-posframe-upd
   emacs-org-popup-posframe
 

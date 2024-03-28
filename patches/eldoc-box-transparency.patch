@@ -1,0 +1,14 @@
+diff --git a/eldoc-box.el b/eldoc-box.el
+--- a/eldoc-box.el
++++ b/eldoc-box.el
+@@ -127,7 +127,7 @@
+     (top . -1)
+     (width  . 0)
+     (height  . 0)
+-
++    (alpha-background . 100)
+     (no-accept-focus . t)
+     (no-focus-on-map . t)
+     (min-width  . 0)
+
+Diff finished.  Thu Mar 28 09:41:29 2024
