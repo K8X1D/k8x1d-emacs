@@ -2,7 +2,11 @@
 (use-package mpdel
   :custom
   (mpdel-prefix-key (kbd "C-c o m"))
-  :hook (after-init . mpdel-mode))
+  :hook (after-init . mpdel-mode)
+  :config
+  (setq libmpdel-port 6600)
+  (setq libmpdel-hostname "0.0.0.0")
+  )
 
 
 ;; Embark support
