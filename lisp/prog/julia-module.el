@@ -32,6 +32,10 @@
     )
   :bind ("C-c o r j" . k8x1d/julia)
   :hook (julia-ts-mode . julia-vterm-mode)
+  :config
+  ;; Clean keybindings
+  (require 'bind-key)
+  (unbind-key "C-c C-i" julia-vterm-mode-map) 
   )
 
 ;; Notebook support
