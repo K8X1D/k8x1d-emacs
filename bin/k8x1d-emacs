@@ -24,6 +24,7 @@ Help()
     echo "i     Install k8x1d-emacs."
     echo "h     Print this Help."
     echo "u     Update k8x1d-emacs."
+    echo "U     Upgrade k8x1d-emacs."
     echo "s     Search k8x1d-emacs."
     echo "d     Daemonize k8x1d-emacs."
     echo "c     Launch k8x1d-emacs client."
@@ -43,6 +44,19 @@ Install()
     }
     notify-send -a "$PROJECT_NAME" "Update" "$STATUS"
 }
+
+
+Upgrade()
+{
+    { # try
+	guix pull --channels="$PROJECT_DIRECTORY/channels.scm" --profile="$GUIX_EXTRA/$PROJECT_NAME/guix" &&
+	    STATUS="Finished"
+    } || { # catch
+	STATUS="Failed..."
+    }
+    notify-send -a "$PROJECT_NAME" "Upgrade" "$STATUS"
+}
+
 
 Update()
 {
@@ -89,7 +103,7 @@ GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFI
 # Process the input options. Add options as needed.        #
 ############################################################
 # Get the options
-while getopts ":hiusdcl:" option; do
+while getopts ":hiuUsdcl:" option; do
     case $option in
 	h) # display Help
             Help
@@ -99,6 +113,9 @@ while getopts ":hiusdcl:" option; do
 	    exit;;
 	u) # Update
 	    Update 
+	    exit;;
+	U) # Upgrade
+	    Upgrade 
 	    exit;;
 	s) # Search
 	    Search 
