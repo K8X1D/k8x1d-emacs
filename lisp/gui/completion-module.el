@@ -11,6 +11,21 @@
   (setq vertico-cycle t) ;; enable cycling for `vertico-next' and `vertico-previous
   )
 
+
+;; Vertico popup in posframe
+(use-package vertico-posframe
+  :if  k8x1d/posframe-support
+  :hook (vertico-mode . vertico-posframe-mode)
+  :config
+  ;; always see candidates, see https://github.com/tumashu/vertico-posframe/issues/14
+  (setq vertico-posframe-truncate-lines nil)
+  (setq vertico-posframe-parameters
+	'((left-fringe . 10)
+	  (right-fringe . 10)
+	  (alpha-background . 100) ;; no transparency
+	  ))
+  )
+
 ;; Persist history over Emacs restarts.
 (use-package savehist
   :hook (after-init . savehist-mode))

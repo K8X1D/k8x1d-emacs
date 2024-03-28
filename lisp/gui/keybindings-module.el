@@ -12,4 +12,18 @@
         which-key-side-window-slot -10)
   )
 
+;; Which-Key popup in posframe
+(use-package whick-key-posframe
+  :if k8x1d/posframe-support
+  :hook (which-key-mode . which-key-posframe-mode)
+  :config
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-center)
+  (setq which-key-posframe-parameters
+	'((left-fringe . 10)
+	  (right-fringe . 10)
+	  (alpha-background . 100) ;; no transparency
+	  ))
+  )
+fringe-indicator-alist
+
 (provide 'keybindings-module)

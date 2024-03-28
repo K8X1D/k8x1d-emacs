@@ -150,5 +150,20 @@
   )
 
 
+;; Popup in posframe
+(use-package org-popup-posframe 
+  :if k8x1d/posframe-support
+  :hook (org-mode . org-popup-posframe-mode)
+  :config
+  (require 'posframe)
+  (setq org-popup-posframe-org-export-dispatch-poshandler #'posframe-poshandler-frame-center)
+  (setq org-popup-posframe-org-capture-poshandler #'posframe-poshandler-frame-center)
+  (setq org-popup-posframe-parameters
+	'((left-fringe . 10)
+	  (right-fringe . 10)
+	  (alpha-background . 100) ;; no transparency
+	  ))
+
+  )
 
 (provide 'org-gui-module)
