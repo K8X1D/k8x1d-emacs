@@ -14,7 +14,7 @@
 
 ;; Vertico popup in posframe
 (use-package vertico-posframe
-  :if  k8x1d/posframe-support
+  :if k8x1d/posframe-support
   :hook (vertico-mode . vertico-posframe-mode)
   :config
   ;; always see candidates, see https://github.com/tumashu/vertico-posframe/issues/14

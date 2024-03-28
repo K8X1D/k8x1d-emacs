@@ -29,6 +29,10 @@
     :bind
     (:map ess-r-mode-map
           ("C-c C-v" . ess-view-data-print))
+    :config
+    ;; Clean keybindings
+    (require 'bind-key)
+    (unbind-key "C-c C-i" ess-view-data-mode-map) 
     )
 
 ;; Notebook support (via org-babel)
