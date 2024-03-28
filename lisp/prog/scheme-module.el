@@ -1,8 +1,14 @@
 ;; Syntax highlight + REPL
-(use-package geiser-guile
+(use-package geiser-mode
   :bind (:map scheme-mode-map
 	      ("C-c '" . geiser))
+  :config
+  ;; Clean keybindings
+  (require 'bind-key)
+  (unbind-key "C-c C-i" geiser-mode-map) 
   )
+
+(use-package geiser-guile)
 
 
 ;; Notebook support (via org-babel)
