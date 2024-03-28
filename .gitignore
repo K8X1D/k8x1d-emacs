@@ -9,7 +9,7 @@ tree-sitter/
 tramp
 projects
 org-roam.db
-forge-database.sqlite
+forge-database*
 elpy
 lsp-bridge
 .org-id-locations
