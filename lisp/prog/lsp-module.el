@@ -12,6 +12,18 @@
   (setq mode-line-misc-info (delete '(eglot--managed-mode (" [" eglot--mode-line-format "] ")) mode-line-misc-info)) ;; Clean modeline info
   )
 
+;; Consult integration
+(use-package consult-eglot
+  :if (string= k8x1d/lsp-backend "eglot"))
+
+;; Embark integration
+(use-package consult-eglot-embark
+  :if (string= k8x1d/lsp-backend "eglot")
+  :after (embark consult-eglot)
+  :config
+  (require 'consult-eglot-embark)
+  (consult-eglot-embark-mode +1))
+
 
 (use-package lsp-bridge
   :if (string= k8x1d/lsp-backend "lsp-bridge")
