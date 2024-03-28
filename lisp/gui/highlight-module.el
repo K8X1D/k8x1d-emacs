@@ -1,6 +1,8 @@
 ;; Highlight searched terms
 (use-package anzu
   :hook (after-init . global-anzu-mode)
+  :custom-face (anzu-mode-line ((t (:foreground ,(doom-color 'green)))))
+  (anzu-mode-line-no-match ((t (:foreground ,(doom-color 'red)))))
   :config
   (setq anzu-cons-mode-line-p nil)
   )
