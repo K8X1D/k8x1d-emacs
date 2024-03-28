@@ -56,6 +56,7 @@
 
 (use-package hide-mode-line
   :hook ((eat-mode . hide-mode-line-mode)
+	 (dired-sidebar-mode . hide-mode-line-mode)
 	 (special-mode . hide-mode-line-mode)))
 
 (provide 'modeline-module)
