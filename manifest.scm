@@ -78,7 +78,29 @@
    (license license:gpl3+)))
 
 
-;; Bluetooth
+(define-public emacs-org-popup-posframe
+  (package
+   (name "emacs-org-popup-posframe")
+   (version "v0.0.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://github.com/A7R7/org-popup-posframe")
+           (commit "f2457999d886328d44a86c2e6e62944bf3191a78")))
+     (sha256
+      (base32 "0d7zfpasa9ymci82qs3ihrjqd1na2s5hagwr0bayzxcrnqrr80di"))
+     (file-name (git-file-name name version))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-posframe))
+   (home-page "https://github.com/A7R7/org-popup-posframe")
+   (synopsis "show org-mode popup buffers in posframe")
+   (description
+    "")
+   (license license:gpl3+)))
+
+
+
 ;; bluetooth package from guix-channel conflicts with emacs-pass from emacs channel, ensure that newer emacs-dash is used
 (define-public emacs-bluetooth-upd
   (package
@@ -88,6 +110,14 @@
     (list emacs-dash))
    ))
 
+;; vertico-posframe package from guix-channel conflicts with more up-to-date vertico package from emacs channel, ensure that newer emacs-vertico is used
+(define-public emacs-vertico-posframe-upd
+  (package
+   (inherit emacs-vertico-posframe)
+   (name "emacs-vertico-posframe-upd")
+   (propagated-inputs
+    (list emacs-vertico emacs-posframe))
+   ))
 
 ;; Emacs defintion
 (define-public emacs-next-minimal
@@ -646,10 +676,10 @@ shell integration.")
   emacs-citar-embark
   emacs-citar-org-roam
   emacs-consult-org-roam
-  emacs-eldoc-box
   emacs-consult-todo
   emacs-consult-yasnippet
-  emacs-corfu
+  emacs-consult-eglot
+  emacs-consult-eglot-embark
   emacs-corfu-candidate-overlay
   emacs-dired-sidebar
   emacs-doom-themes
@@ -668,7 +698,7 @@ shell integration.")
   emacs-evil-nerd-commenter
   emacs-evil-org
   emacs-evil-surround
-  ;; emacs-evil-tex
+  emacs-evil-tex
   emacs-evil-traces
   emacs-fancy-compilation
   emacs-flymake-collection
@@ -739,5 +769,10 @@ shell integration.")
   texlive-scheme-basic ;; Basic scheme (plain and latex)
   texlive-dvipng
   texlive-digestif
+
+  emacs-which-key-posframe
+  emacs-eldoc-box
+  emacs-vertico-posframe-upd
+  emacs-org-popup-posframe
 
   ))

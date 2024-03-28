@@ -24,6 +24,7 @@
 (defvar k8x1d/ide "minimal")
 (defvar k8x1d/terminal "vterm")
 (defvar k8x1d/completion "native")
+(defvar k8x1d/posframe-support t)
 
 (require 'tools-module)
 
@@ -62,6 +63,7 @@
 (require 'python-module)
 (require 'r-module)
 (require 'scheme-module)
+(require 'sql-module)
 
 (require 'terminal-module)
 (require 'password-module)
