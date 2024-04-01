@@ -1,5 +1,3 @@
-
-
 (use-package doom-themes
   ;; :hook (after-init . (lambda () (load-theme 'doom-palenight t)))
   :config
@@ -9,9 +7,9 @@
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
-  (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+  (doom-themes-org-config)
+  )
 
 (use-package emacs
   :hook (after-init . window-divider-mode)
@@ -21,9 +19,5 @@
   (setq window-divider-default-bottom-width 1)
   (setq window-divider-default-right-width 1)
   )
-
-
-
-
 
 (provide 'theme-module)
