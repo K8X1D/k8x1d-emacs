@@ -23,8 +23,8 @@
 ;; (defvar k8x1d/lsp-backend "lsp-bridge")
 (defvar k8x1d/ide "minimal")
 (defvar k8x1d/terminal "vterm")
-(defvar k8x1d/completion "native")
-(defvar k8x1d/posframe-support t)
+(defvar k8x1d/completion "corfu")
+(defvar k8x1d/posframe-support nil)
 
 (require 'tools-module)
 
@@ -88,4 +88,3 @@
 (require 'org-writing-module)
 (require 'org-agenda-module)
 (require 'org-management-module)
-
