@@ -1,0 +1,26 @@
+From ac2dda5f6f729d86c226014420dbeda993ef57db Mon Sep 17 00:00:00 2001
+From: Dan Harms <danielrharms@gmail.com>
+Date: Wed, 2 Nov 2022 12:11:10 -0500
+Subject: [PATCH] fix compatibility with eglot
+
+---
+ flymake-posframe.el | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/flymake-posframe.el b/flymake-posframe.el
+index 1904ef5..875ce4f 100644
+--- a/flymake-posframe.el
++++ b/flymake-posframe.el
+@@ -99,8 +99,11 @@ Only the `foreground' is used in this face."
+            :string (concat (propertize
+ 			    (pcase (flymake--diag-type diag)
+                                  (:error flymake-posframe-error-prefix)
++                                 (eglot-error flymake-posframe-error-prefix)
+                                  (:warning flymake-posframe-warning-prefix)
+-                                 (:note flymake-posframe-note-prefix))
++                                 (eglot-warning flymake-posframe-warning-prefix)
++                                 (:note flymake-posframe-note-prefix)
++                                 (eglot-note flymake-posframe-note-prefix))
+                                'face 'warning)
+ 			   (flymake--diag-text diag)))
+ 
