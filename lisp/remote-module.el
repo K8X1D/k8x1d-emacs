@@ -47,6 +47,13 @@
     (interactive (list (concat "ssh" " " (k8x1d/select-ssh-address))))
     (eat vm)
     )
+
+  (defun k8x1d/vterm-ssh (vm)
+    (interactive (list (concat "ssh" " " (k8x1d/select-ssh-address))))
+    (multi-vterm)
+    (vterm-send-string vm)
+    (vterm-send-return)
+    )
   :config
   ;; Remote variable
   ;; For eat, following https://codeberg.org/akib/emacs-eat/issues/144
