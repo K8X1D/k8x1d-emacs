@@ -32,9 +32,10 @@
 
 
 ;; Add lisp module and subdirectory to path
-(let ((default-directory  (concat user-emacs-directory "/lisp")))
+(let ((default-directory  (concat user-emacs-directory "lisp")))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
+
 (setq user-emacs-cache-directory (concat user-emacs-directory ".cache"))
 (setq custom-theme-directory (concat user-emacs-directory "themes"))
 
