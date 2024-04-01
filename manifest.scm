@@ -102,6 +102,41 @@
    (license license:gpl3+)))
 
 
+(define-public %patch-flymake-posframe-eglot
+  (local-file "patches/flymake-posframe-eglot.patch" #:recursive? #t))
+
+(define-public %patch-flymake-posframe-no-transparency
+  (local-file "patches/flymake-posframe-no-transparency.patch" #:recursive? #t))
+
+(define-public emacs-flymake-posframe-patched
+  (package
+   (name "emacs-flymake-posframe")
+   (version "20210304")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+	   (url "https://github.com/Ladicle/flymake-posframe.git")
+	   (commit
+	    "6ce6e2bc62699c84b7046dd6d07191d37cad3e3e")))
+     (sha256
+      (base32
+       "08id06c3750adxgk8y30yai098jzrh0mmgwn34b7gmfvcn16934n"))
+     (patches (list %patch-flymake-posframe-eglot
+		    %patch-flymake-posframe-no-transparency)
+     )))
+  (build-system melpa-build-system)
+  (propagated-inputs (list emacs-posframe))
+  (home-page
+   "https://github.com/Ladicle/flymake-posframe")
+  (synopsis "Showing flymake diagnostics at point using posframe")
+  (description
+   "Showing flymake diagnostics at point using posframe")
+  (license #f)))
+
+
+
+
 
 ;; bluetooth package from guix-channel conflicts with emacs-pass from emacs channel, ensure that newer emacs-dash is used
 (define-public emacs-bluetooth-upd
@@ -122,9 +157,8 @@
    ))
 
 
-;;;; TODO  
-(define-public %patch-eldoc-box-transparency
-  (local-file "patches/eldoc-box-transparency.patch" #:recursive? #t))
+(define-public %patch-eldoc-box-no-transparency
+  (local-file "patches/eldoc-box-no-transparency.patch" #:recursive? #t))
 
 (define-public emacs-eldoc-box-patched
   (package
@@ -140,7 +174,7 @@
       (sha256
        (base32
 	"0vglh3sp9x6z537jngh5jh9j3szbfadryzlwhmrlq7asiinnjq01"))
-     (patches (list %patch-eldoc-box-transparency))))
+     (patches (list %patch-eldoc-box-no-transparency))))
     (build-system melpa-build-system)
     (home-page
       "https://github.com/casouri/eldoc-box")
@@ -801,10 +835,10 @@ shell integration.")
   texlive-dvipng
   texlive-digestif
 
-  emacs-which-key-posframe
-  ;; emacs-eldoc-box
-  emacs-eldoc-box-patched
-  emacs-vertico-posframe-upd
-  emacs-org-popup-posframe
+  ;; emacs-which-key-posframe
+  ;; emacs-eldoc-box-patched
+  ;; emacs-vertico-posframe-upd
+  ;; emacs-org-popup-posframe
+  ;; emacs-flymake-posframe-patched
 
   ))

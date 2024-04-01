@@ -24,6 +24,10 @@
 	  (right-fringe . 10)
 	  (alpha-background . 100) ;; no transparency
 	  ))
+(setq vertico-multiform-commands
+      '((consult-line (:not posframe))
+	(consult-flymake (:not posframe))
+        (t posframe)))
   )
 
 ;; Persist history over Emacs restarts.
@@ -158,7 +162,7 @@
   (consult-customize
    consult-theme :preview-key '(:debounce 0.2 any)
    consult-ripgrep consult-git-grep consult-grep
-   consult-bookmark consult-recent-file consult-xref
+   ;; consult-bookmark consult-recent-file consult-xref
    consult--source-bookmark consult--source-file-register
    consult--source-recent-file consult--source-project-recent-file
    :preview-key '(:debounce 0.4 any))
@@ -195,9 +199,9 @@
 ;; Completion preview (as-you-type)
 (use-package corfu-candidate-overlay
   :if (string= k8x1d/completion "corfu")
-  :defer 5
+  ;; :defer 5
   :after corfu
-  :hook (corfu-mode . corfu-candidate-overlay-mode)
+  :hook (global-corfu-mode . corfu-candidate-overlay-mode)
   :custom-face  (corfu-candidate-overlay-face ((t (:foreground ,(doom-color 'magenta) :weight bold))))
   :config
   ;; bind Ctrl + TAB to trigger the completion popup of corfu

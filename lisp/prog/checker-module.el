@@ -11,4 +11,12 @@
   :hook (after-init . flymake-collection-hook-setup))
 
 
+;; Display result in posframe
+(use-package flymake-posframe
+  :if k8x1d/posframe-support
+  :hook (flymake-mode . flymake-posframe-mode)
+  :config
+
+  )
+
 (provide 'checker-module)
