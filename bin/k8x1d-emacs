@@ -9,7 +9,10 @@ GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
 GUIX_EXTRA="$HOME/.guix-extra"
 PROJECT_NAME="k8x1d-emacs"
 PROJECT_DIRECTORY="$XDG_CONFIG_HOME/$PROJECT_NAME"
-GUIX_LOCPATH="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/lib/locale"
+GUIX_LOCPATH="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/lib/locale:$GUIX_LOCPATH"
+GUIX_BIN="$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix"
+# EMACSLOADPATH=$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/share/emacs/site-lisp
+#LD_LIBRARY_PATH=""
 
 ############################################################
 # Commands                                                 #
@@ -37,7 +40,7 @@ Install()
 	mkdir -p "$GUIX_EXTRA/$PROJECT_NAME"
 	mkdir -p "$GUIX_EXTRA_PROFILES/$PROJECT_NAME"
 	guix pull --channels="$PROJECT_DIRECTORY/channels.scm" --profile="$GUIX_EXTRA/$PROJECT_NAME/guix" &&
-	    "$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest="$PROJECT_DIRECTORY/manifest.scm" --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" &&
+	    $GUIX_BIN package --manifest="$PROJECT_DIRECTORY/manifest.scm" --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" &&
 	    STATUS="Finished"
     } || { # catch
 	STATUS="Failed..."
@@ -49,7 +52,8 @@ Install()
 Upgrade()
 {
     { # try
-	guix pull --channels="$PROJECT_DIRECTORY/channels.scm" --profile="$GUIX_EXTRA/$PROJECT_NAME/guix" &&
+	guix pull --channels="$PROJECT_DIRECTORY/k8x1d-emacs-channels.scm" --profile="$GUIX_EXTRA/$PROJECT_NAME/guix" &&
+	$GUIX_BIN describe -f channels > "$PROJECT_DIRECTORY/channels.scm" 
 	    STATUS="Finished"
     } || { # catch
 	STATUS="Failed..."
@@ -61,13 +65,14 @@ Upgrade()
 Update()
 {
     { # try
-	"$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" package --manifest="$PROJECT_DIRECTORY/manifest.scm" --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" &&
+	$GUIX_BIN package --manifest="$PROJECT_DIRECTORY/manifest.scm" --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" &&
 	    STATUS="Finished"
     } || { # catch
 	STATUS="Failed..."
     }
     notify-send -a "$PROJECT_NAME" "Update" "$STATUS"
 }
+
 
 Launch()
 {
@@ -77,7 +82,7 @@ GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFI
 
 Search()
 {
-    "$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix" search $@
+    $GUIX_BIN search $@
 }
 
 Daemonize()
