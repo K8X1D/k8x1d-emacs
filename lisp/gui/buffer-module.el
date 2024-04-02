@@ -29,6 +29,7 @@
   :hook (after-init . global-auto-revert-mode)
   :config
   (setq auto-revert-remote-files t)
+  (setq auto-revert-verbose nil)
   )
 
 ;; prevent minibuffer lock
