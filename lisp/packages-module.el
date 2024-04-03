@@ -18,6 +18,4 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-
-
 (provide 'packages-module)
