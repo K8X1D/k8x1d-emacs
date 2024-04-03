@@ -88,3 +88,6 @@
 (require 'org-writing-module)
 (require 'org-agenda-module)
 (require 'org-management-module)
+
+(require 'pubmed-module)
+
