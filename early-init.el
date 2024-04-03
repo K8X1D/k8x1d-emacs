@@ -31,6 +31,8 @@
 
 
 
+(setq user-emacs-directory "~/.config/k8x1d-emacs/")
+
 ;; Add lisp module and subdirectory to path
 (let ((default-directory  (concat user-emacs-directory "lisp")))
   (normal-top-level-add-to-load-path '("."))
