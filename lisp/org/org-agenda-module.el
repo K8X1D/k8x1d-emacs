@@ -60,64 +60,48 @@
 
 ;; Group agenda
 (use-package org-super-agenda
-;;  :init
-;;  (defun k8x1d/org-agenda-day ()
-;;    (interactive)
-;;    (tabspaces-switch-or-create-workspace "GTD")
-;;    (org-agenda nil "d")
-;;    )
-;;  (defun k8x1d/org-agenda-week ()
-;;    (interactive)
-;;    (tabspaces-switch-or-create-workspace "GTD")
-;;    (org-agenda nil "w")
-;;    )
-;;  (defun k8x1d/org-agenda-month ()
-;;    (interactive)
-;;    (tabspaces-switch-or-create-workspace "GTD")
-;;    (org-agenda nil "m")
-;;    )
-;;  (defun k8x1d/org-agenda-grouped-tags ()
-;;    (interactive)
-;;    (tabspaces-switch-or-create-workspace "GTD")
-;;    (org-agenda nil "t")
-;;    )
-;;  (push '(GTD  . k8x1d/org-agenda-day) k8x1d-workspaces)
-;;  (defun k8x1d/switch-or-create-gtd-workspace ()
-;;    (interactive)
-;;    (k8x1d/switch-or-create-predefined-workspace 'GTD)
-;;    )
   :hook (org-agenda-mode . org-super-agenda-mode)
   :config
   ;; Fix for evil user, see https://github.com/alphapapa/org-super-agenda/issues/50
   (setq org-super-agenda-header-map (make-sparse-keymap))
+  (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t %-4s ")
+				   (todo . " %i %-12:c")
+				   (tags . " %i %-12:c")
+				   (search . " %i %-12:c")))
+  (setq org-agenda-todo-keyword-format "%-12s")
+(setq org-agenda-todo
   :init
   (setq org-agenda-custom-commands
         '(("d" "Agenda for the day"
            ((agenda "" ((org-agenda-span 'day)
                         (org-agenda-deadline-leaders '(" " "-%3d" "+%3d"))
-                        (org-agenda-scheduled-leaders '(" " "+%2d"))
+                        (org-agenda-scheduled-leaders '(" " "+%3d"))
                         (org-agenda-skip-deadline-if-done t)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-timestamp-if-done t)
                         (org-super-agenda-groups
                          '(
-                           (:name "Aujourd'hui"
+                           (:name "Horaire"
                                   :time-grid t
+				  :discard (:priority "C")
                                   :order 0)
-                           (:name "Échéancier"
+                           (:name "Aujourd'hui"
                                   :deadline today
-                                  :scheduled today
+				  :scheduled today
                                   :order 1)
-                           (:name "En retard"
-                                  :deadline past
-                                  :scheduled past
-                                  :order 2)
+			   (:name "En attente"
+				  :todo "WAIT"
+				  :order 2)
                            (:name "À venir"
                                   :deadline future
                                   :scheduled future
                                   :order 3)
-                           )))))
-           )
+                           (:name "En retard"
+                                  :deadline past
+                                  :scheduled past
+                                  :order 4)
+                         )))))
+	   )
           ("w" "Agenda for the week"
            ((agenda "" ((org-agenda-span 'week)
                         (org-agenda-start-on-weekday 0)

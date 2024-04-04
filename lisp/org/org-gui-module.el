@@ -85,47 +85,48 @@
 (use-package org
   :config
   ;; Tags
-  (setq org-auto-align-tags nil)
-  ;; Dynamic tags position adjustment, inspired from https://emacs.stackexchange.com/questions/10087/how-to-better-align-tags-in-org-mode-using-variable-width-font and https://orgmode.org/worg/org-hacks.html#orgheadline64
-  (setq k8x1d/org-adjust-tags-column t)
-  (when k8x1d/org-adjust-tags-column
-    (defun get-right-alignment-position ()
-      (- 2 (window-max-chars-per-line)))
-    (defun org-realign-all-tags-now ()
-      (set (make-local-variable 'org-tags-column)
-           (get-right-alignment-position))
-      (org-align-all-tags)
-      (set-buffer-modified-p nil)
-      )
-    (defun k8x1d/org-adjust-tags-column-before-save ()
-      "Tags need to be left-adjusted when saving."
-      (set (make-local-variable 'org-tags-column)
-           1)
-      (org-align-all-tags)
-      (set-buffer-modified-p nil)
-      )
-    (defun k8x1d/org-adjust-tags-column-after-save ()
-      "Revert left-adjusted tag position done by before-save hook."
-      (set (make-local-variable 'org-tags-column)
-           (get-right-alignment-position))
-      (org-align-all-tags)
-      (set-buffer-modified-p nil)
-      )
+  (setq org-auto-align-tags t)
+  ;; (setq org-auto-align-tags nil)
+ ;; ;; Dynamic tags position adjustment, inspired from https://emacs.stackexchange.com/questions/10087/how-to-better-align-tags-in-org-mode-using-variable-width-font and https://orgmode.org/worg/org-hacks.html#orgheadline64
+ ;; (setq k8x1d/org-adjust-tags-column t)
+ ;; (when k8x1d/org-adjust-tags-column
+ ;;   (defun get-right-alignment-position ()
+ ;;     (- 2 (window-max-chars-per-line)))
+ ;;   (defun org-realign-all-tags-now ()
+ ;;     (set (make-local-variable 'org-tags-column)
+ ;;          (get-right-alignment-position))
+ ;;     (org-align-all-tags)
+ ;;     (set-buffer-modified-p nil)
+ ;;     )
+ ;;   (defun k8x1d/org-adjust-tags-column-before-save ()
+ ;;     "Tags need to be left-adjusted when saving."
+ ;;     (set (make-local-variable 'org-tags-column)
+ ;;          1)
+ ;;     (org-align-all-tags)
+ ;;     (set-buffer-modified-p nil)
+ ;;     )
+ ;;   (defun k8x1d/org-adjust-tags-column-after-save ()
+ ;;     "Revert left-adjusted tag position done by before-save hook."
+ ;;     (set (make-local-variable 'org-tags-column)
+ ;;          (get-right-alignment-position))
+ ;;     (org-align-all-tags)
+ ;;     (set-buffer-modified-p nil)
+ ;;     )
 
-    (setq org-tags-column (get-right-alignment-position)) 
+ ;;   (setq org-tags-column (get-right-alignment-position)) 
 
-    (add-hook 'org-mode-hook #'org-realign-all-tags-now)
-    (add-hook 'text-scale-mode-hook #'org-realign-all-tags-now)
-    (add-hook 'before-save-hook #'k8x1d/org-adjust-tags-column-before-save)
-    (add-hook 'after-save-hook #'k8x1d/org-adjust-tags-column-after-save)
+ ;;   (add-hook 'org-mode-hook #'org-realign-all-tags-now)
+ ;;   (add-hook 'text-scale-mode-hook #'org-realign-all-tags-now)
+ ;;   (add-hook 'before-save-hook #'k8x1d/org-adjust-tags-column-before-save)
+ ;;   (add-hook 'after-save-hook #'k8x1d/org-adjust-tags-column-after-save)
 
-    (defadvice org-refile (around org-refile-disable-adjust-tags)
-      "Disable dynamically adjusting tags"
-      (let ((k8x1d/org-adjust-tags-column nil))
-        ad-do-it))
-    (ad-activate 'org-refile)
+ ;;   (defadvice org-refile (around org-refile-disable-adjust-tags)
+ ;;     "Disable dynamically adjusting tags"
+ ;;     (let ((k8x1d/org-adjust-tags-column nil))
+ ;;       ad-do-it))
+ ;;   (ad-activate 'org-refile)
 
-    ) 
+ ;;   ) 
   )
 
 
@@ -147,6 +148,10 @@
 	  (?C :background ,(doom-color 'red)
 	      :foreground ,(doom-color 'bg)
 	      :family "Iosevka Nerd Font")))
+  ;; Correct for issue https://github.com/minad/org-modern/issues/26
+  (add-hook 'org-agenda-finalize-hook
+            (lambda ()
+              (setq-local org-todo-keywords-for-agenda '("TODO" "NEXT" "WAIT"))))
   )
 
 
