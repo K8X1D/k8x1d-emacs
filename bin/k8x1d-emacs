@@ -1,7 +1,8 @@
+#!/usr/bin/bash
 # -*- mode: bash-ts; -*-
-#!/bin/sh
 # See https://www.redhat.com/sysadmin/arguments-options-bash-scripts
 # Adapted from https://guix.gnu.org/cookbook/en/html_node/Reproducible-profiles.html
+# See https://stackoverflow.com/questions/3811345/how-to-pass-all-arguments-passed-to-my-bash-script-to-a-function-of-mine
 ############################################################
 #  Variables                                               #
 ############################################################
@@ -33,6 +34,9 @@ Help()
     echo "c     Launch k8x1d-emacs client."
     echo
 }
+
+
+ARGS="${@:2}"
 
 Install()
 {
@@ -82,7 +86,7 @@ GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFI
 
 Search()
 {
-    $GUIX_BIN search $@
+    $GUIX_BIN search $ARGS
 }
 
 Daemonize()
@@ -101,7 +105,7 @@ Daemonize()
 Client()
 {
 GUIX_PROFILE="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" ; . "$GUIX_PROFILE/etc/profile"
-    "$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacsclient" "-c" || notify-send -a "$PROJECT_NAME" "Client" "Failed..."
+    "$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/bin/emacsclient" $ARGS || notify-send -a "$PROJECT_NAME" "Client" "Failed..."
 }
 
 #####
