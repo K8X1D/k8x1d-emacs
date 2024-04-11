@@ -695,7 +695,7 @@ shell integration.")
   ;; emacs-use-package ;; native don't have description but has :vc
   alsa-utils
   direnv
-  ;; emacs-auctex
+  emacs-auctex
   emacs-bluetooth-upd
   emacs-cape
   emacs-citar-embark
@@ -772,7 +772,7 @@ shell integration.")
   emacs-yasnippet-capf
   emacs-yasnippet-snippets
   emacs-vterm
-  emacs-vterm-toggle
+  ;; emacs-vterm-toggle
   emacs-multi-vterm
   fd
   poppler
@@ -803,5 +803,7 @@ shell integration.")
   ;; emacs-flymake-posframe-patched
 
   emacs-pubmed
+  emacs-memento-mori
+  emacs-auto-dark
 
   ))

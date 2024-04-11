@@ -37,22 +37,40 @@
   :if (string= k8x1d/terminal "vterm")
   :config
   (setq vterm-max-scrollback 10000)
+  (setq vterm-kill-buffer-on-exit t)
   ;; Remote
   (add-to-list 'vterm-tramp-shells '("ssh" "/usr/bin/bash"))
+  ;; Clean keybidings
+  (require 'bind-key)
+  (unbind-key "M-1" vterm-mode-map) 
+  (unbind-key "M-2" vterm-mode-map) 
+  (unbind-key "M-3" vterm-mode-map) 
+  (unbind-key "M-4" vterm-mode-map) 
+  (unbind-key "M-5" vterm-mode-map) 
+  (unbind-key "M-6" vterm-mode-map) 
+  (unbind-key "M-7" vterm-mode-map) 
+  (unbind-key "M-8" vterm-mode-map) 
+  (unbind-key "M-9" vterm-mode-map) 
+  (unbind-key "M-0" vterm-mode-map) 
   )
 
-;; Dedicated terminal
-(use-package vterm-toggle
-  :if (string= k8x1d/terminal "vterm")
-  :bind (("C-c o t" . vterm-toggle-cd)))
+;;;; Dedicated terminal
+;;(use-package vterm-toggle
+;;  :if (string= k8x1d/terminal "vterm")
+;;  ;; :bind (("C-c o t" . vterm-toggle-cd))
+;;  )
 
 ;; Multiple terminals
 (use-package multi-vterm
   :if (string= k8x1d/terminal "vterm")
-  :bind (:map project-prefix-map
-              ("t" . multi-vterm-project))
+  :bind (("C-c o t" . multi-vterm-dedicated-toggle)
+	 (:map project-prefix-map
+	      ("t" . multi-vterm-project)))
   :config
-  (setq multi-vterm-dedicated-window-height-percent 30))
+  (setq multi-vterm-dedicated-window-height-percent 30)
+  (add-to-list 'project-switch-commands '(multi-vterm-project "Terminal"))
+  (add-to-list 'tabspaces-project-switch-commands '(multi-vterm-project "Terminal"))
+  )
 
 
 
