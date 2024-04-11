@@ -23,4 +23,8 @@
   :bind (:map markdown-mode-map
 	      ("C-c C-o" . toc-org-markdown-follow-thing-at-point)))
 
+;; Citar integration
+(use-package citar-markdown
+  :after markdown)
+
 (provide 'markdown-module)
