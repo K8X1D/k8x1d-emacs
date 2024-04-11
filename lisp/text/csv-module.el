@@ -7,6 +7,7 @@
 	   (csv-mode . (lambda () (csv-highlight ?\;)))
 	   (csv-mode . (lambda () (csv-highlight ?\11)))
            (csv-mode . csv-align-mode)
+           (csv-mode . (lambda () (visual-line-mode -1)))
            ;; (csv-mode . (lambda () (interactive) (toggle-truncate-lines nil)))
            )
     :config
