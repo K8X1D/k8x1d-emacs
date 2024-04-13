@@ -50,10 +50,14 @@
 ;; Better indentation for org-modern
 (use-package org-modern-indent
   ;; :vc (:url "https://github.com/jdtsmith/org-modern-indent"
-            ;; :branch "main")
+  ;; :branch "main")
   :hook (org-modern-mode . org-modern-indent-mode)
   :config
-(setq org-src-preserve-indentation nil)
+  (setq org-modern-block-fringe nil) ;; in test, seems to cause conflict with indent
+  (setq org-src-preserve-indentation nil)
+  (setq org-modern-hide-stars nil)		; adds extra indentation
+  (setq org-modern-table nil)
+  (setq org-modern-block-name '("" . "")) ; or other chars; so top bracket is drawn promptly
   )
 
 ;; Hide/Show markup
@@ -132,28 +136,32 @@
 
 ;; TODO: adjust sequence, not loaded when launched in daemon-mode
 (use-package org-modern
+  :init
+  (defun k8x1d/set-org-modern-colors ()
+    (require 'org-modern)
+    (setq org-modern-todo-faces
+	  `(("TODO" :background ,(doom-color 'red) :foreground ,(doom-color 'bg) :family "Iosevka Nerd Font")
+	    ("NEXT" :background ,(doom-color 'green) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")
+	    ("WAIT" :background ,(doom-color 'yellow) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")))
+    (setq org-modern-priority-faces
+	  `((?A :background ,(doom-color 'green)
+		:foreground ,(doom-color 'bg)
+		:family "Iosevka Nerd Font")
+	    (?B :background ,(doom-color 'orange)
+		:foreground ,(doom-color 'bg)
+		:family "Iosevka Nerd Font")
+	    (?C :background ,(doom-color 'red)
+		:foreground ,(doom-color 'bg)
+		:family "Iosevka Nerd Font")))
+    )
   :custom-face (org-modern-done ((t (:family "Iosevka Nerd Font"))))
   :config
-  (setq org-modern-todo-faces
-	`(("TODO" :background ,(doom-color 'red) :foreground ,(doom-color 'bg) :family "Iosevka Nerd Font")
-	  ("NEXT" :background ,(doom-color 'green) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")
-	  ("WAIT" :background ,(doom-color 'yellow) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")))
-  (setq org-modern-priority-faces
-	`((?A :background ,(doom-color 'green)
-	      :foreground ,(doom-color 'bg)
-	      :family "Iosevka Nerd Font")
-	  (?B :background ,(doom-color 'orange)
-	      :foreground ,(doom-color 'bg)
-	      :family "Iosevka Nerd Font")
-	  (?C :background ,(doom-color 'red)
-	      :foreground ,(doom-color 'bg)
-	      :family "Iosevka Nerd Font")))
-  ;; Correct for issue https://github.com/minad/org-modern/issues/26
+    (k8x1d/set-org-modern-colors)
+  ;; Correct for issue with state faces https://github.com/minad/org-modern/issues/26
   (add-hook 'org-agenda-finalize-hook
-            (lambda ()
-              (setq-local org-todo-keywords-for-agenda '("TODO" "NEXT" "WAIT"))))
+	    (lambda ()
+	      (setq-local org-todo-keywords-for-agenda '("TODO" "NEXT" "WAIT"))))
   )
-
 
 ;; Popup in posframe
 (use-package org-popup-posframe 
