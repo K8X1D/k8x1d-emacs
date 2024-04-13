@@ -10,7 +10,7 @@
 
 (use-package org
   :config
-  (setq org-clock-sound "~/Music/Soundtracks/Fargo_season_1/test.wav")
+  (setq org-clock-sound  (concat user-emacs-directory "clock_sound.wav"))
   )
 
 (provide 'org-management-module)
