@@ -34,14 +34,16 @@
   (setq org-agenda-skip-deadline-if-done nil)
   (setq org-agenda-skip-scheduled-if-done nil)
   (setq org-agenda-skip-timestamp-if-done nil)
+
   ;; tags position
-  (add-hook 'org-agenda-finalize-hook 'place-agenda-tags)
-  (defun place-agenda-tags ()
-    "Put the agenda tags by the right border of the agenda window."
-    (interactive)
-    (setq org-agenda-tags-column (- 4 (window-width)))
-    (org-agenda-align-tags)
-    )
+  ;; (add-hook 'org-agenda-finalize-hook 'place-agenda-tags)
+  ;; (defun place-agenda-tags ()
+  ;;   "Put the agenda tags by the right border of the agenda window."
+  ;;   (interactive)
+  ;;   (setq org-agenda-tags-column (- 4 (window-width)))
+  ;;   (org-agenda-align-tags)
+  ;;   )
+
   ;; org agenda keys
   ;; (setq org-agenda-sticky nil)
   ;; View configuration
@@ -69,7 +71,6 @@
 				   (tags . " %i %-12:c")
 				   (search . " %i %-12:c")))
   (setq org-agenda-todo-keyword-format "%-12s")
-(setq org-agenda-todo
   :init
   (setq org-agenda-custom-commands
         '(("d" "Agenda for the day"
@@ -100,7 +101,7 @@
                                   :deadline past
                                   :scheduled past
                                   :order 4)
-                         )))))
+                           )))))
 	   )
           ("w" "Agenda for the week"
            ((agenda "" ((org-agenda-span 'week)
@@ -133,14 +134,14 @@
 
           ("t" "Grouped tags "
            ((org-tags-view "" ((org-agenda-span 'week)
-                        (org-agenda-start-on-weekday 0)
-                        (org-agenda-deadline-leaders '(" " "-%3d" "+%3d"))
-                        (org-agenda-scheduled-leaders '(" " "+%2d"))
-                        (org-super-agenda-groups
-                         '((:name "Job"
-                                  :auto-tags t
-                                  :order 1)
-                           )))))
+                               (org-agenda-start-on-weekday 0)
+                               (org-agenda-deadline-leaders '(" " "-%3d" "+%3d"))
+                               (org-agenda-scheduled-leaders '(" " "+%2d"))
+                               (org-super-agenda-groups
+				'((:name "Job"
+					 :auto-tags t
+					 :order 1)
+				  )))))
            )
           ))
   )
