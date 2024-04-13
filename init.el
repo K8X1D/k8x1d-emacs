@@ -35,6 +35,7 @@
 (require 'workspaces-module)
 (require 'file-browser-module)
 (require 'scrolling-module)
+(require 'daemon-module)
 
 (require 'fonts-module)
 (require 'theme-module)
