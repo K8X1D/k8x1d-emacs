@@ -4,7 +4,7 @@
   (setq tex-fontify-script nil)
   )
 
-;; Latex support
+;; Evil support
 (use-package evil-tex
   :after evil
   :hook (LaTeX-mode . evil-tex-mode)
@@ -25,5 +25,41 @@
   (setq reftex-default-bibliography k8x1d/bibliography)
   (setq reftex-toc-split-windows-fraction 0.2))
 
+;; Latex support
+(use-package latex 
+  :init
+  ;; TODO: fuse function
+  (defun k8x1d/insert-latex-item-below ()
+    "Insert a latex item below the current line."
+    (interactive)
+    (evil-open-below 1)
+    (latex-insert-item)
+    )
+  (defun k8x1d/insert-latex-item-above ()
+    "Insert a latex item above the current line."
+    (interactive)
+    (evil-open-above 1)
+    (latex-insert-item)
+    )
+  :hook (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
+  :bind  (:map LaTeX-mode-map
+	       (("C-<return>" . k8x1d/insert-latex-item-below)
+		("C-S-<return>" . k8x1d/insert-latex-item-above))
+	       )
+  :config
+  (setq reftex-plug-into-AUCTeX t)
+  )
+
+;; LSP support
+(use-package eglot
+  :if (equal k8x1d/lsp-backend "eglot")
+  :hook ((LaTeX-mode . eglot-ensure))
+  :config
+  (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif"))))
+
+
+;; Citar integration
+(use-package citar-latex
+  :after auctex)
 
 (provide 'latex-module)
