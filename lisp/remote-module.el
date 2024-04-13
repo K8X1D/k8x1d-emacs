@@ -15,8 +15,6 @@
   (setq tramp-verbose 0)
   (setq tramp-chunksize 2000)
   (setq tramp-use-ssh-controlmaster-options nil)
-
-
   ;; allow .dir-locals
   (setq enable-remote-dir-locals t)
   )
