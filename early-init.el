@@ -58,12 +58,14 @@
 ;; TODO: add variable for path construction
 (setq
    backup-by-copying t      ; don't clobber symlinks
-   backup-directory-alist
-    '(("." . "~/.config/k8x1d-emacs/.cache/backup/"))    ; don't litter my fs tree
+;;   backup-directory-alist
+;;    '(("." . "~/.config/k8x1d-emacs/.cache/backup/"))    ; don't litter my fs tree
    delete-old-versions t
    kept-new-versions 6
    kept-old-versions 2
    version-control t)       ; use versioned backups
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-cache-directory "/backups"))))
 
 ;; Compilations info
 (setq byte-compile-warnings nil) ;; hide warnings
@@ -74,5 +76,8 @@
 ;; Stop enabling package
 ;; (setq package-enable-at-startup nil)
 
+;; TODO: add automatic change following current theme
+;; path for plasma: /home/k8x1d/.config/kdedefaults/kdeglobals
+;; parse ColorScheme=BreezeLight
 (require 'doom-themes)
 (load-theme 'doom-palenight t)
