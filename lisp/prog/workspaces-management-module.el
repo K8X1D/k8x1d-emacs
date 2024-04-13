@@ -10,8 +10,10 @@
     (tabspaces-include-buffers '("*scratch*"))
     (tabspaces-initialize-project-with-todo nil)
     (tabspaces-todo-file-name "todo.org")
-    (tabspaces-session nil)
-    )
+    ;; sessions
+    (tabspaces-session t)
+    ;; (tabspaces-session-auto-restore t)
+)
 
 ;; Consult integration
 (use-package tabspaces
