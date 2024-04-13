@@ -1,3 +1,14 @@
+(use-package org
+  :config
+    ;; Exportation
+    (setq org-cite-export-processors
+	  '((md . (csl "chicago-fullnote-bibliography.csl"))   ; Footnote reliant
+	    (latex biblatex)                                   ; For humanities
+	    (odt . (csl "chicago-fullnote-bibliography.csl"))  ; Footnote reliant
+	    (t . (csl "modern-language-association.csl"))))      ; Fallback
+    )
+
+
 ;; Bibliography interaction
   (use-package citar
     :hook
