@@ -12,6 +12,9 @@
   )
 
 
+
+
+
 ;; Vertico popup in posframe
 (use-package vertico-posframe
   :if k8x1d/posframe-support
@@ -77,14 +80,13 @@
 
   ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
-
   :config
-
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
-                 (window-parameters (mode-line-format . none)))))
+                 (window-parameters (mode-line-format . none))))
+  )
 
 ;; Consult integration
 (use-package embark-consult
@@ -192,8 +194,6 @@
   :config
   ;; TAB cycle if there are only few candidates
   (setq completion-cycle-threshold 3)
-  ;; Enable indentation+completion using the TAB key.
-  (setq tab-always-indent 'complete)
   )
 
 ;; Completion preview (as-you-type)
@@ -203,12 +203,11 @@
   :after corfu
   :hook (global-corfu-mode . corfu-candidate-overlay-mode)
   :custom-face  (corfu-candidate-overlay-face ((t (:foreground ,(doom-color 'magenta) :weight bold))))
+  :bind (:map corfu-candidate-overlay-map
+	      ("<backtab>" . 'corfu-candidate-overlay-complete-at-point))
   :config
-  ;; bind Ctrl + TAB to trigger the completion popup of corfu
-  ;; (global-set-key (kbd "<backtab>") 'completion-at-point)
-  ;; bind Ctrl + Shift + Tab to trigger completion of the first candidate
-  ;; (keybing <iso-lefttab> may not work for your keyboard model)
-  (global-set-key (kbd "<backtab>") 'corfu-candidate-overlay-complete-at-point)
+  (setq tab-always-indent 'complete)
+  ;; (global-set-key (kbd "<backtab>") 'corfu-candidate-overlay-complete-at-point)
   )
 
 ;; Compeletion as-you-type
