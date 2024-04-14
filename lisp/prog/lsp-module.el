@@ -28,8 +28,6 @@
 (use-package lsp-bridge
   :if (string= k8x1d/lsp-backend "lsp-bridge")
   :load-path "lisp/test/lsp-bridge/"
-  ;; :vc (:url "https://github.com/manateelazycat/lsp-bridge"
-  ;; :branch "master")
   :bind (
 	 :map lsp-bridge-mode-map
 	 ("K" . lsp-bridge-popup-documentation)
