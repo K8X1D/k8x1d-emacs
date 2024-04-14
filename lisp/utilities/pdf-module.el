@@ -1,7 +1,7 @@
 (use-package pdf-tools
- :vc (:url "https://github.com/vedang/pdf-tools"
- 	    :branch "master"
- 	    :lisp-dir "lisp/")
+  ;; :vc (:url "https://github.com/vedang/pdf-tools"
+  ;; 	    :branch "master"
+  ;; 	    :lisp-dir "lisp/")
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :hook (pdf-view-mode . pdf-annot-minor-mode)
   :config
