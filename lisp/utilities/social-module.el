@@ -10,7 +10,4 @@
   (mastodon-discover)
   )
 
-
-
-
 (provide 'social-module)
