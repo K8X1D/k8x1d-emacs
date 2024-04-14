@@ -1,26 +1,45 @@
 (use-package doom-themes
   :init
-  (setq k8x1d/default-dark-theme 'doom-palenight
-	k8x1d/default-light-theme 'doom-one-light)
   (defun k8x1d/switch-theme ()
     (interactive)
-    (if (string= (car custom-enabled-themes) k8x1d/default-dark-theme)
+    (if (string= (car custom-enabled-themes) k8x1d/default-emacs-dark-theme)
 	(progn
 	  ;; (consult-theme k8x1d/default-light-theme)
 	  (disable-theme (car custom-enabled-themes))
-	  (load-theme k8x1d/default-light-theme t)
+	  (load-theme k8x1d/default-emacs-light-theme t)
 	  (k8x1d/set-frame-opacity 90)
 	  )
       (progn
 	;; (consult-theme k8x1d/default-dark-theme)
 	(disable-theme (car custom-enabled-themes))
-	(load-theme k8x1d/default-dark-theme t)
+	(load-theme k8x1d/default-emacs-dark-theme t)
 	(k8x1d/set-frame-opacity 80)
 	)
       )
+    (k8x1d/set-org-modern-colors)
+    (k8x1d/set-tab-bar-colors)
+    (k8x1d/set-window-divider-colors)
+    )
+  ;; TODO: simplify function
+  (defun k8x1d/get-system-theme ()
+   (replace-regexp-in-string "\n" "" (replace-regexp-in-string "'" "" (shell-command-to-string "gsettings get org.gnome.desktop.interface gtk-theme")))
+    )
+  (defun k8x1d/switch-system-theme-to-light ()
+    (interactive)
+    (async-shell-command (concat "gsettings set org.gnome.desktop.interface gtk-theme" " " k8x1d/default-light-theme))
+    (if (string= (k8x1d/get-system-theme) k8x1d/default-dark-theme)
+	(k8x1d/switch-theme))
+    )
+  (defun k8x1d/switch-system-theme-to-dark ()
+    (interactive)
+    (async-shell-command (concat "gsettings set org.gnome.desktop.interface gtk-theme" " " k8x1d/default-dark-theme))
+    (if (string= (k8x1d/get-system-theme) k8x1d/default-light-theme)
+	(k8x1d/switch-theme))
     )
   :bind
-  ("C-c s t " . k8x1d/switch-theme)
+  (("C-c s t " ("Switch emacs theme". k8x1d/switch-theme))
+   ("C-c s l" ("Switch theme to light" . k8x1d/switch-system-theme-to-light))
+    ("C-c s d" ("Switch theme to dark" . k8x1d/switch-system-theme-to-dark)))
 
 ;; TODO: replace by own system
   ;; :hook (after-init . (lambda () (load-theme 'doom-palenight t)))

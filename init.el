@@ -15,6 +15,7 @@
         "~/Nextcloud/facil/Org/projects/evocult.org"
         "~/Nextcloud/facil/Org/projects/contrats.org"
         "~/Nextcloud/facil/Org/projects/presentations.org"
+        "~/Nextcloud/facil/Org/projects/vulgarisation.org"
         "~/Nextcloud/facil/Org/Horaire.org"
         "~/Nextcloud/facil/Org/Inbox.org"
         "~/Nextcloud/facil/Org/Habits.org"))
@@ -25,10 +26,19 @@
 (defvar k8x1d/terminal "vterm")
 (defvar k8x1d/completion "corfu")
 (defvar k8x1d/posframe-support nil)
+(defvar k8x1d/use-general-keybindings t)
+(defvar k8x1d/use-general-keybindings t)
+;; Theme
+(defvar k8x1d/default-emacs-dark-theme 'doom-palenight)
+(defvar k8x1d/default-emacs-light-theme 'doom-one-light)
+(defvar k8x1d/default-dark-theme "Breeze-Dark")
+(defvar k8x1d/default-light-theme "Breeze")
+
 
 (require 'tools-module)
 
 (require 'packages-module)
+(require 'keybindings-module)
 (require 'evil-module)
 
 (require 'buffer-module)
@@ -47,7 +57,6 @@
 (require 'workspaces-management-module)
 (require 'documentation-module)
 
-(require 'keybindings-module)
 
 (require 'prog-module)
 (require 'tree-sitter-module)
