@@ -7,8 +7,10 @@
     (interactive)
     (async-shell-command "k8x1d-emacs -U"))
   :bind
-  (("C-c s u" . k8x1d/update)
-  ("C-c s U" . k8x1d/upgrade))
-)
+  (
+   ;;("C-c s" ("System" . ignore))
+   ("C-c s u" ("Update Emacs" . k8x1d/update))
+   ("C-c s U" ("Upgrade Emacs" . k8x1d/upgrade)))
+  )
 
 (provide 'k8x1d-emacs-management-module)
