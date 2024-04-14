@@ -15,3 +15,6 @@ lsp-bridge
 .org-id-locations
 backend-0.2.4.1
 lisp/k8x1d-keys.el
+mastodon.plstore
+tabsession.el
+url
