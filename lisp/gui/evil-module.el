@@ -129,4 +129,15 @@
   )
 
 
+;; General Keybindings
+(use-package evil
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+   "w" '(:keymap evil-window-map
+		  :package evil
+		  :which-key "Window")
+   )
+  )
+
 (provide 'evil-module)

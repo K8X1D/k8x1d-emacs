@@ -1,4 +1,5 @@
 ;; Syntax highlight
+(use-package julia-mode)
 (use-package julia-ts-mode
   :mode "\\.jl$")
 
@@ -160,5 +161,36 @@
 (use-package eldoc
   :if (not (string=  k8x1d/lsp-backend "lsp-bridge"))
   :hook (julia-ts-mode . eldoc-mode))
+
+;; Keybindings
+
+(use-package julia-mode 
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+   "o"  '(:ignore t :which-key "Open")
+   "or"  '(:ignore t :which-key "REPL")
+   "orj"  '(k8x1d/open-julia-repl-at-bottom t :which-key "Julia")
+   )
+  (k8x1d/local-leader-keys
+   :keymaps 'julia-vterm-mode-map
+   "'" '(k8x1d/open-julia-repl-at-bottom :which-key "REPL")
+   "b" '(julia-vterm-send-buffer :which-key "Send buffer")
+   "RET" '(julia-vterm-send-region-or-current-line :which-key "Eval buffer")
+   "f" '(julia-vterm-send-include-buffer-file :which-key "Eval file")
+   )
+  :config
+  (defun k8x1d/open-julia-repl-at-bottom ()
+    (interactive)
+    (require 'julia-vterm)
+    (evil-window-split)
+    (evil-window-down 1)
+    (evil-window-set-height 17)
+    (julia-vterm-repl)
+    (evil-insert-state)
+    )
+  )
+
+
 
 (provide 'julia-module)

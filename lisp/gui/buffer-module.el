@@ -35,5 +35,19 @@
 ;; prevent minibuffer lock
 (setq enable-recursive-minibuffers t)
 
+;; General Keybindings
+(use-package emacs
+  :if k8x1d/use-general-keybindings
+  :general
+  ;; Buffers
+  (k8x1d/leader-keys
+   "b"  '(:ignore t :which-key "Buffers")
+   "bn" '(next-buffer :which-key "Next")
+   "bp"  '(previous-buffer :which-key "Previous")
+   "bs"  '(consult-buffer :which-key "Search")
+   "bk"  '(k8x1d/kill-buffer-and-window :which-key "Kill")
+   "bi"  '(ibuffer :which-key "List")
+   )
+  )
 
 (provide 'buffer-module)

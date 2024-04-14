@@ -39,4 +39,19 @@
     (add-to-list 'consult-buffer-sources 'consult--source-workspace))
   )
 
+
+
+;; General Keybindings
+(use-package tabspaces
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+   "TAB" '(:keymap tabspaces-command-map
+		   :package tabspaces
+		   :which-key "Workspace")
+   )
+  )
+
+
+
 (provide 'workspaces-management-module)
