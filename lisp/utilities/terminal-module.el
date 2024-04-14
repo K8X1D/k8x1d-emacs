@@ -63,7 +63,7 @@
 ;; Multiple terminals
 (use-package multi-vterm
   :if (string= k8x1d/terminal "vterm")
-  :bind (("C-c o t" . multi-vterm-dedicated-toggle)
+  :bind (("C-c o t" ("Terminal" . multi-vterm-dedicated-toggle))
 	 (:map project-prefix-map
 	      ("t" . multi-vterm-project)))
   :config
@@ -71,11 +71,5 @@
   (add-to-list 'project-switch-commands '(multi-vterm-project "Terminal"))
   (add-to-list 'tabspaces-project-switch-commands '(multi-vterm-project "Terminal"))
   )
-
-
-
-
-
-
 
 (provide 'terminal-module)
