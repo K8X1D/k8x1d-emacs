@@ -91,4 +91,4 @@
 (require 'org-management-module)
 
 (require 'pubmed-module)
-
+(require 'social-module)
