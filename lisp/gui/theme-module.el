@@ -94,4 +94,18 @@
 ;;     )
 ;;   )
 
+
+;; Keybindings
+(use-package org
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+    "s"  '(:ignore t :which-key "Emacs")
+    "st" '(k8x1d/switch-theme :which-key "Switch Light/Dark")
+    "S"  '(:ignore t :which-key "System")
+    "Sl" '(k8x1d/switch-system-theme-to-light :which-key "Light theme")
+    "Sd" '(k8x1d/switch-system-theme-to-dark :which-key "Dark theme")
+   )
+  )
+
 (provide 'theme-module)

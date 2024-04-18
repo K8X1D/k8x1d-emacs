@@ -24,4 +24,17 @@
   :hook (geiser-mode . eldoc-mode))
 
 
+;; Keybindings
+(use-package geiser-mode 
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/local-leader-keys
+   :keymaps 'scheme-mode-map
+   "'" '(geiser :which-key "REPL")
+   "b" '(geiser-eval-buffer :which-key "Eval buffer")
+   "r" '(geiser-eval-region :which-key "Eval region")
+   )
+  )
+
+
 (provide 'scheme-module)

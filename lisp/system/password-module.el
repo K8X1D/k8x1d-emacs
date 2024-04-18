@@ -25,7 +25,13 @@
 
 
 
-
-
+;; Keybindings
+(use-package pass 
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+    "o"  '(:ignore t :which-key "Open")
+    "op" '(pass :which-key "Pass"))
+  )
 
 (provide 'password-module)

@@ -31,4 +31,23 @@
   :hook (git-commit-mode . evil-insert-state)
   )
 
+
+;; Keybindings
+(use-package magit
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+    "g"  '(:ignore t :which-key "Git")
+    "gs"  '(magit-status :which-key "Status")
+    "ga"  '(forge-add-repository :which-key "Add repository")
+    "gpi" '(forge-pull :which-key "Pull Issues")
+    "gc" '(:ignore t :which-key "Create")
+    "gci" '(forge-create-issue :which-key "Issue")
+    "gcp" '(forge-create-post :which-key "Post")
+    "gc" '(:ignore t :which-key "List")
+    "gli" '(forge-list-issues :which-key "Issues")
+    "glr" '(forge-list-repository :which-key "Repositories"))
+  )
+
+
 (provide 'version-control-module)

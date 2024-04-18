@@ -32,7 +32,7 @@
 
   (general-create-definer k8x1d/leader-keys
     :states '(normal insert visual emacs motion)
-    :keymaps 'override
+   :keymaps 'override
     :prefix "SPC"
     :global-prefix "C-SPC")
 
@@ -42,20 +42,20 @@
     :prefix ","
     :global-prefix "SPC m")
 
-  ;;(k8x1d/leader-keys
-  ;;  "<escape>" 'keyboard-escape-quit
-  ;;  "B"  '(:ignore t :which-key "Bookmarks")
-  ;;  "Bg"  '(bookmark-jump :which-key "Goto")
-  ;;  "Bm"  '(bookmark-set :which-key "Set")
-  ;;  "Br"  '(bookmark-delete :which-key "Remove")
-  ;;  "h" '(:keymap help-map :which-key "Help")
-  ;;  "f"  '(:ignore t :which-key "Find")
-  ;;  "ff" '(find-file :which-key "File")
-  ;;  "fs" '(save-buffer :which-key "Save")
-  ;;  "q" '(:ignore t :which-key "Quit")
-  ;;  "qq" '(save-buffers-kill-terminal :which-key "Emacs")
-  ;;  "qs" '(k8x1d/server-shutdown :which-key "Server")
-  ;;  )
+  (k8x1d/leader-keys
+   "<escape>" 'keyboard-escape-quit
+   "B"  '(:ignore t :which-key "Bookmarks")
+   "Bg"  '(bookmark-jump :which-key "Goto")
+   "Bm"  '(bookmark-set :which-key "Set")
+   "Br"  '(bookmark-delete :which-key "Remove")
+   "h" '(:keymap help-map :which-key "Help")
+   "f"  '(:ignore t :which-key "Find")
+   "ff" '(find-file :which-key "File")
+   "fs" '(save-buffer :which-key "Save")
+   "q" '(:ignore t :which-key "Quit")
+   "qq" '(save-buffers-kill-terminal :which-key "Emacs")
+   "qs" '(k8x1d/server-shutdown :which-key "Server")
+   )
 
   ;;;; Open
   ;;(k8x1d/leader-keys
@@ -69,32 +69,6 @@
   ;;  "ob"  '(citar-open :which-key "Bibliography")
   ;;  "oD"  '(dashboard-open :which-key "Dashboard")
   ;;  "oc" '(org-clock-goto :which-key "Clocked Task")
-  ;;  )
-
-  ;;;; Project
-  ;;(k8x1d/leader-keys
-  ;;  "p" '(:keymap project-prefix-map
-  ;;		  :which-key "Project")
-  ;;  "pb" '(consult-project-buffer :which-key "Switch to buffer")
-  ;;  "po" '(:ignore t :which-key "Open")
-  ;;  ;; "pt" '(multi-vterm-project :which-key "Terminal")
-  ;;  ;; "pt" '(eat-project-vertical :which-key "Terminal")
-  ;;  "pm" '(minimap-mode :which-key "Minimap")
-  ;;  )
-
-  ;;;; Workspace
-  ;;(k8x1d/leader-keys
-  ;;  "TAB" '(:keymap tabspaces-command-map
-  ;;		    :package tabspaces
-  ;;		    :which-key "Workspace")
-  ;;  )
-
-  ;;;; Checker
-  ;;;; Evil
-  ;;(k8x1d/leader-keys
-  ;;  "w" '(:keymap evil-window-map
-  ;;		  :package evil
-  ;;		  :which-key "Window")
   ;;  )
 
   ;;;; Notes

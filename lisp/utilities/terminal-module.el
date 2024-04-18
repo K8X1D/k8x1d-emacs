@@ -72,4 +72,20 @@
   (add-to-list 'tabspaces-project-switch-commands '(multi-vterm-project "Terminal"))
   )
 
+;; Keybindings
+(use-package multi-vterm
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+    "o"  '(:ignore t :which-key "Open")
+    "ot"  '(multi-vterm-dedicated-toggle :which-key "Terminal")
+    )
+  )
+
+
+
+
+
+
+
 (provide 'terminal-module)
