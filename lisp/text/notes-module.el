@@ -105,4 +105,20 @@
                ("C-c n i" . org-roam-ql-insert-node-title))))
 
 
+;; Keybindings
+(use-package org-roam
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+    "n"  '(:ignore t :which-key "Notes")
+    "nl" '(org-roam-buffer-toggle :which-key "List")
+    "nf" '(org-roam-node-find :which-key "Find")
+    "ng" '(org-roam-ui-open :which-key "Graph")
+    "ni" '(org-roam-node-insert :which-key "Insert")
+    "nc" '(org-roam-capture :which-key "Capture"))
+  )
+
+
+
+
 (provide 'notes-module)
