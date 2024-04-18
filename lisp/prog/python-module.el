@@ -38,4 +38,17 @@
   :hook ((python-ts-mode . pyvenv-auto-run)))
 
 
+;; Data viewer
+(use-package python-view-data
+  :hook (python-mode . python-view-data-mode)
+  :bind
+  (:map python-mode-map
+	("C-c C-v" . python-view-data-print))
+  :config
+  ;; Clean keybindings
+  (require 'bind-key)
+  (unbind-key "C-c C-i" python-view-data-mode-map) 
+  )
+
+
 (provide 'python-module)

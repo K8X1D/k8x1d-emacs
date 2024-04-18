@@ -24,16 +24,16 @@
   )
 
 ;; Data viewer
-  (use-package ess-view-data
-    :hook (ess-r-mode . ess-view-data-mode)
-    :bind
-    (:map ess-r-mode-map
-          ("C-c C-v" . ess-view-data-print))
-    :config
-    ;; Clean keybindings
-    (require 'bind-key)
-    (unbind-key "C-c C-i" ess-view-data-mode-map) 
-    )
+(use-package ess-view-data
+  :hook (ess-r-mode . ess-view-data-mode)
+  :bind
+  (:map ess-r-mode-map
+	("C-c C-v" . ess-view-data-print))
+  :config
+  ;; Clean keybindings
+  (require 'bind-key)
+  (unbind-key "C-c C-i" ess-view-data-mode-map) 
+  )
 
 ;; Notebook support (via org-babel)
   (use-package org
@@ -79,5 +79,9 @@
     ;;(setq ess-r-flymake-linters '("line_length_linter = NULL" "indentation_linter(indent = 4L)"))
     (setq ess-r-flymake-linters '("line_length_linter = line_length_linter(120)"))
     )
+
+;; Figure viewing
+(use-package essgd)
+
 
 (provide 'r-module)
