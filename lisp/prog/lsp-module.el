@@ -24,6 +24,13 @@
   (require 'consult-eglot-embark)
   (consult-eglot-embark-mode +1))
 
+;; Better performance for eglot
+(use-package eglot-booster
+  :if (string= k8x1d/lsp-backend "eglot")
+  :after eglot
+  :config
+  (eglot-booster-mode))
+
 
 (use-package lsp-bridge
   :if (string= k8x1d/lsp-backend "lsp-bridge")
@@ -64,6 +71,25 @@
   (unbind-key "C-k" evil-insert-state-map) 
   (unbind-key "K" evil-motion-state-map) 
   )
+
+
+;; Keybindings
+(use-package eglot
+  :if (and k8x1d/use-general-keybindings (string= k8x1d/lsp-backend "eglot"))
+  :general
+  (k8x1d/local-leader-keys
+   :keymaps 'eglot-mode-map
+   "l" '(:ignore t :which-key "LSP")
+   "la" '(eglot-code-actions :which-key "Action")
+   "lw" '(eglot-show-workspace-configuration :which-key "Show Workspace Configuration")
+   "lf" '(eglot-format :which-key "Format")
+   "lF" '(eglot-format-buffer :which-key "Format Buffer")
+   "lk" '(eglot-shutdown :which-key "Kill")
+   "lK" '(eglot-shutdown-all :which-key "Kill all")
+   )
+  )
+
+
 
 
 (provide 'lsp-module)
