@@ -8,28 +8,263 @@
 	     (gnu packages)
 	     (gnu packages commencement)
 	     (gnu packages emacs)
+	     (gnu packages fontutils)
 	     (gnu packages glib)
 	     (gnu packages linux)
+	     (gnu packages cran)
 	     (gnu packages emacs-xyz)
 	     (gnu packages shellutils)
 	     (gnu packages python-xyz)
+	     (gnu packages python-science)
 	     (gnu packages pdf)
 	     (gnu packages julia)
+	     (gnu packages linux)
 	     (gnu packages python)
 	     (gnu packages rust-apps)
 	     (gnu packages shellutils)
 	     (gnu packages check)
+	     (gnu packages gtk)
+	     (gnu packages image)
+	     (gnu packages autotools)
+	     (gnu packages pkg-config)
 	     (gnu packages python-check)
 	     (gnu packages python-build)
 	     (gnu packages python-crypto)
+	     (gnu packages statistics)
+	     (guix build-system gnu)
 	     (gnu packages tex)
 	     (gnu packages ncurses)
 	     (gnu packages texinfo)
 	     (gnu packages compression)
 	     (guix build-system python)
+	     (guix build-system r)
 	     (guix build-system pyproject)
 	     (emacs build-system melpa)
 	     (emacs packages melpa))
+
+
+
+
+
+(define-public emacs-breadcrumb
+  (package
+   (name "emacs-breadcrumb")
+   (version "v0.0.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+	   (url "https://github.com/joaotavora/breadcrumb")
+	   (commit "dcb6e2e82de2432d8eb75be74c8d6215fc97a2d3")))
+     (sha256
+      (base32 "01k2gj9s9g8zdhb9c20zk11jgknk8na2vjvzqh0dna75z8kqi1dn"))
+     (file-name (git-file-name name version))
+     ))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-f))
+   (home-page "https://github.com/joaotavora/breadcrumb")
+   (synopsis "Emacs headerline indication of where you are in a large project")
+   (description
+    "Emacs headerline indication of where you are in a large project")
+   (license license:gpl3+)))
+
+(define-public emacs-eglot-ltex
+  (package
+   (name "emacs-eglot-ltex")
+   (version "v0.1.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+	   (url "https://github.com/emacs-languagetool/eglot-ltex")
+	   (commit "b61e36fad79c03ef3c1acc3c3366df7fc223aed8")))
+     (sha256
+      (base32 "1b8rmlc9a1djqfh9ra61is5c9jaq8j4qcrmavn273z06lr5qwj47"))
+     (file-name (git-file-name name version))
+     ;; (patches (list %patch-org-margin-svg-support.patch))
+     ))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-f))
+   (home-page "https://github.com/emacs-languagetool/eglot-ltex")
+   (synopsis "Eglot Clients for LTEX")
+   (description
+    "Eglot Clients for LTEX")
+   (license license:gpl3+)))
+
+(define-public %patch-org-margin-svg-support.patch
+  (local-file "patches/org-margin-svg-support.patch" #:recursive? #t))
+
+(define-public emacs-org-margin-patched
+  (package
+   (name "emacs-org-margin")
+   (version "v0.0.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+	   (url "https://github.com/rougier/org-margin")
+	   (commit "4013b59ff829903a7ab86b95593be71aa5c9b87d")))
+     (sha256
+      (base32 "13x5568yfqm1lfmy29vcii2bdkjxjygmhslbr0fwgm2xq9rn63yv"))
+     (file-name (git-file-name name version))
+     ;; (patches (list %patch-org-margin-svg-support.patch))
+     ))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-svg-lib))
+   (home-page "https://github.com/rougier/org-margin")
+   (synopsis "Outdent headlines in emacs org-mode")
+   (description
+    "Outdent headlines in emacs org-mode")
+   (license license:gpl3+)))
+
+(define-public emacs-consult-jump-project
+  (package
+   (name "emacs-consult-jump-project")
+   (version "v0.0.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://github.com/jdtsmith/consult-jump-project")
+           (commit "bb540e72708dc9e7c8d66337be3d1fe68369ee72")))
+     (sha256
+      (base32 "0wgfhfp2ww5alx5gnn7yay3s8zi0vd2kwnphgb3pcn5bpnjp53v2"))
+     (file-name (git-file-name name version))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-jsonrpc emacs-consult emacs-eglot emacs-seq))
+   (home-page "https://github.com/jdtsmith/consult-jump-project")
+   (synopsis "Quickly jump between projects, their files and buffers with consult")
+   (description
+    "Quickly jump between projects, their files and buffers with consult.")
+   (license license:gpl3+)))
+
+
+
+(define-public emacs-eglot-booster
+  (package
+   (name "emacs-eglot-booster")
+   (version "v0.0.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://github.com/jdtsmith/eglot-booster")
+           (commit "e19dd7ea81bada84c66e8bdd121408d9c0761fe6")))
+     (sha256
+      (base32 "06rn253jil4ccr29hpcadvh3gya8hvi3kz916x2c93qlhmkghpdw"))
+     (file-name (git-file-name name version))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-jsonrpc emacs-eglot emacs-seq))
+   (home-page "https://github.com/jdtsmith/eglot-booster")
+   (synopsis "Boost eglot using lsp-booster")
+   (description
+    "The emacs-lsp-booster project provides a rust-based wrapper program which substantially speeds up emacs' interactions with lsp servers. This small package enables eglot to use it.")
+   (license license:gpl3+)))
+
+
+(define-public emacs-flymake-margin
+  (package
+   (name "emacs-flymake-margin")
+   (version "v0.0.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://github.com/LionyxML/flymake-margin")
+           (commit "fe4da9f947c7a11aba331dd77637d471cedbd061")))
+     (sha256
+      (base32 "1p3q7s5n1szggj8w8fmpz8l7g27srmsrgla5wag2320dnd6djrir"))
+     (file-name (git-file-name name version))))
+   (build-system emacs-build-system)
+   (home-page "https://github.com/LionyxML/flymake-margin")
+   (synopsis "A package to provide flymake into the margin world ")
+   (description
+    "A package to provide Emacs Flymake marks into the margin world.")
+   (license license:gpl3+)))
+
+
+(define-public emacs-modern-tab-bar
+  (package
+   (name "emacs-modern-tab-bar")
+   (version "v0.0.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://github.com/aaronjensen/emacs-modern-tab-bar")
+           (commit "f5e06b2e4897f72add34b061a294116b2d75b756")))
+     (sha256
+      (base32 "1j8f99asp0vq3qg1k2pdhldkdv7qj2jwhyplfz6vz6qf9bih5dxj"))
+     (file-name (git-file-name name version))))
+   (build-system emacs-build-system)
+   (home-page "https://github.com/aaronjensen/emacs-modern-tab-bar")
+   (synopsis "A more modern visual representation for tab-bar-mode tabs.")
+   (description
+    "A more modern visual representation for tab-bar-mode tabs. Note that this does not affect tab-line-mode tabs.")
+   (license license:gpl3+)))
+
+(define-public emacs-pdf-tools-upd
+  (package
+   (inherit emacs-pdf-tools)
+   (name "emacs-pdf-tools")
+   (build-system emacs-build-system)
+    (arguments
+     `(#:tests? #f                      ; there are no tests
+       #:modules ((guix build gnu-build-system)
+                  ((guix build emacs-build-system) #:prefix emacs:)
+                  (guix build utils)
+                  (guix build emacs-utils))
+       #:imported-modules (,@%gnu-build-system-modules
+                           (guix build emacs-build-system)
+                           (guix build emacs-utils))
+       #:phases
+       (modify-phases %standard-phases
+         ;; Build server side using 'gnu-build-system'.
+         (add-after 'unpack 'enter-server-dir
+           (lambda _ (chdir "server")))
+         (add-after 'enter-server-dir 'autogen
+           (lambda _
+             (invoke "bash" "autogen.sh")))
+         ;; Build emacs side using 'emacs-build-system'.
+         (add-after 'compress-documentation 'enter-lisp-dir
+           (lambda _ (chdir "../lisp")))
+         (add-after 'enter-lisp-dir 'emacs-patch-variables
+           (lambda* (#:key outputs #:allow-other-keys)
+             (for-each make-file-writable (find-files "."))
+
+             ;; Set path to epdfinfo program.
+             (emacs-substitute-variables "pdf-info.el"
+               ("pdf-info-epdfinfo-program"
+                (string-append (assoc-ref outputs "out")
+                               "/bin/epdfinfo")))
+             ;; Set 'pdf-tools-handle-upgrades' to nil to avoid "auto
+             ;; upgrading" that pdf-tools tries to perform.
+             (emacs-substitute-variables "pdf-tools.el"
+               ("pdf-tools-handle-upgrades" '()))))
+         (add-after 'emacs-patch-variables 'emacs-expand-load-path
+           (assoc-ref emacs:%standard-phases 'expand-load-path))
+         (add-after 'emacs-expand-load-path 'emacs-add-install-to-native-load-path
+           (assoc-ref emacs:%standard-phases 'add-install-to-native-load-path))
+         (add-after 'emacs-add-install-to-native-load-path 'emacs-install
+           (assoc-ref emacs:%standard-phases 'install))
+         (add-after 'emacs-install 'emacs-build
+           (assoc-ref emacs:%standard-phases 'build))
+         (add-after 'emacs-install 'emacs-make-autoloads
+           (assoc-ref emacs:%standard-phases 'make-autoloads)))))
+    (native-inputs
+     (list autoconf automake emacs-minimal pkg-config))
+    (inputs
+     (list cairo glib libpng poppler zlib))
+    (propagated-inputs
+     (list emacs-tablist))
+    (home-page "https://github.com/vedang/pdf-tools")
+    (synopsis "Emacs support library for PDF files")
+    (description
+     "PDF Tools is, among other things, a replacement of DocView for PDF
+files.  The key difference is that pages are not pre-rendered by
+e.g. ghostscript and stored in the file-system, but rather created on-demand
+and stored in memory.")
+    (license license:gpl3+)))
 
 
 ;; https://github.com/tpapp/julia-repl/blob/656437b94ee7f8d4e21259d942821512d87909c7/julia-repl.el
@@ -79,6 +314,103 @@
     "Modern block styling with org-indent.")
    (license license:gpl3+)))
 
+
+(define-public r-unigd
+  (package
+    (name "r-unigd")
+    (version "0.1.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (cran-uri "unigd" version))
+       (sha256
+        (base32 "0q6nix6pqjg7adfyisg6zn7hzwkdmz1dhd34c6a58dsg2yq1qh1a"))))
+    (properties `((upstream-name . "unigd")))
+    (build-system r-build-system)
+    (inputs (list cairo fontconfig freetype libpng zlib))
+    (propagated-inputs (list r-cpp11 r-systemfonts))
+    (native-inputs (list pkg-config r-knitr))
+    (home-page "https://github.com/nx10/unigd")
+    (synopsis "Universal graphics device")
+    (description
+     "This package provides a unified R graphics backend.  Render R graphics
+fast and easy to many common file formats.  It provides a thread safe C
+interface for asynchronous rendering of R graphics.")
+    (license license:gpl2+)))
+
+(define-public r-asioheaders
+  (package
+    (name "r-asioheaders")
+    (version "1.22.1-2")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (cran-uri "AsioHeaders" version))
+       (sha256
+        (base32 "192qxayrpvi02wrqq2h5cjc92aaxrsgw7z32r8qk5imqg3mc0a8n"))))
+    (properties `((upstream-name . "AsioHeaders")))
+    (build-system r-build-system)
+    (home-page "https://github.com/eddelbuettel/asioheaders")
+    (synopsis "Asio C++ header files")
+    (description
+     "Asio is a cross-platform C++ library for network and low-level I/O
+programming that provides developers with a consistent asynchronous model
+using a modern C++ approach.  It is also included in Boost but requires
+linking when used with Boost.  Standalone it can be used header-only (provided
+a recent compiler).  Asio is written and maintained by Christopher
+M. Kohlhoff, and released under the Boost Software License', Version 1.0.")
+    (license license:boost1.0)))
+
+(define-public r-httpgd
+  (let ((commit "3f5f55822c4dce930155b91cedcfd4d483e3294e")
+        (revision "1"))
+    (package
+      (name "r-httpgd")
+      (version (git-version "2.0.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/nx10/httpgd")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "14i7mhbv1vcz2886w9lii9zhgr4zhhc844349syb989nhhzg552n"))))
+      (properties `((upstream-name . "httpgd")))
+      (build-system r-build-system)
+      (propagated-inputs (list r-asioheaders r-cpp11 r-unigd))
+      (native-inputs (list r-knitr))
+      (home-page "https://github.com/nx10/httpgd")
+      (synopsis "'HTTP' Server Graphics Device")
+      (description
+       "This package provides a graphics device for R that is accessible via
+network protocols.  This package was created to make it easier to embed live R
+graphics in integrated development environments and other applications.  The
+included HTML/@code{JavaScript} client (plot viewer) aims to provide a better
+overall user experience when dealing with R graphics.  The device
+asynchronously serves graphics via HTTP and @code{WebSockets}'.")
+      (license license:gpl2+))))
+
+(define-public emacs-essgd 
+  (package
+   (name "emacs-essgd")
+   (version "v0.0.0")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://github.com/sje30/essgd")
+           (commit "c0e54ee69848e813e5a267aa167bc891afc819bb")))
+     (sha256
+      (base32 "0m55nn3719w3vfbkhxbyrh62xcx1bqz6fcypcmsm8ajbprgiwadq"))
+     (file-name (git-file-name name version))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-websocket emacs-ess))
+   (home-page "https://github.com/sje30/essgd")
+   (synopsis "")
+   (description
+    ".")
+   (license license:gpl3+)))
 
 (define-public emacs-org-popup-posframe
   (package
@@ -692,8 +1024,10 @@ shell integration.")
   ;; emacs-org-noter-pdftools
   ;; emacs-org-pdftools
   ;; emacs-pdf-tools
-  ;; emacs-use-package ;; native don't have description but has :vc
-  alsa-utils
+  emacs-use-package ;; native don't have description but has :vc
+  ;; alsa-utils
+  ;; pipewire
+  ;; wireplumber
   direnv
   emacs-auctex
   emacs-bluetooth-upd
@@ -712,7 +1046,11 @@ shell integration.")
   emacs-embark-consult
   emacs-empv
   emacs-envrc
+  emacs-ess
   emacs-ess-view-data
+  emacs-python-view-data
+  emacs-essgd
+  r-httpgd
   emacs-evil-anzu
   emacs-evil-args
   emacs-evil-collection
@@ -747,7 +1085,7 @@ shell integration.")
   emacs-nerd-icons-dired
   emacs-nerd-icons-ibuffer
   emacs-next-pgtk-xwidgets
-;; emacs-pgtk-xwidgets
+  ;; emacs-pgtk-xwidgets
   emacs-orderless
   emacs-org-appear
   emacs-org-modern
@@ -768,6 +1106,7 @@ shell integration.")
   emacs-treesit-auto
   emacs-vertico
   emacs-which-key
+  emacs-general
   emacs-elpy
   emacs-yasnippet-capf
   emacs-yasnippet-snippets
@@ -777,6 +1116,7 @@ shell integration.")
   fd
   poppler
   python-lsp-server
+  python-pandas
   ripgrep
   python-epc
   python-orjson
@@ -789,7 +1129,8 @@ shell integration.")
   julia
   emacs-julia-vterm
   emacs-ob-julia-vterm
-
+  ;; emacs-pdf-tools-upd
+  emacs-pdf-tools
   glibc-locales
   ;; texlive
   texlive-scheme-basic ;; Basic scheme (plain and latex)
@@ -805,5 +1146,24 @@ shell integration.")
   emacs-pubmed
   emacs-memento-mori
   emacs-auto-dark
+  emacs-mastodon
+
+  emacs-modern-tab-bar
+  emacs-flymake-margin
+  emacs-eglot-booster
+  emacs-consult-jump-project
+  emacs-php-mode
+  emacs-flymake-php
+  emacs-org-margin-patched
+  emacs-eglot-ltex
+
+  emacs-nix-mode
+  emacs-nix-ts-mode
+
+  emacs-tab-bar-echo-area
+
+  emacs-diredc
+  emacs-dired-posframe
+  emacs-breadcrumb
 
   ))
