@@ -96,7 +96,7 @@
 
 
 ;; Keybindings
-(use-package org
+(use-package doom-themes
   :if k8x1d/use-general-keybindings
   :general
   (k8x1d/leader-keys

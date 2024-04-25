@@ -6,7 +6,7 @@
 	   (tab-name (alist-get 'name (tab-bar--current-tab))))
       (if explicit-name tab-name ""))
     )
-  :after evil
+  ;; :after evil
   :config
   (setq evil-mode-line-format '(after . mode-line-front-space))
   (setq evil-mc-mode-line-prefix "󰗧")
@@ -90,6 +90,7 @@ This is a floating point number based on `memento-mori-death-date'."
     "Update `memento-mori-string' based on the current time."
     (setq memento-mori-string
 	  (format "[Time left: %.2f years]" (memento-mori--life-expectency))))
+	  ;; (format "[󰯈 : %.2f years]" (memento-mori--life-expectency))))
   (setq memento-mori-death-date "2067-06-22")
   :hook (after-init . memento-mori-mode)
   )

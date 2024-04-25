@@ -8,9 +8,8 @@
             (setq gc-cons-threshold (* 16 1024 1024)))) ;; doom-emacs value
 
 ;; Disable dialog boxes
-
-  (setq use-file-dialog nil)
-  (setq use-dialog-box nil)
+(setq use-file-dialog nil)
+(setq use-dialog-box nil)
 
 
 (setq inhibit-startup-screen t) ;; no startup screen
