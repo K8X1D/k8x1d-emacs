@@ -19,4 +19,9 @@
 				       ))
   )
 
+(use-package dired-posframe
+  :if k8x1d/posframe-support
+  :hook (dired-mode . dired-posframe-mode))
+
+
 (provide 'file-browser-module)
