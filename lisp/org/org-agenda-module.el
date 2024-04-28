@@ -171,4 +171,23 @@
   (setq org-clock-persist t)
   )
 
+
+;; Keybindings
+(use-package org
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+    "o"  '(:ignore t :which-key "Open")
+    "oc" '(k8x1d/org-clock-goto :which-key "Clock")
+    "oa" '(org-agenda :which-key "Agenda")
+    "X" '(org-capture :which-key "Capture")
+   )
+  (k8x1d/local-leader-keys
+    :keymap 'org-mode-map
+    "c" '(:ignore t :which-key "Clock")
+    "ci" '(org-clock-in :which-key "In")
+    "co" '(org-clock-out :which-key "Out")
+   )
+  )
+
 (provide 'org-agenda-module)
