@@ -1,5 +1,22 @@
 
 
+
+;;; Code:
+(defun k8x1d/kill-buffer-and-window ()
+  (interactive)
+  (kill-buffer)
+  (if (> (length (window-list)) 1)
+      (delete-window)))
+
+
+;; From https://www.emacswiki.org/emacs/EmacsAsDaemon
+(defun k8x1d/server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+
 (defun k8x1d/set-frame-opacity (opacity)
   "Interactively change the current frame's opacity (v29 pgtk version).
 OPACITY is an integer between 0 to 100, inclusive."
