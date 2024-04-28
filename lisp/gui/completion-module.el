@@ -194,21 +194,22 @@
   :config
   ;; TAB cycle if there are only few candidates
   (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete)
   )
 
 ;; Completion preview (as-you-type)
-(use-package corfu-candidate-overlay
-  :if (string= k8x1d/completion "corfu")
-  ;; :defer 5
-  :after corfu
-  :hook (global-corfu-mode . corfu-candidate-overlay-mode)
-  :custom-face  (corfu-candidate-overlay-face ((t (:foreground ,(doom-color 'magenta) :weight bold))))
-  :bind (:map corfu-candidate-overlay-map
-	      ("<backtab>" . 'corfu-candidate-overlay-complete-at-point))
-  :config
-  (setq tab-always-indent 'complete)
-  ;; (global-set-key (kbd "<backtab>") 'corfu-candidate-overlay-complete-at-point)
-  )
+;; (use-package corfu-candidate-overlay
+;;   :if (string= k8x1d/completion "corfu")
+;;   ;; :defer 5
+;;   :after corfu
+;;   :hook (global-corfu-mode . corfu-candidate-overlay-mode)
+;;   :custom-face  (corfu-candidate-overlay-face ((t (:foreground ,(doom-color 'magenta) :weight bold))))
+;;   :bind (:map corfu-candidate-overlay-map
+;; 	      ("<backtab>" . 'corfu-candidate-overlay-complete-at-point))
+;;   :config
+;;   (setq tab-always-indent 'complete)
+;;   ;; (global-set-key (kbd "<backtab>") 'corfu-candidate-overlay-complete-at-point)
+;;   )
 
 ;; Compeletion as-you-type
 (use-package completion-preview
