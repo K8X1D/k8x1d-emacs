@@ -9,10 +9,13 @@
 GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
 GUIX_EXTRA="$HOME/.guix-extra"
 PROJECT_NAME="k8x1d-emacs"
+XDG_CONFIG_HOME="$HOME/.config"
 PROJECT_DIRECTORY="$XDG_CONFIG_HOME/$PROJECT_NAME"
 GUIX_LOCPATH="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/lib/locale:$GUIX_LOCPATH"
 GUIX_BIN="$GUIX_EXTRA/$PROJECT_NAME/guix/bin/guix"
 EMACSLOADPATH=$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME/share/emacs/site-lisp
+ICONS_PATH="$HOME/.local/share/icons"
+APPLICATIONS_PATH="$HOME/.local/share/applications"
 ARGS="${@:2}"
 #LD_LIBRARY_PATH=""
 
@@ -41,6 +44,11 @@ Install()
     { # try
 	mkdir -p "$GUIX_EXTRA/$PROJECT_NAME"
 	mkdir -p "$GUIX_EXTRA_PROFILES/$PROJECT_NAME"
+	mkdir -p $ICONS_PATH
+	mkdir -p $APPLICATIONS_PATH
+
+	ln -fs $PROJECT_DIRECTORY/k8x1d-avatar_small.png $ICONS_PATH
+	ln -fs $PROJECT_DIRECTORY/k8x1d-emacs.desktop $APPLICATIONS_PATH
 	guix pull --channels="$PROJECT_DIRECTORY/channels.scm" --profile="$GUIX_EXTRA/$PROJECT_NAME/guix" --allow-downgrades &&
 	    $GUIX_BIN package --manifest="$PROJECT_DIRECTORY/manifest.scm" --profile="$GUIX_EXTRA_PROFILES/$PROJECT_NAME/$PROJECT_NAME" &&
 	    STATUS="Finished"
