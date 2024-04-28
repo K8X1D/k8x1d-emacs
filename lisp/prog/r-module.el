@@ -84,4 +84,23 @@
 (use-package essgd)
 
 
+;; Keybindings
+(use-package ess
+  :if k8x1d/use-general-keybindings
+  :general
+   (k8x1d/leader-keys
+    "o"  '(:ignore t :which-key "Open")
+    "or"  '(:ignore t :which-key "REPL")
+    "orr"  '(run-ess-r :which-key "R")
+    )
+  (k8x1d/local-leader-keys
+   :keymaps 'ess-mode-map
+   "'" '(ess-switch-to-inferior-or-script-buffer :which-key "REPL")
+   "b" '(ess-eval-buffer :which-key "Send buffer")
+   "RET" '(ess-eval-line :which-key "Eval line")
+   "i" '(ess-install-library :which-key "Install library")
+   )
+  )
+
+
 (provide 'r-module)
