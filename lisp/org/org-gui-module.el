@@ -3,6 +3,29 @@
   :hook ((org-mode . org-indent-mode)
 	 (org-mode . visual-line-mode)))
 
+;; (use-package org-margin
+;;   :hook ((org-mode . org-margin-mode)
+;; 	 (org-margin-mode . (lambda () (progn
+;; 					 (org-indent-mode -1)
+;; 					 (setq left-margin-width 10)
+;; 					 (set-window-buffer nil (current-buffer)))))
+;; 	 )
+;;   :config
+;;   (setq org-margin-headers
+;; 	'((stars #("     *" 0 6 (face org-level-1))
+;; 		 #("    **" 0 6 (face org-level-2))
+;; 		 #("   ***" 0 6 (face org-level-3))
+;; 		 #("  ****" 0 6 (face org-level-4))
+;; 		 #(" *****" 0 6 (face org-level-5))
+;; 		 #("******" 0 6 (face org-level-6)))
+;; 	  (H-txt #("H1" 0 2 (face org-level-1))
+;; 		 #("H2" 0 2 (face org-level-2))
+;; 		 #("H3" 0 2 (face org-level-3))
+;; 		 #("H4" 0 2 (face org-level-4))
+;; 		 #("H5" 0 2 (face org-level-5))
+;; 		 #("H6" 0 2 (face org-level-6))))
+;; 	)
+;;   )
 
 ;; Modern look
 (use-package org-modern
@@ -34,9 +57,9 @@
   (setq org-agenda-current-time-string "⭠ now ─────────────────────────────────────────────────")
 
   ;; Bullets cutomization
-  (setq org-modern-checkbox '((88 . "󰄲 ")
-                              (45 . "󱋬 ")
-                              (32 . "󰄮 ")))
+  (setq org-modern-checkbox '((?X . "󰄲 ")
+                              (?- . "󱋬 ")
+                              (?\s . "󰄮 ")))
   (setq org-modern-list '((43 . "▶")
                           (45 . "◦")
                           (42 . "•")))
@@ -49,8 +72,6 @@
 
 ;; Better indentation for org-modern
 (use-package org-modern-indent
-  ;; :vc (:url "https://github.com/jdtsmith/org-modern-indent"
-  ;; :branch "main")
   :hook (org-modern-mode . org-modern-indent-mode)
   :config
   (setq org-modern-block-fringe nil) ;; in test, seems to cause conflict with indent
@@ -153,10 +174,20 @@
 	    (?C :background ,(doom-color 'red)
 		:foreground ,(doom-color 'bg)
 		:family "Iosevka Nerd Font")))
+    (setq org-modern-symbol
+	  `((?X :background ,(doom-color 'green)
+		:foreground ,(doom-color 'bg)
+		:family "Iosevka Nerd Font")
+	    (?- :background ,(doom-color 'orange)
+		:foreground ,(doom-color 'bg)
+		:family "Iosevka Nerd Font")
+	    (?\s :background ,(doom-color 'red)
+		:foreground ,(doom-color 'bg)
+		:family "Iosevka Nerd Font")))
     )
   :custom-face (org-modern-done ((t (:family "Iosevka Nerd Font"))))
   :config
-    (k8x1d/set-org-modern-colors)
+  (k8x1d/set-org-modern-colors)
   ;; Correct for issue with state faces https://github.com/minad/org-modern/issues/26
   (add-hook 'org-agenda-finalize-hook
 	    (lambda ()
@@ -178,5 +209,8 @@
 	  ))
 
   )
+
+(use-package org-margin)
+
 
 (provide 'org-gui-module)
