@@ -32,6 +32,17 @@
 
 
 ;; Keybindings
+(use-package mpdel 
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+   "o"  '(:ignore t :which-key "Open")
+   "om" '(:keymap mpdel-core-map
+		  :package mpdel 
+		  :which-key "MPD")
+   )
+  )
+
 (use-package empv 
   :if k8x1d/use-general-keybindings
   :general
