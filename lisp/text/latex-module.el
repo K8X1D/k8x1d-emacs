@@ -16,7 +16,8 @@
 ;; Navigation
 (use-package reftex
   :hook
-  ((LaTeX-mode . 'turn-on-reftex)
+  ((latex-mode . 'turn-on-reftex)
+   (LaTeX-mode . 'turn-on-reftex)
    (reftex-mode . visual-line-mode))
   :config
   (setq reftex-toc-split-windows-horizontally t)
@@ -50,12 +51,13 @@
   (setq reftex-plug-into-AUCTeX t)
   )
 
-;; LSP support
-(use-package eglot
-  :if (equal k8x1d/lsp-backend "eglot")
-  :hook ((LaTeX-mode . eglot-ensure))
-  :config
-  (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif"))))
+;;;; LSP support
+;;(use-package eglot
+;;  :if (equal k8x1d/lsp-backend "eglot")
+;;  :hook ((LaTeX-mode . eglot-ensure))
+;;  :config
+;;  (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif")))
+;;  )
 
 
 ;; Citar integration
