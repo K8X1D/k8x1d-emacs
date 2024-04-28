@@ -79,6 +79,8 @@
 (require 'scheme-module)
 (require 'sql-module)
 (require 'shell-module)
+(require 'lua-module)
+(require 'fennel-module)
 
 (require 'terminal-module)
 (require 'password-module)

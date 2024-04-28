@@ -38,6 +38,7 @@
 	     (gnu packages compression)
 	     (guix build-system python)
 	     (guix build-system r)
+	     (guix build-system emacs)
 	     (guix build-system pyproject)
 	     (emacs build-system melpa)
 	     (emacs packages melpa))
@@ -207,7 +208,7 @@
   (package
    (inherit emacs-pdf-tools)
    (name "emacs-pdf-tools")
-   (build-system emacs-build-system)
+   (build-system gnu-build-system)
     (arguments
      `(#:tests? #f                      ; there are no tests
        #:modules ((guix build gnu-build-system)
@@ -1130,7 +1131,7 @@ shell integration.")
   emacs-julia-vterm
   emacs-ob-julia-vterm
   ;; emacs-pdf-tools-upd
-  emacs-pdf-tools
+  emacs-pdf-tools-upd
   glibc-locales
   ;; texlive
   texlive-scheme-basic ;; Basic scheme (plain and latex)
@@ -1165,5 +1166,15 @@ shell integration.")
   emacs-diredc
   emacs-dired-posframe
   emacs-breadcrumb
+
+  emacs-docker
+  emacs-dockerfile-mode
+  emacs-docker-compose-mode
+  emacs-flymake-hadolint
+
+  emacs-lua-mode
+  emacs-flymake-lua
+  emacs-fennel-mode
+  emacs-flymake-fennel
 
   ))
