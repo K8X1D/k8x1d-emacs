@@ -1040,7 +1040,7 @@ shell integration.")
   emacs-consult-yasnippet
   emacs-consult-eglot
   emacs-consult-eglot-embark
-  emacs-corfu-candidate-overlay
+  ;; emacs-corfu-candidate-overlay
   emacs-dired-sidebar
   emacs-doom-themes
   emacs-eat-upd
@@ -1176,5 +1176,10 @@ shell integration.")
   emacs-flymake-lua
   emacs-fennel-mode
   emacs-flymake-fennel
+  emacs-todotxt
+  emacs-corfu
 
+  emacs-denote
+  emacs-denote-explore
+  emacs-citar-denote
   ))
