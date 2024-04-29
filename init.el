@@ -1,24 +1,23 @@
 (setq k8x1d/bibliography '("~/Zotero/k8x1d.bib"))
 
-(setq k8x1d/org-directory "~/Nextcloud/facil/Org")
-(setq org-directory "~/Nextcloud/facil/Org")
+(setq k8x1d/org-directory "~/org")
+(setq org-directory "~/org")
 
 (setq k8x1d/org-files
-      '("~/Nextcloud/facil/Org/projects/implications.org"
-        "~/Nextcloud/facil/Org/projects/bin.org"    
-        "~/Nextcloud/facil/Org/projects/doctorat.org"  
-        "~/Nextcloud/facil/Org/projects/developpements.org"
-        "~/Nextcloud/facil/Org/projects/articles.org"  
-        "~/Nextcloud/facil/Org/projects/financements.org"  
-        "~/Nextcloud/facil/Org/projects/administratifs.org"
-        "~/Nextcloud/facil/Org/projects/machines.org"
-        "~/Nextcloud/facil/Org/projects/evocult.org"
-        "~/Nextcloud/facil/Org/projects/contrats.org"
-        "~/Nextcloud/facil/Org/projects/presentations.org"
-        "~/Nextcloud/facil/Org/projects/vulgarisation.org"
-        "~/Nextcloud/facil/Org/Horaire.org"
-        "~/Nextcloud/facil/Org/Inbox.org"
-        "~/Nextcloud/facil/Org/Habits.org"))
+      '("~/org/projects/implications.org"
+        "~/org/projects/bin.org"    
+        "~/org/projects/doctorat.org"  
+        "~/org/projects/developpements.org"
+        "~/org/projects/articles.org"  
+        "~/org/projects/financements.org"  
+        "~/org/projects/administratifs.org"
+        "~/org/projects/machines.org"
+        "~/org/projects/evocult.org"
+        "~/org/projects/contrats.org"
+        "~/org/projects/presentations.org"
+        "~/org/Horaire.org"
+        "~/org/Inbox.org"
+        "~/org/Habits.org"))
 
 (defvar k8x1d/lsp-backend "eglot")
 ;; (defvar k8x1d/lsp-backend "lsp-bridge")
@@ -105,6 +104,8 @@
 (require 'org-writing-module)
 (require 'org-agenda-module)
 (require 'org-management-module)
+(require 'todo-txt-module)
+(require 'denote-module)
 
 (require 'pubmed-module)
 (require 'social-module)
