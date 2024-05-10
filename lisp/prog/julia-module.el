@@ -156,7 +156,7 @@
 	       ))
 	       )
   )
-  
+
 ;; Documentation
 (use-package eldoc
   :if (not (string=  k8x1d/lsp-backend "lsp-bridge"))

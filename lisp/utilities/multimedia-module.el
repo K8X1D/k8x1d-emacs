@@ -32,7 +32,7 @@
 
 
 ;; Keybindings
-(use-package mpdel 
+(use-package mpdel
   :if k8x1d/use-general-keybindings
   :general
   (k8x1d/leader-keys

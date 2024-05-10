@@ -5,9 +5,15 @@
 (use-package denote
   :config
   (setq denote-directory (concat org-directory "/notes"))
-  (setq denote-knows-keywords '("arts" "methodics" "theoretics"))
+  (setq denote-directory k8x1d/denote-directory)
+  (setq denote-known-keywords '("arts" "methodics" "theoretics"))
   )
 
+;; Show links and backlinks in Denote notes
+(use-package denote-refs)
+
+;; View denote files in a tabulated list.
+(use-package denote-menu)
 
 ;; Explorer for notes
 (use-package denote-explore
@@ -33,6 +39,7 @@
   (k8x1d/leader-keys
    "d"  '(:ignore t :which-key "Denote")
    "dc"  '(denote-create-note :which-key "Create note")
+   "dl"  '(denote-menu-list-notes :which-key "List notes")
    )
   )
 

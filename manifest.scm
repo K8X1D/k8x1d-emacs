@@ -8,6 +8,7 @@
 	     (gnu packages)
 	     (gnu packages commencement)
 	     (gnu packages emacs)
+	     (gnu packages graphviz)
 	     (gnu packages fontutils)
 	     (gnu packages glib)
 	     (gnu packages linux)
@@ -40,17 +41,35 @@
 	     (guix build-system r)
 	     (guix build-system emacs)
 	     (guix build-system pyproject)
-	     (emacs build-system melpa)
-	     (emacs packages melpa))
+	     ;; (emacs build-system melpa)
+	     (emacs packages melpa)
+       )
 
-
-
-
+(define-public emacs-denote-refs
+  (package
+   (name "emacs-denote-refs")
+   (version "0.1.2")
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://codeberg.org/akib/emacs-denote-refs")
+           (commit "9ae49c8770a83eed92c58be45a4c96fa927cbe6f")))
+     (sha256
+      (base32 "04k3gz60pp5p2dnywnx6d6fpa12ssg4l07hxfn13201lpwcp6x1a"))
+     (file-name (git-file-name name version))))
+   (build-system emacs-build-system)
+   (propagated-inputs (list emacs-denote))
+   (home-page "https://codeberg.org/akib/emacs-denote-refs")
+   (synopsis "Show links and backlinks in Denote notes")
+   (description
+    "Show links and backlinks in Denote notes")
+   (license license:gpl3+)))
 
 (define-public emacs-breadcrumb
   (package
    (name "emacs-breadcrumb")
-   (version "v0.0.0")
+   (version "0.0.0")
    (source
     (origin
      (method git-fetch)
@@ -270,27 +289,27 @@ and stored in memory.")
 
 ;; https://github.com/tpapp/julia-repl/blob/656437b94ee7f8d4e21259d942821512d87909c7/julia-repl.el
 
-(define-public emacs-julia-repl-w-eat
-  (package
-   (inherit emacs-julia-repl)
-   (name "emacs-julia-repl")
-   (source
-    (origin
-     (method git-fetch)
-     (uri (git-reference
-	   (url "https://github.com/tpapp/julia-repl.git")
-	   (commit
-	    "656437b94ee7f8d4e21259d942821512d87909c7")))
-     (sha256
-      (base32
-       "10rng1kwl45z8r2z3g5icswm5f52jlp1ic0j4hm5g3s9q2chfrr1"))))
-   (build-system melpa-build-system)
-   (propagated-inputs (list emacs-s))
-   (home-page "https://github.com/tpapp/julia-repl")
-   (synopsis "A minor mode for a Julia REPL")
-   (description
-    "Documentation at https://melpa.org/#/julia-repl")
-   (license #f)))
+;;(define-public emacs-julia-repl-w-eat
+;;  (package
+;;   (inherit emacs-julia-repl)
+;;   (name "emacs-julia-repl")
+;;   (source
+;;    (origin
+;;     (method git-fetch)
+;;     (uri (git-reference
+;;	   (url "https://github.com/tpapp/julia-repl.git")
+;;	   (commit
+;;	    "656437b94ee7f8d4e21259d942821512d87909c7")))
+;;     (sha256
+;;      (base32
+;;       "10rng1kwl45z8r2z3g5icswm5f52jlp1ic0j4hm5g3s9q2chfrr1"))))
+;;   (build-system melpa-build-system)
+;;   (propagated-inputs (list emacs-s))
+;;   (home-page "https://github.com/tpapp/julia-repl")
+;;   (synopsis "A minor mode for a Julia REPL")
+;;   (description
+;;    "Documentation at https://melpa.org/#/julia-repl")
+;;   (license #f)))
 
 
 
@@ -441,31 +460,31 @@ asynchronously serves graphics via HTTP and @code{WebSockets}'.")
 (define-public %patch-flymake-posframe-no-transparency
   (local-file "patches/flymake-posframe-no-transparency.patch" #:recursive? #t))
 
-(define-public emacs-flymake-posframe-patched
-  (package
-   (name "emacs-flymake-posframe")
-   (version "20210304")
-   (source
-    (origin
-     (method git-fetch)
-     (uri (git-reference
-	   (url "https://github.com/Ladicle/flymake-posframe.git")
-	   (commit
-	    "6ce6e2bc62699c84b7046dd6d07191d37cad3e3e")))
-     (sha256
-      (base32
-       "08id06c3750adxgk8y30yai098jzrh0mmgwn34b7gmfvcn16934n"))
-     (patches (list %patch-flymake-posframe-eglot
-		    %patch-flymake-posframe-no-transparency)
-     )))
-  (build-system melpa-build-system)
-  (propagated-inputs (list emacs-posframe))
-  (home-page
-   "https://github.com/Ladicle/flymake-posframe")
-  (synopsis "Showing flymake diagnostics at point using posframe")
-  (description
-   "Showing flymake diagnostics at point using posframe")
-  (license #f)))
+;;(define-public emacs-flymake-posframe-patched
+;;  (package
+;;   (name "emacs-flymake-posframe")
+;;   (version "20210304")
+;;   (source
+;;    (origin
+;;     (method git-fetch)
+;;     (uri (git-reference
+;;	   (url "https://github.com/Ladicle/flymake-posframe.git")
+;;	   (commit
+;;	    "6ce6e2bc62699c84b7046dd6d07191d37cad3e3e")))
+;;     (sha256
+;;      (base32
+;;       "08id06c3750adxgk8y30yai098jzrh0mmgwn34b7gmfvcn16934n"))
+;;     (patches (list %patch-flymake-posframe-eglot
+;;		    %patch-flymake-posframe-no-transparency)
+;;     )))
+;;  (build-system melpa-build-system)
+;;  (propagated-inputs (list emacs-posframe))
+;;  (home-page
+;;   "https://github.com/Ladicle/flymake-posframe")
+;;  (synopsis "Showing flymake diagnostics at point using posframe")
+;;  (description
+;;   "Showing flymake diagnostics at point using posframe")
+;;  (license #f)))
 
 
 
@@ -493,28 +512,28 @@ asynchronously serves graphics via HTTP and @code{WebSockets}'.")
 (define-public %patch-eldoc-box-no-transparency
   (local-file "patches/eldoc-box-no-transparency.patch" #:recursive? #t))
 
-(define-public emacs-eldoc-box-patched
-  (package
-   (inherit emacs-eldoc-box)
-    (version "20231115.519")
-    (source
-     (origin
-      (method git-fetch)
-      (uri (git-reference
-	    (url "https://github.com/casouri/eldoc-box.git")
-	    (commit
-	     "c36f31074b09930e8425963f39d5508da6d2c32d")))
-      (sha256
-       (base32
-	"0vglh3sp9x6z537jngh5jh9j3szbfadryzlwhmrlq7asiinnjq01"))
-     (patches (list %patch-eldoc-box-no-transparency))))
-    (build-system melpa-build-system)
-    (home-page
-      "https://github.com/casouri/eldoc-box")
-    (synopsis "Display documentation in childframe")
-    (description
-      "Documentation at https://melpa.org/#/eldoc-box")
-    (license #f)))
+;;(define-public emacs-eldoc-box-patched
+;;  (package
+;;   (inherit emacs-eldoc-box)
+;;    (version "20231115.519")
+;;    (source
+;;     (origin
+;;      (method git-fetch)
+;;      (uri (git-reference
+;;	    (url "https://github.com/casouri/eldoc-box.git")
+;;	    (commit
+;;	     "c36f31074b09930e8425963f39d5508da6d2c32d")))
+;;      (sha256
+;;       (base32
+;;	"0vglh3sp9x6z537jngh5jh9j3szbfadryzlwhmrlq7asiinnjq01"))
+;;     (patches (list %patch-eldoc-box-no-transparency))))
+;;    (build-system melpa-build-system)
+;;    (home-page
+;;      "https://github.com/casouri/eldoc-box")
+;;    (synopsis "Display documentation in childframe")
+;;    (description
+;;      "Documentation at https://melpa.org/#/eldoc-box")
+;;    (license #f)))
 
 
 (define-public python-wsgiref
@@ -1018,9 +1037,54 @@ shell integration.")
 
 (packages->manifest
  (list
-  ;; emacs-julia-snail
+;;;; to add
   emacs-julia-ts-mode
-  emacs-julia-repl-w-eat
+  emacs-citar-embark
+  emacs-consult-todo
+  emacs-consult-eglot-embark
+  emacs-embark-consult
+  emacs-empv
+  emacs-ess-view-data
+  emacs-evil-easymotion
+  emacs-python-view-data
+  emacs-fancy-compilation
+  emacs-ibuffer-project
+  emacs-mpdel-embark
+  emacs-nerd-icons-completion
+  emacs-nerd-icons-corfu
+  emacs-nerd-icons-dired
+  emacs-nerd-icons-ibuffer
+  emacs-org-roam-ql
+  emacs-org-roam-timestamps
+  emacs-origami
+  emacs-org-roam-ui
+  emacs-proced-narrow
+  emacs-pyvenv-auto
+  emacs-tabspaces
+  emacs-treesit-auto
+  emacs-yasnippet-capf
+  emacs-julia-vterm
+  emacs-ob-julia-vterm
+  emacs-memento-mori
+  emacs-auto-dark
+  emacs-flymake-php
+  emacs-nix-ts-mode
+  emacs-tab-bar-echo-area
+  emacs-diredc
+  emacs-dired-posframe
+  emacs-flymake-hadolint
+  emacs-flymake-lua
+  emacs-flymake-fennel
+  emacs-todotxt
+  emacs-denote-explore
+  
+
+
+
+
+
+  ;; emacs-julia-snail
+  ;; emacs-julia-repl-w-eat
   ;; emacs-org-noter
   ;; emacs-org-noter-pdftools
   ;; emacs-org-pdftools
@@ -1032,30 +1096,23 @@ shell integration.")
   direnv
   emacs-auctex
   emacs-bluetooth-upd
+  ;; emacs-bluetooth
   emacs-cape
-  emacs-citar-embark
   emacs-citar-org-roam
   emacs-consult-org-roam
-  emacs-consult-todo
   emacs-consult-yasnippet
   emacs-consult-eglot
-  emacs-consult-eglot-embark
   ;; emacs-corfu-candidate-overlay
   emacs-dired-sidebar
   emacs-doom-themes
-  emacs-eat-upd
-  emacs-embark-consult
-  emacs-empv
+  ;; emacs-eat-upd
   emacs-envrc
   emacs-ess
-  emacs-ess-view-data
-  emacs-python-view-data
   emacs-essgd
   r-httpgd
   emacs-evil-anzu
   emacs-evil-args
   emacs-evil-collection
-  emacs-evil-easymotion
   emacs-evil-escape
   emacs-evil-goggles
   emacs-evil-mc
@@ -1064,7 +1121,6 @@ shell integration.")
   emacs-evil-surround
   emacs-evil-tex
   emacs-evil-traces
-  emacs-fancy-compilation
   emacs-flymake-collection
   emacs-forge
   emacs-geiser
@@ -1072,7 +1128,6 @@ shell integration.")
   emacs-guix
   emacs-hide-mode-line
   emacs-highlight-indent-guides
-  emacs-ibuffer-project
   emacs-magit-todos
   emacs-marginalia
   emacs-markdown-preview-mode
@@ -1080,11 +1135,6 @@ shell integration.")
   emacs-minions
   emacs-mixed-pitch
   emacs-mpdel
-  emacs-mpdel-embark
-  emacs-nerd-icons-completion
-  emacs-nerd-icons-corfu
-  emacs-nerd-icons-dired
-  emacs-nerd-icons-ibuffer
   emacs-next-pgtk-xwidgets
   ;; emacs-pgtk-xwidgets
   emacs-orderless
@@ -1092,24 +1142,15 @@ shell integration.")
   emacs-org-modern
   emacs-org-modern-indent
   emacs-org-roam
-  emacs-org-roam-ql
-  emacs-org-roam-timestamps
-  emacs-org-roam-ui
-  emacs-origami
   emacs-ox-gfm
   emacs-pass
-  emacs-proced-narrow
-  emacs-pyvenv-auto
   emacs-rainbow-mode
-  emacs-tabspaces
   emacs-toc-org
   emacs-transmission
-  emacs-treesit-auto
   emacs-vertico
   emacs-which-key
   emacs-general
   emacs-elpy
-  emacs-yasnippet-capf
   emacs-yasnippet-snippets
   emacs-vterm
   ;; emacs-vterm-toggle
@@ -1128,10 +1169,12 @@ shell integration.")
   ;; python-rapidfuzz
   python
   julia
-  emacs-julia-vterm
-  emacs-ob-julia-vterm
-  ;; emacs-pdf-tools-upd
+  r-minimal
+  r-languageserver
+  r-lintr
+  r-renv
   emacs-pdf-tools-upd
+  ;; emacs-pdf-tools-upd
   glibc-locales
   ;; texlive
   texlive-scheme-basic ;; Basic scheme (plain and latex)
@@ -1145,8 +1188,6 @@ shell integration.")
   ;; emacs-flymake-posframe-patched
 
   emacs-pubmed
-  emacs-memento-mori
-  emacs-auto-dark
   emacs-mastodon
 
   emacs-modern-tab-bar
@@ -1154,32 +1195,29 @@ shell integration.")
   emacs-eglot-booster
   emacs-consult-jump-project
   emacs-php-mode
-  emacs-flymake-php
   emacs-org-margin-patched
   emacs-eglot-ltex
 
   emacs-nix-mode
-  emacs-nix-ts-mode
 
-  emacs-tab-bar-echo-area
 
-  emacs-diredc
-  emacs-dired-posframe
   emacs-breadcrumb
 
   emacs-docker
   emacs-dockerfile-mode
   emacs-docker-compose-mode
-  emacs-flymake-hadolint
 
   emacs-lua-mode
-  emacs-flymake-lua
   emacs-fennel-mode
-  emacs-flymake-fennel
-  emacs-todotxt
   emacs-corfu
 
   emacs-denote
-  emacs-denote-explore
+  emacs-denote-refs
+  emacs-denote-menu
   emacs-citar-denote
+  graphviz
+
+
+  emacs-direnv
+
   ))

@@ -32,9 +32,6 @@
   (setq auto-revert-verbose nil)
   )
 
-;; prevent minibuffer lock
-(setq enable-recursive-minibuffers t)
-
 ;; General Keybindings
 (use-package emacs
   :if k8x1d/use-general-keybindings
@@ -48,6 +45,12 @@
    "bk"  '(k8x1d/kill-buffer-and-window :which-key "Kill")
    "bi"  '(ibuffer :which-key "List")
    )
+  )
+
+;; Async
+(use-package emacs
+  :config
+  (setq async-shell-command-display-buffer nil)
   )
 
 (provide 'buffer-module)

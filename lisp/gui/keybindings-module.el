@@ -54,7 +54,7 @@
    "fs" '(save-buffer :which-key "Save")
    "q" '(:ignore t :which-key "Quit")
    "qq" '(save-buffers-kill-terminal :which-key "Emacs")
-   "qs" '(k8x1d/server-shutdown :which-key "Server")
+   "qs" '(k8x1d/server-shutdown :which-key "Emacs server")
    )
 
   ;;;; Open

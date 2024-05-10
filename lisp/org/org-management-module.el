@@ -20,6 +20,12 @@
   (k8x1d/local-leader-keys
     :keymaps 'org-mode-map
     "t"  '(org-todo :which-key "Todo")
+    "i" '(:ignore t :which-key "Insert")
+    "p" '(org-property-action :which-key "Properties")
+    "id" '(:ignore t :which-key "Date")
+    "idd" '(org-deadline :which-key "Deadline")
+    "ids" '(org-schedule :which-key "Schedule")
+    "id." '(org-time-stamp :which-key "Timestamp")
     )
   )
 

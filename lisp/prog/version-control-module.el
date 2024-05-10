@@ -1,6 +1,16 @@
 ;; Version control management
 (use-package magit
-  :bind (("C-c g g" . magit-status)))
+  :bind (("C-c g g" . magit-status)
+	 :map magit-mode-map
+	 ;; evil uniformisation
+	 ([remap magit-log] . evil-forward-char)
+	 ([remap magit-dispatch] . evil-backward-char)
+	 ([remap magit-ediff-dwim] . evil-forward-word-end)
+	 ([remap magit-branch] . evil-backward-word-begin)
+	 ([remap magit-jump-to-tracked] . evil-tab-next)
+	 ;; ("gT" . tab-bar-switch-to-prev-tab)
+	 )
+  )
 
 ;; Issue creation/interaction
 (use-package forge
@@ -10,7 +20,11 @@
   ("C-c g c i" . forge-create-issue)
   ("C-c g c p" . forge-create-post)
   ("C-c g l i" . forge-list-issues)
-  ("C-c g l r" . forge-list-repository))
+  ("C-c g l r" . forge-list-repository)
+  :map forge-issue-mode-map
+  ("gt" . evil-tab-next)
+  ("gT" . tab-bar-switch-to-prev-tab)
+  )
   :config
   ;; (add-to-list 'forge-alist '("gitlab.cirst.ca" "gitlab.cirst.ca/api/v4" "gitlab.cirst.ca:8822" forge-gitlab-repository))
   (add-to-list 'forge-alist '("gitlab.cirst.ca" "gitlab.cirst.ca/api/v4" "gitlab.cirst.ca" forge-gitlab-repository)) 

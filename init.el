@@ -2,6 +2,7 @@
 
 (setq k8x1d/org-directory "~/org")
 (setq org-directory "~/org")
+(setq k8x1d/denote-directory (concat k8x1d/org-directory "/notes"))
 
 (setq k8x1d/org-files
       '("~/org/projects/implications.org"
@@ -13,6 +14,7 @@
         "~/org/projects/administratifs.org"
         "~/org/projects/machines.org"
         "~/org/projects/evocult.org"
+        "~/org/projects/recherches.org"
         "~/org/projects/contrats.org"
         "~/org/projects/presentations.org"
         "~/org/Horaire.org"
@@ -24,7 +26,7 @@
 (defvar k8x1d/ide "minimal")
 (defvar k8x1d/terminal "vterm")
 (defvar k8x1d/completion "corfu")
-(defvar k8x1d/tabs nil)
+(defvar k8x1d/tabs t)
 (defvar k8x1d/posframe-support nil)
 (defvar k8x1d/use-general-keybindings t)
 (defvar k8x1d/use-general-keybindings t)
@@ -44,6 +46,7 @@
 (require 'frames-module)
 (require 'buffer-module)
 (require 'tabs-module)
+(require 'minibuffer-module)
 (require 'project-module)
 (require 'file-browser-module)
 (require 'scrolling-module)
@@ -76,6 +79,7 @@
 (require 'r-module)
 (require 'php-module)
 (require 'scheme-module)
+(require 'elisp-module)
 (require 'sql-module)
 (require 'shell-module)
 (require 'lua-module)
@@ -99,6 +103,7 @@
 (require 'markdown-module)
 (require 'csv-module)
 (require 'latex-module)
+(require 'corrector-module)
 
 (require 'org-gui-module)
 (require 'org-writing-module)
