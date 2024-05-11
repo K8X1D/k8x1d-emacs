@@ -7,4 +7,9 @@
 	      (k8x1d/set-window-divider-colors)
 	      )))
 
+;; Daemon set-up
+(if (daemonp)
+    (setq use-package-always-demand t)
+  (setq use-package-always-defer t))
+
 (provide 'daemon-module)
