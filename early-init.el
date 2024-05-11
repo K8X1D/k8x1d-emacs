@@ -73,7 +73,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Stop enabling package
-;; (setq package-enable-at-startup nil)
+(setq package-enable-at-startup nil)
 
 ;; TODO: add automatic change following current theme
 ;; path for plasma: /home/k8x1d/.config/kdedefaults/kdeglobals
