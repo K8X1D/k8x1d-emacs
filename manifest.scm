@@ -1217,7 +1217,8 @@ shell integration.")
   emacs-citar-denote
   graphviz
 
-
   emacs-direnv
 
-  ))
+  )
+ 
+ )
