@@ -2,6 +2,7 @@
 (use-package emacs
   :config
   (setq tex-fontify-script nil)
+  (setq TeX-brace-indent-level 4)
   )
 
 ;; Evil support
@@ -13,21 +14,22 @@
   (unbind-key "m-n" evil-tex-mode-map) ;; clean keys for lsp-bridge in latex
   )
 
-;; Navigation
+;;;; Navigation
 (use-package reftex
-  :hook
-  ((latex-mode . 'turn-on-reftex)
-   (LaTeX-mode . 'turn-on-reftex)
-   (reftex-mode . visual-line-mode))
-  :config
-  (setq reftex-toc-split-windows-horizontally t)
-  (setq reftex-toc-max-level 3)
-  ;; (setq reftex-plug-into-AUCTeX t)
-  (setq reftex-default-bibliography k8x1d/bibliography)
-  (setq reftex-toc-split-windows-fraction 0.2))
+ :hook
+ ((latex-mode . turn-on-reftex)
+  (LaTeX-mode . turn-on-reftex)
+  (reftex-mode . visual-line-mode))
+ :config
+ (setq reftex-toc-split-windows-horizontally t)
+ (setq reftex-toc-max-level 3)
+ (setq reftex-level-indent 4)
+ (setq reftex-default-bibliography k8x1d/bibliography)
+ (setq reftex-toc-split-windows-fraction 0.2))
 
 ;; Latex support
-(use-package latex 
+(use-package latex
+  ;; :ensure auctex
   :init
   ;; TODO: fuse function
   (defun k8x1d/insert-latex-item-below ()
@@ -44,11 +46,13 @@
     )
   :hook (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   :bind  (:map LaTeX-mode-map
-	       (("C-<return>" . k8x1d/insert-latex-item-below)
-		("C-S-<return>" . k8x1d/insert-latex-item-above))
-	       )
+		       (("C-<return>" . k8x1d/insert-latex-item-below)
+			("C-S-<return>" . k8x1d/insert-latex-item-above))
+		       )
   :config
-  (setq reftex-plug-into-AUCTeX t)
+  ;; (setq reftex-plug-into-AUCTeX t)
+  (setq LaTeX-item-indent -4)
+  (setq LaTeX-indent-level 4)
   )
 
 ;;;; LSP support
@@ -61,7 +65,7 @@
 
 
 ;; Citar integration
-(use-package citar-latex
-  :after auctex)
+ (use-package citar-latex
+   :after auctex)
 
 (provide 'latex-module)
