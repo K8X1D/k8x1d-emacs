@@ -19,6 +19,7 @@
 
 ;; Automatic toc management
 (use-package markdown-mode
+  :requires toc-org
   :hook (markdown-mode . toc-org-mode)
   :bind (:map markdown-mode-map
 	      ("C-c C-o" . toc-org-markdown-follow-thing-at-point)))

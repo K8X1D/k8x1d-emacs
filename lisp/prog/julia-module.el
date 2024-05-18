@@ -5,21 +5,22 @@
 
 ;; REPL
 (use-package julia-repl
-  :if (and (string= k8x1d/ide "minimal") (string= k8x1d/terminal "eat")) 
-  :hook (julia-ts-mode . julia-repl-mode)
-  :config
-  ;; Term
-  (julia-repl-set-terminal-backend 'eat)
-  ;; Remote
-  (setq julia-repl-executable-records
+  :ensure nil
+ :if (and (string= k8x1d/ide "minimal") (string= k8x1d/terminal "eat")) 
+ :hook (julia-ts-mode . julia-repl-mode)
+ :config
+ ;; Term
+ (julia-repl-set-terminal-backend 'eat)
+ ;; Remote
+ (setq julia-repl-executable-records
 	'((default "julia")                  ; in the executable path
 	  (remote "ssh -t kkaiser@130.104.60.82 /usr/bin/julia")))
-  (defun remotejl ()
-    (interactive)
-    (make-term "julia-ssh" "ssh" nil "-t" "kkaiser@130.104.60.82" "/bin/julia")
-    (funcall-interactively 'julia-repl-prompt-set-inferior-buffer-name-suffix '(ssh))
-    )
-  )
+ (defun remotejl ()
+   (interactive)
+   (make-term "julia-ssh" "ssh" nil "-t" "kkaiser@130.104.60.82" "/bin/julia")
+   (funcall-interactively 'julia-repl-prompt-set-inferior-buffer-name-suffix '(ssh))
+   )
+ )
 
 
 ;; REPL
@@ -54,6 +55,7 @@
 
 ;; SLIME-like dev environment
 (use-package julia-snail
+  :ensure nil
   :if (string= k8x1d/ide "full") 
   :bind(
 	("K" . julia-snail-doc-lookup) 

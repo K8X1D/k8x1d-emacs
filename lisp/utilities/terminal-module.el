@@ -69,7 +69,7 @@
   :config
   (setq multi-vterm-dedicated-window-height-percent 30)
   (add-to-list 'project-switch-commands '(multi-vterm-project "Terminal"))
-  (add-to-list 'tabspaces-project-switch-commands '(multi-vterm-project "Terminal"))
+  ;; (add-to-list 'tabspaces-project-switch-commands '(multi-vterm-project "Terminal"))
   )
 
 ;; Keybindings

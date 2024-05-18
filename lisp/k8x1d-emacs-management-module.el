@@ -23,7 +23,7 @@
   (k8x1d/leader-keys
     "s"  '(:ignore t :which-key "Emacs")
     "su" '(k8x1d/update :which-key "Update")
-    "sU" '(k8x1d/upgrade :which-key "Update")
+    "sU" '(k8x1d/upgrade :which-key "Upgrade")
     )
   )
 

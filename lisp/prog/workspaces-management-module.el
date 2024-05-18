@@ -13,7 +13,26 @@
     ;; sessions
     (tabspaces-session t)
     ;; (tabspaces-session-auto-restore t)
-)
+    :init
+    (defun k8x1d/tabspaces-switch-or-create-workspace (&optional workspace)
+      "Switch to tab if it exists, otherwise create a new tabbed workspace."
+      (interactive
+       (let ((tabs (tabspaces--list-tabspaces)))
+	 (cond ((eq tabs nil)
+		(tab-new)
+		(tab-rename (format " %s " (completing-read "Workspace name: " tabs))))
+	       (t
+		(list
+		 (completing-read "Select or create tab: " tabs nil nil))))))
+      (cond ((member workspace (tabspaces--list-tabspaces))
+	     (tab-bar-switch-to-tab workspace))
+	    (t
+	     (tab-new)
+	     (tab-rename workspace))))
+    :bind (:map tabspaces-mode-map
+		([remap tabspaces-switch-or-create-workspace] . k8x1d/tabspaces-switch-or-create-workspace)
+		)
+    )
 
 ;; Consult integration
 (use-package tabspaces

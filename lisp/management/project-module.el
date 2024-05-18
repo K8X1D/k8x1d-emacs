@@ -1,7 +1,7 @@
 ;; consult integration
-(use-package consult-jump-project
-  :custom (consult-jump-direct-jump-modes '(dired-mode))
-  :bind ("C-x p j" . consult-jump-project))
+;; (use-package consult-jump-project
+;;   :custom (consult-jump-direct-jump-modes '(dired-mode))
+;;   :bind ("C-x p j" . consult-jump-project))
 
 ;; Keybindings
 (use-package project

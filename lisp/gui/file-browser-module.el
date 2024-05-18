@@ -1,6 +1,6 @@
 
 ;; Native file-explorer
-(use-package dired
+(use-package emacs
   :ensure nil
   :config
   (setq dired-auto-revert-buffer t)

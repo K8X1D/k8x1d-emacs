@@ -10,6 +10,13 @@
 	 ([remap magit-jump-to-tracked] . evil-tab-next)
 	 ;; ("gT" . tab-bar-switch-to-prev-tab)
 	 )
+  :config
+  ;; Clean keybindings
+  (require 'bind-key)
+  (unbind-key "M-1" magit-section-mode-map)
+  (unbind-key "M-2" magit-section-mode-map)
+  (unbind-key "M-3" magit-section-mode-map)
+  (unbind-key "M-4" magit-section-mode-map)
   )
 
 ;; Issue creation/interaction

@@ -10,6 +10,7 @@
   )
 ;; Evil extended support
 (use-package evil-collection
+;; correct for latex indent error from missing reftex autoload
   :hook (evil-mode . evil-collection-init))
 
 ;; Customizable key sequence to escape from insert state and everything else in Emacs.

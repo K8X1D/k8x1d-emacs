@@ -47,6 +47,7 @@
 ;; Completion order
 (use-package orderless
   :init
+  (require 'orderless)
   ;; (setq completion-styles '(orderless basic))
   ;; (setq completion-category-overrides '((file (styles basic partial-completion)))))
   (setq completion-styles '(orderless basic)
@@ -97,6 +98,9 @@
 ;; Consulting completing-read 
 ;; TODO: reduce
 (use-package consult
+  :init
+  (require 'consult)
+  (require 'consult-xref)
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
@@ -212,20 +216,20 @@
 ;;   )
 
 ;; Compeletion as-you-type
-(use-package completion-preview
-  :if (and (string= k8x1d/completion "native")
-	   (not (string= k8x1d/lsp-backend "lsp-bridge")))
-  :load-path "lisp/test"
-  :bind (:map completion-preview-active-mode-map
-	      ("C-j" . completion-preview-prev-candidate)
-	      ("C-k" . completion-preview-next-candidate))
-  :hook ((text-mode prog-mode) . completion-preview-mode)
-  :config
-  (unbind-key "C-k" evil-insert-state-map)
-  ;; (keymap-unset evil-insert-state-map (kbd "C-k"))
-  (setq completion-preview-minimum-symbol-length 2)
-  :custom-face  (completion-preview ((t (:foreground ,(doom-color 'magenta) :weight bold))))
-  )
+;; (use-package completion-preview
+;;   :if (and (string= k8x1d/completion "native")
+;; 	   (not (string= k8x1d/lsp-backend "lsp-bridge")))
+;;   :load-path "lisp/test"
+;;   :bind (:map completion-preview-active-mode-map
+;; 	      ("C-j" . completion-preview-prev-candidate)
+;; 	      ("C-k" . completion-preview-next-candidate))
+;;   :hook ((text-mode prog-mode) . completion-preview-mode)
+;;   :config
+;;   (unbind-key "C-k" evil-insert-state-map)
+;;   ;; (keymap-unset evil-insert-state-map (kbd "C-k"))
+;;   (setq completion-preview-minimum-symbol-length 2)
+;;   :custom-face  (completion-preview ((t (:foreground ,(doom-color 'magenta) :weight bold))))
+;;   )
 
 ;; Use Dabbrev with Corfu!
 (use-package dabbrev

@@ -26,6 +26,7 @@
 
 ;; Better performance for eglot
 (use-package eglot-booster
+  ;; :straight (eglot-booster :type git :host github :repo "jdtsmith/eglot-booster")
   :if (string= k8x1d/lsp-backend "eglot")
   :after eglot
   :config

@@ -6,34 +6,37 @@
      ("C-c ! l" . flymake-show-buffer-diagnostics))
     )
 
-;; Extended support
+;; FIXME: failed to autoload
+;;;; Extended support
 (use-package flymake-collection
-  :hook (after-init . flymake-collection-hook-setup))
-
-
-;; Display result in posframe
-(use-package flymake-posframe
-  :if k8x1d/posframe-support
-  :hook (flymake-mode . flymake-posframe-mode)
+  ;; :hook (flymake-mode . flymake-collection-hook-setup)
   )
 
-;; Indicator in the margin
+;; Display result in posframe
+;;(use-package flymake-posframe
+;;  :ensure nil
+;;  :if k8x1d/posframe-support
+;;  :hook (flymake-mode . flymake-posframe-mode)
+;;  )
+
+;;;; Indicator in the margin
 (use-package flymake-margin
-  :hook ((flymake-mode . flymake-margin-mode)
+  :ensure nil
+ :hook ((flymake-mode . flymake-margin-mode)
 	 (flymake-margin-mode . (lambda () (progn
 					     ;; (setq left-margin-width 2)
 					     (setq right-margin-width 3)
 					     (set-window-buffer nil (current-buffer)))))
 	 )
-  :config
-  ;; (setq flymake-margin-error-symbol " ")
-  ;; (setq flymake-margin-warning-symbol " ")
-  ;; (setq flymake-margin-note-symbol " ")
-  (setq flymake-margin-error-symbol "⮾")
-  (setq flymake-margin-warning-symbol "△")
-  (setq flymake-margin-note-symbol "?")
-  (setq flymake-margin-side 'right)
-  )
+ :config
+ ;; (setq flymake-margin-error-symbol " ")
+ ;; (setq flymake-margin-warning-symbol " ")
+ ;; (setq flymake-margin-note-symbol " ")
+ (setq flymake-margin-error-symbol "⮾")
+ (setq flymake-margin-warning-symbol "△")
+ (setq flymake-margin-note-symbol "?")
+ (setq flymake-margin-side 'right)
+ )
 
 
 ;; Keybindings

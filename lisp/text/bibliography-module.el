@@ -11,6 +11,7 @@
 
 ;; Bibliography interaction
 (use-package citar
+  :requires citar-capf
   :hook
   ((LaTeX-mode . citar-capf-setup)
    (org-mode . citar-capf-setup))
@@ -38,8 +39,8 @@
 ;; Integration with embark
 (use-package citar-embark
   :after citar embark
-  :no-require
-  :config (citar-embark-mode))
+  :config
+  (citar-embark-mode 1))
 
 
 ;; Keybindings
