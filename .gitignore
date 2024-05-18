@@ -7,6 +7,7 @@ history
 transient/
 tree-sitter/
 tramp
+persist
 projects
 org-roam.db
 forge-database*
@@ -18,3 +19,5 @@ lisp/k8x1d-keys.el
 mastodon.plstore
 tabsession.el
 url
+straight
+test

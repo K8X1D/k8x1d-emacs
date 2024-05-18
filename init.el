@@ -36,16 +36,18 @@
 (defvar k8x1d/default-dark-theme "Breeze-Dark")
 (defvar k8x1d/default-light-theme "Breeze")
 
+;; (require 'straight-module)
+(require 'packages-module)
 
 (require 'tools-module)
 
-(require 'packages-module)
 (require 'keybindings-module)
 (require 'evil-module)
 
 (require 'frames-module)
 (require 'buffer-module)
-(require 'tabs-module)
+;; (require 'tabs-module)
+(require 'tabs-alt-module)
 (require 'minibuffer-module)
 (require 'project-module)
 (require 'file-browser-module)
@@ -59,7 +61,7 @@
 (require 'completion-module)
 (require 'icons-module)
 (require 'highlight-module)
-(require 'workspaces-management-module)
+;; (require 'workspaces-management-module)
 (require 'documentation-module)
 
 
@@ -73,6 +75,7 @@
 (require 'environment-management-module)
 (require 'compilation-module)
 (require 'notebook-module)
+(require 'breadcrumb-module)
 
 (require 'julia-module)
 (require 'python-module)
