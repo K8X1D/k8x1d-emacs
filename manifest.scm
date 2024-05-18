@@ -1099,6 +1099,7 @@ shell integration.")
   emacs-tab-bar-echo-area
   emacs-diredc
   emacs-dired-posframe
+  emacs-dired-preview
   emacs-flymake-hadolint
   emacs-flymake-lua
   emacs-flymake-fennel
