@@ -18,6 +18,16 @@
  ;;	      )
   )
 
+;; REPL
+(use-package python-vterm
+  :if (and (string= k8x1d/ide "minimal") (string= k8x1d/terminal "vterm")) 
+  :hook ((python-mode . python-vterm-mode)
+	 (python-ts-mode . python-vterm-mode))
+  :config
+  (setq-default python-vterm-repl-program "python3")
+  (setq-default python-vterm-silent-cells t)
+  )
+
 ;; IDE
 (use-package elpy
   :if (string= k8x1d/ide "full") 

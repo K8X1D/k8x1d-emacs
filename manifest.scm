@@ -45,6 +45,33 @@
 	     (emacs packages melpa)
        )
 
+
+(define-public emacs-python-vterm
+  (package
+    (name "emacs-python-vterm")
+    (version "20240517.075")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/vale981/python-vterm.el.git")
+               (commit
+                 "0755613c86fa7af89a2badc336787b4c694da89d")))
+        (sha256
+          (base32
+            "0si1gsvwpj3in60dzlm98ayf2wvlc1s9wqaarnv0laz62s7fgiij"))))
+    (build-system emacs-build-system)
+    (arguments
+     `(#:include (cons* "^scripts/.*" %default-include))
+     )
+    (propagated-inputs (list emacs-vterm))
+    (home-page
+      "https://github.com/shg/julia-vterm.el")
+    (synopsis "A mode for Python REPL using vterm")
+    (description
+      "A simple vterm-based mode for an inferior (i)Python REPL process in Emacs ")
+    (license #f)))
+
 (define-public emacs-denote-refs
   (package
    (name "emacs-denote-refs")
@@ -1218,6 +1245,8 @@ shell integration.")
   graphviz
 
   emacs-direnv
+
+  emacs-python-vterm
 
   )
  
