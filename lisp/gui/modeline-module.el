@@ -5,9 +5,11 @@
   (defun k8x1d-workspace-module ()
     (if (not tab-bar-show)
 	(let* ((explicit-name (alist-get 'explicit-name (tab-bar--current-tab)))
+	       (tab-index (tab-bar--current-tab-index))
 	       (tab-name (alist-get 'name (tab-bar--current-tab))))
 	  ;; (if explicit-name tab-name ""))
-	  (if explicit-name (propertize  (format " %s " tab-name) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'magenta)) 'help-echo org-clock-heading) ""))
+	  (if explicit-name (propertize  (format " %s " tab-name) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)) 'help-echo org-clock-heading)
+	    (propertize  (format " %s " tab-index) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)) 'help-echo org-clock-heading)))
       ""
       )
     )
