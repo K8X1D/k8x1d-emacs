@@ -21,3 +21,10 @@ tabsession.el
 url
 straight
 test
+.emacs.desktop
+lisp/elpaca-module.el
+lisp/straight-module.el
+test.mp3
+lisp/management/todo-txt-module.el
+patches/org-margin-svg-support.patch
+

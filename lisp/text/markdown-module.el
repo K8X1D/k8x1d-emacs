@@ -1,20 +1,20 @@
 ;; Markdown support
 (use-package markdown-mode
-    :hook (markdown-mode . hl-todo-mode)
-    :config
-    (setq markdown-command "pandoc")
-    (setq markdown-asymmetric-header t)
-    )
+  :hook (markdown-mode . hl-todo-mode)
+  :config
+  (setq markdown-command "pandoc")
+  (setq markdown-asymmetric-header t)
+  )
 
 ;; Preview in browser
-  (use-package markdown-preview-mode
-    :init
-    (defun k8x1d/markdown-preview ()
-      (mardown-preview-mode 1)
-      (markdown-preview-cleanup)
-      )
-    :bind (:map markdown-mode-map
-                ("C-c C-c p" . markdown-preview-open-browser)))
+(use-package markdown-preview-mode
+  :init
+  (defun k8x1d/markdown-preview ()
+    (mardown-preview-mode 1)
+    (markdown-preview-cleanup)
+    )
+  :bind (:map markdown-mode-map
+              ("C-c C-c p" . markdown-preview-open-browser)))
 
 
 ;; Automatic toc management
