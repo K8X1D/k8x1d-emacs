@@ -71,6 +71,10 @@
   )
 
 ;; Better indentation for org-modern
+(if (string= k8x1d/package-management "straight")
+    (straight-use-package
+     '(org-modern-indent :type git :host github :repo "jdtsmith/org-modern-indent"))
+  )
 (use-package org-modern-indent
   :hook (org-modern-mode . org-modern-indent-mode)
   :config
@@ -195,6 +199,10 @@
   )
 
 ;; Popup in posframe
+(if (string= k8x1d/package-management "straight")
+    (straight-use-package
+     '(org-popup-posframe :type git :host github :repo "A7R7/org-popup-posframe"))
+  )
 (use-package org-popup-posframe 
   :if k8x1d/posframe-support
   :hook (org-mode . org-popup-posframe-mode)
@@ -210,6 +218,10 @@
 
   )
 
+(if (string= k8x1d/package-management "straight")
+    (straight-use-package
+     '(org-margin :type git :host github :repo "rougier/org-margin"))
+  )
 (use-package org-margin)
 
 

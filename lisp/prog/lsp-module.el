@@ -25,53 +25,56 @@
   (consult-eglot-embark-mode +1))
 
 ;; Better performance for eglot
+(if (string= k8x1d/package-management "straight")
+    (straight-use-package
+     '(eglot-booster :type git :host github :repo "jdtsmith/eglot-booster"))
+  )
 (use-package eglot-booster
-  ;; :straight (eglot-booster :type git :host github :repo "jdtsmith/eglot-booster")
   :if (string= k8x1d/lsp-backend "eglot")
   :after eglot
   :config
   (eglot-booster-mode))
 
 
-(use-package lsp-bridge
-  :if (string= k8x1d/lsp-backend "lsp-bridge")
-  :load-path "lisp/test/lsp-bridge/"
-  :bind (
-	 :map lsp-bridge-mode-map
-	 ("K" . lsp-bridge-popup-documentation)
-	 ("<tab>" . lsp-bridge-popup-complete-menu)
-	 ("C-j" . lsp-bridge-popup-documentation-scroll-up)
-	 ("C-k" . lsp-bridge-popup-documentation-scroll-down)
-	 :map acm-mode-map
-	 ("C-j" . acm-select-next)
-	 ("C-k" . acm-select-prev)
-	 )
-  :hook (prog-mode . global-lsp-bridge-mode)
-  :custom
-  (lsp-bridge-enable-mode-line nil)
-  (lsp-bridge-enable-log t) 
-  :config
-  ;; Python
-  (setq lsp-bridge-python-lsp-server "pylsp")
-  ;; Julia
-  (add-to-list 'lsp-bridge-single-lang-server-mode-list '((julia-ts-mode) . "julials"))
-  ;; Latex
-  (setq lsp-bridge-tex-lsp-server "digestif")
-  ;; General configuration
-  (setq lsp-bridge-complete-manually t)
-  (setq lsp-bridge-enable-org-babel t)
-  (setq acm-enable-doc nil)
-  (setq acm-enable-icon t)
-  (setq lsp-bridge-enable-completion-in-string t)
-  ;; Remote configuration
-  (setq lsp-bridge-enable-with-tramp t)
-  (setq lsp-bridge-remote-start-automatically t)
-
-  ;; Clean keybindings
-  (require 'bind-key)
-  (unbind-key "C-k" evil-insert-state-map) 
-  (unbind-key "K" evil-motion-state-map) 
-  )
+;; (use-package lsp-bridge
+;;   :if (string= k8x1d/lsp-backend "lsp-bridge")
+;;   :load-path "lisp/test/lsp-bridge/"
+;;   :bind (
+;; 	 :map lsp-bridge-mode-map
+;; 	 ("K" . lsp-bridge-popup-documentation)
+;; 	 ("<tab>" . lsp-bridge-popup-complete-menu)
+;; 	 ("C-j" . lsp-bridge-popup-documentation-scroll-up)
+;; 	 ("C-k" . lsp-bridge-popup-documentation-scroll-down)
+;; 	 :map acm-mode-map
+;; 	 ("C-j" . acm-select-next)
+;; 	 ("C-k" . acm-select-prev)
+;; 	 )
+;;   :hook (prog-mode . global-lsp-bridge-mode)
+;;   :custom
+;;   (lsp-bridge-enable-mode-line nil)
+;;   (lsp-bridge-enable-log t) 
+;;   :config
+;;   ;; Python
+;;   (setq lsp-bridge-python-lsp-server "pylsp")
+;;   ;; Julia
+;;   (add-to-list 'lsp-bridge-single-lang-server-mode-list '((julia-ts-mode) . "julials"))
+;;   ;; Latex
+;;   (setq lsp-bridge-tex-lsp-server "digestif")
+;;   ;; General configuration
+;;   (setq lsp-bridge-complete-manually t)
+;;   (setq lsp-bridge-enable-org-babel t)
+;;   (setq acm-enable-doc nil)
+;;   (setq acm-enable-icon t)
+;;   (setq lsp-bridge-enable-completion-in-string t)
+;;   ;; Remote configuration
+;;   (setq lsp-bridge-enable-with-tramp t)
+;;   (setq lsp-bridge-remote-start-automatically t)
+;; 
+;;   ;; Clean keybindings
+;;   (require 'bind-key)
+;;   (unbind-key "C-k" evil-insert-state-map) 
+;;   (unbind-key "K" evil-motion-state-map) 
+;;   )
 
 
 ;; Keybindings

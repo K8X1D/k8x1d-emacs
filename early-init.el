@@ -78,5 +78,5 @@
 ;; TODO: add automatic change following current theme
 ;; path for plasma: /home/k8x1d/.config/kdedefaults/kdeglobals
 ;; parse ColorScheme=BreezeLight
-(require 'doom-themes)
-(load-theme 'doom-palenight t)
+;;(require 'doom-themes)
+(load-theme 'modus-vivendi t)

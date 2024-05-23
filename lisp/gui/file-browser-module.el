@@ -26,7 +26,8 @@
   (setq dired-preview-delay 0.7)
   (setq dired-preview-max-size (expt 2 20))
   (setq dired-preview-ignored-extensions-regexp
-	(concat "\\."
+	(concat
+	 ;; "\\."
 		"\\(mkv\\|webm\\|mp4\\|mp3\\|ogg\\|m4a"
 		"\\|gz\\|zst\\|tar\\|xz\\|rar\\|zip"
 		"\\|iso\\|epub\\)"))

@@ -82,10 +82,6 @@
                         (org-agenda-skip-timestamp-if-done t)
                         (org-super-agenda-groups
                          '(
-                           (:name "Horaire"
-                                  :time-grid t
-				  :discard (:priority "C")
-                                  :order 0)
                            (:name "Aujourd'hui"
                                   :deadline today
 				  :scheduled today
@@ -100,7 +96,8 @@
                            (:name "En retard"
                                   :deadline past
                                   :scheduled past
-                                  :order 4)
+                                  :order 0
+				  :discard (:anything t))
                            )))))
 	   )
           ("w" "Agenda for the week"

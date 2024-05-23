@@ -28,7 +28,7 @@
  (setq reftex-toc-split-windows-fraction 0.2))
 
 ;; Latex support
-(use-package latex
+(use-package auctex
   ;; :ensure auctex
   :init
   ;; TODO: fuse function
@@ -65,7 +65,10 @@
 
 
 ;; Citar integration
- (use-package citar-latex
-   :after auctex)
+ (use-package citar
+   :after auctex
+   :config
+   (require 'citar-latex)
+   )
 
 (provide 'latex-module)

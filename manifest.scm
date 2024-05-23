@@ -11,8 +11,12 @@
 	     (gnu packages graphviz)
 	     (gnu packages fontutils)
 	     (gnu packages glib)
+	     (gnu packages certs)
+	     (gnu packages tls)
+	     (gnu packages commencement)
 	     (gnu packages linux)
 	     (gnu packages cran)
+	     (gnu packages perl)
 	     (gnu packages emacs-xyz)
 	     (gnu packages shellutils)
 	     (gnu packages python-xyz)
@@ -44,6 +48,92 @@
 	     ;; (emacs build-system melpa)
 	     (emacs packages melpa)
        )
+
+
+(define-public %emacs-ess-fix-obsolete-function-alias.patch
+  (local-file "patches/emacs-ess-fix-obsolete-function-alias.patch" #:recursive? #t))
+
+(define-public emacs-ess-custom
+  ;; Latest release is old.  This is not the latest commit either due to bug
+  ;; reported here: <https://github.com/emacs-ess/ESS/issues/987>.
+  (let ((commit "24da603184ce39246611dd5b8602e769d7ebd5bf")
+        (version "18.10.2")
+        (revision "0"))
+    (package
+      (name "emacs-ess-custom")
+      ;; (version (git-version version revision commit))
+      (version "20240516.811")
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/emacs-ess/ESS")
+               (commit commit)))
+         (sha256
+          (base32 "0j98lv07nzwzd54d4dgcfz01wy5gj48m0mnirxzh5r45ik2myh1r"))
+         (file-name (git-file-name name version))
+         (modules '((guix build utils)))
+         (snippet
+          '(begin
+             ;; Stop ESS from trying to bundle an external julia-mode.el.
+             (substitute* "lisp/Makefile"
+               ((" \\$\\(JULIAS)") "")
+               (("\ttest.*julia-mode.*\\.el") ""))
+             ;; Only build docs in info format.
+             (substitute* "doc/Makefile"
+               (("all  : info text")
+                "all  : info")
+               (("install: install-info install-other-docs")
+                "install: install-info"))
+             ;; Stop install-info from trying to update the info directory.
+             (substitute* "doc/Makefile"
+               ((".*/dir.*") ""))
+             ;; Fix r-help-mode test.
+             (substitute* "test/ess-test-r.el"
+               (("\\(equal ess-help-object \"plot.default\")") "t"))
+             ;; Avoid generating ess-autoloads.el twice.
+             (substitute* "Makefile"
+               (("all: lisp doc etc autoloads")
+                "all: lisp doc etc"))
+             ;; Install to correct directories.
+             (substitute* "Makefile"
+               (("mkdir -p \\$\\(ESSDESTDIR)")
+                "$(MAKE) -C lisp install; $(MAKE) -C doc install")
+               (("\\$\\(INSTALL) -R \\./\\* \\$\\(ESSDESTDIR)/")
+                "$(MAKE) -C etc install"))
+             #t))
+         (patches (list %emacs-ess-fix-obsolete-function-alias.patch))
+          ))
+      (build-system gnu-build-system)
+      (arguments
+       (let ((base-directory "/share/emacs/site-lisp"))
+         `(#:make-flags (list (string-append "PREFIX=" %output)
+                              (string-append "ETCDIR=" %output
+                                             ,base-directory "/etc")
+                              (string-append "LISPDIR=" %output
+                                             ,base-directory)
+                              (string-append "INFODIR=" %output
+                                             "/share/info"))
+           #:phases
+           (modify-phases %standard-phases
+             (delete 'configure)
+             (replace 'check
+               (lambda _ (invoke "echo" "NULL")))))))
+               ;; (lambda _ (invoke "make" "test")))))))
+      (native-inputs
+       (list perl r-roxygen2 texinfo))
+      (inputs
+       `(("emacs" ,emacs-minimal)
+         ("r-minimal" ,r-minimal)))
+      (propagated-inputs
+       (list emacs-julia-mode))
+      (home-page "https://ess.r-project.org/")
+      (synopsis "Emacs mode for statistical analysis programs")
+      (description
+       "Emacs Speaks Statistics (ESS) is an add-on package for GNU Emacs.  It
+is designed to support editing of scripts and interaction with various
+statistical analysis programs such as R, Julia, and JAGS.")
+      (license license:gpl3+))))
 
 
 (define-public emacs-python-vterm
@@ -452,7 +542,7 @@ asynchronously serves graphics via HTTP and @code{WebSockets}'.")
       (base32 "0m55nn3719w3vfbkhxbyrh62xcx1bqz6fcypcmsm8ajbprgiwadq"))
      (file-name (git-file-name name version))))
    (build-system emacs-build-system)
-   (propagated-inputs (list emacs-websocket emacs-ess))
+   (propagated-inputs (list emacs-websocket emacs-ess-custom))
    (home-page "https://github.com/sje30/essgd")
    (synopsis "")
    (description
@@ -1135,7 +1225,7 @@ shell integration.")
   emacs-doom-themes
   ;; emacs-eat-upd
   emacs-envrc
-  emacs-ess
+  emacs-ess-custom
   emacs-essgd
   r-httpgd
   emacs-evil-anzu
@@ -1181,7 +1271,6 @@ shell integration.")
   emacs-elpy
   emacs-yasnippet-snippets
   emacs-vterm
-  ;; emacs-vterm-toggle
   emacs-multi-vterm
   fd
   poppler
@@ -1194,13 +1283,19 @@ shell integration.")
   python-six
   python-setuptools
   python-paramiko
-  ;; python-rapidfuzz
   python
   julia
   r-minimal
   r-languageserver
   r-lintr
+  r-dplyr
+  r-ggplot2
   r-renv
+  gcc-toolchain
+  gfortran-toolchain
+  ;; nss-certs
+  openssl
+
   emacs-pdf-tools-upd
   ;; emacs-pdf-tools-upd
   glibc-locales
@@ -1248,7 +1343,8 @@ shell integration.")
   emacs-direnv
 
   emacs-python-vterm
-
+  ;; emacs-project-butler-test
+  emacs-project-butler
   )
  
  )

@@ -6,7 +6,7 @@
 
 
 ;; Citar integration
-(use-package citar-org
+(use-package citar
   :after org
   :custom
   (org-cite-insert-processor 'citar)

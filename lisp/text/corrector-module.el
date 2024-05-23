@@ -1,3 +1,8 @@
+
+(if (string= k8x1d/package-management "straight")
+    (straight-use-package
+     '(eglot-ltex :type git :host github :repo "emacs-languagetool/eglot-ltex"))
+  )
 (use-package eglot-ltex
   :hook (text-mode . (lambda ()
                        (require 'eglot-ltex)

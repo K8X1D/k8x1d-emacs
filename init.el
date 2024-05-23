@@ -17,7 +17,7 @@
         "~/org/projects/recherches.org"
         "~/org/projects/contrats.org"
         "~/org/projects/presentations.org"
-        "~/org/Horaire.org"
+        ;; "~/org/Horaire.org"
         "~/org/Inbox.org"
         "~/org/Habits.org"))
 
@@ -26,6 +26,7 @@
 (defvar k8x1d/ide "minimal")
 (defvar k8x1d/terminal "vterm")
 (defvar k8x1d/completion "corfu")
+;; FIXME To correct
 (defvar k8x1d/tabs t)
 (defvar k8x1d/posframe-support nil)
 (defvar k8x1d/use-general-keybindings t)
@@ -35,9 +36,16 @@
 (defvar k8x1d/default-emacs-light-theme 'doom-one-light)
 (defvar k8x1d/default-dark-theme "Breeze-Dark")
 (defvar k8x1d/default-light-theme "Breeze")
+(defvar k8x1d/package-management "guix")
 
-;; (require 'straight-module)
-(require 'packages-module)
+;;
+;; Loaded modules
+;;
+
+(if (string= k8x1d/package-management "guix")
+    (require 'packages-module)
+  (require 'straight-module)
+  )
 
 (require 'tools-module)
 

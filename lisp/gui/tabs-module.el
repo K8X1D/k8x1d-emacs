@@ -9,11 +9,18 @@
 
 ;; Tabs visible
 (use-package tab-bar
+  :after doom-themes
   :if k8x1d/tabs
   :init
   (defun k8x1d/tab-bar-tab-name-current ()
     (format " %s " (tab-bar-tab-name-current))
     )
+(defun k8x1d/set-tab-bar-colors ()
+    (custom-set-faces
+     `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg) :weight bold))))
+     `(tab-bar-tab-inactive ((t (:foreground ,(doom-color 'bg-alt) :background ,(doom-color 'grey)))))
+     `(tab-bar ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg)))))
+     ))
   :custom
   (tab-bar-tab-name-function #'k8x1d/tab-bar-tab-name-current)
   :config
@@ -30,12 +37,7 @@
   ;; (setq tab-bar-auto-width-min '(20 2))
   ;; (setq tab-bar-auto-width-max '(220 20))
   (setq tab-bar-format '(tab-bar-format-tabs tab-bar-format-align-right tab-bar-format-global tab-bar-separator))
-  (defun k8x1d/set-tab-bar-colors ()
-    (custom-set-faces
-     `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg) :weight bold))))
-     `(tab-bar-tab-inactive ((t (:foreground ,(doom-color 'bg-alt) :background ,(doom-color 'grey)))))
-     `(tab-bar ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg)))))
-     ))
+  
   (k8x1d/set-tab-bar-colors)
   )
 

@@ -1,5 +1,7 @@
 (use-package emacs
+  :after (nerd-icons anzu doom-themes)
   :init
+(require 'doom-themes)
   (require 'nerd-icons)
   (require 'anzu)
   (defun k8x1d-workspace-module ()
@@ -8,8 +10,8 @@
 	       (tab-index (tab-bar--current-tab-index))
 	       (tab-name (alist-get 'name (tab-bar--current-tab))))
 	  ;; (if explicit-name tab-name ""))
-	  (if explicit-name (propertize  (format " %s " tab-name) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)) 'help-echo org-clock-heading)
-	    (propertize  (format " %s " tab-index) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)) 'help-echo org-clock-heading)))
+	  (if explicit-name (propertize  (format " %s " tab-name) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)))
+	    (propertize  (format " %s " tab-index) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)))))
       ""
       )
     )
@@ -157,7 +159,7 @@
 		  (:eval (anzu--update-mode-line))
 		  ;; Right modules
 		  mode-line-format-right-align
-		  ;; mode-line-misc-info
+		  mode-line-misc-info
 		  ;; minions-mode-line-modes
 		  ;; flymake-mode-line-format
 		  (:eval (k8x1d-checker-module))
@@ -215,7 +217,7 @@ This is a floating point number based on `memento-mori-death-date'."
     "Update `memento-mori-string' based on the current time."
     (setq memento-mori-string
 	  ;; (format "[Time left: %.2f years]" (memento-mori--life-expectency))))
-	  (format "[󰯈 : %.2f years]" (memento-mori--life-expectency))))
+	  (format "[memento mori: %.2f years]" (memento-mori--life-expectency))))
   (setq memento-mori-death-date "2067-06-22")
   :hook (after-init . memento-mori-mode)
   )

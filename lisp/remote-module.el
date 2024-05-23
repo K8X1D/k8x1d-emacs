@@ -30,6 +30,7 @@
       ("Mariadb-Hive-1" . "kkaiser@198.168.185.123")
       ("Mariadb-Hive-2" . "kkaiser@198.168.186.137")
       ("Mariadb-Hive-3" . "kkaiser@198.168.187.221")
+      ;; ("Debian-WM" . "ssh test@127.0.0.1")
       ("Groudon" . "kkaiser@130.104.60.82")))
   (defun k8x1d/select-ssh-address ()
     (alist-get

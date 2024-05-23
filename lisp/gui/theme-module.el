@@ -1,5 +1,6 @@
 (use-package doom-themes
   :init
+  (require 'doom-themes)
   (defun k8x1d/switch-theme ()
     (interactive)
     (if (string= (car custom-enabled-themes) k8x1d/default-emacs-dark-theme)
@@ -17,7 +18,7 @@
 	)
       )
     (k8x1d/set-org-modern-colors)
-    (k8x1d/set-tab-bar-colors)
+    ;; (k8x1d/set-tab-bar-colors)
     (k8x1d/set-window-divider-colors)
     )
   ;; TODO: simplify function
@@ -43,6 +44,9 @@
 
 ;; TODO: replace by own system
   ;; :hook (after-init . (lambda () (load-theme 'doom-palenight t)))
+  :hook (after-init . (lambda ()
+	(disable-theme (car custom-enabled-themes))
+	(load-theme k8x1d/default-emacs-dark-theme t)))
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled

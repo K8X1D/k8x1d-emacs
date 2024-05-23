@@ -19,6 +19,10 @@
   )
 
 ;; REPL
+(if (string= k8x1d/package-management "straight")
+    (straight-use-package
+     '(python-vterm :type git :host github :repo "vale981/python-vterm.el"))
+  )
 (use-package python-vterm
   :if (and (string= k8x1d/ide "minimal") (string= k8x1d/terminal "vterm")) 
   :hook ((python-mode . python-vterm-mode)

@@ -18,4 +18,18 @@
 ;; (tab-line-tab-inactive ((t (:foreground ,(doom-color 'fg-alt) :background ,(doom-color 'bg-alt) :height 0.7))))
 ;;   )
 
+
+
+;; Keybindings
+(use-package tab-bar
+  :if k8x1d/use-general-keybindings
+  :general
+  (k8x1d/leader-keys
+    "t" '(:keymap tab-prefix-map
+		  :which-key "Tabs")
+    )
+  )
+
+
+
 (provide 'tabs-alt-module)
