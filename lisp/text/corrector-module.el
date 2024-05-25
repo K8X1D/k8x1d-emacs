@@ -4,7 +4,7 @@
      '(eglot-ltex :type git :host github :repo "emacs-languagetool/eglot-ltex"))
   )
 (use-package eglot-ltex
-  :hook (text-mode . (lambda ()
+  :hook (latex-mode . (lambda ()
                        (require 'eglot-ltex)
                        (eglot-ensure)))
   :init

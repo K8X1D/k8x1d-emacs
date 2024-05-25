@@ -23,7 +23,11 @@
     )
   ;; TODO: simplify function
   (defun k8x1d/get-system-theme ()
-   (replace-regexp-in-string "\n" "" (replace-regexp-in-string "'" "" (shell-command-to-string "gsettings get org.gnome.desktop.interface gtk-theme")))
+   (replace-regexp-in-string "\n" "" (replace-regexp-in-string "'" "" (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme")))
+    )
+  (if (string= (k8x1d/get-system-theme) "prefer-dark")
+      (setq k8x1d/default-emacs-theme k8x1d/default-emacs-dark-theme)
+    (setq k8x1d/default-emacs-theme k8x1d/default-emacs-light-theme)
     )
   (defun k8x1d/switch-system-theme-to-light ()
     (interactive)
@@ -46,7 +50,8 @@
   ;; :hook (after-init . (lambda () (load-theme 'doom-palenight t)))
   :hook (after-init . (lambda ()
 	(disable-theme (car custom-enabled-themes))
-	(load-theme k8x1d/default-emacs-dark-theme t)))
+	;; (load-theme k8x1d/default-emacs-dark-theme t)))
+	(load-theme k8x1d/default-emacs-theme t)))
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled

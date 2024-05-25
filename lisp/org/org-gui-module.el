@@ -1,5 +1,6 @@
 ;; General
 (use-package org
+  :custom-face (org-block ((t (:background ,(doom-color 'bg)))))
   :hook ((org-mode . org-indent-mode)
 	 (org-mode . visual-line-mode)))
 

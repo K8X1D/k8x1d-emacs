@@ -1171,6 +1171,7 @@ shell integration.")
   emacs-nerd-icons-corfu
   emacs-nerd-icons-dired
   emacs-nerd-icons-ibuffer
+  emacs-magit-file-icons
   emacs-org-roam-ql
   emacs-org-roam-timestamps
   emacs-origami
@@ -1345,6 +1346,8 @@ shell integration.")
   emacs-python-vterm
   ;; emacs-project-butler-test
   emacs-project-butler
+  emacs-yaml-mode
+  emacs-substitute
   )
  
  )

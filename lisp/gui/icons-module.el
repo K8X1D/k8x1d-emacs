@@ -17,11 +17,12 @@
   :if (display-graphic-p)
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
+
 ;; Icons support for corfu
 (use-package nerd-icons-corfu
   :if (and (string= k8x1d/completion "corfu") (display-graphic-p))
   :after corfu
-  :init
+  :config
   ;; Optionally:
   (setq nerd-icons-corfu-mapping
 	'((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
@@ -38,5 +39,17 @@
   :after marginalia
   :hook ((after-init . nerd-icons-completion-mode)
 	 (marginalia-mode  . nerd-icons-completion-marginalia-setup)))
+
+
+;; Add icons to magit
+(use-package magit-file-icons
+  :after magit
+  :hook (magit-mode . magit-file-icons-mode)
+  :custom
+  ;; These are the default values:
+  (magit-file-icons-enable-diff-file-section-icons t)
+  (magit-file-icons-enable-untracked-icons t)
+  (magit-file-icons-enable-diffstat-icons t))
+
 
 (provide 'icons-module)

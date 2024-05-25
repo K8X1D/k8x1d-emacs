@@ -1,4 +1,6 @@
 (use-package org
+  :after citar
+  :init (require 'citar-org)
   :config
   ;; Exportation
   (setq org-cite-export-processors
