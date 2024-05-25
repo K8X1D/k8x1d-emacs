@@ -1,4 +1,4 @@
-(setq k8x1d/bibliography '("~/Zotero/k8x1d.bib"))
+(setq k8x1d/bibliography '("/extension/Data/Zotero/k8x1d.bib"))
 
 (setq k8x1d/org-directory "~/org")
 (setq org-directory "~/org")
@@ -95,6 +95,7 @@
 (require 'shell-module)
 (require 'lua-module)
 (require 'fennel-module)
+(require 'yaml-module)
 
 (require 'terminal-module)
 (require 'password-module)
@@ -115,6 +116,7 @@
 (require 'csv-module)
 (require 'latex-module)
 (require 'corrector-module)
+(require 'substitute-module)
 
 (require 'org-gui-module)
 (require 'org-writing-module)
