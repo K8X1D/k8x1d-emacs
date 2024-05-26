@@ -1,7 +1,7 @@
 (use-package emacs
   :after (nerd-icons anzu doom-themes)
   :init
-(require 'doom-themes)
+  (require 'doom-themes)
   (require 'nerd-icons)
   (require 'anzu)
   (defun k8x1d-workspace-module ()
@@ -65,7 +65,7 @@
 				icon)
 			      )
 		      'face `(:foreground ,(doom-color 'green) :background ,(doom-color 'bg))
-	  'help-echo (format "Major-mode: %s" (format-mode-line mode-name)))
+		      'help-echo (format "Major-mode: %s" (format-mode-line mode-name)))
 	  )
       ;; (propertize (format " %s " major-mode) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)))
       (propertize (format " %s  " (format-mode-line mode-name)) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)))
@@ -117,14 +117,24 @@
 		 )
 	 'help-echo
 	 (lambda (&rest _)
-	    (concat
-	     (format "%s known backends\n" (hash-table-count flymake--state))
-	     (format "%s running\n" (length (flymake-running-backends)))
-	     (format "%s disabled\n" (length (flymake-disabled-backends)))
-	     "mouse-1: Display minor mode menu\n"
-	     "mouse-2: Show help for minor mode"))
+	   (concat
+	    (format "%s known backends\n" (hash-table-count flymake--state))
+	    (format "%s running\n" (length (flymake-running-backends)))
+	    (format "%s disabled\n" (length (flymake-disabled-backends)))
+	    "mouse-1: Display minor mode menu\n"
+	    "mouse-2: Show help for minor mode"))
 	 )
 	)
+      )
+    )
+
+  (defun k8x1d-show-line-number ()
+    ;; (if  (eq evil-state 'visual)
+    (when  (eq evil-state 'visual)
+	(let* ((lines (count-lines (region-beginning) (region-end))))
+	  (propertize
+	   (format " %d line%s " (if (= lines 0) (+ lines 1) lines) (if (or (= lines 0) (= lines 1)) "" "s"))
+	   'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'fg-alt))))
       )
     )
 
@@ -157,6 +167,10 @@
 		  evil-mc-mode-line
 		  "  "
 		  (:eval (anzu--update-mode-line))
+		  (:eval (k8x1d-show-line-number))
+
+
+
 		  ;; Right modules
 		  mode-line-format-right-align
 		  mode-line-misc-info
