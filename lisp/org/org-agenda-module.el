@@ -66,11 +66,19 @@
   :config
   ;; Fix for evil user, see https://github.com/alphapapa/org-super-agenda/issues/50
   (setq org-super-agenda-header-map (make-sparse-keymap))
-  (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t %-4s ")
+  (require 'nerd-icons)
+  (setq org-agenda-prefix-format '(
+				   (agenda . " %i %-12c%-12t [󰔟%-4s |󰿖 %-3e] ")
+				   ;; (agenda . " %i %-12:c %-4s %-4e ") ;; no
+				   ;; (agenda . " %i %-12t %-4s %-4e ") ;; no
+				   ;; (agenda . " %-12:c%-12t %-4s %-4e ") ;; no
+				   ;; (agenda . " %-12:c%-12t %-4e ")
 				   (todo . " %i %-12:c")
 				   (tags . " %i %-12:c")
-				   (search . " %i %-12:c")))
-  (setq org-agenda-todo-keyword-format "%-12s")
+				   (search . " %i %-12:c")
+				   ))
+  (setq org-agenda-todo-keyword-format "%-4s ")
+  (setq org-agenda-log-mode-items '(closed))
   :init
   (setq org-agenda-custom-commands
         '(("d" "Agenda for the day"

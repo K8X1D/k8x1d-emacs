@@ -32,6 +32,7 @@
 (use-package org-modern
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda))
+  :custom-face (org-modern-tag ((t (:background ,(doom-color 'bg-alt)))))
   :custom
   (org-modern-hide-stars nil)		; adds extra indentation
   (org-modern-table nil)
@@ -190,7 +191,12 @@
 		:foreground ,(doom-color 'bg)
 		:family "Iosevka Nerd Font")))
     )
-  :custom-face (org-modern-done ((t (:family "Iosevka Nerd Font"))))
+  :custom-face
+  (org-modern-done ((t (:family "Iosevka Nerd Font"))))
+  ;; (org-agenda-clocking ((t (:weight bold :underline (:color foreground-color :style line :position 4) :background nil))))
+  (org-agenda-clocking ((t (:weight bold :inverse-video t :background nil))))
+  ;; (org-agenda-date ((t (:weight normal))))
+  (org-imminent-deadline ((t (:weight normal)))) 
   :config
   (k8x1d/set-org-modern-colors)
   ;; Correct for issue with state faces https://github.com/minad/org-modern/issues/26

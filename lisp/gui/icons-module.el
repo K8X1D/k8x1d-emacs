@@ -52,4 +52,43 @@
   (magit-file-icons-enable-diffstat-icons t))
 
 
+
+
+(use-package org
+  :config
+  (require 'nerd-icons)
+  ;; adapted from https://blog.gpkb.org/posts/org-agenda-nerd-icons/
+  (defun gk-nerd-agenda-icons (fun prefix alist)
+    "Makes an org agenda alist"
+    (mapcar (pcase-lambda (`(,category . ,icon))
+	      `(,category
+		(,(funcall fun (concat prefix icon) :height 1.0))))
+	    alist))
+  (setq org-agenda-category-icon-alist
+	(append
+	 (gk-nerd-agenda-icons #'nerd-icons-mdicon "nf-md-"
+			       '(("Inbox" . "email")
+				 ("Emplois" . "purse")
+				 ("Recherches" . "atom")
+				 ("Impli" . "leaf")
+				 ("Admin" . "broom")
+				 ("Revenu" . "cash")
+				 ;; template
+				 ("Sprint" . "run_fast")
+				 ("Database" . "database")
+				 ("ELT" . "pipe")
+				 ("Devops" . "gitlab")
+				 ("Blog" . "fountain_pen_tip")
+				 ("FOSS" . "code_braces")
+				 ("Tool" . "tools")
+				 ("Todo" . "list_status")))
+	 (gk-nerd-agenda-icons #'nerd-icons-sucicon "nf-custom-"
+			       '(("Emacs" . "emacs")
+				 ("Org" . "orgmode")))
+	 '(("" '(space . (:width (11)))))))
+  )
+
+
+
+
 (provide 'icons-module)
