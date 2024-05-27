@@ -51,6 +51,7 @@
 
 (require 'keybindings-module)
 (require 'evil-module)
+(require 'default-configurations)
 
 (require 'frames-module)
 (require 'buffer-module)
