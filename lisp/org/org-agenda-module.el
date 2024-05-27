@@ -167,8 +167,14 @@
   :init
   (defun k8x1d/org-clock-goto ()
     (interactive)
-    (if (member "GTD" (tabspaces--list-tabspaces)) (tabspaces-switch-or-create-workspace "GTD"))
-    (org-clock-goto)
+    (let* ((name "GTD")
+	   (tab-index (tab-bar--tab-index-by-name name)))
+      (if tab-index
+	  (tab-bar-select-tab (1+ tab-index))
+	(tab-bar-new-tab)
+	(tab-bar-rename-tab name))
+      (org-clock-goto)
+      )
     )
   :bind
   ("C-c o c" . k8x1d/org-clock-goto)
