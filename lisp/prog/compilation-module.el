@@ -9,6 +9,8 @@
 
 
 (setq compilation-ask-about-save nil)
+(setq compilation-window-height 17)
+
 
 ;; In test
 (use-package fancy-compilation
