@@ -33,7 +33,7 @@
 (defvar k8x1d/use-general-keybindings t)
 ;; Theme
 (defvar k8x1d/default-emacs-dark-theme 'doom-palenight)
-(defvar k8x1d/default-emacs-light-theme 'doom-one-light)
+(defvar k8x1d/default-emacs-light-theme 'doom-gruvbox-light)
 (defvar k8x1d/default-dark-theme "Breeze-Dark")
 (defvar k8x1d/default-light-theme "Breeze")
 (defvar k8x1d/package-management "guix")
