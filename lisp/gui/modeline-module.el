@@ -22,7 +22,7 @@
 	     (foreground-color (if (string-match "ma\\(in\\|ster\\)" branch) 'green 'orange)))
 	;; (text-color 'green))
 	(propertize  (format " %s " branch)
-		     'face `(:background ,(doom-color 'grey) :foreground ,(doom-color foreground-color))
+		     'face `(:background ,(doom-color 'bg-alt) :foreground ,(doom-color foreground-color))
 		     )
 	)
       )
@@ -33,7 +33,7 @@
     (when (bound-and-true-p evil-local-mode)
       (let* ((left-separator " ")
 	     (right-separator " ")
-	     (default-background-color (doom-color 'grey))
+	     (default-background-color (doom-color 'bg-alt))
 	     (default-foreground-color (doom-color 'green)))
 	(cond
 	 ;; ((evil-normal-state-p) (propertize  (format "%s" "🅝") 'face `(:foreground ,(doom-color 'green))))
@@ -57,14 +57,14 @@
 
   (defun k8x1d-modeline-modes-module ()
     (if (display-graphic-p)
-	(let ((icon (nerd-icons-icon-for-buffer)))
+	(let* ((icon (nerd-icons-icon-for-buffer)))
 	  (propertize (format " %s  "
 			      (if (or (null icon) (symbolp icon))
 				  (nerd-icons-faicon "nf-fa-file_o" nil nil
 						     :face 'nerd-icons-dsilver)
 				icon)
 			      )
-		      'face `(:foreground ,(doom-color 'green) :background ,(doom-color 'bg))
+		      'face `(:foreground ,(doom-color 'green))
 		      'help-echo (format "Major-mode: %s" (format-mode-line mode-name)))
 	  )
       ;; (propertize (format " %s " major-mode) 'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'green)))
@@ -76,8 +76,8 @@
 
   (defun k8x1d-buffer-name-module ()
     (if (buffer-modified-p)
-	(propertize (format " %s " (substring-no-properties (format-mode-line mode-line-buffer-identification))) 'face `(:foreground ,(doom-color 'fg) :background ,(doom-color 'bg)))
-      (propertize (format " %s " (substring-no-properties (format-mode-line mode-line-buffer-identification))) 'face `(:foreground ,(doom-color 'fg-alt) :background ,(doom-color 'bg)))
+	(propertize (format " %s " (substring-no-properties (format-mode-line mode-line-buffer-identification))) 'face `(:foreground ,(doom-color 'fg)))
+      (propertize (format " %s " (substring-no-properties (format-mode-line mode-line-buffer-identification))) 'face `(:foreground ,(doom-color 'fg-alt)))
       )
     )
 
@@ -108,12 +108,15 @@
 	(propertize
 	 (format "[%s:%s:%s]"
 		 ;; (if error-p
-		 (propertize (format "%s" errors) 'face `(:foreground ,(doom-color 'red) :background ,(doom-color 'bg)))
+		 ;; (propertize (format "%s" errors) 'face `(:foreground ,(doom-color 'red) :background ,(doom-color 'bg-alt)))
+		 (propertize (format "%s" errors) 'face `(:foreground ,(doom-color 'red)))
 		 ;; "0")
 		 ;; (if warning-p
-		 (propertize (format "%s" warnings) 'face `(:foreground ,(doom-color 'yellow) :background ,(doom-color 'bg)))
+		 ;; (propertize (format "%s" warnings) 'face `(:foreground ,(doom-color 'yellow) :background ,(doom-color 'bg-alt)))
+		 (propertize (format "%s" warnings) 'face `(:foreground ,(doom-color 'yellow)))
 		 ;; "0")
-		 (propertize (format "%s" notes) 'face `(:foreground ,(doom-color 'green) :background ,(doom-color 'bg)))
+		 ;; (propertize (format "%s" notes) 'face `(:foreground ,(doom-color 'green) :background ,(doom-color 'bg-alt)))
+		 (propertize (format "%s" notes) 'face `(:foreground ,(doom-color 'green)))
 		 )
 	 'help-echo
 	 (lambda (&rest _)
@@ -128,19 +131,25 @@
       )
     )
 
-  (defun k8x1d-show-line-number ()
-    ;; (if  (eq evil-state 'visual)
-    (when  (eq evil-state 'visual)
-	(let* ((lines (count-lines (region-beginning) (region-end))))
-	  (propertize
-	   (format " %d line%s " (if (= lines 0) (+ lines 1) lines) (if (or (= lines 0) (= lines 1)) "" "s"))
-	   'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'fg-alt))))
-      )
+
+(defun k8x1d-show-line-number ()
+  (when  (eq evil-state 'visual)
+    (let ((lines (count-lines (region-beginning) (region-end))))
+      (propertize
+       (format " %d line%s " (if (= lines 0) (+ lines 1) lines) (if (or (= lines 0) (= lines 1)) "" "s"))
+       'face `(:foreground ,(doom-color 'bg) :background ,(doom-color 'fg-alt))))
+    ;; (force-mode-line-update)
     )
+  )
+
+;; (advice-add 'evil-line-move :after 'force-mode-line-update)
+(advice-add 'evil-next-line :after 'force-mode-line-update)
+(advice-add 'evil-previous-line :after 'force-mode-line-update)
 
   :config
   (setq evil-mode-line-format nil)
-  (setq evil-mc-mode-line-prefix "󰗧")
+  (setq evil-mc-mode-line-prefix "")
+  (setq mode-line-text-prefix "󰗧")
   (setq-default mode-line-format
 		'(
 		  ;; Left module
@@ -160,16 +169,17 @@
 		  (:eval (k8x1d-buffer-name-module))
 		  ;; (:eval (k8x1d-buffer-status-module))
 		  (:eval  (k8x1d-git-infos-module))
-		  " "
-		  mode-line-position
-		  "  "
-		  mode-line-end-spaces
-		  evil-mc-mode-line
-		  "  "
+		  ;; " "
+		  ;; mode-line-end-spaces
+		  ;; evil-mc-mode-line
+		  (:eval
+		   (let ((mode-line-text-prefix (concat "" evil-mc-mode-line-prefix)))
+		     (if (> (evil-mc-get-cursor-count) 1)
+			 (evil-mc-active-mode-line mode-line-text-prefix)
+		       (when evil-mc-one-cursor-show-mode-line-text
+			 mode-line-text-prefix))))
 		  (:eval (anzu--update-mode-line))
 		  (:eval (k8x1d-show-line-number))
-
-
 
 		  ;; Right modules
 		  mode-line-format-right-align
@@ -197,6 +207,7 @@
   :hook ((eat-mode . hide-mode-line-mode)
 	 (dired-sidebar-mode . hide-mode-line-mode)
 	 (vterm-mode . hide-mode-line-mode)
+	 (compilation-mode . hide-mode-line-mode)
 	 (special-mode . hide-mode-line-mode)))
 
 (use-package memento-mori
