@@ -433,7 +433,7 @@ and stored in memory.")
 (define-public emacs-org-modern-indent
   (package
    (name "emacs-org-modern-indent")
-   (version "v0.1.3")
+   (version "v0.1.4")
    (source
     (origin
      (method git-fetch)
@@ -441,7 +441,7 @@ and stored in memory.")
            (url "https://github.com/jdtsmith/org-modern-indent")
            (commit version)))
      (sha256
-      (base32 "0308shm58s38r4h7pj5wv5pa99ki3qxzwfrfdyvvarlchsnbsxza"))
+      (base32 "15g818wzmq5yq772vmvr96ijf03yjbmvjjrasw470ihlfdmxmmmy"))
      (file-name (git-file-name name version))))
    (build-system emacs-build-system)
    (propagated-inputs (list emacs-org emacs-compat))
