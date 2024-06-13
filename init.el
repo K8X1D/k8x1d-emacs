@@ -1,16 +1,19 @@
-(setq k8x1d/bibliography '("/extension/Data/Zotero/k8x1d.bib"))
+;;; package --- Summary  -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
 
-(setq k8x1d/org-directory "~/org")
-(setq org-directory "~/org")
-(setq k8x1d/denote-directory (concat k8x1d/org-directory "/notes"))
-
-(setq k8x1d/org-files
+(defvar k8x1d/bibliography '("/extension/Data/Zotero/k8x1d.bib"))
+(defvar k8x1d/bibliography-notes '("/extension/Data/Zotero/notes"))
+(defvar k8x1d/org-directory "~/org")
+(defvar org-directory "~/org")
+(defvar k8x1d/denote-directory (concat k8x1d/org-directory "/notes"))
+(defvar k8x1d/org-files
       '("~/org/projects/implications.org"
-        "~/org/projects/bin.org"    
-        "~/org/projects/doctorat.org"  
+        "~/org/projects/bin.org"
+        "~/org/projects/doctorat.org"
         "~/org/projects/developpements.org"
-        "~/org/projects/articles.org"  
-        "~/org/projects/financements.org"  
+        "~/org/projects/articles.org"
+        "~/org/projects/financements.org"
         "~/org/projects/administratifs.org"
         "~/org/projects/machines.org"
         "~/org/projects/evocult.org"
@@ -47,8 +50,8 @@
   (require 'straight-module)
   )
 
-(require 'tools-module)
 
+(require 'tools-module)
 (require 'keybindings-module)
 (require 'evil-module)
 (require 'default-configurations)
@@ -91,6 +94,8 @@
 (require 'r-module)
 (require 'php-module)
 (require 'scheme-module)
+(require 'nix-module)
+(require 'docker-module)
 (require 'elisp-module)
 (require 'sql-module)
 (require 'shell-module)
@@ -108,6 +113,7 @@
 (require 'guix-module)
 (require 'process-management-module)
 (require 'bluetooth-module)
+(require 'pomodoro-module)
 (require 'gnupg-module)
 (require 'torrents-module)
 (require 'k8x1d-emacs-management-module)
@@ -128,3 +134,7 @@
 
 (require 'pubmed-module)
 (require 'social-module)
+
+;;; init.el ends here
+
+

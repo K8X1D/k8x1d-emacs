@@ -68,7 +68,7 @@
   (setq org-super-agenda-header-map (make-sparse-keymap))
   (require 'nerd-icons)
   (setq org-agenda-prefix-format '(
-				   (agenda . " %i %-12c%-12t [󰔟%-4s |󰿖 %-3e] ")
+				   (agenda . " %i %-15c%-18t [󰔟%-4s |󰿖 %-3e] ")
 				   ;; (agenda . " %i %-12:c %-4s %-4e ") ;; no
 				   ;; (agenda . " %i %-12t %-4s %-4e ") ;; no
 				   ;; (agenda . " %-12:c%-12t %-4s %-4e ") ;; no

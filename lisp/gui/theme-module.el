@@ -1,3 +1,6 @@
+;;; package --- Summary-*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
 (use-package doom-themes
   :init
   (require 'doom-themes)
@@ -61,22 +64,22 @@
   ;; (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
   ;; (doom-themes-org-config)
-
   )
 
 (use-package emacs
+  :hook (after-init . window-divider-mode)
   :init
+  (require 'doom-themes)
   (defun k8x1d/set-window-divider-colors ()
     (custom-set-faces
      `(window-divider ((t :foreground ,(doom-color 'green))))
      )
     )
-  :hook (after-init . window-divider-mode)
+  (k8x1d/set-window-divider-colors)
   :config
   (setq window-divider-default-places t)
   (setq window-divider-default-bottom-width 1)
   (setq window-divider-default-right-width 1)
-  (k8x1d/set-window-divider-colors)
   )
 ;; Follow system theme
 ;; Don't work with dwl, have to be adjusted
@@ -118,3 +121,4 @@
   )
 
 (provide 'theme-module)
+;;; theme-module.el ends here

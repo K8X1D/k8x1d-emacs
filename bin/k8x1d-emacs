@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 # -*- mode: bash-ts; -*-
 # See https://www.redhat.com/sysadmin/arguments-options-bash-scripts
 # Adapted from https://guix.gnu.org/cookbook/en/html_node/Reproducible-profiles.html

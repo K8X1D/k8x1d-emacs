@@ -11,6 +11,7 @@
            ;; (csv-mode . (lambda () (interactive) (toggle-truncate-lines nil)))
            )
     :config
+    (setq csv-header-lines 1)
     (setq csv-separators '("," ";" "\11"))
   
     ;; Set a different colour to each column

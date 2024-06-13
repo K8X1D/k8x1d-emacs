@@ -3,7 +3,13 @@
   :config
   (setq tex-fontify-script nil)
   (setq TeX-brace-indent-level 4)
+  (setq TeX-view-program-selection '(((output-dvi has-no-display-manager) "dvi2tty")
+				     ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi")
+				     (output-pdf "Zathura") (output-html "xdg-open"))
+	)
   )
+
+
 
 ;; Evil support
 (use-package evil-tex

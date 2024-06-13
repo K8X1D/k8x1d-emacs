@@ -97,6 +97,7 @@
 
 ;; Consulting completing-read 
 ;; TODO: reduce
+;; FIXME: Consult autoload don't work
 (use-package consult
   :init
   (require 'consult)

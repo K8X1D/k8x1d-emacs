@@ -15,6 +15,12 @@
       ""
       )
     )
+
+  ;; Display time configuration
+  (setq display-time-day-and-date t)
+  (setq display-time-24hr-format t)
+  (setq display-time-format "%H:%M %d/%m/%Y")
+
   ;; from https://emacs.stackexchange.com/questions/10955/customize-vc-mode-appearance-in-mode-line
   (defun k8x1d-git-infos-module ()
     (when (stringp vc-mode)
@@ -242,7 +248,8 @@ This is a floating point number based on `memento-mori-death-date'."
     "Update `memento-mori-string' based on the current time."
     (setq memento-mori-string
 	  ;; (format "[Time left: %.2f years]" (memento-mori--life-expectency))))
-	  (format "[memento mori: %.2f years]" (memento-mori--life-expectency))))
+	  ;; (format "[memento mori: %.2f years]" (memento-mori--life-expectency))))
+	  (format "󰚌 : %.2f years" (memento-mori--life-expectency))))
   (setq memento-mori-death-date "2067-06-22")
   :hook (after-init . memento-mori-mode)
   )

@@ -31,7 +31,7 @@
   ;; (setq flymake-margin-error-symbol " ")
   ;; (setq flymake-margin-warning-symbol " ")
   ;; (setq flymake-margin-note-symbol " ")
-  (setq flymake-margin-error-symbol "⮾")
+  (setq flymake-margin-error-symbol "")
   (setq flymake-margin-warning-symbol "△")
   (setq flymake-margin-note-symbol "?")
   (setq flymake-margin-side 'right)

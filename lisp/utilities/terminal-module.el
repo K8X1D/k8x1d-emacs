@@ -62,10 +62,17 @@
 
 ;; Multiple terminals
 (use-package multi-vterm
+  :init
+  (defun k8x1d/multi-vterm-project-vertical ()
+    (interactive)
+    (multi-vterm-project)
+    (evil-window-move-very-bottom)
+    (evil-window-set-height 16)
+    )
   :if (string= k8x1d/terminal "vterm")
   :bind (("C-c o t" ("Terminal" . multi-vterm-dedicated-toggle))
 	 (:map project-prefix-map
-	      ("t" . multi-vterm-project)))
+	      ("t" . k8x1d/multi-vterm-project-vertical)))
   :config
   (setq multi-vterm-dedicated-window-height-percent 30)
   (add-to-list 'project-switch-commands '(multi-vterm-project "Terminal"))

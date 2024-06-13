@@ -77,7 +77,7 @@
     :config
     (setq ess-use-flymake t)
     ;;(setq ess-r-flymake-linters '("line_length_linter = NULL" "indentation_linter(indent = 4L)"))
-    (setq ess-r-flymake-linters '("line_length_linter = line_length_linter(120)"))
+    (setq ess-r-flymake-linters '("line_length_linter = line_length_linter(120)" "object_name_linter(120)"))
     )
 
 ;; Figure viewing

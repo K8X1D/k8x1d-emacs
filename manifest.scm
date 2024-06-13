@@ -1249,6 +1249,7 @@ shell integration.")
   emacs-highlight-indent-guides
   emacs-magit-todos
   emacs-marginalia
+  emacs-markdown-mode
   emacs-markdown-preview-mode
   emacs-minimap
   emacs-minions
@@ -1312,7 +1313,7 @@ shell integration.")
   ;; emacs-flymake-posframe-patched
 
   emacs-pubmed
-  emacs-mastodon
+  ;; emacs-mastodon
 
   emacs-modern-tab-bar
   emacs-flymake-margin
@@ -1348,6 +1349,9 @@ shell integration.")
   emacs-project-butler
   emacs-yaml-mode
   emacs-substitute
+  emacs-pomm
+  emacs-org
+  emacs-org-link-beautify
   )
  
  )

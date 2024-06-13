@@ -35,7 +35,7 @@
   (setq citar-bibliography k8x1d/bibliography)
   (setq citar-at-point-function 'embark-act)
   ;; Notes
-  (setq citar-notes-paths '("~/Zotero/notes"))
+  (setq citar-notes-paths k8x1d/bibliography-notes)
   )
 
 ;; Integration with embark

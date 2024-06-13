@@ -73,6 +73,7 @@
 				 ("Impli" . "leaf")
 				 ("Admin" . "broom")
 				 ("Revenu" . "cash")
+				 ("Développements" . "dev_to")
 				 ;; template
 				 ("Sprint" . "run_fast")
 				 ("Database" . "database")

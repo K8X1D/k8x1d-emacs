@@ -9,7 +9,12 @@
 
 ;; Highlight todo
 (use-package hl-todo
-  :hook ((LaTeX-mode prog-mode) . hl-todo-mode))
+  :hook ((LaTeX-mode prog-mode) . hl-todo-mode)
+  ;; FIXME : adjust
+  :config
+  (add-to-list 'hl-todo-keyword-faces '("XXX" . (doom-color 'red)))
+  (add-to-list 'hl-todo-keyword-faces '("XXXX" . (doom-color 'red)))
+  )
 
 ;; Highlight colors
 (use-package rainbow-mode

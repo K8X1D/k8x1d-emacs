@@ -66,6 +66,7 @@
                           (45 . "◦")
                           (42 . "•")))
   (setq org-modern-star '("◉" "●" "○"))
+  (setq org-modern-replace-stars "◉●○")
 
   ;; org block
   (setq org-modern-block-name t)
@@ -196,6 +197,9 @@
   ;; (org-agenda-clocking ((t (:weight bold :underline (:color foreground-color :style line :position 4) :background nil))))
   (org-agenda-clocking ((t (:weight bold :inverse-video t :background nil))))
   ;; (org-agenda-date ((t (:weight normal))))
+  (org-block-begin-line ((t (:background ,(doom-color 'bg))))) 
+  (org-block-end-line ((t (:background ,(doom-color 'bg))))) 
+  (org-block ((t (:background ,(doom-color 'bg))))) 
   (org-imminent-deadline ((t (:weight normal)))) 
   :config
   (k8x1d/set-org-modern-colors)
@@ -230,6 +234,16 @@
      '(org-margin :type git :host github :repo "rougier/org-margin"))
   )
 (use-package org-margin)
+
+
+;; FIXME: update org to latest
+;; (use-package org-link-beautify
+;;   :hook (org-mode . org-link-beautify-mode)
+;;   :config
+;;   (setq org-element-use-cache t)
+;;   (setq org-link-beautify-async-preview t)
+;;   )
+
 
 
 (provide 'org-gui-module)
