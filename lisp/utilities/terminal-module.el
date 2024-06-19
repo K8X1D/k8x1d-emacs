@@ -65,6 +65,7 @@
   :init
   (defun k8x1d/multi-vterm-project-vertical ()
     (interactive)
+    (require 'multi-vterm)
     (multi-vterm-project)
     (evil-window-move-very-bottom)
     (evil-window-set-height 16)
