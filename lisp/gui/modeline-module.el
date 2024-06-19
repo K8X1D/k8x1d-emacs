@@ -1,3 +1,7 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
 (use-package emacs
   :after (nerd-icons anzu doom-themes)
   :init
@@ -271,3 +275,4 @@ practice for inclusion in `global-mode-string'.")
   )
 
 (provide 'modeline-module)
+;;; modeline-module.el ends here
