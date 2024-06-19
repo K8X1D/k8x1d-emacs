@@ -13,6 +13,8 @@
 			;; (eglot-ensure)))
   :init
   (setq eglot-ltex-server-path "/home/k8x1d/.config/k8x1d-emacs/.cache/ltex-ls-15.2.0")
+  ;; Fix me, don't work, see https://github.com/valentjn/ltex-ls/issues/262
+  ;; (setq eglot-ltex-server-path "/home/k8x1d/.config/k8x1d-emacs/.cache/ltex-ls-16.0.0")
   (setq eglot-connect-timeout 180)
   (setq eglot-ltex-communication-channel 'stdio)
   (defun k8x1d/launch-corrector ()
@@ -20,6 +22,8 @@
     (require 'eglot-ltex)
     (eglot-ensure))
   )
+
+
 
 
 
