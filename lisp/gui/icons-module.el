@@ -2,19 +2,19 @@
 
 ;; Icons
 (use-package nerd-icons
-  :if (display-graphic-p)
+  ;; :if (display-graphic-p)
   :config
   (setq nerd-icons-font-family "Iosevka Nerd Font")
   )
 
 ;; Icons support for dired
 (use-package nerd-icons-dired
-  :if (display-graphic-p)
+  ;; :if (display-graphic-p)
   :hook (dired-mode . nerd-icons-dired-mode))
 
 ;; Icons support for ibuffer
 (use-package nerd-icons-ibuffer
-  :if (display-graphic-p)
+  ;; :if (display-graphic-p)
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 
@@ -35,7 +35,7 @@
 
 ;; Add icon to mini-buffer
 (use-package nerd-icons-completion
-  :if (display-graphic-p)
+  ;; :if (display-graphic-p)
   :after marginalia
   :hook ((after-init . nerd-icons-completion-mode)
 	 (marginalia-mode  . nerd-icons-completion-marginalia-setup)))
