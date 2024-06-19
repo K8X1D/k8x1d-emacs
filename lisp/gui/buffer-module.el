@@ -53,4 +53,13 @@
   (setq async-shell-command-display-buffer nil)
   )
 
+
+;; dir-locals.el
+(defun k8x1d/reload-dir-locals-for-current-buffer ()
+  "reload dir locals for the current buffer"
+  (interactive)
+  (let ((enable-local-variables :all))
+    (hack-dir-local-variables-non-file-buffer)))
+
+
 (provide 'buffer-module)
