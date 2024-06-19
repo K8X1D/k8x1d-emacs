@@ -30,7 +30,7 @@
       ("Mariadb-Hive-1" . "kkaiser@198.168.185.123")
       ("Mariadb-Hive-2" . "kkaiser@198.168.186.137")
       ("Mariadb-Hive-3" . "kkaiser@198.168.187.221")
-      ;; ("Debian-WM" . "ssh test@127.0.0.1")
+      ("Debian-WM" . "test@127.0.0.1")
       ("Groudon" . "kkaiser@130.104.60.82")))
   (defun k8x1d/select-ssh-address ()
     (alist-get
@@ -47,12 +47,14 @@
     (eat vm)
     )
 
-  (defun k8x1d/vterm-ssh (vm)
-    (interactive (list (concat "ssh" " " (k8x1d/select-ssh-address))))
-    (multi-vterm)
-    (vterm-send-string vm)
-    (vterm-send-return)
-    )
+  (defun k8x1d/vterm-ssh ()
+    (interactive)
+    (let* ((ssh-address (k8x1d/select-ssh-address))
+	   (port (completing-read "Port: " nil nil nil "22")))
+      (multi-vterm)
+      (vterm-send-string (concat "ssh" " " ssh-address " -p " port))
+      (vterm-send-return)
+      ))
   :config
   ;; Remote variable
   ;; For eat, following https://codeberg.org/akib/emacs-eat/issues/144
