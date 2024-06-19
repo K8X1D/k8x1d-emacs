@@ -1318,6 +1318,7 @@ shell integration.")
   emacs-modern-tab-bar
   emacs-flymake-margin
   emacs-eglot-booster
+  emacs-lsp-booster
   emacs-consult-jump-project
   emacs-php-mode
   emacs-org-margin-patched
@@ -1352,6 +1353,7 @@ shell integration.")
   emacs-pomm
   emacs-org
   emacs-org-link-beautify
+
   )
  
  )
