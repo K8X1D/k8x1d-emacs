@@ -39,7 +39,7 @@
 (defvar k8x1d/default-emacs-light-theme 'doom-gruvbox-light)
 (defvar k8x1d/default-dark-theme "Breeze-Dark")
 (defvar k8x1d/default-light-theme "Breeze")
-(defvar k8x1d/package-management "guix")
+(defvar k8x1d/package-management "straight")
 
 ;;
 ;; Loaded modules
@@ -69,6 +69,7 @@
 (require 'fonts-module)
 (require 'theme-module)
 (require 'modeline-module)
+(require 'dashboard-module)
 
 (require 'completion-module)
 (require 'icons-module)
@@ -110,7 +111,7 @@
 (require 'notes-module)
 (require 'bibliography-module)
 (require 'multimedia-module)
-(require 'guix-module)
+;; (require 'guix-module)
 (require 'process-management-module)
 (require 'bluetooth-module)
 (require 'pomodoro-module)
@@ -134,6 +135,7 @@
 
 (require 'pubmed-module)
 (require 'social-module)
+(require 'dwl-guile-module)
 
 ;;; init.el ends here
 
