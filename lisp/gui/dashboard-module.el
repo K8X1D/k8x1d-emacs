@@ -1,3 +1,7 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
 (if (string= k8x1d/package-management "straight")
     (straight-use-package
      '(enlight :type git :host github :repo "ichernyshovvv/enlight"))
@@ -12,7 +16,7 @@
 
 (setopt initial-buffer-choice #'enlight)
 
-(require 'grid)
+(use-package grid)
 
 (defvar enlight-lipsum "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
@@ -20,19 +24,19 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 (defface enlight-yellow-bold
   '((t (:foreground "#cabf00" :bold t)))
-  "Yellow bold face")
+  "Yellow bold face.")
 
 (defvar enlight-guix
   (propertize
    " ..                             `.
- `--..```..`           `..```..--`   
-   .-:///-:::.       `-:::///:-.     
-      ````.:::`     `:::.````        
-           -//:`    -::-             
-            ://:   -::-              
-            `///- .:::`              
-             -+++-:::.               
-              :+/:::-                
+ `--..```..`           `..```..--`
+   .-:///-:::.       `-:::///:-.
+      ````.:::`     `:::.````
+           -//:`    -::-
+            ://:   -::-
+            `///- .:::`
+             -+++-:::.
+              :+/:::-
               `-....`                "
    'face 'enlight-yellow-bold))
 
@@ -62,6 +66,8 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
       (calendar-exit))))
 
 (use-package enlight
+  :init
+  (require 'grid)
   :custom
   (enlight-content
    (concat
@@ -110,3 +116,4 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 
 (provide 'dashboard-module)
+;;; dashboard-module.el ends here

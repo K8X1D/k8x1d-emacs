@@ -270,8 +270,6 @@ practice for inclusion in `global-mode-string'.")
   :hook ((after-init . memento-mori-mode)
 	 (memento-mori-mode . (lambda ()
 				(add-to-list 'global-mode-string memento-mori--modeline-info))))
-  ;; :config 
-  ;; (add-to-list 'global-mode-string memento-mori--modeline-info)
   )
 
 (provide 'modeline-module)
