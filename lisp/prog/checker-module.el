@@ -40,12 +40,21 @@
 
 ;; Keybindings
 (use-package flymake
+  :init
+  (defun k8x1d/flymake-show-buffer-diagnostics-vertical ()
+    (interactive)
+    (require 'flymake)
+    (flymake-show-buffer-diagnostics)
+    (evil-window-right 1)
+    (evil-window-move-very-bottom)
+    (evil-window-set-height 16)
+    )
   :if k8x1d/use-general-keybindings
   :general
   (k8x1d/local-leader-keys
    :keymaps 'flymake-mode-map
    "d" '(:ignore t :which-key "Diagnostics")
-   "db" '(flymake-show-buffer-diagnostics :which-key "Buffer")
+   "db" '(k8x1d/flymake-show-buffer-diagnostics-vertical :which-key "Buffer")
    "dp" '(flymake-goto-prev-error :which-key "Previous")
    "dn" '(flymake-goto-next-error :which-key "Next")
    )
