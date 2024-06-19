@@ -17,6 +17,8 @@
     )
 
   ;; Display time configuration
+  (display-time-mode 1)
+  (display-battery-mode 1)
   (setq display-time-day-and-date t)
   (setq display-time-24hr-format t)
   (setq display-time-format "%H:%M %d/%m/%Y")
@@ -216,8 +218,9 @@
 	 (compilation-mode . hide-mode-line-mode)
 	 (special-mode . hide-mode-line-mode)))
 
+;; TODO: reduce
 (use-package memento-mori
-  :config
+  :init
   (defun memento-mori--assert-death-date ()
     "Ensure that `memento-mori-death-date' has been set."
     (when (or (null memento-mori-death-date)
@@ -244,14 +247,25 @@ This is a floating point number based on `memento-mori-death-date'."
     (/ (truncate (float-time
 		  (time-subtract (memento-mori--death-time) (current-time))))
        (* 60 60 24 365.2425)))
-  (defun memento-mori--update ()
-    "Update `memento-mori-string' based on the current time."
-    (setq memento-mori-string
-	  ;; (format "[Time left: %.2f years]" (memento-mori--life-expectency))))
-	  ;; (format "[memento mori: %.2f years]" (memento-mori--life-expectency))))
-	  (format "󰚌 : %.2f years" (memento-mori--life-expectency))))
+  (setq memento-mori-display-in-modeline nil)
+  (defvar memento-mori--modeline-info
+    `(memento-mori-mode
+      ((:propertize
+	("󰚌 ")
+	mouse-face mode-line-highlight
+	face `(:foreground ,(doom-color 'red))
+	help-echo (format "%.2f years left" (memento-mori--life-expectency))
+
+	)
+       " "))
+    "A mode line construct to be added to `global-mode-string'.
+See `mode-line-format' for information about the format.  It should
+append a space to the `memento-mori-string' which is considered best
+practice for inclusion in `global-mode-string'.")
   (setq memento-mori-death-date "2067-06-22")
   :hook (after-init . memento-mori-mode)
+  :config 
+  (add-to-list 'global-mode-string memento-mori--modeline-info)
   )
 
 (provide 'modeline-module)
