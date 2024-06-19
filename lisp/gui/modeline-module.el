@@ -263,9 +263,11 @@ See `mode-line-format' for information about the format.  It should
 append a space to the `memento-mori-string' which is considered best
 practice for inclusion in `global-mode-string'.")
   (setq memento-mori-death-date "2067-06-22")
-  :hook (after-init . memento-mori-mode)
-  :config 
-  (add-to-list 'global-mode-string memento-mori--modeline-info)
+  :hook ((after-init . memento-mori-mode)
+	 (memento-mori-mode . (lambda ()
+				(add-to-list 'global-mode-string memento-mori--modeline-info))))
+  ;; :config 
+  ;; (add-to-list 'global-mode-string memento-mori--modeline-info)
   )
 
 (provide 'modeline-module)
