@@ -136,9 +136,7 @@
 (require 'denote-module)
 
 (require 'pubmed-module)
-;; (require 'social-module)
+(require 'social-module)
 (require 'dwl-guile-module)
 
 ;;; init.el ends here
-
-

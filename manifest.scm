@@ -1196,11 +1196,6 @@ shell integration.")
   emacs-flymake-fennel
   emacs-todotxt
   emacs-denote-explore
-  
-
-
-
-
 
   ;; emacs-julia-snail
   ;; emacs-julia-repl-w-eat
@@ -1313,7 +1308,7 @@ shell integration.")
   ;; emacs-flymake-posframe-patched
 
   emacs-pubmed
-  ;; emacs-mastodon
+  emacs-mastodon
 
   emacs-modern-tab-bar
   emacs-flymake-margin
