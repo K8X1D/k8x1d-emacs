@@ -9,6 +9,17 @@
   ;; (setq vertico-count 20) ;; Show more candidates
   (setq vertico-resize t) ;; Grow and shrink the Vertico minibuffer
   (setq vertico-cycle t) ;; enable cycling for `vertico-next' and `vertico-previous
+
+  ;; In test in replacement of corfu
+  ;; Use `consult-completion-in-region' if Vertico is enabled.
+  ;; Otherwise use the default `completion--in-region' function.
+  (setq completion-in-region-function
+	(lambda (&rest args)
+	  (apply (if vertico-mode
+		     #'consult-completion-in-region
+		   #'completion--in-region)
+		 args)))
+  (setq tab-always-indent 'complete)
   )
 
 
@@ -184,6 +195,9 @@
 ;; Completion preview (pop-up)
 (use-package corfu
   :if (string= k8x1d/completion "corfu")
+  :init
+  (require 'corfu-info)
+  (require 'corfu-popupinfo)
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   ;; (corfu-auto t)                 ;; Enable auto completion

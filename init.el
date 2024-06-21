@@ -28,7 +28,8 @@
 ;; (defvar k8x1d/lsp-backend "lsp-bridge")
 (defvar k8x1d/ide "minimal")
 (defvar k8x1d/terminal "vterm")
-(defvar k8x1d/completion "corfu")
+;; (defvar k8x1d/completion "corfu")
+(defvar k8x1d/completion "")
 ;; FIXME To correct
 (defvar k8x1d/tabs t)
 (defvar k8x1d/posframe-support nil)
@@ -39,7 +40,8 @@
 (defvar k8x1d/default-emacs-light-theme 'doom-gruvbox-light)
 (defvar k8x1d/default-dark-theme "Breeze-Dark")
 (defvar k8x1d/default-light-theme "Breeze")
-(defvar k8x1d/package-management "straight")
+(defvar k8x1d/package-management "guix")
+(setq vc-follow-symlinks t)
 
 ;;
 ;; Loaded modules
@@ -134,7 +136,7 @@
 (require 'denote-module)
 
 (require 'pubmed-module)
-(require 'social-module)
+;; (require 'social-module)
 (require 'dwl-guile-module)
 
 ;;; init.el ends here
