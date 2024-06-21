@@ -13,7 +13,9 @@
 
 ;; Bibliography interaction
 (use-package citar
-  :requires citar-capf
+  ;; :requires citar-capf
+  :init
+  (require 'citar-capf)
   :hook
   ((LaTeX-mode . citar-capf-setup)
    (org-mode . citar-capf-setup))
