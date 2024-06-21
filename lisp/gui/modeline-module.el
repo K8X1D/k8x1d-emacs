@@ -252,12 +252,13 @@ This is a floating point number based on `memento-mori-death-date'."
 		  (time-subtract (memento-mori--death-time) (current-time))))
        (* 60 60 24 365.2425)))
   (setq memento-mori-display-in-modeline nil)
+  (require 'doom-themes)
   (defvar memento-mori--modeline-info
     `(memento-mori-mode
       ((:propertize
 	("󰚌 ")
 	mouse-face mode-line-highlight
-	face `(:foreground ,(doom-color 'red))
+	`face (:foreground ,(doom-color 'fg))
 	help-echo (format "%.2f years left" (memento-mori--life-expectency))
 
 	)
