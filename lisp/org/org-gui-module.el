@@ -1,8 +1,19 @@
 ;; General
 (use-package org
-  :custom-face (org-block ((t (:background ,(doom-color 'bg)))))
   :hook ((org-mode . org-indent-mode)
-	 (org-mode . visual-line-mode)))
+	 (org-mode . visual-line-mode))
+  :config
+  (setq org-fontify-quote-and-verse-blocks t)
+  (setq org-src-fontify-natively t)
+  ;; (setq org-src-block-faces
+  ;; 	`(("emacs-lisp" (:background ,(doom-color 'magenta)))
+  ;; 	  ("python" (:background ,(doom-color 'blue)))
+  ;; 	  ("julia" (:background ,(doom-color 'magenta)))))
+  ;;   (custom-set-faces
+  ;;    `(org-block ((t (:background ,(doom-color 'bg-alt)))))
+  ;;    `(org-quote ((t (:background ,(doom-color 'bg-alt)))))
+  ;;    )
+  )
 
 ;; (use-package org-margin
 ;;   :hook ((org-mode . org-margin-mode)
@@ -32,7 +43,6 @@
 (use-package org-modern
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda))
-  :custom-face (org-modern-tag ((t (:background ,(doom-color 'bg-alt)))))
   :custom
   (org-modern-hide-stars nil)		; adds extra indentation
   (org-modern-table nil)
@@ -164,45 +174,36 @@
 
 ;; TODO: adjust sequence, not loaded when launched in daemon-mode
 (use-package org-modern
-  :init
-  (defun k8x1d/set-org-modern-colors ()
-    (require 'org-modern)
-    (setq org-modern-todo-faces
-	  `(("TODO" :background ,(doom-color 'red) :foreground ,(doom-color 'bg) :family "Iosevka Nerd Font")
-	    ("NEXT" :background ,(doom-color 'green) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")
-	    ("WAIT" :background ,(doom-color 'yellow) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")))
-    (setq org-modern-priority-faces
-	  `((?A :background ,(doom-color 'green)
-		:foreground ,(doom-color 'bg)
-		:family "Iosevka Nerd Font")
-	    (?B :background ,(doom-color 'orange)
-		:foreground ,(doom-color 'bg)
-		:family "Iosevka Nerd Font")
-	    (?C :background ,(doom-color 'red)
-		:foreground ,(doom-color 'bg)
-		:family "Iosevka Nerd Font")))
-    (setq org-modern-symbol
-	  `((?X :background ,(doom-color 'green)
-		:foreground ,(doom-color 'bg)
-		:family "Iosevka Nerd Font")
-	    (?- :background ,(doom-color 'orange)
-		:foreground ,(doom-color 'bg)
-		:family "Iosevka Nerd Font")
-	    (?\s :background ,(doom-color 'red)
-		:foreground ,(doom-color 'bg)
-		:family "Iosevka Nerd Font")))
-    )
-  :custom-face
-  (org-modern-done ((t (:family "Iosevka Nerd Font"))))
-  ;; (org-agenda-clocking ((t (:weight bold :underline (:color foreground-color :style line :position 4) :background nil))))
-  (org-agenda-clocking ((t (:weight bold :inverse-video t :background nil))))
-  ;; (org-agenda-date ((t (:weight normal))))
-  (org-block-begin-line ((t (:background ,(doom-color 'bg))))) 
-  (org-block-end-line ((t (:background ,(doom-color 'bg))))) 
-  (org-block ((t (:background ,(doom-color 'bg))))) 
-  (org-imminent-deadline ((t (:weight normal)))) 
+  ;; :init
+  ;; (defun k8x1d/set-org-modern-colors ()
+  ;;   (require 'org-modern)
+  ;;   (setq org-modern-todo-faces
+  ;; 	  `(("TODO" :background ,(doom-color 'red) :foreground ,(doom-color 'bg) :family "Iosevka Nerd Font")
+  ;; 	    ("NEXT" :background ,(doom-color 'green) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")
+  ;; 	    ("WAIT" :background ,(doom-color 'yellow) :foreground ,(doom-color 'bg)  :family "Iosevka Nerd Font")))
+  ;;   (setq org-modern-priority-faces
+  ;; 	  `((?A :background ,(doom-color 'green)
+  ;; 		:foreground ,(doom-color 'bg)
+  ;; 		:family "Iosevka Nerd Font")
+  ;; 	    (?B :background ,(doom-color 'orange)
+  ;; 		:foreground ,(doom-color 'bg)
+  ;; 		:family "Iosevka Nerd Font")
+  ;; 	    (?C :background ,(doom-color 'red)
+  ;; 		:foreground ,(doom-color 'bg)
+  ;; 		:family "Iosevka Nerd Font")))
+  ;;   (setq org-modern-symbol
+  ;; 	  `((?X :background ,(doom-color 'green)
+  ;; 		:foreground ,(doom-color 'bg)
+  ;; 		:family "Iosevka Nerd Font")
+  ;; 	    (?- :background ,(doom-color 'orange)
+  ;; 		:foreground ,(doom-color 'bg)
+  ;; 		:family "Iosevka Nerd Font")
+  ;; 	    (?\s :background ,(doom-color 'red)
+  ;; 		:foreground ,(doom-color 'bg)
+  ;; 		:family "Iosevka Nerd Font")))
+  ;;   )
   :config
-  (k8x1d/set-org-modern-colors)
+  ;; (k8x1d/set-org-modern-colors)
   ;; Correct for issue with state faces https://github.com/minad/org-modern/issues/26
   (add-hook 'org-agenda-finalize-hook
 	    (lambda ()

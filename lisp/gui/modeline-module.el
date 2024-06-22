@@ -220,7 +220,8 @@
 	 (dired-sidebar-mode . hide-mode-line-mode)
 	 (vterm-mode . hide-mode-line-mode)
 	 (compilation-mode . hide-mode-line-mode)
-	 (special-mode . hide-mode-line-mode)))
+	 ;; (special-mode . hide-mode-line-mode)
+	 ))
 
 ;; TODO: reduce
 (use-package memento-mori

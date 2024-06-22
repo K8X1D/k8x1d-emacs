@@ -3,7 +3,7 @@
 (use-package mastodon
   :init
   (setq browse-url-browser-function 'browse-url-firefox)
-  (setq browse-url-browser-function 'browse-url-nyxt)
+  ;; (setq browse-url-browser-function 'browse-url-nyxt)
   :bind ("C-c o M" ("Mastodon" . mastodon))
   :config
   (setq mastodon-instance-url "https://mastodon.online"

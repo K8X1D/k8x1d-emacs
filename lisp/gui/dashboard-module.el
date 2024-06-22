@@ -66,8 +66,8 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 (use-package enlight
   :init
-  (require 'grid)
-  (require 'enlight-menu)
+  ;; (require 'enlight)
+  ;; (require 'enlight-menu)
   (setq initial-buffer-choice #'enlight)
   :custom
   (enlight-content

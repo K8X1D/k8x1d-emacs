@@ -64,7 +64,6 @@
   (setq completion-styles '(orderless basic)
 	completion-category-defaults nil
 	completion-category-overrides '((file (styles partial-completion))))
-  :custom-face  (orderless-match-face-0 ((t (:foreground ,(doom-color 'green) :background ,(doom-color 'bg) :weight bold))))
   )
 
 (use-package marginalia

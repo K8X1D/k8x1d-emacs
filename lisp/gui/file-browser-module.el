@@ -21,9 +21,11 @@
 
 ;; Preview files
 (use-package dired-preview
+  ;; :bind (:map dired-mode-map
+		 ;; ("p" . my-dired-preview-to-the-right))
   :config
   ;; Default values for demo purposes
-  (setq dired-preview-delay 0.7)
+  (setq dired-preview-delay 10)
   (setq dired-preview-max-size (expt 2 20))
   (setq dired-preview-ignored-extensions-regexp
 	(concat
@@ -32,12 +34,23 @@
 		"\\|gz\\|zst\\|tar\\|xz\\|rar\\|zip"
 		"\\|iso\\|epub\\)"))
 
-  :hook (dired-mode . dired-preview-mode))
+(defun my-dired-preview-to-the-right ()
+  "My preferred `dired-preview-display-action-alist-function'."
+  (interactive)
+  '((display-buffer-in-side-window)
+    (side . right)
+    (width . 0.3)))
+
+  ;; :hook (dired-mode . dired-preview-mode)
+  )
 
 
 (use-package dired-posframe
   :if k8x1d/posframe-support
   :hook (dired-mode . dired-posframe-mode))
+
+
+
 
 
 (provide 'file-browser-module)

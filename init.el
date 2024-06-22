@@ -69,9 +69,10 @@
 (require 'daemon-module)
 
 (require 'fonts-module)
-(require 'theme-module)
+;; (require 'theme-module)
+(require 'theme-module-alt)
 (require 'modeline-module)
-(require 'dashboard-module)
+;; (require 'dashboard-module)
 
 (require 'completion-module)
 (require 'icons-module)
