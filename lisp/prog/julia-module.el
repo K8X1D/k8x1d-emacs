@@ -43,15 +43,17 @@
 ;; Notebook support
 (use-package ob-julia-vterm
   :if (and (string= k8x1d/ide "minimal") (string= k8x1d/terminal "vterm")) 
-  :init
-  (with-eval-after-load 'org
-    (add-to-list 'org-babel-load-languages '(julia-vterm . t))
-    (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
-    (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
-    (defalias 'org-babel-variable-assignments:julia 'org-babel-variable-assignments:julia-vterm))
   )
 
 
+(use-package org
+  :if (and (string= k8x1d/ide "minimal") (string= k8x1d/terminal "vterm")) 
+  :config
+    (add-to-list 'org-babel-load-languages '(julia-vterm . t))
+    (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+    (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
+    (defalias 'org-babel-variable-assignments:julia 'org-babel-variable-assignments:julia-vterm)
+  )
 
 ;; SLIME-like dev environment
 (use-package julia-snail
