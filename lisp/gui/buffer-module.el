@@ -3,7 +3,8 @@
 ;; Better buffer management
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
-  :hook (ibuffer-mode . ibuffer-auto-mode)
+  ;; TODO: evaluate. seems to cause performance issue in general...
+  ;; :hook (ibuffer-mode . ibuffer-auto-mode)
   )
 
 ;; Group buffer per project
