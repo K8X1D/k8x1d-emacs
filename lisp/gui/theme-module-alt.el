@@ -35,7 +35,7 @@
    `(org-meta-line ((t (:foreground ,(doom-color 'green)))))
    `(org-agenda-clocking ((t (:weight bold :inverse-video t :background nil))))
    `(org-imminent-deadline ((t (:weight normal)))) 
-   `(org-modern-done ((t (:background ,(doom-color 'bg-alt) :foreground ,(doom-color 'bg) :family "Iosevka Nerd Font"))))
+   `(org-modern-done ((t (:background ,(doom-color 'bg-alt) :foreground ,(doom-color 'green) :family "Iosevka Nerd Font"))))
 
    ;; Consult
    `(orderless-match-face-0 ((t (:foreground ,(doom-color 'green) :background ,(doom-color 'bg) :weight bold))))
@@ -93,6 +93,17 @@
   ;; (k8x1d/set-org-src-colors-per-language)
   )
 
+
+(defun k8x1d/get-system-theme ()
+  (replace-regexp-in-string "\n" "" (replace-regexp-in-string "'" "" (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme")))
+  )
+(if (string= (k8x1d/get-system-theme) "prefer-dark")
+    (setq k8x1d/default-emacs-theme k8x1d/default-emacs-dark-theme)
+  (setq k8x1d/default-emacs-theme k8x1d/default-emacs-light-theme)
+  )
+
+
+;; TODO: reduce code
 (defun k8x1d/switch-theme ()
   (interactive)
   (if (string= (car custom-enabled-themes) k8x1d/default-emacs-dark-theme)
@@ -113,6 +124,39 @@
   )
 
 
+(defun k8x1d/set-theme-to-system ()
+  (interactive)
+  (if (string= (k8x1d/get-system-theme) "prefer-dark")
+      (progn
+	;; (consult-theme k8x1d/default-dark-theme)
+	(disable-theme (car custom-enabled-themes))
+	(load-theme k8x1d/default-emacs-dark-theme t)
+	(k8x1d/set-frame-opacity 80)
+	)
+    (progn
+      ;; (consult-theme k8x1d/default-light-theme)
+      (disable-theme (car custom-enabled-themes))
+      (load-theme k8x1d/default-emacs-light-theme t)
+      (k8x1d/set-frame-opacity 90)
+      )
+    )
+  (k8x1d/adjust-theme-colors)
+  )
+
+(defun k8x1d/switch-system-theme ()
+  (interactive)
+  (if (string= (k8x1d/get-system-theme) "prefer-dark")
+      (progn
+	(shell-command "gsettings set org.gnome.desktop.interface color-scheme default")
+	(shell-command "gsettings set org.gnome.desktop.interface icon-theme breeze")
+	)
+      (progn
+	(shell-command "gsettings set org.gnome.desktop.interface color-scheme prefer-dark")
+	(shell-command "gsettings set org.gnome.desktop.interface icon-theme breeze-dark")
+	)
+    )
+  (k8x1d/set-theme-to-system)
+  )
 
 ;; Keybindings
 (use-package doom-themes
@@ -122,12 +166,9 @@
     "s"  '(:ignore t :which-key "Emacs")
     "st" '(k8x1d/switch-theme :which-key "Switch Light/Dark")
     "S"  '(:ignore t :which-key "System")
-    "Sl" '(k8x1d/switch-system-theme-to-light :which-key "Light theme")
-    "Sd" '(k8x1d/switch-system-theme-to-dark :which-key "Dark theme")
+    "St" '(k8x1d/switch-system-theme :which-key "Switch Light/Dark")
     )
   )
-
-
 
 (use-package emacs
   :hook (after-init . window-divider-mode)
