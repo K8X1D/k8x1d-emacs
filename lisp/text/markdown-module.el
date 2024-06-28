@@ -1,5 +1,6 @@
 ;; Markdown support
 (use-package markdown-mode
+  :mode "\\.md\\'"
   :hook (markdown-mode . hl-todo-mode)
   :config
   (setq markdown-command "pandoc")
