@@ -21,6 +21,7 @@
 	     (gnu packages shellutils)
 	     (gnu packages python-xyz)
 	     (gnu packages python-science)
+	     (gnu packages music)
 	     (gnu packages pdf)
 	     (gnu packages julia)
 	     (gnu packages linux)
@@ -1219,6 +1220,7 @@ shell integration.")
   ;; emacs-corfu-candidate-overlay
   emacs-dired-sidebar
   emacs-doom-themes
+  emacs-doom-modeline
   ;; emacs-eat-upd
   emacs-envrc
   emacs-ess-custom
@@ -1348,7 +1350,9 @@ shell integration.")
   emacs-pomm
   emacs-org
   emacs-org-link-beautify
+  emacs-ellama
+  emacs-emms
+  python-mutagen
 
   )
- 
  )
