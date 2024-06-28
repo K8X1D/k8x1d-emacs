@@ -71,7 +71,7 @@
 (require 'fonts-module)
 ;; (require 'theme-module)
 (require 'theme-module-alt)
-(require 'modeline-module)
+(require 'modeline-module-alt)
 ;; (require 'dashboard-module)
 
 (require 'completion-module)
@@ -139,5 +139,7 @@
 (require 'pubmed-module)
 (require 'social-module)
 (require 'dwl-guile-module)
+(require 'chatbot-module)
+(require 'profiler-module)
 
 ;;; init.el ends here
