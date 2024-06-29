@@ -10,6 +10,14 @@
                                  (doom-modeline-set-modeline 'custom-modeline 'default)))
          )
   :config
+  ;; fonts
+  ;; (custom-set-faces
+  ;;  '(mode-line ((t (:family "Iosevka Font Mono" :height 0.9))))
+  ;;  '(mode-line-active ((t (:family "Iosevka Nerd Font Mono" :height 0.9)))) ; For 29+
+  ;;  '(mode-line-inactive ((t (:family "Iosevka Nerd Font Mono" :height 0.9)))))
+  (setq nerd-icons-font-family "Symbols Nerd Font Mono")
+
+;; XXX
   (setq doom-modeline-height 25)
   (setq doom-modeline-minor-modes t)
   ;; Icons
@@ -29,8 +37,7 @@
   (setq doom-modeline-lsp t)
   (setq doom-modeline-lsp-icon t)
   ;; Checker
-  (setq doom-modeline-checker-simple-format nil)
-  ;;(setq k8x1d-doom-modeline--flymake-icon " ")
+  (setq doom-modeline-checker-simple-format t)
   ;; Bar
   (setq doom-modeline-bar-width 3)
   ;; (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
@@ -54,26 +61,6 @@
            (doom-modeline-display-icon icon)
            )))))
 
-
-  (doom-modeline-def-segment k8x1d-checker
-    "Displays color-coded error status in the current buffer with pretty icons."
-    (let* ((seg (cond
-                 ((and (bound-and-true-p flymake-mode)
-                       (bound-and-true-p flymake--state)) ; only support 26+
-                  `(,k8x1d-doom-modeline--flymake-icon . ,doom-modeline--flymake-text))
-                 ((and (bound-and-true-p flycheck-mode)
-                       (bound-and-true-p flycheck--automatically-enabled-checkers))
-                  `(,doom-modeline--flycheck-icon . ,doom-modeline--flycheck-text))))
-           (icon (car seg))
-           (text (cdr seg)))
-      (concat
-       (and (or icon text) (doom-modeline-spc))
-       (and icon (doom-modeline-display-icon icon))
-       (and text
-            (concat
-             (and icon (doom-modeline-vspc))
-             (doom-modeline-display-text text)))
-       (and (or icon text) (doom-modeline-spc)))))
 
 
   (doom-modeline-def-segment k8x1d-buffer-info
@@ -118,8 +105,10 @@
   (doom-modeline-def-modeline 'custom-modeline
     ;;'(bar modals " " buffer-position selection-info matches " "  buffer-info " " lsp checker vcs " " follow remote-host word-count parrot compilation)
     ;;'(misc-info " " battery time)
-    '(modals workspace-name k8x1d-buffer-info vcs  buffer-position selection-info matches follow word-count parrot buffer-encoding remote-host " " compilation)
-    '(time battery k8x1d-major-mode k8x1d-lsp k8x1d-checker " ")
+    ;; '(modals workspace-name k8x1d-buffer-info vcs  buffer-position selection-info matches follow word-count parrot buffer-encoding remote-host " " compilation)
+    ;; '(time battery k8x1d-lsp " " check k8x1d-major-mode " ")
+    '(modals workspace-name buffer-info vcs lsp " " check buffer-position selection-info matches follow word-count parrot buffer-encoding remote-host " " compilation)
+    '(time battery)
     )
 
   ;; (eldoc bar workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count parrot selection-info)
