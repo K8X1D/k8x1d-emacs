@@ -1,0 +1,147 @@
+
+* Set-up
+Mise en place guix avec channels
+#+begin_src shell :async true :session emacs-guix
+  EMACS_DIR=$HOME/.config/emacs-guix
+  GUIX_PROFILE=$EMACS_DIR/guix/guix-profile
+  mkdir -p $EMACS_DIR/guix
+  guix pull --channels="$EMACS_DIR/channels.scm" --profile=$GUIX_PROFILE
+#+end_src
+
+Mise en place du profile :
+#+begin_src shell :async true :session emacs-guix
+  EMACS_DIR=$HOME/.config/emacs-guix
+  EMACS_PROFILE=$EMACS_DIR/guix/emacs-profile
+  GUIX_PROFILE=$EMACS_DIR/guix/guix-profile
+  GUIX=$GUIX_PROFILE/bin/guix
+  mkdir -p "$EMACS_DIR/guix"
+  $GUIX package --profile=$EMACS_PROFILE --manifest=$EMACS_DIR/manifest.scm 
+#+end_src
+
+#+RESULTS:
+#+begin_example
+k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal
+default-gnu-imported-modules' instead
+guix package: warning: Consider running 'guix pull' followed by
+'guix package -u' to get up-to-date packages and security updates.
+
+The following packages will be installed:
+   emacs-bluetooth-upd       0.3.1
+   emacs-consult             20240926.916
+   emacs-diminish            20220909.847
+   emacs-ess                 20240821.1952
+   emacs-ess-view-data       20240127.1701
+   emacs-evil                20240915.832
+   emacs-evil-collection     20240827.1102
+   emacs-evil-escape         20231122.2114
+   emacs-evil-mc             20240701.140
+   emacs-evil-org            20221001.2335
+   emacs-evil-surround       20240325.852
+   emacs-evil-visualstar     20160223.48
+   emacs-flycheck            20240726.456
+   emacs-forge               20240920.1417
+   emacs-julia-mode          20240506.1205
+   emacs-julia-vterm         20240514.724
+   emacs-lsp-julia           20230915.654
+   emacs-lsp-mode            20240923.1603
+   emacs-lsp-ui              20240514.1943
+   emacs-magit               20240920.1135
+   emacs-magit-todos         20240922.1507
+   emacs-marginalia          20240926.918
+   emacs-multi-vterm         20221031.610
+   emacs-nerd-icons          20240816.1555
+   emacs-nerd-icons-completion 20240731.1213
+   emacs-nerd-icons-dired    20231214.2155
+   emacs-nerd-icons-ibuffer  20230417.1549
+   emacs-next-pgtk           30.0.60-1.4e22ef8
+   emacs-ob-julia-vterm      20240514.328
+   emacs-ob-python-vterm     0.0.0
+   emacs-orderless           20240926.921
+   emacs-pdf-tools           20240429.407
+   emacs-python-vterm        0.0.0
+   emacs-pyvenv              20211014.707
+   emacs-undo-fu             20240707.1410
+   emacs-undo-fu-session     20240713.1427
+   emacs-vdiff               20230621.201
+   emacs-vertico             20240926.924
+   emacs-vterm               20240825.133
+
+
+
+The following derivations will be built:
+  /gnu/store/i894qn8vc06x0v2fbqd2nmzq7agr89qa-emacs-pdf-tools-20240429.407.drv
+  /gnu/store/rf7qsjm0cz28ba8g7mnpdnfqk8zzca5b-emacs-tablist-20231019.1126.drv
+  /gnu/store/a0y1l46p7rzxrixqkm1rqpcdwrbw9d63-git-checkout.drv
+  /gnu/store/aj0sfx79b2574gdwc02d94yzqfx2qrkb-emacs-python-vterm-0.0.0.drv
+  /gnu/store/28m2xxfsp7dbisjy3f8d3jhaq8vh8wzs-git-checkout.drv
+  /gnu/store/6cz09px0wrgq4ij04c1gf0dqi8hi1ciw-emacs-ob-python-vterm-0.0.0.drv
+  /gnu/store/984km6y4rh63ls3d9zk59bvc2n9ci8qa-git-checkout.drv
+
+building /gnu/store/28m2xxfsp7dbisjy3f8d3jhaq8vh8wzs-git-checkout.drv...
+building /gnu/store/984km6y4rh63ls3d9zk59bvc2n9ci8qa-git-checkout.drv...
+building /gnu/store/aj0sfx79b2574gdwc02d94yzqfx2qrkb-emacs-python-vterm-0.0.0.drv...
+building /gnu/store/a0y1l46p7rzxrixqkm1rqpcdwrbw9d63-git-checkout.drv...
+building /gnu/store/6cz09px0wrgq4ij04c1gf0dqi8hi1ciw-emacs-ob-python-vterm-0.0.0.drv...
+building /gnu/store/rf7qsjm0cz28ba8g7mnpdnfqk8zzca5b-emacs-tablist-20231019.1126.drv...
+building /gnu/store/i894qn8vc06x0v2fbqd2nmzq7agr89qa-emacs-pdf-tools-20240429.407.drv...
+The following derivation will be built:
+  /gnu/store/72vr3qdrzdy90zgy5g79zav605ngsz64-profile.drv
+
+applying 5 grafts for emacs-pdf-tools-20240429.407 ...
+building CA certificate bundle...
+listing Emacs sub-directories...
+building fonts directory...
+generating GdkPixbuf loaders cache...
+generating GLib schema cache...
+creating GTK+ icon theme cache...
+building cache files for GTK+ input methods...
+building directory of Info manuals...
+building XDG desktop file cache...
+building XDG MIME database...
+building profile with 39 packages...
+hint: Consider setting the necessary environment variables by running:
+
+     GUIX_PROFILE="/home/k8x1d/.config/emacs-guix/guix/emacs-profile"
+GUIX_PROFILE/etc/profile"
+
+Alternately, see `guix package --search-paths -p "/home/k8x1d/.config/emacs-guix/guix/emacs-profile"'.
+
+k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal
+#+end_example
+
+Fixation des channels
+#+begin_src shell :async true :session emacs-guix
+  EMACS_DIR=$HOME/.config/emacs-guix
+  GUIX=$EMACS_DIR/guix/emacs/bin/guix
+  source "$GUIX_PROFILE/etc/profile"
+
+  # Generate our initial =channels-lock.scm= Commit this to your emacs dotfiles repository.
+  $GUIX describe --format=channels > $EMACS_DIR/channels-lock.scm
+#+end_src
+
+Lancement d'emacs
+#+begin_src shell  :async true :session emacs-guix :mkdirp true :tangle ~/.config/emacs-guix/bin/emacs-guix :shebang "#!/bin/sh"
+  EMACS_DIR=$HOME/.config/emacs-guix
+  EMACS_PROFILE="$EMACS_DIR/guix/emacs-profile"
+  EMACS=$EMACS_PROFILE/bin/emacs
+  EMACSLOADPATH=$EMACSLOADPATH:$EMACS_PROFILE/share/emacs/site-lisp/
+  source "$GUIX_PROFILE/etc/profile"
+  source "$HOME/.guix-home/profile/etc/profile"
+
+  $EMACS --init-directory=$EMACS_DIR
+#+end_src
+
+#+RESULTS:
+: k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+: k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+: k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+: k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+: k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+: k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+: k8x1d@frame13 /extension/Data/Cloud/facil/Org/notes/journal 
+: k8x1d@frame13 [32m/extension/Data/Cloud/facil/Org/notes/journal [91m[00m

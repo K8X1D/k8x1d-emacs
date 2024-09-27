@@ -1,0 +1,6 @@
+guix
+.lsp-session-v1
+channels-lock.scm
+history
+undo-fu-session/
+eln-cache
