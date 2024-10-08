@@ -1,9 +1,75 @@
+;; -*- lexical-binding: t; -*-
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;; Eglot    ;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package eglot
+  :if (string= k8x1d/lsp "eglot")
+  :commands (eglot
+	     eglot-rename
+	     eglot-ensure
+	     eglot-rename
+	     eglot-format
+	     eglot-format-buffer)
+  :custom
+  (eglot-report-progress nil)  ; Prevent minibuffer spam
+  :bind
+  ("C-c l a" . eglot-code-actions)
+  ("C-c l s" . eglot-shutdown)
+  ("C-c l S" . eglot-shutdown-all)
+  ("C-c l r" . eglot-reconnect)
+  ("C-c l f" . eglot-format)
+  ("C-c l F" . eglot-format-buffer)
+  :config
+  ;; Optimizations
+  (fset #'jsonrpc--log-event #'ignore)
+  (setq jsonrpc-event-hook nil))
+
+;; Better performance for eglot
+(use-package eglot-booster
+  :if (string= k8x1d/lsp "eglot")
+  :after eglot
+  :config
+  (setq eglot-booster-no-remote-boost t)
+  (eglot-booster-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;; Lsp-bridge ;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package lsp-bridge
+  :ensure nil
+  :load-path "code/lsp-bridge"
+  :if (string= k8x1d/lsp "lsp-bridge")
+  :hook
+  (prog-mode . lsp-bridge-mode)
+  :bind
+  (:map acm-mode-map
+	("C-k" . acm-select-prev)
+	([remap evil-insert-digraph] . acm-select-prev)
+	("C-j" . acm-select-next)
+	)
+  :config
+  (setq lsp-bridge-mode-lighter " lsp")
+  (setq lsp-bridge-tex-lsp-server "ltex-ls")
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;; Lsp-mode ;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package lsp-mode
+  :if (string= k8x1d/lsp "lsp-mode")
+  :general
+  (k8x1d/local-leader-keys
+   :keymaps 'lsp-mode-map
+   "a" '(lsp-execute-code-action :which-key "Code action")
+    )
   :diminish
   :init
   (setenv "LSP_USE_PLISTS" "true") ;; Use plists for deserialization
   (setq lsp-use-plists t) ;; Use plists for deserialization
-  (setq lsp-keymap-prefix "C-c l")
+  ;; (setq lsp-keymap-prefix "C-c l")
   :config
   ;; Clean-up ui
   (setq lsp-headerline-breadcrumb-enable nil)
@@ -29,22 +95,25 @@
   )
 
 (use-package lsp-ui
+  :init
+  (setq lsp-ui-sideline-enable nil) ;; manually set through lsp-ui-sideline-mode
+  :commands lsp-ui-mode
   :config
   (setq lsp-ui-sideline-show-hover t
-                lsp-ui-sideline-delay 0.5
-                lsp-ui-doc-delay 5
-                lsp-ui-sideline-ignore-duplicates t
-                lsp-ui-doc-position 'bottom
-                lsp-ui-doc-alignment 'frame
-                lsp-ui-doc-header nil
-                lsp-ui-doc-include-signature t
-                lsp-ui-doc-use-childframe t)
-  :commands lsp-ui-mode
+	lsp-ui-sideline-delay 0.5
+	lsp-ui-doc-delay 5
+	lsp-ui-sideline-ignore-duplicates t
+	lsp-ui-doc-position 'bottom
+	lsp-ui-doc-alignment 'frame
+	lsp-ui-doc-header nil
+	lsp-ui-doc-include-signature t
+	lsp-ui-doc-use-childframe t)
   )
 
 
 ;; Better performance for lsp-mode via lsp-booster
 (use-package lsp-mode
+  :if (string= k8x1d/lsp "lsp-mode")
   :init
   ;; Set-up lsp-booster
   (defun lsp-booster--advice-json-parse (old-fn &rest args)

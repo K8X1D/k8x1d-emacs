@@ -66,6 +66,7 @@
 ;;; Completion suggestions through minibuffer
 (use-package consult)
 (use-package vertico
+  :if (not (string= k8x1d/lsp "lsp-bridge"))
   :config
   ;; Completion suggestion in minibuffer
   (require 'consult)

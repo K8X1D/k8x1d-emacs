@@ -20,6 +20,12 @@
 (setq evil-want-keybinding nil)
 
 (use-package evil
+  :general
+  (k8x1d/leader-keys
+   "w" '(:keymap evil-window-map
+		  :package evil
+		  :which-key "Window")
+   )
   :init
   (setq evil-undo-system 'undo-fu)
   (setq evil-want-integration t)
@@ -31,10 +37,16 @@
   (git-commit-mode . evil-insert-state)
   :config
   (evil-select-search-module 'evil-search-module 'evil-search)
+  (setq evil-mode-line-format nil) ;; managed manually
   )
 
 (use-package evil-collection
-  :hook (evil-mode . evil-collection-init) 
+  :hook
+  (evil-mode . evil-collection-init) 
+  (evil-collection-unimpaired-mode . (lambda ()
+				  (diminish 'evil-collection-unimpaired-mode) ;; :diminish keyword don't work...
+
+				  ))
   )
 
 (use-package undo-fu
@@ -104,6 +116,7 @@
 
  ;; Org integration
 (use-package evil-org
+  :diminish
   :hook ((org-mode . evil-org-mode)
 	 (org-agenda-mode . evil-org-mode))
   :config
@@ -116,6 +129,7 @@
 
 ;; Multi-cursor support
 (use-package evil-mc
+  :diminish
   :hook (evil-mode . global-evil-mc-mode)
   :config
   ;; Sample set-up
@@ -156,6 +170,7 @@
 
 ;; One key to escape them all ;; in test
 (use-package evil-escape
+  :diminish
   :bind
   ([remap evil-force-normal-state] . evil-escape)
   :hook

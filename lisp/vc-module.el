@@ -12,6 +12,11 @@
   )
 
 (use-package magit
+  :general
+  (k8x1d/leader-keys
+    "g" '(:ignore t :which-key "Git")
+    "gg" '(magit-status :which-key "Status")
+    )
   :bind
   (([remap magit-jump-to-tracked] . tab-bar-switch-to-next-tab)
    ("C-c g g" . magit-status)))

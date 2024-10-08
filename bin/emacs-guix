@@ -3,7 +3,4 @@ EMACS_DIR=$HOME/.config/emacs-guix
 EMACS_PROFILE="$EMACS_DIR/guix/emacs-profile"
 EMACS=$EMACS_PROFILE/bin/emacs
 EMACSLOADPATH=$EMACSLOADPATH:$EMACS_PROFILE/share/emacs/site-lisp/
-source "$GUIX_PROFILE/etc/profile"
-source "$HOME/.guix-home/profile/etc/profile"
-
-$EMACS --init-directory=$EMACS_DIR
+$EMACS --init-directory=$EMACS_DIR --debug-init "$@"
