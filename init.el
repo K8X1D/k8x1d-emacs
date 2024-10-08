@@ -1,59 +1,108 @@
+;; Source
+;; - https://medium.com/@danielorihuelarodriguez/optimize-emacs-start-up-time-ae314201e04f
+;; - https://tychoish.com/post/towards-faster-emacs-start-times/
+;; - https://arne.me/blog/emacs-from-scratch-part-one-foundations
 
-(load-theme 'modus-vivendi t)
 
-;; Remove ui elements
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(setq use-file-dialog nil)
-(setq use-dialog-box nil)
-
-(setq use-short-answers t) ;; y-or-p insteat of yes-or-no
-
-;;; Garbage collection
-(setq gc-cons-threshold most-positive-fixnum) ;; Increase gc threshold at start
-(add-hook 'emacs-startup-hook
+;; Print start-up time
+(add-to-list 'after-init-hook
           (lambda ()
-            (setq gc-cons-threshold (* 16 1024 1024))))  ;; Decrease gc threshold after start
-
-;;; Performance
-
-(setq load-prefer-newer t) ;; Prefer loading newer compiled files
-(setq read-process-output-max (* 512 1024))  ;; Increase how much is read from processes in a single chunk (default is 4kb).
-;; Reduce rendering/line scan work by not rendering cursors or regions in non-focused windows.
-(setq-default cursor-in-non-selected-windows nil)
-(setq highlight-nonselected-windows nil)
-
-;; Disable warnings from the legacy advice API. They aren't useful.
-(setq ad-redefinition-action 'accept)
-(setq warning-suppress-types '((lexical-binding)))
-
-(setq ffap-machine-p-known 'reject) ;; Don't ping things that look like domain names.
-(setq idle-update-delay 1.0) ;; By default, Emacs "updates" its ui more often than it needs to
-;; Font compacting can be very resource-intensive, especially when rendering
-;; icon fonts on Windows. This will increase memory usage.
-(setq inhibit-compacting-font-caches t)
+            (message (concat "emacs (" (number-to-string (emacs-pid)) ") started in " (emacs-init-time)))))
 
 
-;; Package.el
-(setq package-enable-at-startup nil)
-(setq package-quickstart nil)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Common variables ;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar k8x1d/bibliography '("~/Zotero/k8x1d.bib")) ;; Defaults bibliography
+;; TODO: add choice of value
+(defvar k8x1d/checker "flycheck")
+(defvar k8x1d/lsp "lsp-mode")
+(defvar k8x1d/theme "doom")
+(defvar k8x1d/org-gui "custom")
+(defvar k8x1d/package-manager "package.el")
+;; (defvar k8x1d/terminal "vterm")
+(defvar k8x1d/terminal "shell")
+;; (defvar k8x1d/package-manager "elpaca")
+;; (defvar k8x1d/checker "flymake")
+;; (defvar k8x1d/lsp "eglot")
+;; (defvar k8x1d/checker "")
+;; (defvar k8x1d/lsp "lsp-bridge")
 
 
-;; Add personal modules to load-path 
-(add-to-list 'load-path (concat user-emacs-directory "lisp"))
+(with-timer "package setup"
+	    (require 'packages-module)
+	    )
 
-(keymap-global-set "C-x C-b" #'ibuffer)
 
-(require 'evil-module)
-(require 'file-explorer-module)
-(require 'icons-module)
-(require 'completion-module)
-(require 'lsp-module)
-(require 'checker-module)
-(require 'terminal-module)
-(require 'r-module)
-(require 'julia-module)
+(with-timer "base set-up setup"
+	    (require 'keybindings-module)
+	    (require 'evil-module)
+	    (require 'encoding-module)
+	    )
+
+(with-timer "UI set-up"
+	    (require 'file-explorer-module)
+	    (require 'highlight-module)
+	    (require 'modeline-module)
+	    (require 'icons-module)
+	    (require 'windows-module)
+	    (require 'tab-module)
+	    (require 'fonts-module)
+	    (require 'files-module)
+	    (require 'themes-module)
+	    (require 'documentation-module)
+	    (require 'line-number-module)
+	    (require 'buffers-module)
+	    )
+
+(with-timer "Utilities set-up"
+	    (require 'terminal-module)
+	    (require 'bluetooth-module)
+	    (require 'multimedia-module)
+	    (require 'pdf-module)
+	    )
+
+(with-timer "Work set-up"
+	    (require 'completion-module)
+	    (require 'lsp-module)
+	    (require 'checker-module)
+	    (require 'notebook-module)
+	    (require 'compilation-module)
+	    (require 'vc-module)
+	    (require 'projects-module)
+	    (require 'corrector-module)
+	    (require 'treesitter-module)
+	    )
+
+
+(with-timer "Prog set-up"
+	    (require 'r-module)
+	    (require 'julia-module)
+	    (require 'shell-module)
+	    (require 'scheme-module)
+	    )
+
+(with-timer "Text set-up"
+	    (require 'text-module)
+	    (require 'notes-taking-module)
+	    (require 'csv-module)
+	    (require 'org-module)
+	    (require 'markdown-module)
+	    (require 'latex-module)
+	    )
+
+(with-timer "System set-up"
+	    (require 'guix-module)
+	    (require 'process-manager-module)
+	    )
+
+(with-timer "Utilities set-up"
+	    (require 'social-module)
+	    (require 'torrents-module)
+	    (require 'bibliography-module)
+	    (require 'password-module)
+	    )
+
 
 
 
@@ -62,7 +111,35 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(safe-local-variable-values '((eval tab-rename "Journal") (lsp-ltex-language . "fr"))))
+ '(custom-safe-themes
+   '("48042425e84cd92184837e01d0b4fe9f912d875c43021c3bcb7eeb51f1be5710"
+     default))
+ '(package-selected-packages nil)
+ '(package-vc-selected-packages
+   '((org-modern-indent :vc-backend Git :url
+			"https://github.com/jdtsmith/org-modern-indent")
+     (eglot-ltex :vc-backend Git :url
+		 "https://github.com/emacs-languagetool/eglot-ltex")
+     (eglot-booster :vc-backend Git :url
+		    "https://github.com/jdtsmith/eglot-booster")))
+ '(safe-local-variable-values
+   '((eval tab-rename "Notes") (eval tab-rename "AIS")
+     (lsp-ltex-language . "en") (eval tab-group "Recherche")
+     (eval tab-rename "Colloque CIRST") (eval tab-rename "xphi-fphi")
+     (eval tab-group "Research") (eval tab-rename "Evocult")
+     (eval tab-rename "Thèse") (TeX-command-Biber . "Biber-guix")
+     (eval setenv "PATH"
+	   (concat (getenv "PATH") ":"
+		   "/extension/Work/Documents/Recherche/Doctorat/These/Texte/bin"))
+     (eval tab-rename "Sysbio ID") (eval tab-rename "emacs-guix")
+     (eval tab-group "BIN") (eval tab-rename "OFDIG") (TeX-master . t)
+     (eval tab-rename "K8X1D-Emacs") (eval tab-rename "dwl")
+     (eval tab-group "Admin") (eval tab-rename "Monitoring")
+     (eval tab-group "Developpements") (eval tab-rename "Guix")
+     (eval tab-group "Recherches") (eval tab-rename "Plan thèse")
+     (eval tab-group "Finances") (eval tab-rename "FRQ-BZ2")
+     (lsp-ltex-language . "en-US") (eval tab-rename "Journal")
+     (lsp-ltex-language . "fr"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

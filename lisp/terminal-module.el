@@ -1,10 +1,31 @@
+;; -*- lexical-binding: t; -*-
+
+
+(use-package shell
+  :if (string= k8x1d/terminal "shell")
+  :ensure nil
+  :general
+  (k8x1d/leader-keys
+   "o"  '(:ignore t :which-key "Open")
+   "ot"  '(shell :which-key "Terminal (Dedicated)")
+    )
+  )
+
+
 (use-package vterm
+  :if (string= k8x1d/terminal "vterm")
   :init
   (setenv "CC" "gcc")
   :config
   (setq vterm-max-scrollback 10000))
 
 (use-package multi-vterm
+  :if (string= k8x1d/terminal "vterm")
+  :general
+  (k8x1d/leader-keys
+   "o"  '(:ignore t :which-key "Open")
+   "ot"  '(multi-vterm-dedicated-toggle :which-key "Terminal (Dedicated)")
+    )
   :init
   (defun k8x1d/multi-vterm-project-vertical ()
     (interactive)
