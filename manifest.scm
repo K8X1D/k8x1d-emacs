@@ -346,9 +346,9 @@ and stored in memory.")
    ;; LSP
    emacs-lsp-booster
    ;; Org + Latex
-   texlive-bin
+   ;; texlive-bin
    texlive-dvipng-bin
-   texlive-scheme-basic
+   ;; texlive-scheme-basic
    texlive-ulem ;; org-preview latex
    ))
 

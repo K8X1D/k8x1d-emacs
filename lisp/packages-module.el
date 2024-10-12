@@ -32,9 +32,6 @@
 				("nongnu" . 80)
 				("stable" . 70)
 				("melpa"  . 0)))
-  :init
-  (setq package-enable-at-startup t)
-  (setq package-quickstart t)
   )
 
 ;; (package-initialize)

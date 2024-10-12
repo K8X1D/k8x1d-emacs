@@ -38,23 +38,24 @@
   :bind
   ("C-c o a" . org-agenda)
   :config
-  (setq org-agenda-files
-	'("~/org/projects/implications.org"
-	"~/org/projects/bin.org"
-        "~/org/projects/doctorat.org"
-        "~/org/projects/developpements.org"
-        "~/org/projects/articles.org"
-        "~/org/projects/financements.org"
-        "~/org/projects/administratifs.org"
-        "~/org/projects/machines.org"
-        "~/org/projects/evocult.org"
-        "~/org/projects/recherches.org"
-        "~/org/projects/contrats.org"
-        "~/org/projects/presentations.org"
-        "~/org/projects/vulgarisation.org"
-        ;; "~/org/Horaire.org"
-        "~/org/Inbox.org"
-        "~/org/Habits.org")) ;; org-agenda files
+  (setq org-agenda-files k8x1d/org-agenda-files)
+  ;; (setq org-agenda-files k8x1d/agenda-files
+  ;; 	'("~/org/projects/implications.org"
+  ;; 	"~/org/projects/bin.org"
+  ;;       "~/org/projects/doctorat.org"
+  ;;       "~/org/projects/developpements.org"
+  ;;       "~/org/projects/articles.org"
+  ;;       "~/org/projects/financements.org"
+  ;;       "~/org/projects/administratifs.org"
+  ;;       "~/org/projects/machines.org"
+  ;;       "~/org/projects/evocult.org"
+  ;;       "~/org/projects/recherches.org"
+  ;;       "~/org/projects/contrats.org"
+  ;;       "~/org/projects/presentations.org"
+  ;;       "~/org/projects/vulgarisation.org"
+  ;;       ;; "~/org/Horaire.org"
+  ;;       "~/org/Inbox.org"
+  ;;       "~/org/Habits.org")) ;; org-agenda files
 
   ;; Don't show tasks if already done
   (setq org-agenda-skip-deadline-if-done t)
@@ -212,8 +213,10 @@
      ;; Adapted from org-modern-label
      `(org-todo ((t (:weight semibold :height 1.0 :width wide :underline nil :family "Iosevka Nerd Font" :foreground ,(doom-color 'red)))))
      `(org-done ((t (:weight semibold :height 1.0 :width wide :underline nil :family "Iosevka Nerd Font" :foreground ,(doom-color 'bg)))))
+     `(org-done ((t (:weight semibold :height 1.0 :width wide :underline nil :family "Iosevka Nerd Font" :foreground ,(doom-color 'bg)))))
+     `(org-table ((nil (:inherit 'fixed-pitch))))
+     )
     )
-  )
   )
 
 
@@ -226,6 +229,7 @@
 	org-hide-emphasis-markers t
 	org-startup-with-inline-images t
 	org-image-actual-width '(300))
+  (setq org-tags-column 0)
   )
 
 ;; Bullets

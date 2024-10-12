@@ -129,7 +129,9 @@
 	    ;;;;;;;;;;;;;;;;;;;;
 	    ;; Disable package.el by default
 	    ;;;;;;;;;;;;;;;;;;;
+	    ;; (setq package-enable-at-startup nil)
 	    (setq package-enable-at-startup t)
+	    (setq package-quickstart t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;

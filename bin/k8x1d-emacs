@@ -1,0 +1,7 @@
+#!/bin/sh
+EMACS_DIR=$HOME/.config/k8x1d-emacs
+EMACS_PROFILE="$EMACS_DIR/guix/k8x1d-emacs"
+EMACS=$EMACS_PROFILE/bin/emacs
+# EMACSLOADPATH=$EMACSLOADPATH:$EMACS_PROFILE/share/emacs/site-lisp/
+# $EMACS --init-directory=$EMACS_DIR --debug-init "$@"
+emacs --init-directory=$EMACS_DIR --debug-init "$@"

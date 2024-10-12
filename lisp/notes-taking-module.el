@@ -4,19 +4,33 @@
   :general
   (k8x1d/leader-keys
    "o"  '(:ignore t :which-key "Open")
-   "oj"  '(denote-journal-extras-new-or-existing-entry :which-key "Journal")
+   ;; "oj"  '(denote-journal-extras-new-or-existing-entry :which-key "Journal")
    "on"  '(denote :which-key "Note")
     )
   :bind
   ("C-c c n" . denote)
   ("C-c c j" . denote-journal-extras-new-or-existing-entry)
   :config
-  (setq denote-directory "~/org/notes")
-  (setq denote-known-keywords '("arts" "methodics" "theoretics"))
-  ;; In test
-  ;; (setq denote-journal-extras-title-format "")
-  ;; (setq denote-id-format "%Y%m%d")
-  ;; (setq denote-id-regexp "\\([0-9]\\{8\\}\\)")
+  (setq denote-directory k8x1d/notes-directory)
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Logseq compatible journal ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package emacs
+  :general
+  (k8x1d/leader-keys
+    "o"  '(:ignore t :which-key "Open")
+    "oj" '(k8x1d/create-or-find-today-journal-entry :which-key "Journal") 
+    )
+  :config
+  (defun k8x1d/today-date ()
+    (format-time-string "%Y-%m-%d" (current-time))
+    )
+  (defun k8x1d/create-or-find-today-journal-entry ()
+    (interactive)
+    (find-file (concat k8x1d/journal-directory "/" (k8x1d/today-date) ".org"))
+    )
   )
 
 ;; Org capture integration

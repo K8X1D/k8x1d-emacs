@@ -14,6 +14,7 @@
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
   (setq LaTeX-item-indent 2)
+  (setq LaTeX-indent-level 4)
   (setq font-latex-fontify-script nil)
   )
 
@@ -37,8 +38,8 @@
 
 
 ;; ;; PDF viewing configuration
-(use-package auctex
-  ;; :ensure auctex
+(use-package tex
+  :ensure auctex
   :hook
   (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   :config

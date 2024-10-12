@@ -20,8 +20,13 @@
 (defvar k8x1d/theme "doom")
 (defvar k8x1d/org-gui "custom")
 (defvar k8x1d/package-manager "package.el")
-;; (defvar k8x1d/terminal "vterm")
-(defvar k8x1d/terminal "shell")
+(defvar k8x1d/terminal "vterm")
+;; (defvar k8x1d/terminal "shell") ;; julia support is bad
+;; (defvar k8x1d/journal-directory "/extension/Data/Cloud/facil/journal")
+(defvar k8x1d/org-directory "~/org")
+(defvar k8x1d/notes-directory (concat k8x1d/org-directory "/notes"))
+(defvar k8x1d/journal-directory (concat k8x1d/org-directory "/journals"))
+(defvar k8x1d/org-agenda-files (list (concat k8x1d/org-directory "/projects"))) 
 ;; (defvar k8x1d/package-manager "elpaca")
 ;; (defvar k8x1d/checker "flymake")
 ;; (defvar k8x1d/lsp "eglot")
@@ -53,6 +58,7 @@
 	    (require 'documentation-module)
 	    (require 'line-number-module)
 	    (require 'buffers-module)
+	    (require 'cursor-module)
 	    )
 
 (with-timer "Utilities set-up"
@@ -101,6 +107,7 @@
 	    (require 'torrents-module)
 	    (require 'bibliography-module)
 	    (require 'password-module)
+	    (require 'chatbot-module)
 	    )
 
 

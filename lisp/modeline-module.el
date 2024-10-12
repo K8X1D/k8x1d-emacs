@@ -13,6 +13,7 @@
 		mode-line-remote
 		mode-line-window-dedicated
 		 
+		project-mode-line-format
 		mode-line-frame-identification
 		mode-line-buffer-identification
 		"   "
@@ -20,7 +21,6 @@
 
 		;; Right modules
 		mode-line-format-right-align
-		(project-mode-line project-mode-line-format)
 		(vc-mode vc-mode)
 		"  "
 		mode-line-modes

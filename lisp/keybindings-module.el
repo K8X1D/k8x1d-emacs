@@ -32,6 +32,7 @@
 
 ;; UI to show keys
 (use-package which-key
+  :ensure nil
   :diminish which-key-mode
   :hook
   (after-init . which-key-mode)

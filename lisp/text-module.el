@@ -8,6 +8,13 @@
   )
 
 
+(use-package visual-wrap
+  :diminish
+  :ensure nil
+  :hook
+  (org-mode . visual-wrap-prefix-mode)
+  )
+
 (use-package face-remap
   :diminish (buffer-face-mode visual-line-mode)
   :ensure nil

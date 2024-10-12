@@ -29,7 +29,7 @@
 
   ;; Name adjustment
   (setq tab-bar-auto-width t)
-  (setq tab-bar-auto-width-max '((100) 50))
+  (setq tab-bar-auto-width-max '((150) 50))
   )
 
 

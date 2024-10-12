@@ -69,7 +69,7 @@
   :init
   (setenv "LSP_USE_PLISTS" "true") ;; Use plists for deserialization
   (setq lsp-use-plists t) ;; Use plists for deserialization
-  ;; (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
   :config
   ;; Clean-up ui
   (setq lsp-headerline-breadcrumb-enable nil)
@@ -95,6 +95,8 @@
   )
 
 (use-package lsp-ui
+  :custom
+  (lsp-ui-sideline-enable nil)
   :init
   (setq lsp-ui-sideline-enable nil) ;; manually set through lsp-ui-sideline-mode
   :commands lsp-ui-mode

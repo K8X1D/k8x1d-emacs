@@ -23,4 +23,16 @@
 				       ))
   )
 
+
+(use-package dired-sidebar
+  :bind
+  (:map project-prefix-map
+	;; ("e" . +sidebar-toggle))
+	("e" . dired-sidebar-toggle-sidebar))
+  :hook (dired-sidebar-mode . (lambda ()
+				(unless (file-remote-p default-directory)
+				  (auto-revert-mode)))) ;; Do not autorevert when tramp connection
+  )
+
+
 (provide 'file-explorer-module)
