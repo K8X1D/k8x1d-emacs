@@ -3,13 +3,6 @@
 ;; - https://tychoish.com/post/towards-faster-emacs-start-times/
 ;; - https://arne.me/blog/emacs-from-scratch-part-one-foundations
 
-
-;; Print start-up time
-(add-to-list 'after-init-hook
-          (lambda ()
-            (message (concat "emacs (" (number-to-string (emacs-pid)) ") started in " (emacs-init-time)))))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Common variables ;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36,6 +29,11 @@
 ;; (defvar k8x1d/lsp "eglot")
 ;; (defvar k8x1d/checker "")
 ;; (defvar k8x1d/lsp "lsp-bridge")
+
+;; Print start-up time
+(add-to-list 'after-init-hook
+          (lambda ()
+            (message (concat "emacs (" (number-to-string (emacs-pid)) ") started in " (emacs-init-time)))))
 
 
 (with-timer "package setup"
