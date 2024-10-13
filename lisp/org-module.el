@@ -108,15 +108,15 @@
   (setq org-refile-use-outline-path t
 	org-outline-path-complete-in-steps nil)
   (setq org-refile-use-cache t)
-  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-default-notes-file (concat k8x1d/notes-directory "/notes_frame13.org"))
   (setq org-capture-templates
-	'(("t" "Todo" entry (file (lambda () (concat org-directory "/Inbox.org")))
+	'(("t" "Todo" entry (file (lambda () (concat k8x1d/inbox-directory "/inbox-frame13.org")))
 	   "* TODO %?\n  %i\n")
 	  ;; To write: 
 	  ;; see https://orgmode.org/manual/Capture-templates.html
 	  ;; ("p" "Project" entry (file+function "~/org/projects.org" k8x1d/get-project-name)
 	  ;;  "*  %?\n  %i\n")
-	  ("n" "Notes" entry (file+headline (lambda () (concat org-directory "/notes.org"))  "Notes")
+	  ("n" "Notes" entry (file+headline (lambda () (concat k8x1d/notes-directory "/notes_frame13.org"))  "Notes")
 	   "* %U %?\n")))
 
 
@@ -227,8 +227,10 @@
 	org-pretty-entities t
 	org-use-sub-superscripts "{}"
 	org-hide-emphasis-markers t
-	org-startup-with-inline-images t
-	org-image-actual-width '(300))
+	;; org-startup-with-inline-images t
+	;; org-image-actual-width '(300))
+	)
+  (setq org-image-actual-width nil)
   (setq org-tags-column 0)
   )
 

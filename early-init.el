@@ -145,5 +145,4 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 
-
 	    )

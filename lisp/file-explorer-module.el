@@ -21,6 +21,7 @@
 				       ("\\.pdf\\'" "zathura")
 				       ("\\.html\\'" "firefox")
 				       ))
+  (setq dired-dwim-target t) ;; Allow dired tries to guess a default target directory, see https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
   )
 
 

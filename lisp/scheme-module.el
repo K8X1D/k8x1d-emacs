@@ -2,7 +2,8 @@
 
 ;; Syntax highlight
 (use-package geiser)
-(use-package geiser-guile)
+(use-package geiser-guile
+  :diminish)
 ;; (use-package geiser-repl
 ;;   :ensure nil
 ;;   :config
