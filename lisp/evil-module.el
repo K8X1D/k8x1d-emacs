@@ -27,14 +27,17 @@
 		  :which-key "Window")
    )
   :init
+  (setq evil-want-integration t)      ;; Integrate `evil' with other Emacs features (optional as it's true by default).
+  (setq evil-want-keybinding nil)     ;; Disable default keybinding to set custom ones.
+  (setq evil-want-C-u-scroll t)       ;; Makes C-u scroll
+  (setq evil-want-C-u-delete t)       ;; Makes C-u delete on insert mode
   (setq evil-undo-system 'undo-fu)
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
   :custom
   (evil-want-Y-yank-to-eol t)
   :hook
   (after-init . evil-mode)
   (git-commit-mode . evil-insert-state)
+  (org-capture-mode . evil-insert-state)
   :config
   (evil-select-search-module 'evil-search-module 'evil-search)
   (setq evil-mode-line-format nil) ;; managed manually

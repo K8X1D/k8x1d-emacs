@@ -111,13 +111,24 @@
   (setq org-default-notes-file (concat k8x1d/notes-directory "/notes_frame13.org"))
   (setq org-capture-templates
 	'(("t" "Todo" entry (file (lambda () (concat k8x1d/inbox-directory "/inbox-frame13.org")))
-	   "* TODO %?\n  %i\n")
+	   "* TODO %?\n")
 	  ;; To write: 
 	  ;; see https://orgmode.org/manual/Capture-templates.html
 	  ;; ("p" "Project" entry (file+function "~/org/projects.org" k8x1d/get-project-name)
 	  ;;  "*  %?\n  %i\n")
-	  ("n" "Notes" entry (file+headline (lambda () (concat k8x1d/notes-directory "/notes_frame13.org"))  "Notes")
+	  ;; Calendars
+	  ("c" "Calendars")
+	  ("cr" "Recherches" entry (file (lambda () (concat k8x1d/calendars-directory "/recherche.org"))) "* %?\n%^T")
+	  ("cs" "Social" entry (file (lambda () (concat k8x1d/calendars-directory "/social.org"))) "* %?\n%^T")
+	  ("ci" "Implications" entry (file (lambda () (concat k8x1d/calendars-directory "/implications.org"))) "* %?\n%^T")
+	  ("cf" "Formations" entry (file (lambda () (concat k8x1d/calendars-directory "/formations.org"))) "* %?\n%^T")
+	  ("cE" "Exercices" entry (file (lambda () (concat k8x1d/calendars-directory "/exercices.org"))) "* %?\n%^T")
+	  ("ce" "Emplois" entry (file (lambda () (concat k8x1d/calendars-directory "/emplois.org"))) "* %?\n%^T")
+	  ("cd" "Développement" entry (file (lambda () (concat k8x1d/calendars-directory "/developpements.org"))) "* %?\n%^T")
+	  ;; Notes
+	  ("n" "Notes" entry (file+function (lambda () (concat k8x1d/notes-directory "/notes_frame13.org"))  "Notes")
 	   "* %U %?\n")))
+
 
 
   ;; Don't break window layout when suggestion todo state option
@@ -212,8 +223,7 @@
     (custom-set-faces
      ;; Adapted from org-modern-label
      `(org-todo ((t (:weight semibold :height 1.0 :width wide :underline nil :family "Iosevka Nerd Font" :foreground ,(doom-color 'red)))))
-     `(org-done ((t (:weight semibold :height 1.0 :width wide :underline nil :family "Iosevka Nerd Font" :foreground ,(doom-color 'bg)))))
-     `(org-done ((t (:weight semibold :height 1.0 :width wide :underline nil :family "Iosevka Nerd Font" :foreground ,(doom-color 'bg)))))
+     `(org-done ((t (:weight semibold :height 1.0 :width wide :underline nil :family "Iosevka Nerd Font" :foreground ,(doom-color 'grey)))))
      `(org-table ((nil (:inherit 'fixed-pitch))))
      )
     )
@@ -257,12 +267,6 @@
   (setq org-appear-delay 0.0)
   (setq org-appear-trigger #'always)
   )
-
-
-
-
-
-
 
 ;; Latex support
 (use-package org
