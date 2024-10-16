@@ -17,7 +17,9 @@
   :init
   (setenv "CC" "gcc")
   :config
-  (setq vterm-max-scrollback 10000))
+  (setq vterm-max-scrollback 10000)
+  (add-to-list 'vterm-tramp-shells '("ssh" "/bin/bash"))
+  (add-to-list 'vterm-tramp-shells '("sudo" "/bin/bash")))
 
 (use-package multi-vterm
   :if (string= k8x1d/terminal "vterm")
