@@ -52,6 +52,8 @@
 		  (k8x1d/set-org-colors)
 		  (k8x1d/set-custom-colors)
 		  ))
+  ;; (org-mode . (lambda ()
+  ;; 		(k8x1d/set-custom-colors)))
   :bind
   ("<f5>" . k8x1d/switch-theme)
   :config

@@ -70,9 +70,11 @@
   (setenv "LSP_USE_PLISTS" "true") ;; Use plists for deserialization
   (setq lsp-use-plists t) ;; Use plists for deserialization
   (setq lsp-keymap-prefix "C-c l")
+  ;; (setq lsp-keymap-prefix "SPC m l")
   :config
   ;; Clean-up ui
   (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-ui-sideline-enable nil)
   ;; Checker compatibility 
   ;; (setq lsp-diagnostics-provider :none)
 
