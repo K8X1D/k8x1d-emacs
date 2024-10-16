@@ -143,6 +143,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 	    ;; Custom file
 ;;;;;;;;;;;;;;;;;;;;;;;;
-	    (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
+	    (setq custom-file (expand-file-name "customs.el" user-emacs-directory)) ;; set elsewhere
+	    (load custom-file) ;; load
 
 	    )
