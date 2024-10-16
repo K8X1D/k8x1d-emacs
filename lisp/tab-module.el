@@ -21,6 +21,8 @@
     ))
   :hook
   (after-init . tab-bar-mode)
+  :custom-face
+  (tab-bar-tab ((nil (:underline t))))
   :config
   (setq tab-bar-new-tab-choice "*scratch*")
   (setq tab-bar-close-button-show nil)
