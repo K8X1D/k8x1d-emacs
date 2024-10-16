@@ -1,6 +1,6 @@
 ;; Syntax highlight + functionality
-(use-package auctex
-  ;; :ensure auctex
+(use-package tex
+  :ensure auctex
   :hook
   (LaTeX-mode . visual-line-mode)
   (LaTeX-mode . display-line-numbers-mode)
