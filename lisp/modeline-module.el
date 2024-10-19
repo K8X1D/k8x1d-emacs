@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
+
+
 (setq-default mode-line-format
 	      '(
 		;; Left modules
@@ -23,7 +25,10 @@
 		mode-line-format-right-align
 		(vc-mode vc-mode)
 		"  "
-		mode-line-modes
+		;; mode-line-modes
+		;; (:eval (format "%s %s" (nerd-icons-icon-for-buffer) (format-mode-line mode-name)))
+		(:eval (format "%s" (format-mode-line mode-name)))
+		"  "
 		;; mode-line-misc-info ;; superflous
 		mode-line-end-spaces)
 	      )
