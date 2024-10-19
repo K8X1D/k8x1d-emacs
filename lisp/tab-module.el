@@ -11,18 +11,43 @@
   :init
   ;; TODO: implement string triming
   (defvar k8x1d/org-clock-module-max-length 60)
-  (defun tab-bar-org-clock-module ()
-    (require 'org-clock)
-    (when (org-clocking-p)
-      (if (> (string-width org-mode-line-string) k8x1d/org-clock-module-max-length)
-	  (format "%s)... " (string-limit org-mode-line-string k8x1d/org-clock-module-max-length))
-	org-mode-line-string
+(defun k8x1d/org-clock-get-clock-string ()
+  "Form a clock-string, that will be shown in the mode line.
+If an effort estimate was defined for the current item, use
+01:30/01:50 format (clocked/estimated).
+If not, show simply the clocked time like 01:50."
+  (let ((clocked-time (org-clock-get-clocked-time)))
+    (if org-clock-effort
+	(let* ((effort-in-minutes (org-duration-to-minutes org-clock-effort))
+	       (work-done-str
+		(propertize (org-duration-from-minutes clocked-time)
+			    'face
+			    (if (and org-clock-task-overrun
+				     (not org-clock-task-overrun-text))
+				'org-mode-line-clock-overrun
+			      'org-mode-line-clock)))
+	       (effort-str (org-duration-from-minutes effort-in-minutes)))
+	  (format (propertize "%s [%s/%s]" 'face 'tab-bar)
+		  org-clock-heading work-done-str effort-str))
+      (format (propertize "%s [%s]" 'face 'tab-bar)
+	      org-clock-heading
+	      (org-duration-from-minutes clocked-time)
+	      ))))
+
+(defun tab-bar-org-clock-module ()
+  (require 'org-clock)
+  (when (org-clocking-p)
+    (let* ((prefix "Task:")
+	   (clocked-task (k8x1d/org-clock-get-clock-string)))
+      (if (> (string-width clocked-task) k8x1d/org-clock-module-max-length)
+	  (format "%s %s)... " prefix (string-limit clocked-task k8x1d/org-clock-module-max-length))
+	(format "%s %s" prefix clocked-task)
 	)
+      )
     ))
+
   :hook
   (after-init . tab-bar-mode)
-  :custom-face
-  (tab-bar-tab ((nil (:underline t))))
   :config
   (setq tab-bar-new-tab-choice "*scratch*")
   (setq tab-bar-close-button-show nil)

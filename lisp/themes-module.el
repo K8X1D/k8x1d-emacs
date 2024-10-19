@@ -39,12 +39,17 @@
   :init
   (defun k8x1d/set-custom-colors ()
     (custom-set-faces
-     `(window-divider ((t :foreground ,(doom-color 'green))))
+     ;; `(window-divider ((t :foreground ,(doom-color 'green))))
+     `(window-divider ((t :foreground ,(doom-color 'fg-alt))))
 
+     ;; Tabs
      `(tab-bar ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg-alt) :height 0.9 ))))
-     `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg)))))
+     `(tab-bar-tab ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg) :underline t))))
      `(tab-bar-tab-inactive ((t (:foreground ,(doom-color 'grey) :background ,(doom-color 'bg-alt)))))
 
+     ;; Modeline
+     `(mode-line-active ((t (:foreground ,(doom-color 'fg) :background ,(doom-color 'bg-alt) :overline ,(doom-color 'fg-alt) :underline (:color ,(doom-color 'fg-alt) :style line :position -5)))))
+     `(mode-line-inactive ((t (:foreground ,(doom-color 'bg) :background ,(doom-color 'bg-alt) :overline ,(doom-color 'bg-alt) :underline (:color ,(doom-color 'bg-alt) :style line :position -5)))))
      ))
   :hook
   (after-init . (lambda ()
