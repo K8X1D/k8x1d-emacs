@@ -74,7 +74,7 @@
   (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
   (setq org-agenda-skip-scheduled-repeats-after-deadline t)
   (setq org-agenda-skip-timestamp-if-deadline-is-shown t)
-  (setq org-agenda-show-future-repeats nil) 
+  (setq org-agenda-show-future-repeats t) 
 
   ;; Initial agenda
   (setq org-agenda-span 'day) ;; span

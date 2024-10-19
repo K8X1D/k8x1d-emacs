@@ -23,7 +23,7 @@
   :if (string= k8x1d/lsp "lsp-mode")
   :hook
   (LaTeX-mode . lsp-deferred)
-  (LaTeX-mode . lsp-ui-sideline-mode)
+  ;; (LaTeX-mode . lsp-ui-sideline-mode)
   )
 
 ;; Diagnostic

@@ -65,7 +65,12 @@
    :keymaps 'lsp-mode-map
    "a" '(lsp-execute-code-action :which-key "Code action")
     )
-  :diminish
+  :diminish 
+  :custom
+  (lsp-ui-sideline-enable nil)
+  :bind
+  (:map evil-motion-state-map
+	([remap evil-lookup] . lsp-ui-doc-show))
   :init
   (setenv "LSP_USE_PLISTS" "true") ;; Use plists for deserialization
   (setq lsp-use-plists t) ;; Use plists for deserialization

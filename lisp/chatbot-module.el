@@ -13,8 +13,8 @@
   (setopt ellama-ollama-binary "docker exec -it ollama ollama")
   (defun k8x1d/launch-ollama ()
     (interactive)
-    ;; (async-shell-command "docker start ollama")
-    (async-shell-command "docker run -d -v ollama:/root/.ollama -p 11434:11434 ollama/ollama")
+    (async-shell-command "podman start ollama")
+    ;; (async-shell-command "docker run -d -v ollama:/root/.ollama -p 11434:11434 ollama/ollama")
     )
   )
 

@@ -61,6 +61,8 @@
 	    (require 'line-number-module)
 	    (require 'buffers-module)
 	    (require 'cursor-module)
+	    ;; In test
+	    ;; (setq-default truncate-lines t)
 	    )
 
 (with-timer "Utilities set-up"
@@ -85,6 +87,7 @@
 
 (with-timer "Prog set-up"
 	    (require 'r-module)
+	    (require 'python-module)
 	    (require 'julia-module)
 	    (require 'shell-module)
 	    (require 'scheme-module)
