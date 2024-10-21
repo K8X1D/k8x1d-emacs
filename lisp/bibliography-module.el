@@ -1,9 +1,25 @@
 ;; -*- lexical-binding: t -*-
 ;; Citation manager
 (use-package citar
+  :general
+  (k8x1d/leader-keys
+    "ob" '(citar-open :which-key "Bibliography")
+    )
+  (k8x1d/local-leader-keys
+    :keymaps 'LaTeX-mode-map
+    "ic" '(citar-insert-citation :which-key "Citation")
+    )
+  (k8x1d/local-leader-keys
+    :keymaps 'org-mode-map
+    "ic" '(citar-insert-citation :which-key "Citation")
+    )
+  (k8x1d/local-leader-keys
+    :keymaps 'markdown-mode
+    "ic" '(citar-insert-citation :which-key "Citation")
+    )
   :bind
   ("C-c w c" . citar-create-note)
-   ("C-c o z" . citar-open)
+  ("C-c o z" . citar-open)
   :config
   (setq citar-bibliography k8x1d/bibliography) ;; set bibliography's location
   (setq citar-open-always-create-notes nil) ;; Allow multiple notes per bibliographic entry
@@ -18,7 +34,6 @@
   (org-mode . citar-capf-setup)
   :config
   (require 'citar-org)
-  (setq citar-at-point-function 'embark-act)
   (setq org-cite-insert-processor 'citar)
   (setq org-cite-follow-processor 'citar)
   (setq org-cite-activate-processor 'citar)
@@ -35,14 +50,22 @@
 
 ;; Embark integration
 (use-package citar-embark
-  :after citar embark
-  ;; :no-require
+  :hook
+  (org-mode . citar-embark-mode)
+  (markdown-mode . citar-embark-mode)
+  (LaTeX-mode . citar-embark-mode)
   :config
-  (require 'citar-embark)
-  (citar-embark-mode))
+  (setq citar-at-point-function 'embark-act)
+  )
 
 ;; Browse and fetch references
-(use-package biblio)
+(use-package biblio
+  :general
+  (k8x1d/leader-keys 
+    "s" '(:ignore t :which-key "Search")
+    "sb" '(biblio-lookup :which-key "Bibliographic reference")
+    )
+  )
 
 
 (provide 'bibliography-module)
