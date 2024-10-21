@@ -28,5 +28,12 @@
                     ))
   )
 
+;; Notebook
+(use-package org
+  :config
+  (add-to-list 'org-babel-load-languages '(scheme . t))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+  )
+
 
 (provide 'scheme-module)
