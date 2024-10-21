@@ -4,15 +4,22 @@
 ;;;;;;;;;;;;;;;;;; Flymake ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package flymake
-  :diminish
   :if (string= k8x1d/checker "flymake")
+  :diminish
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'flymake-mode-map
+    "c" '(:ignore t :which-key "Checker")
+    "cl" '(flymake-show-buffer-diagnostics :which-key "List")
+    "cn" '(flymake-goto-prev-error :which-key "Prev")
+    "cp" '(flymake-goto-next-error :which-key "Next")
+    )
   :bind (:map flymake-mode-map
 	      ("C-c d p" . flymake-goto-prev-error)
 	      ("C-c d n" . flymake-goto-next-error)
 	      ("C-c d l" . flymake-show-buffer-diagnostics)
 	      )
   )
-
 (use-package flymake-collection
   :if (string= k8x1d/checker "flymake")
   :hook (flymake-mode . flymake-collection-hook-setup)

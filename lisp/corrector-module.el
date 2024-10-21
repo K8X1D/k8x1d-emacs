@@ -13,7 +13,8 @@
 			(require 'eglot-ltex)
 			(eglot-ensure)))
   :init
-  (setq eglot-ltex-server-path "/home/k8x1d/.config/k8x1d-emacs/.cache/lsp/ltex-ls/ltex-ls-15.2.0/") ;; don't work...
+  ;; (setq eglot-ltex-server-path "/home/k8x1d/.config/k8x1d-emacs/.cache/lsp/ltex-ls/ltex-ls-15.2.0/") ;; don't work...
+  (setq eglot-ltex-server-path (concat user-emacs-directory ".cache/lsp/ltex-ls/latest/"))
   ;; (setq eglot-ltex-server-path "/home/k8x1d/.config/k8x1d-emacs/.cache/ltex-ls-15.2.0")
   ;; Fix me, don't work, see https://github.com/valentjn/ltex-ls/issues/262
   (setq eglot-connect-timeout 180)

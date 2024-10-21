@@ -15,12 +15,27 @@
 
 ;; LSP
 (use-package lsp-mode
+  :if (string= k8x1d/lsp "lsp-mode")
   :hook (python-mode . lsp-deferred))
+
+(use-package eglot
+  :if (string= k8x1d/lsp "eglot")
+  :hook
+  (python-mode . eglot-ensure) ;; lsp
+  )
+
 
 ;; Diagnostic
 (use-package flycheck
+  :if (string= k8x1d/checker "flycheck")
   :hook
   (python-mode . flycheck-mode))
+
+(use-package flymake
+  :if (string= k8x1d/checker "flymake")
+  :hook
+  (python-mode . flymake-mode)
+  )
 
 ;; ;; Notebook
 (use-package ob-python-vterm

@@ -6,6 +6,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package eglot
   :if (string= k8x1d/lsp "eglot")
+  :general
+  (k8x1d/local-leader-keys
+    :keymaps 'eglot-mode-map
+   "a" '(eglot-code-actions :which-key "Code action")
+    )
   :commands (eglot
 	     eglot-rename
 	     eglot-ensure
@@ -29,10 +34,11 @@
 ;; Better performance for eglot
 (use-package eglot-booster
   :if (string= k8x1d/lsp "eglot")
-  :after eglot
+  :hook
+  (prog-mode . eglot-booster-mode)
   :config
   (setq eglot-booster-no-remote-boost t)
-  (eglot-booster-mode))
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -65,12 +71,12 @@
    :keymaps 'lsp-mode-map
    "a" '(lsp-execute-code-action :which-key "Code action")
     )
-  :diminish 
+  :diminish
   :custom
   (lsp-ui-sideline-enable nil)
   :bind
   (:map evil-motion-state-map
-	([remap evil-lookup] . lsp-ui-doc-show))
+	([remap evil-lookup] . lsp-ui-doc-toggle))
   :init
   (setenv "LSP_USE_PLISTS" "true") ;; Use plists for deserialization
   (setq lsp-use-plists t) ;; Use plists for deserialization
@@ -83,7 +89,10 @@
   ;; Checker compatibility 
   ;; (setq lsp-diagnostics-provider :none)
 
-  ;; Optimizations, see https://emacs-lsp.github.io/lsp-mode/page/performance/#performance
+  ;; Optimizations,
+  ;; - see https://emacs-lsp.github.io/lsp-mode/page/performance/#performance
+  ;; - see https://github.com/yyoncho/lsp-mode/tree/perf-docs#performance
+  (setq gc-cons-threshold 100000000)
   (setq read-process-output-max (* 1024 1024)) ;; Increase the amount of data which Emacs reads from the process to 1mb 
   (setq lsp-log-io nil) ; if set to true can cause a performance hit
 
