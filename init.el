@@ -6,10 +6,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Common variables ;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar k8x1d/bibliography '("~/Zotero/k8x1d.bib")) ;; Defaults bibliography
+(defvar k8x1d/bibliography '("~/Zotero/k8x1d.bib" "/extension/Data/Cloud/facil/Bibliography/bibliography.bib")) ;; Defaults bibliographies
 ;; TODO: add choice of value
-(defvar k8x1d/checker "flycheck")
-(defvar k8x1d/lsp "lsp-mode")
+;; (defvar k8x1d/checker "flycheck")
+(defvar k8x1d/checker "flymake")
+;; (defvar k8x1d/lsp "lsp-mode")
+(defvar k8x1d/lsp "eglot")
 (defvar k8x1d/theme "doom")
 (defvar k8x1d/org-gui "custom")
 (defvar k8x1d/package-manager "package.el")
@@ -91,6 +93,7 @@
 	    (require 'julia-module)
 	    (require 'shell-module)
 	    (require 'scheme-module)
+	    (require 'elisp-module)
 	    )
 
 (with-timer "Text set-up"
@@ -100,6 +103,7 @@
 	    (require 'org-module)
 	    (require 'markdown-module)
 	    (require 'latex-module)
+	    (require 'bibtex-module)
 	    )
 
 (with-timer "System set-up"
